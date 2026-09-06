@@ -6,13 +6,13 @@ This document describes the machine as it stands after the concept review. Dimen
 
 The bench is about 190 × 100 cm. From left to right it carries the carousel magazine (Ø 86 cm, standing free on the bench), then the frame (125 × 80 × 90 cm) that spans the flip station and the turntable. The gantry rides on top of the frame; its Z column rises to about 135 cm when fully raised, so the machine wants a metre and a half of headroom.
 
-The frame's left end is open and its rails overhang it by 8 cm so that the gantry can reach the carousel's pick slot, which is the only point where the two halves of the machine meet. The carousel can be lifted off the bench for loading without touching the frame.
+The frame's left end is open and its X beams overhang it by 8 cm so that the gantry can reach the carousel's pick slot, which is the only point where the two halves of the machine meet. The carousel can be lifted off the bench for loading without touching the frame.
 
 ## Frame
 
 The frame is a glued box of 18 mm birch plywood: two side panels at Y = ±40 cm and one end panel at the deck end, each cut as a frame around a large window so the interior stays open and reachable. The panels give the racking stiffness; there are no diagonals and no corner posts. A 2040 V-slot extrusion is bolted along the top edge of each side panel and is the X axis: the carriages run on Delrin V-wheels in the slot, as on a hobby printer. One 2020 tie across the open end keeps the two beams parallel. Brackets for the cue-lever servo, the deck camera and the LED bar screw directly to the panels' inner faces.
 
-The Pi, the controller board and the vacuum pump live in a box under the flip station, whose post stands on that box.
+The Pi, the controller board, the relay card and the vacuum pump live in a box under the flip station, whose post stands on that box.
 
 ## Gantry
 
@@ -25,7 +25,7 @@ The gantry is a Cartesian XYZ with one rotary axis:
 | Z | T8 lead screw, NEMA17, moving column on an MGN12 rail | ≈ 60 cm | Column slides through a guide on the cross beam; self-locking; the one axis that keeps a linear rail |
 | Wrist | NEMA17 with ≈ 5:1 planetary gearbox, Hall home sensor | −90° … 180° | Axis parallel to X |
 
-The Z axis is a moving column rather than a fixed tower: the 76 cm rail is part of the carriage and slides up through a guide block on the cross beam, so when the carriage is raised nothing hangs below it. Every X move happens at travel height and clears the deck, the station and the brush by construction. The lead screw is self-locking, so a power loss leaves the record where it is.
+The Z axis is a moving column rather than a fixed tower: the 76 cm rail is part of the carriage and slides up through a guide block on the cross beam, so when the carriage is raised nothing hangs below it. Every X move happens at travel height and clears the deck and the station by construction. The lead screw is self-locking, so a power loss leaves the record where it is.
 
 The wrist sits on a 9 cm outrigger beside the column so the arm can swing without meeting it. It carries three things: the vacuum arm (22 cm, with the cup on its end pointing perpendicular to the arm), the wrist camera looking along the cup's axis, and the finger-lift fork on the opposite side of the hub, 10 cm long, which points down when the arm points up.
 
@@ -53,7 +53,7 @@ The deck is an Omnitronic DD 3120: a Technics-type direct drive, 45 × 36 × 9 c
 
 The felt DJ slipmat in the photo should be replaced by a rubber or cork mat for digitising: a slipmat is made to let the record slip, and it also holds static and dust. (A Stanton T.92 USB is also available but has no cue lever, which would bring back a separate arm-lift mechanism; it stays the spare.) The cartridge is an Ortofon DJ S, a spherical DJ stylus tracking at about 3 g, robust against the kind of handling this machine does; an elliptical stylus can be swapped in for a final archive pass once the machine is trusted. The machine touches the deck in four places, none of them modifications:
 
-Start and stop go through the deck's own remote start/stop connector, a 6.3 mm jack made for the fader-start feature of older mixers and hi-fi systems, which started the deck when the fader came up: it expects a contact closure and does nothing but start and stop the platter (speed is chosen with the buttons). One channel of a small relay board on a 6.3 mm plug does it, with no wire soldered inside the deck. The 33 and 45 buttons are momentary switches and are pressed by two more relay channels wired across the switch contacts inside the deck; a relay is a dry contact, so polarity and the switch's voltage do not matter.
+Start and stop go through the deck's own remote start/stop connector, a 6.3 mm jack made for the fader-start feature of older mixers and hi-fi systems, which started the deck when the fader came up: it expects a contact closure and does nothing but start and stop the platter (speed is chosen with the buttons). One channel of the Conrad 393905 USB relay card (already on hand, driven from the Pi) on a 6.3 mm plug does it, with no wire soldered inside the deck. The 33 and 45 buttons are momentary switches and are pressed by two more channels of the same card wired across the switch contacts inside the deck; a relay is a dry contact, so polarity and the switch's voltage do not matter.
 
 The cue lever is worked by a small linear-push servo on a bracket on the deck-end panel of the frame, whose rod comes in along X at lever height; the lever is only 3 cm from the deck's right edge, so the rod is short and never crosses the arm's swing. A bar from the same bracket runs in front of the arm base, under the arm, and carries a soft-sleeved end-stop pin standing in the arm tube's path at about 6 cm from the pivot, so the arm cannot swing past a stylus radius of roughly 53 mm: the stylus physically cannot reach the label.
 

@@ -84,7 +84,7 @@ Most of the motion parts (steppers, PSU, belts, pulleys, wheels, a lead screw, e
 
 ## Plywood frame, extrusion beams
 
-A full aluminium extrusion frame was replaced by a glued box of 18 mm birch plywood with 2040 extrusion only where the X rails need a straight, adjustable mounting surface. The panels give more racking stiffness than a lattice with diagonals, the interior stays open, brackets screw straight to the panels, and extrusion drops from ten metres to four. Cost is about the same; the choice is about the tools the builder prefers.
+A full aluminium extrusion frame was replaced by a glued box of 18 mm birch plywood with 2040 V-slot extrusion only where the X axis needs a straight, adjustable running surface. The panels give more racking stiffness than a lattice with diagonals, the interior stays open, brackets screw straight to the panels, and extrusion drops from ten metres to four. Cost is about the same; the choice is about the tools the builder prefers.
 
 ## Roller ring instead of a lazy susan
 

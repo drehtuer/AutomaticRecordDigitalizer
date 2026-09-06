@@ -1,6 +1,6 @@
 # Bill of materials
 
-Prices are typical German retail in September 2026, rounded, and will drift; check before ordering. Everything listed is stocked by German shops, so nothing depends on imports. Suggested sources: Motedis and Dold Mechatronik for extrusion, rails, screws, belts and pulleys; 3DJake and Amazon.de for the BIGTREETECH board and drivers; BerryBase and Reichelt for Raspberry Pi, cameras and extenders; Reichelt, Conrad and Amazon.de for motors, servos, pump, valve, sensors and optocouplers; Filamentworld or 3DJake for filament; any Baumarkt for plywood, bearings and fasteners.
+Prices are typical German retail in September 2026, rounded, and will drift; check before ordering. Everything listed is stocked by German shops, so nothing depends on imports. Suggested sources: Motedis and Dold Mechatronik for extrusion, rails, screws, belts and pulleys; 3DJake and Amazon.de for the BIGTREETECH board and drivers; BerryBase and Reichelt for Raspberry Pi, cameras and extenders; Reichelt, Conrad and Amazon.de for motors, servos, pump, valve and sensors; Filamentworld or 3DJake for filament; any Baumarkt for plywood, bearings and fasteners.
 
 ## Bought parts
 
@@ -16,8 +16,8 @@ Prices are typical German retail in September 2026, rounded, and will drift; che
 | Motion | GT2 belt 5 m, 20T pulleys, idlers, tensioners | 1 set | 25 |
 | Motion | T8 lead screw 0.8 m, nut, coupler, bearing block | 1 | 20 |
 | Servos | Micro linear servo (cue lever) | 1 | 12 |
-| Controller | BIGTREETECH Octopus V1.1 | 1 | 65 |
-| Controller | TMC2209 driver | 5 | 30 |
+| Controller | BIGTREETECH Octopus V1.1 (or: donor printer board + Raspberry Pi Pico, see below) | 1 | 65 |
+| Controller | TMC2209 driver (5 with the Octopus, 1 with the donor-board option) | 5 | 30 |
 | Power | 24 V 150 W supply, 5 V 3 A buck module | 1 set | 35 |
 | Computer | Raspberry Pi 5 4 GB, official PSU, 64 GB microSD | 1 | 90 |
 | Cameras | Raspberry Pi Camera Module 3 | 2 | 60 |
@@ -34,7 +34,7 @@ Prices are typical German retail in September 2026, rounded, and will drift; che
 | Consumables | PETG 2.5 kg, TPU 0.3 kg | | 70 |
 | **Total** | | | **≈ 865** |
 
-Not included: the 3D printer, the turntable (Omnitronic DD 3120, owned), the Focusrite Scarlett (owned), the Conrad 393905 USB relay card (owned),  and an external phono preamp if the deck's own line output is not used (about 40 €).
+Not included: the 3D printer, the turntable (Omnitronic DD 3120, owned), the Focusrite Scarlett (owned), the Conrad 393905 USB relay card (owned), and an external phono preamp if the deck's own line output is not used (about 40 €).
 
 Where to trim further: a used Raspberry Pi 4 saves about 40 € and a USB camera on the wrist instead of the second Pi camera about 20 €.
 
