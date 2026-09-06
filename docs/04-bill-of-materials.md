@@ -7,15 +7,15 @@ Prices are typical German retail in September 2026, rounded, and will drift; che
 | Group | Part | Qty | ≈ € |
 |---|---|---|---|
 | Frame | 18 mm birch plywood, 1 sheet for panels, bench top, carousel disc and base plate | 1 | 60 |
-| Frame | 2040 extrusion 1.3 m (X beams) | 2 | 25 |
-| Frame | 2020 extrusion 0.8 m (end tie, cross beam), brackets, T-nuts, bolts | 1 set | 35 |
-| Linear | MGN12H rail 1.2 m with carriage (X) | 2 | 70 |
-| Linear | MGN12H rail 0.8 m with carriage (Y, Z column) | 2 | 60 |
+| Frame | 2040 V-slot extrusion 1.3 m (X beams) | 2 | 30 |
+| Frame | 2040 V-slot 0.8 m (cross beam), 2020 0.8 m (end tie), brackets, T-nuts, bolts | 1 set | 40 |
+| Linear | Delrin V-wheel kits with eccentric spacers (X ×2 carriages, Y ×1) | 3 sets | 30 |
+| Linear | MGN12H rail 0.8 m with carriage (Z column) | 1 | 30 |
 | Motion | NEMA17 stepper, plain (X, Y, Z) | 3 | 36 |
 | Motion | NEMA17 with 5:1 planetary gearbox (wrist, carousel index) | 2 | 70 |
 | Motion | GT2 belt 5 m, 20T pulleys, idlers, tensioners | 1 set | 25 |
 | Motion | T8 lead screw 0.8 m, nut, coupler, bearing block | 1 | 20 |
-| Servos | 25 kg·cm servo (brush), micro linear servo (cue lever) | 2 | 25 |
+| Servos | Micro linear servo (cue lever) | 1 | 12 |
 | Controller | BIGTREETECH Octopus V1.1 | 1 | 65 |
 | Controller | TMC2209 driver | 5 | 30 |
 | Power | 24 V 150 W supply, 5 V 3 A buck module | 1 set | 35 |
@@ -32,24 +32,36 @@ Prices are typical German retail in September 2026, rounded, and will drift; che
 | Cabling | Cable chain 10 × 20 mm, 2.5 m; wire, connectors, crimps, sleeving | 1 set | 60 |
 | Hardware | M3/M5 screws and nuts, heat-set inserts, felt, rubber sleeve stock | 1 set | 35 |
 | Consumables | PETG 2.5 kg, TPU 0.3 kg | | 70 |
-| Cleaning | Carbon-fibre record brush | 1 | 15 |
-| **Total** | | | **≈ 1,000** |
+| **Total** | | | **≈ 870** |
 
 Not included: the 3D printer, the turntable (Omnitronic DD 3120, owned), the Focusrite Scarlett (owned), and an external phono preamp if the deck's own line output is not used (about 40 €).
 
-Where to trim if needed: a used Raspberry Pi 4 saves about 40 €, a USB camera on the wrist instead of the second Pi camera about 20 €, and V-slot wheels instead of the MGN rail on Y about 25 €. Rails on X and Z should stay, since they carry the record.
+Where to trim further: a used Raspberry Pi 4 saves about 40 € and a USB camera on the wrist instead of the second Pi camera about 20 €.
+
+## Donor printer
+
+A used 3D printer is the cheapest source for most of the motion parts and is worth buying before anything else on the list. What it has to bring: at least four NEMA17 steppers, a 24 V supply, GT2 belts and pulleys, a T8 lead screw, V-slot extrusion with Delrin wheels and carriage plates, end-stops, and ideally a 32-bit board that runs Klipper. Candidates in rough order of usefulness:
+
+| Donor | What it contributes | Notes |
+|---|---|---|
+| Creality CR-10 / CR-10S (300–500 mm) | 4–5 steppers, 2040/4040 V-slot up to 60 cm, 1–2 lead screws 40 cm, wheels, 24 V PSU, board | The best fit: longest extrusions and lead screws of the cheap decks; the S5 (500 mm) variant most of all |
+| Creality Ender 3 / 3 Pro / V2 | 4 steppers, short 2020/2040 V-slot, 1 lead screw 36 cm, wheels, 24 V PSU, 4.2.x board (Klipper-capable, 4 drivers) | Plentiful and cheap; the long members must still be bought |
+| Creality Ender 5 / 5 Plus | 4–5 steppers, 2020/2040 V-slot in a box frame, dual Z screws on the Plus, larger PSU | The Plus gives two lead screws and a 350 W supply |
+| Anycubic Kobra / Vyper, Artillery Sidewinder | 4 steppers, 24 V PSU, some extrusion | Less V-slot, boards less Klipper-friendly; take for motors and PSU only |
+| Tevo Tornado, Alfawise U20 | CR-10 clones | Same value as a CR-10 if cheap |
+
+Whatever the donor, the long V-slot beams (2 × 1.3 m) and the 80 cm Z rail and lead screw are bought new; the donor covers motors, wheels, belts, pulleys, end-stops, PSU and fasteners, roughly 150 to 200 € of the list above, for a 50 to 100 € machine. Its board can run the four gantry axes under Klipper with a second small board for the carousel stepper, or be kept as a spare and the Octopus bought as planned.
 
 ## Printed parts
 
-Roughly 35 distinct parts, 60 to 80 hours of printing. PETG unless marked TPU.
+Roughly 30 distinct parts, 50 to 70 hours of printing. PETG unless marked TPU.
 
 | Assembly | Parts |
 |---|---|
-| Gantry | 2 rail carriages for the X beams, cross-beam end brackets, Y carriage plate, Z guide block, Z carriage with outrigger, lead-screw nut holder, column end caps |
+| Gantry | 2 V-wheel carriage plates for the X beams (or the donor's), cross-beam end brackets, Y wheel plate, Z guide block, Z carriage with outrigger, lead-screw nut holder, column end caps |
 | Wrist | hub with bearing seats, arm, cup bracket, hose clip, wrist camera mount, finger-lift fork with TPU lining, Hall sensor mount |
 | Carousel | centre hub, 24 slot combs, 8 rim segments, 8 GT2 tooth-ring segments, 10 roller brackets, stepper mount with pulley, home-mark flag and sensor mount |
 | Station | ring rest with TPU pads, post bracket, electronics box (or a bought enclosure) |
-| Brush module | panel bracket, outrigger clamp, servo horn arm, brush holder, dust edge posts, slide-out tray with finger tab |
 | Deck interface | cue-servo bracket, pusher rod guide, lever pad, end-stop pin base with TPU sleeve |
 | Cameras and light | deck camera bracket, LED bar housing, cable-chain end brackets |
 

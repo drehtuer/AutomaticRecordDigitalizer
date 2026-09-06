@@ -4,7 +4,7 @@ The guiding idea is that the machine is a strangely shaped 3D printer. Motion ru
 
 ## Hardware
 
-**Controller.** BIGTREETECH Octopus V1.1 with five TMC2209 drivers: X, Y, Z, wrist, carousel index. The board's remaining driver slots stay free. Its servo header drives the brush servo and the cue-lever servo; its fan/heater MOSFET outputs drive the vacuum pump, the release valve and the LED bar (the LED output must be a proper PWM pin so the strobe can run at 50.000 Hz); its end-stop inputs take the axis end-stops, the wrist Hall sensor, the carousel home sensor and the vacuum switch. A 24 V 150 W supply feeds the board, and the board's 5 V rail or a separate buck converter feeds the servos.
+**Controller.** BIGTREETECH Octopus V1.1 with five TMC2209 drivers: X, Y, Z, wrist, carousel index. The board's remaining driver slots stay free. If a donor printer's 32-bit board is used instead, its four drivers cover X, Y, Z and the wrist, and the carousel stepper runs on a second small board as an additional Klipper MCU, which Klipper supports natively. Its servo header drives the cue-lever servo; its fan/heater MOSFET outputs drive the vacuum pump, the release valve and the LED bar (the LED output must be a proper PWM pin so the strobe can run at 50.000 Hz); its end-stop inputs take the axis end-stops, the wrist Hall sensor, the carousel home sensor and the vacuum switch. A 24 V 150 W supply feeds the board, and the board's 5 V rail or a separate buck converter feeds the servos.
 
 **Computer.** Raspberry Pi 5 (4 GB). It runs Klipper's host process, Moonraker, the orchestrator, the vision code, the web interface and the audio capture. The Scarlett connects over USB; second-generation and later Scarletts are USB class compliant and need no driver on Linux.
 
@@ -18,9 +18,9 @@ The guiding idea is that the machine is a strangely shaped 3D printer. Motion ru
 
 ## Klipper configuration
 
-The `printer.cfg` declares the four motion axes as a Cartesian kinematics with X, Y, Z, and the wrist as an additional manual stepper, the carousel as a second manual stepper, both servos as `servo` sections, the pump, valve and LED as `output_pin` sections (the LED with `pwm: True` and a 20 ms cycle time for the strobe), and the three optocouplers (remote start/stop, 33, 45) as `output_pin` outputs with a macro that pulses each for 150 ms.
+The `printer.cfg` declares the four motion axes as a Cartesian kinematics with X, Y, Z, and the wrist as an additional manual stepper, the carousel as a second manual stepper, the cue-lever servo as a `servo` section, the pump, valve and LED as `output_pin` sections (the LED with `pwm: True` and a 20 ms cycle time for the strobe), and the three optocouplers (remote start/stop, 33, 45) as `output_pin` outputs with a macro that pulses each for 150 ms.
 
-G-code macros implement the primitives the orchestrator composes: `HOME_ALL`, `GRIP` (pump on, wait for the vacuum switch, else error), `RELEASE`, `CUE_UP`, `CUE_DOWN`, `DECK_START`, `DECK_STOP`, `DECK_33`, `DECK_45`, `BRUSH_DEPLOY`, `BRUSH_PARK`, `CAROUSEL_INDEX`, `STROBE_ON`, `LIGHT_ON`, `LIGHT_OFF`, and `EMERGENCY_LIFT`, which is `CUE_UP` followed by `DECK_STOP` and a motion halt, bound so it can be fired without waiting for the queue.
+G-code macros implement the primitives the orchestrator composes: `HOME_ALL`, `GRIP` (pump on, wait for the vacuum switch, else error), `RELEASE`, `CUE_UP`, `CUE_DOWN`, `DECK_START`, `DECK_STOP`, `DECK_33`, `DECK_45`, `CAROUSEL_INDEX`, `STROBE_ON`, `LIGHT_ON`, `LIGHT_OFF`, and `EMERGENCY_LIFT`, which is `CUE_UP` followed by `DECK_STOP` and a motion halt, bound so it can be fired without waiting for the queue.
 
 Klipper's own safety features do the low-level work: TMC stall detection on every axis, soft limits, and a hard limit on Z so the carriage cannot be driven below its lowest working height.
 

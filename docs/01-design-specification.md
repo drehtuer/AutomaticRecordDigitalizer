@@ -10,7 +10,7 @@ The frame's left end is open and its rails overhang it by 8 cm so that the gantr
 
 ## Frame
 
-The frame is a glued box of 18 mm birch plywood: two side panels at Y = ±40 cm and one end panel at the deck end, each cut as a frame around a large window so the interior stays open and reachable. The panels give the racking stiffness; there are no diagonals and no corner posts. A 2040 aluminium extrusion is bolted along the top edge of each side panel and carries an MGN12 linear rail, the X axis. One 2020 tie across the open end keeps the two beams parallel. Brackets for the brush module, the cue-lever servo, the deck camera and the LED bar screw directly to the panels' inner faces.
+The frame is a glued box of 18 mm birch plywood: two side panels at Y = ±40 cm and one end panel at the deck end, each cut as a frame around a large window so the interior stays open and reachable. The panels give the racking stiffness; there are no diagonals and no corner posts. A 2040 V-slot extrusion is bolted along the top edge of each side panel and is the X axis: the carriages run on Delrin V-wheels in the slot, as on a hobby printer. One 2020 tie across the open end keeps the two beams parallel. Brackets for the cue-lever servo, the deck camera and the LED bar screw directly to the panels' inner faces.
 
 The Pi, the controller board and the vacuum pump live in a box under the flip station, whose post stands on that box.
 
@@ -20,9 +20,9 @@ The gantry is a Cartesian XYZ with one rotary axis:
 
 | Axis | Mechanism | Travel | Notes |
 |---|---|---|---|
-| X | GT2 belt, NEMA17, MGN12 rails on both beams | ≈ 80 cm | From the carousel pick slot to the tonearm rest |
-| Y | GT2 belt, NEMA17, MGN12 rail on the cross beam | ≈ 45 cm | Set by the two station poses, 22 cm either side of the ring |
-| Z | T8 lead screw, NEMA17, moving column | ≈ 60 cm | Column slides through a guide on the cross beam; self-locking |
+| X | GT2 belt, NEMA17, Delrin wheels on 2040 V-slot beams | ≈ 80 cm | From the carousel pick slot to the tonearm rest |
+| Y | GT2 belt, NEMA17, Delrin wheels on a 2040 V-slot cross beam | ≈ 45 cm | Set by the two station poses, 22 cm either side of the ring |
+| Z | T8 lead screw, NEMA17, moving column on an MGN12 rail | ≈ 60 cm | Column slides through a guide on the cross beam; self-locking; the one axis that keeps a linear rail |
 | Wrist | NEMA17 with ≈ 5:1 planetary gearbox, Hall home sensor | −90° … 180° | Axis parallel to X |
 
 The Z axis is a moving column rather than a fixed tower: the 76 cm rail is part of the carriage and slides up through a guide block on the cross beam, so when the carriage is raised nothing hangs below it. Every X move happens at travel height and clears the deck, the station and the brush by construction. The lead screw is self-locking, so a power loss leaves the record where it is.
@@ -61,9 +61,9 @@ The tonearm is moved only while the cue lever holds it up, by the fork straddlin
 
 The arm rest clip stays open.
 
-## Brush module
+## Cleaning
 
-A carbon-fibre record brush on a servo arm, mounted on a bracket on the rear panel with an outrigger reaching behind the deck. It swings over the spinning record, is lowered for a few revolutions, swept outward to carry dust to the edge, and on its way back to park drags its bristles across a dust edge: a thin aluminium comb running radially, as long as the brush, perpendicular to the sweep, with a slide-out tray under it that pulls out towards the back of the frame for emptying.
+There is no cleaning module. Records are brushed by hand before they go into the carousel; a brush pass takes a minute per record and is the right moment to look each one over anyway. A frame-mounted brush with a dust edge was designed and dropped as a simplification; the decision log has the details, and the rear panel has room for it if it ever comes back.
 
 ## Cameras and light
 
@@ -75,4 +75,4 @@ An LED bar beside the deck camera has two modes: pulsed at 50.000 Hz from the co
 
 ## Materials and printing
 
-Printed parts are PETG for structure and TPU wherever a record is touched: the cup lip if not bought, the fork lining, the ring rest pads, the end-stop sleeve. Bought parts are everything long, stiff or precise: extrusion, rails, screws, bearings, motors, electronics. Plywood is used for the frame panels, the bench top, the carousel disc and its base plate, and never for anything whose position matters.
+Printed parts are PETG for structure and TPU wherever a record is touched: the cup lip if not bought, the fork lining, the ring rest pads, the end-stop sleeve. Bought parts are everything long, stiff or precise: extrusion, the Z rail, screws, bearings, motors, electronics; a used 3D printer is the intended source for most of the motion parts. Plywood is used for the frame panels, the bench top, the carousel disc and its base plate, and never for anything whose position matters.

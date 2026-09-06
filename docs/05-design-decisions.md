@@ -66,11 +66,23 @@ Recording everything at one speed and resampling later was rejected because the 
 
 The camera cannot imitate a 50 Hz neon strobe, but an LED pulsed at 50.000 Hz from the controller's crystal makes the deck's dot rows, or a printed strobe ring on a deck without them, show the speed error as a drift the camera can measure. It works on any turntable, and the same LED run continuously is a raking light that shows the grooves for cueing and stylus checks. The measured speed and wow are logged with each recording rather than corrected live.
 
-## Brush on the frame, with a dust edge
+## No brush
 
-The brush was first drawn clamped to the turntable's plinth. It moved to a frame bracket so the deck can be swapped or shifted without re-alignment beyond a software offset. On its return path a radial comb edge, as long as the brush, strips the dust from the bristles into a slide-out tray, so cleaning side A does not put its dust onto side B.
+A frame-mounted brush with a servo arm, a dust edge and a slide-out tray was designed in full and then dropped. Brushing by hand before loading takes a minute per record, is a natural moment to inspect each one, and removes a motor, a bracket, a cycle step and a source of dust inside the machine. The rear panel keeps room for the module.
 
-## Plywood frame, extrusion rails
+## Manual deck, not an automatic one
+
+A fully automatic turntable would have removed the cue servo, the fork, the end stop and most of the deck camera's job, and was proposed as the biggest available simplification. It was rejected because the collection contains records an automatic deck cannot play: sides with several locked grooves, sides cut from the inside out, and records with non-standard start and end positions. Those need a machine that decides where the stylus goes and when it leaves, which is why the manual DD 3120, the fork, and both cameras stay.
+
+## V-slot instead of linear rails
+
+X and Y run on 2040 V-slot with Delrin wheels, as on a hobby printer, instead of MGN rails. The accuracy needed at the cup is set by the hole camera and the spindle tip, well within what V-wheels give, and the change saves about a hundred euros and makes alignment easier. The Z column keeps a rail because it carries the record vertically and its guide block must not rattle.
+
+## A used printer as parts donor
+
+Most of the motion parts (steppers, PSU, belts, pulleys, wheels, a lead screw, end-stops, a Klipper-capable board) come cheapest as a used 3D printer; a CR-10 class machine is the best fit because of its long extrusions and lead screws. Only the two long X beams and the Z rail are bought new.
+
+## Plywood frame, extrusion beams
 
 A full aluminium extrusion frame was replaced by a glued box of 18 mm birch plywood with 2040 extrusion only where the X rails need a straight, adjustable mounting surface. The panels give more racking stiffness than a lattice with diagonals, the interior stays open, brackets screw straight to the panels, and extrusion drops from ten metres to four. Cost is about the same; the choice is about the tools the builder prefers.
 

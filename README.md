@@ -1,6 +1,6 @@
 # AutomaticRecordDigitalizer
 
-A DIY machine that digitises a vinyl record collection unattended: it takes a record from a magazine, puts it on a Technics-style turntable (an Omnitronic DD 3120), cleans it, cues the stylus, records the side, flips the record, records the other side, and puts it back — about 25 records per eight-hour run, with a photo of both labels for the tags.
+A DIY machine that digitises a vinyl record collection unattended: it takes a record from a magazine, puts it on a Technics-style turntable (an Omnitronic DD 3120), cues the stylus, records the side, flips the record, records the other side, and puts it back — about 25 records per eight-hour run, with a photo of both labels for the tags. Records are brushed by hand before they go into the magazine.
 
 The project exists because the cheap way of doing this, a second-hand stacking record changer, drops records onto each other and the recordings show it. Here nothing ever touches a record except a vacuum cup on the label, a felt-lined slot, and the turntable mat.
 
@@ -25,7 +25,7 @@ Concept design, finished and reviewed. Nothing has been bought or printed yet. T
 
 ## The machine in one paragraph
 
-Records stand like spokes in a 24-slot carousel. A small XYZ gantry with a rotary wrist carries a vacuum cup that takes each record by its label, lifts it out of its slot, turns it flat over the deck and sets it on the spindle. A brush cleans the spinning record; the deck's own cue lever, worked by a servo, lifts the tonearm while a fork on the wrist walks it to the lead-in groove found by a camera; the platter is stopped before every needle placement and removal. After the run-out, the record goes to a ring rest where the cup lets go and re-grips the other face, both labels get photographed, and side B is recorded the same way. The record returns to its own slot and the carousel indexes to the next one. The deck's remote start/stop connector starts and stops the platter. Recording runs through a Focusrite Scarlett into a Raspberry Pi, which also runs the cameras, the web interface for the batch list, and the orchestration on top of a Klipper-driven printer mainboard.
+Records stand like spokes in a 24-slot carousel. A small XYZ gantry with a rotary wrist carries a vacuum cup that takes each record by its label, lifts it out of its slot, turns it flat over the deck and sets it on the spindle. The deck's own cue lever, worked by a servo, lifts the tonearm while a fork on the wrist walks it to the lead-in groove found by a camera; the platter is stopped before every needle placement and removal. After the run-out, the record goes to a ring rest where the cup lets go and re-grips the other face, both labels get photographed, and side B is recorded the same way. The record returns to its own slot and the carousel indexes to the next one. The deck's remote start/stop connector starts and stops the platter. Recording runs through a Focusrite Scarlett into a Raspberry Pi, which also runs the cameras, the web interface for the batch list, and the orchestration on top of a Klipper-driven printer mainboard.
 
 ## Follow-up project
 

@@ -1,10 +1,10 @@
 # Operating cycle
 
-One record goes through fifteen steps. The concept model animates each of them, and the order of the axis moves within each step is the order the controller will use, not an approximation.
+One record goes through fourteen steps. The concept model animates each of them, and the order of the axis moves within each step is the order the controller will use, not an approximation.
 
 ## Before a batch
 
-The user loads up to 24 records into the carousel and enters the batch manifest in the web interface: one line per slot with size, speed (33 or 45), and flags for reverse-play or locked-groove sides. The machine homes every axis, indexes the carousel to slot 1, and checks with the wrist camera that a record is present where the manifest says one is.
+The user brushes each record by hand and loads up to 24 of them into the carousel and enters the batch manifest in the web interface: one line per slot with size, speed (33 or 45), and flags for reverse-play or locked-groove sides. The machine homes every axis, indexes the carousel to slot 1, and checks with the wrist camera that a record is present where the manifest says one is.
 
 ## The steps
 
@@ -12,31 +12,29 @@ The user loads up to 24 records into the carousel and enters the batch manifest 
 
 **2. Place side A.** The vertical record leaves the carousel along X at travel height, passes beside the flip station, and only when it is over the deck does the wrist turn to −90° so the record is horizontal, cup on top. It is lowered to a few millimetres above the mat, centred over the spindle using the hole offset the camera measured, and released. The spindle tip does the final centring.
 
-**3. Start and brush.** Start is tapped. The brush swings in, is lowered onto the spinning record for a few turns, swept outward to the edge, lifted, and on its way back to park dragged across the dust edge. Stop is tapped. The gantry waits at travel height with the arm up.
+**3. Lift arm, engage fork.** Nothing is spinning yet; the cue-lever servo raises the arm on the deck's own damped lift. The fork descends from above and straddles the finger lift while the arm still sits over its rest.
 
-**4. Lift arm, engage fork.** With the platter stopped, the cue-lever servo raises the arm on the deck's own damped lift. The fork descends from above and straddles the finger lift while the arm still sits over its rest.
+**4. Carry arm to lead-in.** The fork walks the floating arm along its arc to the lead-in radius measured in step 1. The deck camera confirms the headshell's position.
 
-**5. Carry arm to lead-in.** The fork walks the floating arm along its arc to the lead-in radius measured in step 1. The deck camera confirms the headshell's position.
+**5. Lower needle, start.** The fork rises clear. The cue lever lowers the stylus onto the stationary lead-in groove; the deck camera confirms contact. Start is tapped. Recording on the Scarlett has already been running for a few seconds, so nothing is lost; the lead-in silence absorbs the spin-up.
 
-**6. Lower needle, start.** The fork rises clear. The cue lever lowers the stylus onto the stationary lead-in groove; the deck camera confirms contact. Start is tapped. Recording on the Scarlett has already been running for a few seconds, so nothing is lost; the lead-in silence absorbs the spin-up.
+**6. Run-out: stop, lift, find arm.** The recording's silence detector and the deck camera's headshell radius both indicate the run-out. Stop is tapped first, then the cue lever lifts the arm. The camera tells the gantry where the headshell actually is, which can be anywhere on the surface, and the fork descends onto the finger lift there.
 
-**7. Run-out: stop, lift, find arm.** The recording's silence detector and the deck camera's headshell radius both indicate the run-out. Stop is tapped first, then the cue lever lifts the arm. The camera tells the gantry where the headshell actually is, which can be anywhere on the surface, and the fork descends onto the finger lift there.
+**7. Carry arm to rest, lower.** The fork walks the floating arm back over the rest, rises clear, and the cue lever sets the arm down.
 
-**8. Carry arm to rest, lower.** The fork walks the floating arm back over the rest, rises clear, and the cue lever sets the arm down.
+**8. Lift record off the platter.** Cup onto the A-side label from above, vacuum on, straight up off the spindle.
 
-**9. Lift record off the platter.** Cup onto the A-side label from above, vacuum on, straight up off the spindle.
+**9. Carry to station, B up.** Over the deck the wrist swings through vertical to +90°, so the record now rides on top of the cup with side B up. The gantry carries it to the station and lowers it until its label rests on the ring; the arm enters through the ring's opening.
 
-**10. Carry to station, B up.** Over the deck the wrist swings through vertical to +90°, so the record now rides on top of the cup with side B up. The gantry carries it to the station and lowers it until its label rests on the ring; the arm enters through the ring's opening.
+**10. Release and withdraw.** Vacuum off. The cup drops straight down clear of the ring. Nothing else moves. The record stays on the rest by its label.
 
-**11. Release and withdraw.** Vacuum off. The cup drops straight down clear of the ring. Nothing else moves. The record stays on the rest by its label.
+**11. Re-grip from above.** The arm backs out along Y from under the record, rises, hangs straight down, crosses along Y to the far side of the station, swings to −90° and comes down onto the B-side label. The wrist camera photographs label B and measures the hole and groove radii on the way in.
 
-**12. Re-grip from above.** The arm backs out along Y from under the record, rises, hangs straight down, crosses along Y to the far side of the station, swings to −90° and comes down onto the B-side label. The wrist camera photographs label B and measures the hole and groove radii on the way in.
+**12. Place side B.** As step 2. Steps 3 to 7 then repeat for side B.
 
-**13. Place side B.** As step 2. Steps 3 to 8 then repeat for side B.
+**13. Return to its slot.** Over the deck the wrist turns back to 0°, the record hangs vertical, travels along X beside the station and is lowered into the slot it came from. Vacuum off, the cup backs away along Y, the arm rises out of the gap.
 
-**14. Return to its slot.** Over the deck the wrist turns back to 0°, the record hangs vertical, travels along X beside the station and is lowered into the slot it came from. Vacuum off, the cup backs away along Y, the arm rises out of the gap.
-
-**15. Index carousel.** The stepper turns the magazine one slot. The next record is at the pick position.
+**14. Index carousel.** The stepper turns the magazine one slot. The next record is at the pick position.
 
 ## Motion planning rules
 
@@ -56,7 +54,7 @@ Every target position is either a fixed mechanical datum (the pick slot, the spi
 
 ## Timing
 
-A side runs 10 to 25 minutes depending on the record. The handling between sides adds about two minutes, so one record takes 25 to 55 minutes and an eight-hour run digitises roughly 10 to 20 records; a full 24-slot carousel therefore covers a long day or a weekend.
+A side runs 10 to 25 minutes depending on the record. The handling between sides adds about a minute and a half, so one record takes 25 to 55 minutes and an eight-hour run digitises roughly 10 to 20 records; a full 24-slot carousel therefore covers a long day or a weekend.
 
 ## Fault handling
 
