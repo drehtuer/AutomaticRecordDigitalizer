@@ -286,17 +286,20 @@
 
   // ---------- turntable ----------
   const TTX = 55;
-  box(45, 9, 35, M.tt, TTX, 4.5, 0); box(45.4, 1.2, 35.4, M.ext, TTX, 0.6, 0);   // Omnitronic DD 3120: 45 × 35 × 9 cm
+  box(45, 9, 36, M.tt, TTX + 4.1, 4.5, -0.55); box(45.4, 1.2, 36.4, M.ext, TTX + 4.1, 0.6, -0.55);   // Omnitronic DD 3120, 45 × 36 × 9 cm; spindle 18.4 cm from the left edge, 18.6 from the rear (measured on the photo)
   const platterG = new THREE.Group(); platterG.position.set(TTX, 0, 0); scene.add(platterG);
   cyl(16.5, 1.5, M.platter, 0, 9.75, 0, platterG, 96); cyl(15.2, 0.3, M.mat, 0, 10.65, 0, platterG, 96);
   for (let i = 0; i < 36; i++) { const a = i / 36 * Math.PI * 2; box(0.5, 0.2, 0.5, M.alu, Math.cos(a) * 16.6, 9.75, Math.sin(a) * 16.6, platterG); }
   cyl(0.36, 2.2, M.alu, 0, 11.6, 0, platterG, 16);
   const onPlatter = recordFlat(15, 0xD9642B, 0, 10.95, 0, platterG);
-  cyl(1.6, 0.8, M.ext, TTX - 19, 9.3, 15); box(1.6, 0.4, 9, M.ext, TTX + 19, 9.2, 4);
-  cyl(1.4, 0.4, M.ext, TTX - 19, 9.2, -13); cyl(1.4, 0.4, M.ext, TTX - 15, 9.2, -13);
-  const PIV = new THREE.Vector3(TTX + 16, 13, -13), ARM_R = 23;
+  box(4.5, 0.8, 3, M.ext, TTX - 14.5, 9.3, 15.3);                                  // start/stop
+  box(1.6, 0.4, 10, M.ext, TTX + 23, 9.2, 6.4);                                   // pitch fader
+  for (const dx of [-11.5, -9, -6.5]) box(1.8, 0.4, 1.2, M.ext, TTX + dx, 9.2, 16.2);   // 33 / 45 / 78
+  cyl(1.5, 1.2, M.ext, TTX - 16.2, 9.6, 11.8);                                      // power knob
+  cyl(0.5, 0.6, new THREE.MeshStandardMaterial({ color: 0xFF3B6B, emissive: 0xFF2255, emissiveIntensity: 1.2 }), TTX - 13.3, 9.4, 10.8);   // the deck's own strobe LED
+  const PIV = new THREE.Vector3(TTX + 19.4, 13, -8.4), ARM_R = 23;   // pivot 19.4 cm right of and 8.4 cm behind the spindle (photo)
   cyl(3.2, 5, M.alu, PIV.x, 7.5, PIV.z);                                          // arm base
-  cyl(0.9, 3.5, M.alu, TTX + 20.6, 10.7, 9.5); box(2.4, 0.6, 1.2, M.print, TTX + 20.6, 12.4, 9.5);   // arm rest
+  cyl(0.9, 3.5, M.alu, TTX + 18.9, 10.7, 12.5); box(2.4, 0.6, 1.2, M.print, TTX + 18.9, 12.4, 12.5);   // arm rest, front right
   // arm built pointing along local +X; armG.rotation.y = -a swings the stylus to azimuth a; armG.position.y lifts it
   const armG = new THREE.Group(); armG.position.copy(PIV); scene.add(armG);
   {
@@ -310,25 +313,27 @@
     cyl(1.6, 1.4, M.alu, 0, 0, 0, armG);
   }
   const FL_LOCAL = new THREE.Vector3(ARM_R - 0.6, -0.4, 2.2);
-  const ARM_A = { rest: deg(78.4), leadin: deg(102.3), runout: deg(124.9), mid: deg(113) };
+  const ARM_A = { rest: deg(91.3), leadin: deg(118), runout: deg(140), mid: deg(129) };   // recomputed for the measured pivot
   const LIFT_H = 1.0;
   function setArmPose(a, l) { armG.rotation.y = -a; armG.position.y = PIV.y + LIFT_H * l; cueLever.rotation.x = -deg(35) * l; }
   const fingerLiftAt = (a, l) => { const g = new THREE.Group(); g.position.copy(PIV); g.position.y += LIFT_H * l; g.rotation.y = -a; g.updateMatrixWorld(true); return g.localToWorld(FL_LOCAL.clone()); };
   // cue lever on the deck (front-left of the arm base) and the servo that works it, on a frame outrigger
-  const cueLever = new THREE.Group(); cueLever.position.set(TTX + 12, 10.2, -9); scene.add(cueLever);
-  box(0.8, 0.5, 3.4, M.ext, 0, 0, -1.2, cueLever); cyl(0.6, 1.0, M.alu, 0, 0, 0, cueLever);
-  // cue-lever servo: everything stays at lever height, below the arm's swing; the pusher rod comes in along Y from the rear
-  const CL = new THREE.Vector3(TTX + 12, 10.2, -40);
-  box(3, 10, 2.5, M.print, CL.x, 7, -38);                                          // bracket on the rear panel's inner face
-  const cueServo = cyl(2, 3.5, M.ext, CL.x, CL.y, -35); cueServo.rotation.x = Math.PI / 2;   // linear-push servo
-  box(1.2, 1.2, 24, M.alu, CL.x, CL.y, -22);                                       // pusher rod, sliding in a guide
-  box(1.4, 1.4, 2, M.print, CL.x, CL.y, -19);                                      // rod guide on the plinth edge
-  box(1.6, 0.8, 1.6, M.accent, CL.x, CL.y, -10.6);                                 // pad that presses the lever
-  // inner end stop: a soft-sleeved pin on the same bracket that the arm tube meets just past the run-out radius, so the stylus can never reach the label
-  const ESA = deg(128.5), ESR = 6;
+  const cueLever = new THREE.Group(); cueLever.position.set(TTX + 23.5, 10.2, -4.6); scene.add(cueLever);   // front-right of the arm base
+  box(3.4, 0.5, 0.8, M.ext, 1.2, 0, 0, cueLever); cyl(0.6, 1.0, M.alu, 0, 0, 0, cueLever);
+  // cue-lever servo on the right end panel: the pusher comes in along -X at lever height, nowhere near the arm's swing
+  const CL = new THREE.Vector3(SX1 - 1.8, 10.2, -4.6);
+  box(2.5, 10, 3, M.print, CL.x, 7, CL.z);                                          // bracket on the end panel's inner face
+  const cueServo = cyl(2, 3.5, M.ext, CL.x - 4, CL.y, CL.z); cueServo.rotation.z = Math.PI / 2;   // linear-push servo
+  box(16, 1.2, 1.2, M.alu, CL.x - 12, CL.y, CL.z);                                  // pusher rod
+  box(2, 1.4, 1.4, M.print, CL.x - 10, CL.y, CL.z);                                 // rod guide
+  box(0.8, 1.6, 1.6, M.accent, TTX + 25.6, CL.y, CL.z);                             // pad that presses the lever
+  // inner end stop on a bar from the same bracket, passing in front of the arm base under the arm: a soft-sleeved pin the
+  // arm tube meets just past the run-out radius, so the stylus can never reach the label
+  const ESA = deg(143.8), ESR = 6;
   const ES = new THREE.Vector3(PIV.x + ESR * Math.cos(ESA), 0, PIV.z + ESR * Math.sin(ESA));
-  box(1.2, 1.0, 1.2, M.alu, ES.x, 9.8, ES.z); cyl(0.5, 5, M.alu, ES.x, 12.3, ES.z); cyl(0.9, 2.2, M.rubber, ES.x, 13.6, ES.z);
-  box(1.0, 0.8, Math.abs(ES.z - CL.z) - 20, M.alu, (ES.x + CL.x) / 2, 9.8, (ES.z - 19) / 2 - 9.5);   // link from the guide to the stop
+  box(CL.x - ES.x, 0.8, 1.0, M.alu, (CL.x + ES.x) / 2, 9.8, -2.0);                  // bar along X in front of the arm base
+  box(1.0, 0.8, Math.abs(ES.z + 2.0) + 1, M.alu, ES.x, 9.8, (ES.z - 2.0) / 2);       // stub to the pin
+  cyl(0.5, 5, M.alu, ES.x, 12.3, ES.z); cyl(0.9, 2.2, M.rubber, ES.x, 13.6, ES.z);
 
   // brush module on the frame: post on the rear base rail, outrigger to the pivot behind the deck
   const BR = new THREE.Vector3(TTX - 15, 14, -20.5);
@@ -523,14 +528,14 @@
     ['Flip & photo station', () => new THREE.Vector3(ST.x, 32.5, ST.z - 8)],
     ['Deck camera · faces the headshell', () => new THREE.Vector3(DC.x, DC.y + 4, DC.z)],
     ['50 Hz LED strobe · raking light for the grooves', () => new THREE.Vector3(DC.x - 1, DC.y - 6, DC.z + 4.5)],
-    ['Cue-lever servo', () => new THREE.Vector3(CL.x, CL.y + 3, -33)],
+    ['Cue-lever servo · on the end panel', () => new THREE.Vector3(CL.x - 4, CL.y + 3, CL.z)],
     ['Inner end stop · stylus never reaches the label', () => new THREE.Vector3(ES.x, 16, ES.z)],
-    ['33 / 45 buttons tapped electrically', () => new THREE.Vector3(TTX - 17, 10.5, -13)],
+    ['33 / 45 / 78 buttons tapped electrically', () => new THREE.Vector3(TTX - 9, 10.5, 16.2)],
     ['Strobe dots on the rim · read by the deck camera', () => new THREE.Vector3(TTX + 12, 11, 11.5)],
     ['Brush arm · on the frame', () => new THREE.Vector3(BR.x, 17, BR.z)],
     ['Dust edge · removable tray', () => new THREE.Vector3(DE.x, 12.5, DE.z)],
     ['Tonearm', () => new THREE.Vector3(PIV.x, 15, PIV.z)],
-    ['Start / stop via the remote jack', () => new THREE.Vector3(TTX - 19, 10.5, 15)],
+    ['Start / stop via the remote jack', () => new THREE.Vector3(TTX - 14.5, 10.5, 15.3)],
     ['X rail on 2040 · birch-ply box frame', () => new THREE.Vector3(60, 89, 40)],
     ['Roller ring · 10 × 608 bearings', () => new THREE.Vector3(CC.x + 36, 8, CC.z)],
     ['Printed hub & rim carry the slot angles', () => new THREE.Vector3(CC.x, 33, CC.z)],

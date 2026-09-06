@@ -2,7 +2,9 @@
 
 Things the concept could not settle and that the first hardware has to answer. Each one names what to measure and what depends on it.
 
-**The turntable's exact geometry.** The Omnitronic DD 3120 is 45 × 35 × 9 cm; the model otherwise uses generic Technics SL-1200 dimensions: pivot-to-stylus 230 mm, pivot 160 mm right and 130 mm behind the spindle, cue lever left-front of the arm base, finger lift on the left of the headshell. Measure the actual deck before the CAD: the cue-servo bracket, the end-stop pin position and the fork's approach all hang on these numbers.
+**The turntable's exact geometry.** The layout in the specification was measured on a top-down photo of the DD 3120 (`images/dd-3120-top.jpg`) and is good to about half a centimetre; perspective in the photo makes the outer positions the least certain. Confirm with a ruler before the CAD: spindle to pivot, pivot to arm rest, the cue lever's position and travel, and the height of the lever above the plinth. The cue-servo bracket, the end-stop pin and the fork's approach all hang on these numbers.
+
+**Slipmat.** Replace the felt DJ slipmat with a rubber or cork mat before the first batch and check that the vacuum-cup release a few millimetres above it still centres the record on the spindle.
 
 **The remote start/stop jack's behaviour.** Whether a closure toggles start/stop or the platter runs only while the contact is held; the macros mirror whichever it is.
 
