@@ -4,7 +4,7 @@ Written 6 September 2026, at the end of the concept phase.
 
 ## Where the project stands
 
-The concept is complete and has been reviewed step by step against an interactive model (`concept-model.html`) that plans every motion of the cycle as waypoints. Every subsystem has a defined mechanism, every step of the cycle has a defined sequence, and every decision and rejected alternative is written down in `05-design-decisions.md`. Nothing has been bought, cut or printed. There is no CAD and no code yet.
+The concept is complete and has been reviewed step by step against an interactive model (`concept-model.html`) that plans every motion of the cycle as waypoints. Every subsystem has a defined mechanism, every step of the cycle has a defined sequence, and every decision and rejected alternative is written down in `05-design-decisions.md`. A first parametric CAD exists under `cad/` (CadQuery), with STEP exports of the whole machine and the sub-assemblies, STL files of the first printed parts, and a collision checker that sweeps the complete cycle; it passes with zero intersections at 20 mm / 5° sampling. Nothing has been bought, cut or printed. There is no machine code yet.
 
 The machine, in its final concept form: a 24-slot carousel magazine with records standing as spokes; a plywood box frame carrying an XYZ gantry on V-slot with a rotary wrist; a single vacuum cup on the label as the gripper, with a camera and a finger-lift fork on the same wrist; a passive ring rest for the side-B flip and the label photos; the Omnitronic DD 3120 as the deck, worked through its remote start/stop jack, its 33/45 buttons and its cue lever; a second camera and a 50 Hz LED strobe facing the headshell; Klipper on a printer mainboard for motion, a Raspberry Pi 5 for orchestration, vision, the web interface and recording through the Focusrite Scarlett. No brush; records are cleaned by hand before loading. No automatic recovery from a skip; the arm lifts, the platter stops, and the machine waits.
 
@@ -26,9 +26,13 @@ Second, buy the 3D printer, since it is needed for everything after this point, 
 
 Third, print and test the three parts that decide the geometry before any frame exists: the finger-lift fork on a hand-held handle against the real headshell; the vacuum cup bracket with a hand pump against 12", 10", 7" and picture-disc labels; and three carousel combs with the hub and rim segments to confirm the 6.5 cm gap takes the wrist assembly. A Raspberry Pi with one camera can be set up in parallel to prove hole and groove-band detection on a record lying on a table.
 
-Fourth, the parametric CAD (OpenSCAD or CadQuery), starting from the measured deck and the tested gripper, then the frame panels, the gantry, the carousel.
+Fourth, detail the CAD: put the measured deck numbers into `cad/params.py`, rerun the collision sweep, then turn the remaining printed parts from envelopes into print-ready parts in the order the build needs them (wrist and cup end, carousel hub and combs, Z carriage, station, cue bracket).
 
 Fifth, the software, which can begin before the machine is complete: the Klipper configuration and macros, the orchestrator's state machine and motion planner (the same one the concept model uses), the vision routines, and the web interface with the batch manifest. The step-through mode of the web interface is the commissioning tool.
+
+## What the CAD changed
+
+Building the CAD and sweeping the cycle changed four numbers and one rule against the concept: the frame is 86 cm wide instead of 80, the finger-lift fork is 55 mm long instead of 100, the end-stop pin stands 45 mm from the arm pivot instead of 60, the wrist camera sits 110 mm up the outer side of the arm and no longer looks at records inside the carousel, and the carry to the station swings the record to vertical before moving in Y. All are in the specification and the decision log.
 
 ## Repository
 

@@ -18,7 +18,7 @@ Things the concept could not settle and that the first hardware has to answer. E
 
 **Cup size against 7" labels.** A 40 mm bellows cup on an 88 mm label leaves margin; confirm the seal on printed and glossy labels, on labels with embossed text, and on a shaped picture disc's centre.
 
-**Gap at the pick slot.** 6.5 cm between spokes at the label radius against a gripper assembly of just under 5 cm. Print the wrist's cup end and camera bracket first and check it in a mock-up of three slots; if it is too tight, the fix is 22 slots at 16.4° rather than a wider carousel.
+**Gap at the pick slot.** 65 mm between spoke faces at the arm's radius against 48 mm of cup, neck, bracket and arm, leaving 8 mm of approach and 9 mm of margin. Print the wrist's cup end first and check it in a mock-up of three slots; if it is too tight, the fix is 22 slots at 16.4° rather than a wider carousel. The camera is no longer in the gap.
 
 **Carousel indexing accuracy.** Whether a printed GT2 ring in eight segments indexes to within a millimetre at the rim over many revolutions, or whether the per-slot optical mark is needed for every index rather than only for homing.
 
@@ -37,3 +37,7 @@ Things the concept could not settle and that the first hardware has to answer. E
 **Column height.** The raised column top at about 135 cm is fine on a bench but not under a low shelf; if headroom is short, the Z travel can be reduced by lowering the travel height for horizontal carries, at the cost of a slightly longer cycle.
 
 **V-wheel play on X.** With Delrin wheels on V-slot the carriages must be adjusted with their eccentric spacers until there is no rock and no binding over the whole 1.3 m; check that the cup's position at the pick slot repeats to within half a millimetre after a full X traverse, and fall back to a rail on X if it does not.
+
+**Pick without a camera.** The pick relies on the record's centre being within about a millimetre of its nominal position when it rests against the rim ring. Check this on the printed combs and rim with a 12", a 10" and a 7": if a size sits further off, the wrist camera can take one look from above the slot before the arm descends, at the cost of a few seconds.
+
+**Spindle in the cup.** The spindle tip enters the hollow bellows cup by about 10 mm when a record is released 3 mm above the mat. Confirm the cup's inner depth allows that with the chosen cup; otherwise release from a little higher.

@@ -56,7 +56,7 @@ A skip is detected by audio and by camera at once. The response is to lift the a
 
 ## Two cameras, placed by what they need to see
 
-An overhead camera cannot see a label or hole past the gripper, and cannot see the label at all while the record stands in the magazine. So the label-and-hole camera rides on the wrist looking along the cup's axis and sees whatever face is about to be gripped, and the deck camera sits low at platter height facing the headshell, where it sees the stylus in profile, the groove bands edge-on and the strobe dots on the rim. A rail-top camera above the deck was tried and moved for that reason.
+An overhead camera cannot see a label or hole past the gripper. So the label camera rides on the wrist looking along the cup's axis: with the cup pointing down over the platter or the ring rest it looks straight down at whichever label is facing up, with nothing in the way, and measures the groove radii there. The deck camera sits low at platter height facing the headshell, where it sees the stylus in profile, the groove bands edge-on and the strobe dots on the rim. A rail-top camera above the deck was tried and moved for that reason. The wrist camera was first meant to look at the record's face inside the carousel gap as well; the CAD showed there is no room for a camera at a usable distance inside a 65 mm gap, and the rim ring makes the record's position known well enough that no look is needed there.
 
 ## 33/45 by the deck's buttons, not by resampling
 
@@ -93,3 +93,7 @@ The 86 cm carousel rolls on ten printed brackets with 608 bearings around a cent
 ## Precision where it is printed, cheapness where it is wood
 
 The carousel disc and base plate, the frame panels and the bench top are plywood cut to a few millimetres. Every position that matters, the slot angles, the rail line, the ring rest, is carried by a printed or bought part that registers to the wood without depending on how accurately it was cut.
+
+## CAD in CadQuery, checked by script
+
+The CAD is CadQuery code rather than a GUI model: every dimension is a named parameter, STEP and STL regenerate from it, and the same planner that animates the concept model produces the cycle's keyframes for a scripted collision sweep. The first sweep found five conflicts the concept model had not shown (camera in the narrowing gap, cup bracket on the spindle tip, end stop under the record's edge, fork through the rear panel, record swept into the front panel) and each became a parameter change or a planner rule. The sweep is the gate for every later change to the geometry.
