@@ -6,13 +6,13 @@ This document describes the machine as it stands after the concept review. Dimen
 
 The bench is about 190 × 100 cm. From left to right it carries the carousel magazine (Ø 86 cm, standing free on the bench), then the frame (125 × 80 × 90 cm) that spans the flip station and the turntable. The gantry rides on top of the frame; its Z column rises to about 135 cm when fully raised, so the machine wants a metre and a half of headroom.
 
-The frame's left end is open and its rails overhang it by 8 cm so that the gantry can reach the carousel's pick slot, which is the only point where the two halves of the machine meet. The carousel can be lifted off the bench for loading without touching the frame.
+The frame's left end is open and its X beams overhang it by 8 cm so that the gantry can reach the carousel's pick slot, which is the only point where the two halves of the machine meet. The carousel can be lifted off the bench for loading without touching the frame.
 
 ## Frame
 
-The frame is a glued box of 18 mm birch plywood: two side panels at Y = ±40 cm and one end panel at the deck end, each cut as a frame around a large window so the interior stays open and reachable. The panels give the racking stiffness; there are no diagonals and no corner posts. A 2040 aluminium extrusion is bolted along the top edge of each side panel and carries an MGN12 linear rail, the X axis. One 2020 tie across the open end keeps the two beams parallel. Brackets for the brush module, the cue-lever servo, the deck camera and the LED bar screw directly to the panels' inner faces.
+The frame is a glued box of 18 mm birch plywood: two side panels at Y = ±40 cm and one end panel at the deck end, each cut as a frame around a large window so the interior stays open and reachable. The panels give the racking stiffness; there are no diagonals and no corner posts. A 2040 V-slot extrusion is bolted along the top edge of each side panel and is the X axis: the carriages run on Delrin V-wheels in the slot, as on a hobby printer. One 2020 tie across the open end keeps the two beams parallel. Brackets for the cue-lever servo, the deck camera and the LED bar screw directly to the panels' inner faces.
 
-The Pi, the controller board and the vacuum pump live in a box under the flip station, whose post stands on that box.
+The Pi, the controller board, the relay card and the vacuum pump live in a box under the flip station, whose post stands on that box.
 
 ## Gantry
 
@@ -20,12 +20,12 @@ The gantry is a Cartesian XYZ with one rotary axis:
 
 | Axis | Mechanism | Travel | Notes |
 |---|---|---|---|
-| X | GT2 belt, NEMA17, MGN12 rails on both beams | ≈ 80 cm | From the carousel pick slot to the tonearm rest |
-| Y | GT2 belt, NEMA17, MGN12 rail on the cross beam | ≈ 45 cm | Set by the two station poses, 22 cm either side of the ring |
-| Z | T8 lead screw, NEMA17, moving column | ≈ 60 cm | Column slides through a guide on the cross beam; self-locking |
+| X | GT2 belt, NEMA17, Delrin wheels on 2040 V-slot beams | ≈ 80 cm | From the carousel pick slot to the tonearm rest |
+| Y | GT2 belt, NEMA17, Delrin wheels on a 2040 V-slot cross beam | ≈ 45 cm | Set by the two station poses, 22 cm either side of the ring |
+| Z | T8 lead screw, NEMA17, moving column on an MGN12 rail | ≈ 60 cm | Column slides through a guide on the cross beam; self-locking; the one axis that keeps a linear rail |
 | Wrist | NEMA17 with ≈ 5:1 planetary gearbox, Hall home sensor | −90° … 180° | Axis parallel to X |
 
-The Z axis is a moving column rather than a fixed tower: the 76 cm rail is part of the carriage and slides up through a guide block on the cross beam, so when the carriage is raised nothing hangs below it. Every X move happens at travel height and clears the deck, the station and the brush by construction. The lead screw is self-locking, so a power loss leaves the record where it is.
+The Z axis is a moving column rather than a fixed tower: the 76 cm rail is part of the carriage and slides up through a guide block on the cross beam, so when the carriage is raised nothing hangs below it. Every X move happens at travel height and clears the deck and the station by construction. The lead screw is self-locking, so a power loss leaves the record where it is.
 
 The wrist sits on a 9 cm outrigger beside the column so the arm can swing without meeting it. It carries three things: the vacuum arm (22 cm, with the cup on its end pointing perpendicular to the arm), the wrist camera looking along the cup's axis, and the finger-lift fork on the opposite side of the hub, 10 cm long, which points down when the arm points up.
 
@@ -49,19 +49,21 @@ A ring rest on a post 12 cm behind the machine's centreline, at X = 20 cm, Z = 3
 
 ## Turntable interface
 
-The deck is a Technics-type direct-drive clone with a manual cue lever and no auto-return. The machine touches it in four places, none of them modifications:
+The deck is an Omnitronic DD 3120: a Technics-type direct drive, 45 × 36 × 9 cm, with a manual cue lever, a remote start/stop connector, a pitch output, 33/45/78 rpm with quartz lock and ±10/±20 % pitch range, and no auto-return. Its layout, measured on a top-down photo (`images/dd-3120-top.jpg`) and to be confirmed with a ruler: the spindle sits 18.4 cm from the left edge and 18.6 cm from the rear edge; the arm pivot is 19.4 cm to the right of and 8.4 cm behind the spindle (pivot-to-spindle 21.1 cm, consistent with a 23 cm effective length); the arm rest is 19 cm right of and 13 cm in front of the spindle; the cue lever is at the front-right of the arm base, 3 cm inside the deck's right edge and about 5 cm behind the spindle line; start/stop and the speed buttons are at the front left, the power knob at the left, the pitch fader at the right in front of the arm, and the deck's own red strobe LED shines on the platter rim at the front left. The platter rim carries four rows of strobe dots.
 
-The start/stop and 33/45 buttons are momentary switches and are tapped electrically through optocouplers wired in parallel with them.
+The felt DJ slipmat in the photo should be replaced by a rubber or cork mat for digitising: a slipmat is made to let the record slip, and it also holds static and dust. (A Stanton T.92 USB is also available but has no cue lever, which would bring back a separate arm-lift mechanism; it stays the spare.) The cartridge is an Ortofon DJ S, a spherical DJ stylus tracking at about 3 g, robust against the kind of handling this machine does; an elliptical stylus can be swapped in for a final archive pass once the machine is trusted. The machine touches the deck in four places, none of them modifications:
 
-The cue lever is worked by a small linear-push servo mounted on the rear panel, whose rod comes in along Y at lever height, below the arm's swing. The same bracket carries a soft-sleeved end-stop pin that stands in the arm tube's path at about 6 cm from the arm pivot, so the arm cannot swing past a stylus radius of roughly 53 mm: the stylus physically cannot reach the label.
+Start and stop go through the deck's own remote start/stop connector, a 6.3 mm jack made for the fader-start feature of older mixers and hi-fi systems, which started the deck when the fader came up: it expects a contact closure and does nothing but start and stop the platter (speed is chosen with the buttons). One channel of the Conrad 393905 USB relay card (already on hand, driven from the Pi) on a 6.3 mm plug does it, with no wire soldered inside the deck. The 33 and 45 buttons are momentary switches and are pressed by two more channels of the same card wired across the switch contacts inside the deck; a relay is a dry contact, so polarity and the switch's voltage do not matter.
+
+The cue lever is worked by a small linear-push servo on a bracket on the deck-end panel of the frame, whose rod comes in along X at lever height; the lever is only 3 cm from the deck's right edge, so the rod is short and never crosses the arm's swing. A bar from the same bracket runs in front of the arm base, under the arm, and carries a soft-sleeved end-stop pin standing in the arm tube's path at about 6 cm from the pivot, so the arm cannot swing past a stylus radius of roughly 53 mm: the stylus physically cannot reach the label.
 
 The tonearm is moved only while the cue lever holds it up, by the fork straddling the headshell's finger lift with prongs fore and aft of it. The fork never carries the arm's weight.
 
 The arm rest clip stays open.
 
-## Brush module
+## Cleaning
 
-A carbon-fibre record brush on a servo arm, mounted on a bracket on the rear panel with an outrigger reaching behind the deck. It swings over the spinning record, is lowered for a few revolutions, swept outward to carry dust to the edge, and on its way back to park drags its bristles across a dust edge: a thin aluminium comb running radially, as long as the brush, perpendicular to the sweep, with a slide-out tray under it that pulls out towards the back of the frame for emptying.
+There is no cleaning module. Records are brushed by hand before they go into the carousel; a brush pass takes a minute per record and is the right moment to look each one over anyway. A frame-mounted brush with a dust edge was designed and dropped as a simplification; the decision log has the details, and the rear panel has room for it if it ever comes back.
 
 ## Cameras and light
 
@@ -73,4 +75,4 @@ An LED bar beside the deck camera has two modes: pulsed at 50.000 Hz from the co
 
 ## Materials and printing
 
-Printed parts are PETG for structure and TPU wherever a record is touched: the cup lip if not bought, the fork lining, the ring rest pads, the end-stop sleeve. Bought parts are everything long, stiff or precise: extrusion, rails, screws, bearings, motors, electronics. Plywood is used for the frame panels, the bench top, the carousel disc and its base plate, and never for anything whose position matters.
+Printed parts are PETG for structure and TPU wherever a record is touched: the cup lip if not bought, the fork lining, the ring rest pads, the end-stop sleeve. Bought parts are everything long, stiff or precise: extrusion, the Z rail, screws, bearings, motors, electronics; a used 3D printer is the intended source for most of the motion parts. Plywood is used for the frame panels, the bench top, the carousel disc and its base plate, and never for anything whose position matters.

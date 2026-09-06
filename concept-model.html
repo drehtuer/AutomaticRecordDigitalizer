@@ -102,6 +102,7 @@
       <dt>Bench</dt><dd>≈ 190 × 100 cm</dd>
       <dt>Frame</dt><dd>125 × 80 × 90 cm · 18 mm ply</dd>
       <dt>Cue lift</dt><dd>deck’s own lever, servo-driven</dd>
+      <dt>Linear motion</dt><dd>V-slot X/Y · rail on Z</dd>
       <dt>Column top, raised</dt><dd>≈ 135 cm</dd>
       <dt>Carousel</dt><dd>24 slots · 15° · Ø 86 cm</dd>
       <dt>Gap at the label</dt><dd>≈ 6.5 cm</dd>
@@ -112,7 +113,7 @@
     </dl>
   </div>
   <label class="tog"><input type="checkbox" id="lbltog" checked> Show part labels</label>
-  <p class="note">This revision: the frame is a glued box of 18 mm birch plywood — side and end panels with window cut-outs, open at the carousel end — and only the two X rails ride on 2040 extrusion bolted along the top edges, with one extrusion tie across the open end; about 4 m of extrusion instead of 10, no diagonals, and the brush, cue-servo and camera brackets simply screw to the panels. The carousel is a plywood disc that is nothing but a floor: it rolls on ten printed brackets with 608 bearings around a central 6005 bearing, is indexed by a stepper through a printed GT2 ring in eight segments, and the printed hub and rim segments hold the 24 combs at their exact angles, so no wood cut has to be precise.</p>
+  <p class="note">This revision: the brush module is gone — records are brushed by hand before they go into the carousel, which saves a servo, a bracket and a step. X and Y run on 2040 V-slot with Delrin wheels instead of linear rails; only the Z column keeps a rail. The deck is the Omnitronic DD 3120 with its layout measured from a photo: the cue lever sits at the front-right of the arm base, so its servo lives on the frame’s end panel with a short pusher, and the end-stop pin hangs off a bar from the same bracket. An automatic turntable was considered and rejected: it cannot handle locked grooves, inside-out records or non-standard start and end positions, which is exactly why both cameras stay.</p>
 </aside>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';document.head.appendChild(s);"></script>
@@ -201,7 +202,7 @@
   box(PLY, 12, 80, M.ply, SX1 - 0.9, 6, 0); box(PLY, 14, 80, M.ply, SX1 - 0.9, PH - 7, 0);   // right end panel with window
   for (const z of [-34, 34]) box(PLY, PH, 12, M.ply, SX1 - 0.9, PH / 2, z);
   box(3, 3, 83, M.ext, FX0 + 1.5, RAIL_Y, 0);                                      // extrusion tie across the open left end
-  for (const z of PZ) { box(FLEN, 4, 2, M.ext, FXC, RAIL_Y, z); box(FLEN, 0.8, 1.2, M.alu, FXC, RAIL_Y + 2.4, z); }   // 2040 beams + MGN12 rails
+  for (const z of PZ) box(FLEN, 4, 2, M.ext, FXC, RAIL_Y, z);   // 2040 V-slot beams: the carriages run on Delrin wheels in the slot
   // XYZ triad at the bench corner (machine axes: X along the bench, Y across it, Z up)
   const AX = new THREE.Vector3(-92, 0, 48);
   const arrow = (dir, color) => { const a = new THREE.ArrowHelper(dir, AX, 18, color, 4, 2.2); scene.add(a); return AX.clone().addScaledVector(dir, 21); };
@@ -209,7 +210,7 @@
 
   // ---------- gantry ----------
   const xCar = new THREE.Group(); scene.add(xCar);
-  for (const z of PZ) box(7, 3, 7, M.print, 0, RAIL_Y + 3.6, z, xCar);         // rail carriages on top of the beams
+  for (const z of PZ) { box(8, 3, 8, M.print, 0, RAIL_Y + 3.5, z, xCar); for (const dx of [-3, 3]) cyl(1.2, 1.1, M.rubber, dx, RAIL_Y, z + 1.6, xCar, 20).rotation.x = Math.PI / 2; }   // wheel plates on the V-slot
   box(4, 4, 88, M.ext, 0, RAIL_Y + 4, 0, xCar);                                 // cross beam above the rails
   const yCar = new THREE.Group(); xCar.add(yCar);
   box(8, 12, 8, M.print, 0, RAIL_Y + 4, 0, yCar);
@@ -286,17 +287,20 @@
 
   // ---------- turntable ----------
   const TTX = 55;
-  box(45, 9, 37, M.tt, TTX, 4.5, 0); box(45.4, 1.2, 37.4, M.ext, TTX, 0.6, 0);
+  box(45, 9, 36, M.tt, TTX + 4.1, 4.5, -0.55); box(45.4, 1.2, 36.4, M.ext, TTX + 4.1, 0.6, -0.55);   // Omnitronic DD 3120, 45 × 36 × 9 cm; spindle 18.4 cm from the left edge, 18.6 from the rear (measured on the photo)
   const platterG = new THREE.Group(); platterG.position.set(TTX, 0, 0); scene.add(platterG);
   cyl(16.5, 1.5, M.platter, 0, 9.75, 0, platterG, 96); cyl(15.2, 0.3, M.mat, 0, 10.65, 0, platterG, 96);
   for (let i = 0; i < 36; i++) { const a = i / 36 * Math.PI * 2; box(0.5, 0.2, 0.5, M.alu, Math.cos(a) * 16.6, 9.75, Math.sin(a) * 16.6, platterG); }
   cyl(0.36, 2.2, M.alu, 0, 11.6, 0, platterG, 16);
   const onPlatter = recordFlat(15, 0xD9642B, 0, 10.95, 0, platterG);
-  cyl(1.6, 0.8, M.ext, TTX - 19, 9.3, 15); box(1.6, 0.4, 9, M.ext, TTX + 19, 9.2, 4);
-  cyl(1.4, 0.4, M.ext, TTX - 19, 9.2, -13); cyl(1.4, 0.4, M.ext, TTX - 15, 9.2, -13);
-  const PIV = new THREE.Vector3(TTX + 16, 13, -13), ARM_R = 23;
+  box(4.5, 0.8, 3, M.ext, TTX - 14.5, 9.3, 15.3);                                  // start/stop
+  box(1.6, 0.4, 10, M.ext, TTX + 23, 9.2, 6.4);                                   // pitch fader
+  for (const dx of [-11.5, -9, -6.5]) box(1.8, 0.4, 1.2, M.ext, TTX + dx, 9.2, 16.2);   // 33 / 45 / 78
+  cyl(1.5, 1.2, M.ext, TTX - 16.2, 9.6, 11.8);                                      // power knob
+  cyl(0.5, 0.6, new THREE.MeshStandardMaterial({ color: 0xFF3B6B, emissive: 0xFF2255, emissiveIntensity: 1.2 }), TTX - 13.3, 9.4, 10.8);   // the deck's own strobe LED
+  const PIV = new THREE.Vector3(TTX + 19.4, 13, -8.4), ARM_R = 23;   // pivot 19.4 cm right of and 8.4 cm behind the spindle (photo)
   cyl(3.2, 5, M.alu, PIV.x, 7.5, PIV.z);                                          // arm base
-  cyl(0.9, 3.5, M.alu, TTX + 20.6, 10.7, 9.5); box(2.4, 0.6, 1.2, M.print, TTX + 20.6, 12.4, 9.5);   // arm rest
+  cyl(0.9, 3.5, M.alu, TTX + 18.9, 10.7, 12.5); box(2.4, 0.6, 1.2, M.print, TTX + 18.9, 12.4, 12.5);   // arm rest, front right
   // arm built pointing along local +X; armG.rotation.y = -a swings the stylus to azimuth a; armG.position.y lifts it
   const armG = new THREE.Group(); armG.position.copy(PIV); scene.add(armG);
   {
@@ -310,42 +314,28 @@
     cyl(1.6, 1.4, M.alu, 0, 0, 0, armG);
   }
   const FL_LOCAL = new THREE.Vector3(ARM_R - 0.6, -0.4, 2.2);
-  const ARM_A = { rest: deg(78.4), leadin: deg(102.3), runout: deg(124.9), mid: deg(113) };
+  const ARM_A = { rest: deg(91.3), leadin: deg(118), runout: deg(140), mid: deg(129) };   // recomputed for the measured pivot
   const LIFT_H = 1.0;
   function setArmPose(a, l) { armG.rotation.y = -a; armG.position.y = PIV.y + LIFT_H * l; cueLever.rotation.x = -deg(35) * l; }
   const fingerLiftAt = (a, l) => { const g = new THREE.Group(); g.position.copy(PIV); g.position.y += LIFT_H * l; g.rotation.y = -a; g.updateMatrixWorld(true); return g.localToWorld(FL_LOCAL.clone()); };
   // cue lever on the deck (front-left of the arm base) and the servo that works it, on a frame outrigger
-  const cueLever = new THREE.Group(); cueLever.position.set(TTX + 12, 10.2, -9); scene.add(cueLever);
-  box(0.8, 0.5, 3.4, M.ext, 0, 0, -1.2, cueLever); cyl(0.6, 1.0, M.alu, 0, 0, 0, cueLever);
-  // cue-lever servo: everything stays at lever height, below the arm's swing; the pusher rod comes in along Y from the rear
-  const CL = new THREE.Vector3(TTX + 12, 10.2, -40);
-  box(3, 10, 2.5, M.print, CL.x, 7, -38);                                          // bracket on the rear panel's inner face
-  const cueServo = cyl(2, 3.5, M.ext, CL.x, CL.y, -35); cueServo.rotation.x = Math.PI / 2;   // linear-push servo
-  box(1.2, 1.2, 24, M.alu, CL.x, CL.y, -22);                                       // pusher rod, sliding in a guide
-  box(1.4, 1.4, 2, M.print, CL.x, CL.y, -19);                                      // rod guide on the plinth edge
-  box(1.6, 0.8, 1.6, M.accent, CL.x, CL.y, -10.6);                                 // pad that presses the lever
-  // inner end stop: a soft-sleeved pin on the same bracket that the arm tube meets just past the run-out radius, so the stylus can never reach the label
-  const ESA = deg(128.5), ESR = 6;
+  const cueLever = new THREE.Group(); cueLever.position.set(TTX + 23.5, 10.2, -4.6); scene.add(cueLever);   // front-right of the arm base
+  box(3.4, 0.5, 0.8, M.ext, 1.2, 0, 0, cueLever); cyl(0.6, 1.0, M.alu, 0, 0, 0, cueLever);
+  // cue-lever servo on the right end panel: the pusher comes in along -X at lever height, nowhere near the arm's swing
+  const CL = new THREE.Vector3(SX1 - 1.8, 10.2, -4.6);
+  box(2.5, 10, 3, M.print, CL.x, 7, CL.z);                                          // bracket on the end panel's inner face
+  const cueServo = cyl(2, 3.5, M.ext, CL.x - 4, CL.y, CL.z); cueServo.rotation.z = Math.PI / 2;   // linear-push servo
+  box(16, 1.2, 1.2, M.alu, CL.x - 12, CL.y, CL.z);                                  // pusher rod
+  box(2, 1.4, 1.4, M.print, CL.x - 10, CL.y, CL.z);                                 // rod guide
+  box(0.8, 1.6, 1.6, M.accent, TTX + 25.6, CL.y, CL.z);                             // pad that presses the lever
+  // inner end stop on a bar from the same bracket, passing in front of the arm base under the arm: a soft-sleeved pin the
+  // arm tube meets just past the run-out radius, so the stylus can never reach the label
+  const ESA = deg(143.8), ESR = 6;
   const ES = new THREE.Vector3(PIV.x + ESR * Math.cos(ESA), 0, PIV.z + ESR * Math.sin(ESA));
-  box(1.2, 1.0, 1.2, M.alu, ES.x, 9.8, ES.z); cyl(0.5, 5, M.alu, ES.x, 12.3, ES.z); cyl(0.9, 2.2, M.rubber, ES.x, 13.6, ES.z);
-  box(1.0, 0.8, Math.abs(ES.z - CL.z) - 20, M.alu, (ES.x + CL.x) / 2, 9.8, (ES.z - 19) / 2 - 9.5);   // link from the guide to the stop
+  box(CL.x - ES.x, 0.8, 1.0, M.alu, (CL.x + ES.x) / 2, 9.8, -2.0);                  // bar along X in front of the arm base
+  box(1.0, 0.8, Math.abs(ES.z + 2.0) + 1, M.alu, ES.x, 9.8, (ES.z - 2.0) / 2);       // stub to the pin
+  cyl(0.5, 5, M.alu, ES.x, 12.3, ES.z); cyl(0.9, 2.2, M.rubber, ES.x, 13.6, ES.z);
 
-  // brush module on the frame: post on the rear base rail, outrigger to the pivot behind the deck
-  const BR = new THREE.Vector3(TTX - 15, 14, -20.5);
-  box(3, 14, 2.5, M.print, BR.x, 10, -38);                                        // bracket on the rear panel's inner face
-  box(2.5, 2.5, 19, M.ext, BR.x, 15.5, -29);                                      // outrigger
-  cyl(1.2, 3, M.ext, BR.x, 12.6, BR.z);
-  // dust edge: a thin comb the bristles drag across on the way back to park, with a tray under it
-  const DE = new THREE.Vector3(BR.x, 11.0, -35.5);
-  box(1.2, 0.4, 9.5, M.alu, DE.x, DE.y, DE.z);                                    // edge runs radially, as long as the brush, across the sweep
-  for (const dx of [-1.5, 1.5]) box(0.6, 6, 0.6, M.alu, DE.x + dx, 8, DE.z - 4.5);  // edge posts
-  // removable tray under the edge: slides out towards the back, finger tab on the outside
-  box(7, 0.5, 11, M.print, DE.x, 5.25, DE.z); for (const dz of [-5.25, 5.25]) box(7, 3, 0.5, M.print, DE.x, 6.5, DE.z + dz); for (const dx of [-3.25, 3.25]) box(0.5, 3, 11, M.print, DE.x + dx, 6.5, DE.z);
-  box(3, 0.6, 2, M.accent, DE.x, 5.3, DE.z - 6.5);
-  const brushG = new THREE.Group(); brushG.position.copy(BR); scene.add(brushG);
-  cyl(2.2, 3, M.ext, 0, 1.5, 0, brushG); box(18, 1.4, 1.4, M.alu, 9, 0, 0, brushG);
-  box(9, 2.4, 3, M.brush, 15, -1.6, 0, brushG); box(9, 0.8, 3, M.mat, 15, -3.1, 0, brushG);
-  const brushDeployedAngle = Math.atan2(-(0 - BR.z), TTX - BR.x);
   // deck camera: fixed, watches only the tonearm
   // deck camera: low on the right end of the frame, facing the headshell across the platter — sees the stylus in profile,
   // the groove bands edge-on, and the strobe dots on the platter's rim
@@ -379,62 +369,59 @@
     { id: 'pick', name: 'Pick from carousel', code: '01',
       desc: 'The arm descends into the 6.5 cm gap beside the spoke, the wrist camera reads label and hole, then the cup moves a few millimetres along Y onto the label. The record lifts straight up out of its slot — spokes never touch.',
       car: () => carriageForCup(PICK.x, PICK.y, PICK.z + 0.95, 0), approach: { x: 0, y: 0, z: 1.5 },
-      before: V(false, true, false, false), after: V(true, false, false, false), brush: false, spin: false },
+      before: V(false, true, false, false), after: V(true, false, false, false), spin: false },
     { id: 'place', name: 'Place side A', code: '02',
       desc: 'The vertical record leaves the carousel along X at mid height, passes beside the station, and only turns to horizontal once it is over the deck. Released a few millimetres above the mat; the spindle tip does the last of the centring.',
-      car: () => carriageForCup(TTX, 12.35, 0, deg(-90)), before: V(true, false, false, false), brush: false, spin: false },
-    { id: 'brush', name: 'Start & brush', code: '03',
-      desc: 'Start pressed via the optocoupler; the frame-mounted brush swings over the spinning record for a few turns, sweeps outward, and drags its bristles across the dust edge on the way back to park. Then the platter is stopped again.',
-      car: () => PARK, before: V(false, false, true, false), brush: true, spin: true },
-    { id: 'liftarm', name: 'Lift arm, engage fork', code: '04',
-      desc: 'Platter stopped. The cue-lever servo raises the arm on the deck’s own damped lift — the fork never carries the arm’s weight. Then the fork descends from above and straddles the finger lift while the arm still sits over its rest.',
-      car: () => forkOn(ARM_A.rest), approach: { x: 0, y: 4, z: 0 }, before: V(false, false, true, false), brush: false, spin: false, arm: { a: 'rest', l: 1 },
+      car: () => carriageForCup(TTX, 12.35, 0, deg(-90)), before: V(true, false, false, false), spin: false },
+    { id: 'liftarm', name: 'Lift arm, engage fork', code: '03',
+      desc: 'The record was brushed by hand before loading, so nothing spins yet. The cue-lever servo raises the arm on the deck’s own damped lift — the fork never carries the arm’s weight. Then the fork descends from above and straddles the finger lift while the arm still sits over its rest.',
+      car: () => forkOn(ARM_A.rest), approach: { x: 0, y: 4, z: 0 }, before: V(false, false, true, false), spin: false, arm: { a: 'rest', l: 1 },
       plan: (f, g) => { const f2 = { ...f, l: 1 }; return [f, f2, ...defaultPlan(f2, g, null, { x: 0, y: 4, z: 0 }).slice(1)]; } },
-    { id: 'toleadin', name: 'Carry arm to lead-in', code: '05',
+    { id: 'toleadin', name: 'Carry arm to lead-in', code: '04',
       desc: 'With the arm floating on the cue lift, the fork pushes the finger lift along the arm’s arc to the lead-in radius. The deck camera on the rear rail watches the headshell and confirms the radius.',
-      car: () => forkOn(ARM_A.leadin), before: V(false, false, true, false), brush: false, spin: false, arm: { a: 'leadin', l: 1 },
+      car: () => forkOn(ARM_A.leadin), before: V(false, false, true, false), spin: false, arm: { a: 'leadin', l: 1 },
       plan: (f, g) => [f, { ...g, l: 1 }] },
-    { id: 'drop', name: 'Lower needle, start', code: '06',
+    { id: 'drop', name: 'Lower needle, start', code: '05',
       desc: 'Fork rises clear. The cue lever lowers the stylus onto the stationary lead-in groove — damped, so it cannot be dropped — then start is pressed. The lead-in silence swallows the spin-up. Recording runs on the Scarlett.',
-      car: () => { const c = forkOn(ARM_A.leadin); return { ...c, y: c.y + 8 }; }, before: V(false, false, true, false), brush: false, spin: true, arm: { a: 'leadin', l: 0 },
+      car: () => { const c = forkOn(ARM_A.leadin); return { ...c, y: c.y + 8 }; }, before: V(false, false, true, false), spin: true, arm: { a: 'leadin', l: 0 },
       plan: (f, g) => [f, { ...f, y: g.y }, { ...g, l: 0 }] },
-    { id: 'runout', name: 'Run-out: stop, lift, find arm', code: '07',
+    { id: 'runout', name: 'Run-out: stop, lift, find arm', code: '06',
       desc: 'Silence on the recording plus the headshell radius from the deck camera flag the run-out. Stop is pressed first, then the cue lever lifts the arm. The camera tells the gantry where the headshell actually is — anywhere on the surface — and the fork descends onto the finger lift there.',
-      car: () => forkOn(ARM_A.runout), approach: { x: 0, y: 4, z: 0 }, before: V(false, false, true, false), brush: false, spin: false, arm: { a: 'runout', l: 1 },
+      car: () => forkOn(ARM_A.runout), approach: { x: 0, y: 4, z: 0 }, before: V(false, false, true, false), spin: false, arm: { a: 'runout', l: 1 },
       plan: (f, g) => { const f1 = { ...f, a: g.a, l: 0 }, f2 = { ...f1, l: 1 }; return [f, f1, f2, ...defaultPlan(f2, g, null, { x: 0, y: 4, z: 0 }).slice(1)]; } },
-    { id: 'torest', name: 'Carry arm to rest, lower', code: '08',
+    { id: 'torest', name: 'Carry arm to rest, lower', code: '07',
       desc: 'The fork walks the floating arm back along its arc over the rest, rises clear, and the cue lever sets the arm down onto the rest.',
-      car: () => { const c = forkOn(ARM_A.rest); return { ...c, y: c.y + 8 }; }, before: V(false, false, true, false), brush: false, spin: false, arm: { a: 'rest', l: 0 },
+      car: () => { const c = forkOn(ARM_A.rest); return { ...c, y: c.y + 8 }; }, before: V(false, false, true, false), spin: false, arm: { a: 'rest', l: 0 },
       plan: (f, g) => { const on = forkOn(ARM_A.rest); return [f, { ...f, x: on.x, z: on.z, a: ARM_A.rest, l: 1 }, { ...f, x: on.x, z: on.z, y: g.y, a: ARM_A.rest, l: 1 }, { ...g, l: 0 }]; } },
-    { id: 'lift', name: 'Lift record off the platter', code: '09',
+    { id: 'lift', name: 'Lift record off the platter', code: '08',
       desc: 'Platter stopped, arm parked. Cup onto the A-side label from above, vacuum on, straight up off the spindle.',
-      car: () => carriageForCup(TTX, 12.35, 0, deg(-90)), before: V(false, false, true, false), after: V(true, false, false, false), brush: false, spin: false },
-    { id: 'station', name: 'Carry to station, B up', code: '10',
+      car: () => carriageForCup(TTX, 12.35, 0, deg(-90)), before: V(false, false, true, false), after: V(true, false, false, false), spin: false },
+    { id: 'station', name: 'Carry to station, B up', code: '09',
       desc: 'Over the deck the wrist swings through vertical to +90°: the record now rides on top of the cup, B side up. Carried to the station (off the centreline) and lowered until its label rests on the ring; the arm enters through the ring’s opening.',
-      car: () => carriageForCup(ST.x, ST.y + 0.1, ST.z, deg(90)), before: V(true, false, false, false), brush: false, spin: false },
-    { id: 'release', name: 'Release & withdraw', code: '11',
+      car: () => carriageForCup(ST.x, ST.y + 0.1, ST.z, deg(90)), before: V(true, false, false, false), spin: false },
+    { id: 'release', name: 'Release & withdraw', code: '10',
       desc: 'Vacuum off. The cup drops straight down clear of the ring — nothing else moves — and the record stays on the rest by its label, B side up.',
-      car: () => carriageForCup(ST.x, ST.y - 6, ST.z, deg(90)), before: V(false, false, false, true), brush: false, spin: false,
+      car: () => carriageForCup(ST.x, ST.y - 6, ST.z, deg(90)), before: V(false, false, false, true), spin: false,
       plan: (f, g) => [f, g] },
-    { id: 'regrip', name: 'Re-grip from above', code: '12',
+    { id: 'regrip', name: 'Re-grip from above', code: '11',
       desc: 'The arm backs out along Y from under the record, rises, hangs straight down, crosses to the far side of the station along Y, swings to −90° and comes down onto the B-side label. The wrist camera photographs the B label on the way in.',
       car: () => carriageForCup(ST.x, ST.y + 0.95 + 0.95, ST.z, deg(-90)), approach: { x: 0, y: 3, z: 0 },
-      before: V(false, false, false, true), after: V(true, false, false, false), brush: false, spin: false,
+      before: V(false, false, false, true), after: V(true, false, false, false), spin: false,
       plan: (f, g) => { const k = []; let s = f; const push = (c) => { s = { ...s, ...c }; k.push(s); };
         push({}); push({ z: f.z + 15 }); push({ y: 58 }); push({ t: 0 }); push({ z: g.z }); push({ t: g.t }); push({ y: g.y + 3 }); push({ y: g.y }); return k; } },
-    { id: 'placeB', name: 'Place side B', code: '13',
-      desc: 'Same as side A: hover, release above the mat. Steps 03 to 08 then repeat for side B.',
-      car: () => carriageForCup(TTX, 12.35, 0, deg(-90)), before: V(true, false, false, false), brush: false, spin: false },
-    { id: 'return', name: 'Return to its slot', code: '14',
+    { id: 'placeB', name: 'Place side B', code: '12',
+      desc: 'Same as side A: hover, release above the mat. Steps 03 to 07 then repeat for side B.',
+      car: () => carriageForCup(TTX, 12.35, 0, deg(-90)), before: V(true, false, false, false), spin: false },
+    { id: 'return', name: 'Return to its slot', code: '13',
       desc: 'Over the deck the wrist turns back to 0°, the record hangs vertical, travels along X beside the station and is lowered into the slot it came from. Vacuum off, cup backs away along Y, arm rises out of the gap.',
       car: () => carriageForCup(PICK.x, PICK.y, PICK.z + 0.95, 0), before: V(true, false, false, false), after: V(false, true, false, false), retreat: { x: 0, y: 0, z: 1.5 },
-      brush: false, spin: false },
-    { id: 'index', name: 'Index carousel', code: '15',
+      spin: false },
+    { id: 'index', name: 'Index carousel', code: '14',
       desc: 'The stepper under the magazine turns it one slot (15°); the next record is now at the fixed pick position. Nothing else moves.',
-      car: () => ({ x: 20, y: TRAVEL, z: 3, t: 0 }), carousel: -DPHI, before: V(false, true, false, false), brush: false, spin: false },
+      car: () => ({ x: 20, y: TRAVEL, z: 3, t: 0 }), carousel: -DPHI, before: V(false, true, false, false), spin: false },
     { id: 'fault', name: 'Fault: needle skip', code: '!!',
       desc: 'Mid-side, the recording shows a discontinuity and the deck camera sees the headshell radius jump. Within half a second the cue-lever servo lifts the arm (no gantry involved), stop is pressed, the batch pauses and you get a notification. No automatic retry: the machine holds here until you intervene.',
-      car: () => PARK, before: V(false, false, true, false), brush: false, spin: false, arm: { a: 'mid', l: 1 },
+      car: () => PARK, before: V(false, false, true, false), spin: false, arm: { a: 'mid', l: 1 },
       plan: (f, g) => { const f1 = { ...f, a: ARM_A.mid, l: 0 }, f2 = { ...f1, l: 1 }; return [f, f1, f2, ...defaultPlan(f2, { ...g, a: ARM_A.mid, l: 1 }, null, null).slice(1)]; } },
   ];
 
@@ -455,7 +442,7 @@
   // ---------- state & animation ----------
   const state = { x: 20, y: TRAVEL, z: 3, t: 0, c: 0, a: ARM_A.rest, l: 0 };
   let keys = [state], segDur = [], totalDur = 0, t0 = 0, dur = 4200;
-  let brushDeployed = false, spinning = false, prevPose = null, curPose = null, pendingEnd = null;
+  let spinning = false, prevPose = null, curPose = null, pendingEnd = null;
   const vis = { held: false, slot: true, platter: false, ring: false };
   const curSlot = () => slotRecs[slotAt(state.c)];
   function applyVis(v) {
@@ -478,7 +465,7 @@
       const sd = d < 0.01 ? 0 : 350 + d * 18; segDur.push(sd); totalDur += sd;
     }
     dur = Math.max(totalDur, 400); t0 = performance.now(); pendingEnd = p.after || null;
-    applyVis(p.before); brushDeployed = p.brush; spinning = p.spin;
+    applyVis(p.before); spinning = p.spin;
     document.getElementById('desc').textContent = p.desc;
     document.querySelectorAll('#poses button').forEach(b => b.classList.toggle('on', b.dataset.id === p.id));
     prevPose = p; curPose = p;
@@ -495,8 +482,6 @@
     else { const a = keys[i], b = keys[i + 1], e = ease(el / segDur[i]); for (const k of ['x', 'y', 'z', 't', 'c', 'a', 'l']) state[k] = a[k] + (b[k] - a[k]) * e; }
     setArmPose(state.a, state.l);
     xCar.position.x = state.x; yCar.position.z = state.z; zCar.position.y = state.y; wrist.rotation.x = state.t; carG.rotation.y = state.c;
-    const bt = brushDeployed ? brushDeployedAngle : Math.PI;
-    brushG.rotation.y += (bt - brushG.rotation.y) * 0.06;
     if (spinning) platterG.rotation.y -= 0.035;
   }
 
@@ -523,15 +508,13 @@
     ['Flip & photo station', () => new THREE.Vector3(ST.x, 32.5, ST.z - 8)],
     ['Deck camera · faces the headshell', () => new THREE.Vector3(DC.x, DC.y + 4, DC.z)],
     ['50 Hz LED strobe · raking light for the grooves', () => new THREE.Vector3(DC.x - 1, DC.y - 6, DC.z + 4.5)],
-    ['Cue-lever servo', () => new THREE.Vector3(CL.x, CL.y + 3, -33)],
+    ['Cue-lever servo · on the end panel', () => new THREE.Vector3(CL.x - 4, CL.y + 3, CL.z)],
     ['Inner end stop · stylus never reaches the label', () => new THREE.Vector3(ES.x, 16, ES.z)],
-    ['33 / 45 buttons tapped electrically', () => new THREE.Vector3(TTX - 17, 10.5, -13)],
+    ['33 / 45 / 78 buttons tapped electrically', () => new THREE.Vector3(TTX - 9, 10.5, 16.2)],
     ['Strobe dots on the rim · read by the deck camera', () => new THREE.Vector3(TTX + 12, 11, 11.5)],
-    ['Brush arm · on the frame', () => new THREE.Vector3(BR.x, 17, BR.z)],
-    ['Dust edge · removable tray', () => new THREE.Vector3(DE.x, 12.5, DE.z)],
     ['Tonearm', () => new THREE.Vector3(PIV.x, 15, PIV.z)],
-    ['Start / stop tapped electrically', () => new THREE.Vector3(TTX - 19, 10.5, 15)],
-    ['X rail on 2040 · birch-ply box frame', () => new THREE.Vector3(60, 89, 40)],
+    ['Start / stop via the remote jack', () => new THREE.Vector3(TTX - 14.5, 10.5, 15.3)],
+    ['X axis · 2040 V-slot on the birch-ply box frame', () => new THREE.Vector3(60, 89, 40)],
     ['Roller ring · 10 × 608 bearings', () => new THREE.Vector3(CC.x + 36, 8, CC.z)],
     ['Printed hub & rim carry the slot angles', () => new THREE.Vector3(CC.x, 33, CC.z)],
     ['Pi + Octopus · pump, under the station', () => new THREE.Vector3(ST.x, 10, ST.z - 8)],

@@ -46,6 +46,10 @@ The turntable has a manual cue lever. A servo on a frame bracket works it, so ev
 
 The cue-servo bracket initially collided with the arm's inner swing. That collision became a feature: a soft-sleeved pin on the bracket stands in the arm tube's path just past the run-out radius, so whatever the software does, the stylus cannot reach the label.
 
+## Omnitronic DD 3120, not the Stanton T.92
+
+Two decks were available. The Omnitronic has a cue lever, a remote start/stop jack and a pitch output; the Stanton has none of these and a built-in USB converter that is not wanted. The cue lever alone decides it: without one, the machine would need its own damped arm lift, which is the part most likely to damage a record. The remote jack (6.3 mm, the fader-start input of older mixers and hi-fi systems, start/stop only) is a bonus that removes all soldering on the start/stop switch. The cue lever turned out to sit at the front-right of the arm base, 3 cm from the deck's right edge, which put the cue servo on the frame's end panel with a short pusher instead of an outrigger from the rear.
+
 ## No automatic skip recovery
 
 A skip is detected by audio and by camera at once. The response is to lift the arm via the cue lever within half a second, stop the platter, pause the batch and notify. Re-cueing automatically was rejected because a record that skipped once will usually skip again at the same place, and an unattended retry loop grinding a stylus into a scratch is the one thing the machine must never do.
@@ -56,19 +60,31 @@ An overhead camera cannot see a label or hole past the gripper, and cannot see t
 
 ## 33/45 by the deck's buttons, not by resampling
 
-Recording everything at one speed and resampling later was rejected because the phono stage applies RIAA equalisation at fixed frequencies; a record played at the wrong speed is equalised wrongly and resampling does not undo it. The deck's 33 and 45 buttons are momentary switches, so two optocouplers and a manifest column solve it properly.
+Recording everything at one speed and resampling later was rejected because the phono stage applies RIAA equalisation at fixed frequencies; a record played at the wrong speed is equalised wrongly and resampling does not undo it. The deck's 33 and 45 buttons are momentary switches, so two relay channels across the switches and a manifest column solve it properly; relays rather than optocouplers because a dry contact needs no knowledge of the switch's polarity or voltage, and the Conrad 393905 USB relay card already on hand supplies them from the Pi.
 
 ## LED strobe for speed, not camera frame rate
 
 The camera cannot imitate a 50 Hz neon strobe, but an LED pulsed at 50.000 Hz from the controller's crystal makes the deck's dot rows, or a printed strobe ring on a deck without them, show the speed error as a drift the camera can measure. It works on any turntable, and the same LED run continuously is a raking light that shows the grooves for cueing and stylus checks. The measured speed and wow are logged with each recording rather than corrected live.
 
-## Brush on the frame, with a dust edge
+## No brush
 
-The brush was first drawn clamped to the turntable's plinth. It moved to a frame bracket so the deck can be swapped or shifted without re-alignment beyond a software offset. On its return path a radial comb edge, as long as the brush, strips the dust from the bristles into a slide-out tray, so cleaning side A does not put its dust onto side B.
+A frame-mounted brush with a servo arm, a dust edge and a slide-out tray was designed in full and then dropped. Brushing by hand before loading takes a minute per record, is a natural moment to inspect each one, and removes a motor, a bracket, a cycle step and a source of dust inside the machine. The rear panel keeps room for the module.
 
-## Plywood frame, extrusion rails
+## Manual deck, not an automatic one
 
-A full aluminium extrusion frame was replaced by a glued box of 18 mm birch plywood with 2040 extrusion only where the X rails need a straight, adjustable mounting surface. The panels give more racking stiffness than a lattice with diagonals, the interior stays open, brackets screw straight to the panels, and extrusion drops from ten metres to four. Cost is about the same; the choice is about the tools the builder prefers.
+A fully automatic turntable would have removed the cue servo, the fork, the end stop and most of the deck camera's job, and was proposed as the biggest available simplification. It was rejected because the collection contains records an automatic deck cannot play: sides with several locked grooves, sides cut from the inside out, and records with non-standard start and end positions. Those need a machine that decides where the stylus goes and when it leaves, which is why the manual DD 3120, the fork, and both cameras stay.
+
+## V-slot instead of linear rails
+
+X and Y run on 2040 V-slot with Delrin wheels, as on a hobby printer, instead of MGN rails. The accuracy needed at the cup is set by the hole camera and the spindle tip, well within what V-wheels give, and the change saves about a hundred euros and makes alignment easier. The Z column keeps a rail because it carries the record vertically and its guide block must not rattle.
+
+## A used printer as parts donor
+
+Most of the motion parts (steppers, PSU, belts, pulleys, wheels, a lead screw, end-stops, a Klipper-capable board) come cheapest as a used 3D printer; a CR-10 class machine is the best fit because of its long extrusions and lead screws. Only the two long X beams and the Z rail are bought new.
+
+## Plywood frame, extrusion beams
+
+A full aluminium extrusion frame was replaced by a glued box of 18 mm birch plywood with 2040 V-slot extrusion only where the X axis needs a straight, adjustable running surface. The panels give more racking stiffness than a lattice with diagonals, the interior stays open, brackets screw straight to the panels, and extrusion drops from ten metres to four. Cost is about the same; the choice is about the tools the builder prefers.
 
 ## Roller ring instead of a lazy susan
 

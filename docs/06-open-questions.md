@@ -2,7 +2,15 @@
 
 Things the concept could not settle and that the first hardware has to answer. Each one names what to measure and what depends on it.
 
-**The turntable's exact geometry.** The model uses generic Technics SL-1200 dimensions: pivot-to-stylus 230 mm, pivot 160 mm right and 130 mm behind the spindle, cue lever left-front of the arm base, finger lift on the left of the headshell. Measure the actual Omnitronic or Stanton deck before the CAD: the cue-servo bracket, the end-stop pin position and the fork's approach all hang on these numbers.
+**The turntable's exact geometry.** The layout in the specification was measured on a top-down photo of the DD 3120 (`images/dd-3120-top.jpg`) and is good to about half a centimetre; perspective in the photo makes the outer positions the least certain. Confirm with a ruler before the CAD: spindle to pivot, pivot to arm rest, the cue lever's position and travel, and the height of the lever above the plinth. The cue-servo bracket, the end-stop pin and the fork's approach all hang on these numbers.
+
+**Slipmat.** Replace the felt DJ slipmat with a rubber or cork mat before the first batch and check that the vacuum-cup release a few millimetres above it still centres the record on the spindle.
+
+**The remote start/stop jack's behaviour.** Fader start suggests the platter runs while the contact is held and stops when it opens; confirm that it is not a toggle, and whether the front-panel button still works while the remote contact is closed.
+
+**The pitch output.** What signal the DD 3120's pitch output carries: a control voltage, a tacho pulse train, or something else. A pulse train proportional to platter speed would be a second, strobe-independent speed reference for the sidecar file.
+
+**Stylus for the archive pass.** The Ortofon DJ S is spherical and robust, which is right for commissioning and for worn records. Decide after the first batches whether an elliptical stylus is worth a second pass on the records that matter.
 
 **Cue lever force and throw.** How much force and travel does the lever need, and does it lift the arm enough for the fork to walk it without the stylus touching a warped record? This decides whether a micro linear servo is enough or a larger one is needed, and sets the lift height the deck camera must confirm.
 
@@ -27,3 +35,5 @@ Things the concept could not settle and that the first hardware has to answer. E
 **Phono stage.** Whether the clone's built-in phono stage on its line output is good enough, or an external phono preamp goes between the deck and the Scarlett. Record the same side both ways and compare before deciding.
 
 **Column height.** The raised column top at about 135 cm is fine on a bench but not under a low shelf; if headroom is short, the Z travel can be reduced by lowering the travel height for horizontal carries, at the cost of a slightly longer cycle.
+
+**V-wheel play on X.** With Delrin wheels on V-slot the carriages must be adjusted with their eccentric spacers until there is no rock and no binding over the whole 1.3 m; check that the cup's position at the pick slot repeats to within half a millimetre after a full X traverse, and fall back to a rail on X if it does not.
