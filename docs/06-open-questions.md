@@ -6,7 +6,7 @@ Things the concept could not settle and that the first hardware has to answer. E
 
 **Slipmat.** Replace the felt DJ slipmat with a rubber or cork mat before the first batch and check that the vacuum-cup release a few millimetres above it still centres the record on the spindle.
 
-**The remote start/stop jack's behaviour.** Whether a closure toggles start/stop or the platter runs only while the contact is held; the macros mirror whichever it is.
+**The remote start/stop jack's behaviour.** Fader start suggests the platter runs while the contact is held and stops when it opens; confirm that it is not a toggle, and whether the front-panel button still works while the remote contact is closed.
 
 **The pitch output.** What signal the DD 3120's pitch output carries: a control voltage, a tacho pulse train, or something else. A pulse train proportional to platter speed would be a second, strobe-independent speed reference for the sidecar file.
 

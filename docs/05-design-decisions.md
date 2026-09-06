@@ -48,7 +48,7 @@ The cue-servo bracket initially collided with the arm's inner swing. That collis
 
 ## Omnitronic DD 3120, not the Stanton T.92
 
-Two decks were available. The Omnitronic has a cue lever, a remote start/stop jack and a pitch output; the Stanton has none of these and a built-in USB converter that is not wanted. The cue lever alone decides it: without one, the machine would need its own damped arm lift, which is the part most likely to damage a record. The remote jack is a bonus that removes all soldering on the start/stop switch. The cue lever turned out to sit at the front-right of the arm base, 3 cm from the deck's right edge, which put the cue servo on the frame's end panel with a short pusher instead of an outrigger from the rear.
+Two decks were available. The Omnitronic has a cue lever, a remote start/stop jack and a pitch output; the Stanton has none of these and a built-in USB converter that is not wanted. The cue lever alone decides it: without one, the machine would need its own damped arm lift, which is the part most likely to damage a record. The remote jack (6.3 mm, the fader-start input of older mixers and hi-fi systems, start/stop only) is a bonus that removes all soldering on the start/stop switch. The cue lever turned out to sit at the front-right of the arm base, 3 cm from the deck's right edge, which put the cue servo on the frame's end panel with a short pusher instead of an outrigger from the rear.
 
 ## No automatic skip recovery
 

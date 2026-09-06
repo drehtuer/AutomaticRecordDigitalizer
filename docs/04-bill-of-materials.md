@@ -25,7 +25,7 @@ Prices are typical German retail in September 2026, rounded, and will drift; che
 | Vacuum | 12 V diaphragm vacuum pump | 1 | 15 |
 | Vacuum | 12 V 2/2 solenoid valve, vacuum switch, 40 mm bellows cup, 6 mm tubing, fittings | 1 set | 35 |
 | Sensing | End-stops, Hall sensor, slot optical sensor | 1 set | 12 |
-| Deck I/O | Optocoupler board (4 channels), 3.5 mm mono plug and cable for the remote start/stop jack | 1 | 8 |
+| Deck I/O | Optocoupler board (4 channels), 6.3 mm mono plug and cable for the remote start/stop jack | 1 | 8 |
 | Light | LED bar (12 V, warm white) and logic-level MOSFET | 1 | 8 |
 | Carousel | 608ZZ bearing (rollers) | 10 | 6 |
 | Carousel | 6005 bearing, 25 mm stub shaft | 1 | 8 |
