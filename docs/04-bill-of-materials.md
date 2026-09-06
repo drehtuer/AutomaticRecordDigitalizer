@@ -34,7 +34,7 @@ Prices are typical German retail in September 2026, rounded, and will drift; che
 | Consumables | PETG 2.5 kg, TPU 0.3 kg | | 70 |
 | **Total** | | | **≈ 865** |
 
-Not included: the 3D printer, the turntable (Omnitronic DD 3120, owned), the Focusrite Scarlett (owned), the Conrad 393905 USB relay card (owned), the NXP MIMXRT1010-EVK (owned; replaces the Octopus and its drivers, about 95 €, when a donor board runs the gantry axes), and an external phono preamp if the deck's own line output is not used (about 40 €).
+Not included: the 3D printer, the turntable (Omnitronic DD 3120, owned), the Focusrite Scarlett (owned), the Conrad 393905 USB relay card (owned),  and an external phono preamp if the deck's own line output is not used (about 40 €).
 
 Where to trim further: a used Raspberry Pi 4 saves about 40 € and a USB camera on the wrist instead of the second Pi camera about 20 €.
 
@@ -50,7 +50,7 @@ A used 3D printer is the cheapest source for most of the motion parts and is wor
 | Anycubic Kobra / Vyper, Artillery Sidewinder | 4 steppers, 24 V PSU, some extrusion | Less V-slot, boards less Klipper-friendly; take for motors and PSU only |
 | Tevo Tornado, Alfawise U20 | CR-10 clones | Same value as a CR-10 if cheap |
 
-Whatever the donor, the long V-slot beams (2 × 1.3 m) and the 80 cm Z rail and lead screw are bought new; the donor covers motors, wheels, belts, pulleys, end-stops, PSU and fasteners, roughly 150 to 200 € of the list above, for a 50 to 100 € machine. Its board can run the four gantry axes under Klipper with a second small board for the carousel stepper, or be kept as a spare and the Octopus bought as planned.
+Whatever the donor, the long V-slot beams (2 × 1.3 m) and the 80 cm Z rail and lead screw are bought new; the donor covers motors, wheels, belts, pulleys, end-stops, PSU and fasteners, roughly 150 to 200 € of the list above, for a 50 to 100 € machine. Its board can run the four gantry axes under Klipper with a Raspberry Pi Pico (about 5 €) plus one TMC2209 stick as a second MCU for the carousel stepper and the remaining I/O, which replaces the Octopus and its drivers (about 95 €); or it is kept as a spare and the Octopus bought as planned.
 
 ## Printed parts
 
