@@ -60,7 +60,7 @@ An overhead camera cannot see a label or hole past the gripper, and cannot see t
 
 ## 33/45 by the deck's buttons, not by resampling
 
-Recording everything at one speed and resampling later was rejected because the phono stage applies RIAA equalisation at fixed frequencies; a record played at the wrong speed is equalised wrongly and resampling does not undo it. The deck's 33 and 45 buttons are momentary switches, so two optocouplers and a manifest column solve it properly.
+Recording everything at one speed and resampling later was rejected because the phono stage applies RIAA equalisation at fixed frequencies; a record played at the wrong speed is equalised wrongly and resampling does not undo it. The deck's 33 and 45 buttons are momentary switches, so two relay channels across the switches and a manifest column solve it properly; relays rather than optocouplers because a dry contact needs no knowledge of the switch's polarity or voltage.
 
 ## LED strobe for speed, not camera frame rate
 
