@@ -2,7 +2,13 @@
 
 Things the concept could not settle and that the first hardware has to answer. Each one names what to measure and what depends on it.
 
-**The turntable's exact geometry.** The model uses generic Technics SL-1200 dimensions: pivot-to-stylus 230 mm, pivot 160 mm right and 130 mm behind the spindle, cue lever left-front of the arm base, finger lift on the left of the headshell. Measure the actual Omnitronic or Stanton deck before the CAD: the cue-servo bracket, the end-stop pin position and the fork's approach all hang on these numbers.
+**The turntable's exact geometry.** The Omnitronic DD 3120 is 45 × 35 × 9 cm; the model otherwise uses generic Technics SL-1200 dimensions: pivot-to-stylus 230 mm, pivot 160 mm right and 130 mm behind the spindle, cue lever left-front of the arm base, finger lift on the left of the headshell. Measure the actual deck before the CAD: the cue-servo bracket, the end-stop pin position and the fork's approach all hang on these numbers.
+
+**The remote start/stop jack's behaviour.** Whether a closure toggles start/stop or the platter runs only while the contact is held; the macros mirror whichever it is.
+
+**The pitch output.** What signal the DD 3120's pitch output carries: a control voltage, a tacho pulse train, or something else. A pulse train proportional to platter speed would be a second, strobe-independent speed reference for the sidecar file.
+
+**Stylus for the archive pass.** The Ortofon DJ S is spherical and robust, which is right for commissioning and for worn records. Decide after the first batches whether an elliptical stylus is worth a second pass on the records that matter.
 
 **Cue lever force and throw.** How much force and travel does the lever need, and does it lift the arm enough for the fork to walk it without the stylus touching a warped record? This decides whether a micro linear servo is enough or a larger one is needed, and sets the lift height the deck camera must confirm.
 

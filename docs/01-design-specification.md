@@ -49,9 +49,9 @@ A ring rest on a post 12 cm behind the machine's centreline, at X = 20 cm, Z = 3
 
 ## Turntable interface
 
-The deck is a Technics-type direct-drive clone with a manual cue lever and no auto-return. The machine touches it in four places, none of them modifications:
+The deck is an Omnitronic DD 3120: a Technics-type direct drive, 45 × 35 × 9 cm, with a manual cue lever, a remote start/stop connector, a pitch output and no auto-return. (A Stanton T.92 USB is also available but has no cue lever, which would bring back a separate arm-lift mechanism; it stays the spare.) The cartridge is an Ortofon DJ S, a spherical DJ stylus tracking at about 3 g, robust against the kind of handling this machine does; an elliptical stylus can be swapped in for a final archive pass once the machine is trusted. The machine touches the deck in four places, none of them modifications:
 
-The start/stop and 33/45 buttons are momentary switches and are tapped electrically through optocouplers wired in parallel with them.
+Start and stop go through the deck's own remote start/stop connector, the fader-start input meant for DJ mixers, which expects a contact closure: a relay or optocoupler on a 3.5 mm plug, with no wire soldered inside the deck. The 33 and 45 buttons are momentary switches and are tapped through two optocouplers wired in parallel with them.
 
 The cue lever is worked by a small linear-push servo mounted on the rear panel, whose rod comes in along Y at lever height, below the arm's swing. The same bracket carries a soft-sleeved end-stop pin that stands in the arm tube's path at about 6 cm from the arm pivot, so the arm cannot swing past a stylus radius of roughly 53 mm: the stylus physically cannot reach the label.
 

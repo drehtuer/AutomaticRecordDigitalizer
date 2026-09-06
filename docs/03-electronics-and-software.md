@@ -10,7 +10,7 @@ The guiding idea is that the machine is a strangely shaped 3D printer. Motion ru
 
 **Cameras.** Two Pi Camera Module 3 units. The deck camera connects directly to the Pi by ribbon cable. The wrist camera rides on the gantry, so its cable runs through 1.5 m of cable chain; either a CSI-to-HDMI extender pair carries the ribbon signal that far, or the wrist camera is a small USB module, which is simpler and adequate for its job.
 
-**Deck interface.** Four optocouplers (PC817 or a ready-made board) wired in parallel with the deck's start/stop, 33 and 45 button switches, driven from Octopus GPIO. Nothing on the deck is modified beyond soldering two wires to each switch.
+**Deck interface.** Start/stop uses the DD 3120's remote start/stop jack, a contact-closure input for DJ fader start: one optocoupler or small relay on a 3.5 mm plug, driven from Octopus GPIO, no soldering in the deck. Whether the jack toggles on each closure or holds while closed has to be checked on the deck and mirrored in the `DECK_START` / `DECK_STOP` macros. The 33 and 45 buttons are momentary switches and get one optocoupler each wired in parallel with the switch. The deck's pitch output, if it carries a speed or tacho signal, can feed a counter input on the Octopus as a second speed reference beside the strobe; what it actually outputs is an open question.
 
 **Sensors.** Mechanical or optical end-stops on X, Y and Z at the home ends; a Hall sensor for the wrist's home position; a slot-type optical sensor reading a home mark on the carousel's tooth ring; a vacuum switch in the cup line; optionally a record-present reflective sensor at the pick position, though the wrist camera makes it redundant.
 
@@ -18,7 +18,7 @@ The guiding idea is that the machine is a strangely shaped 3D printer. Motion ru
 
 ## Klipper configuration
 
-The `printer.cfg` declares the four motion axes as a Cartesian kinematics with X, Y, Z, and the wrist as an additional manual stepper, the carousel as a second manual stepper, both servos as `servo` sections, the pump, valve and LED as `output_pin` sections (the LED with `pwm: True` and a 20 ms cycle time for the strobe), and the four optocouplers as `output_pin` outputs with a macro that pulses each for 150 ms.
+The `printer.cfg` declares the four motion axes as a Cartesian kinematics with X, Y, Z, and the wrist as an additional manual stepper, the carousel as a second manual stepper, both servos as `servo` sections, the pump, valve and LED as `output_pin` sections (the LED with `pwm: True` and a 20 ms cycle time for the strobe), and the three optocouplers (remote start/stop, 33, 45) as `output_pin` outputs with a macro that pulses each for 150 ms.
 
 G-code macros implement the primitives the orchestrator composes: `HOME_ALL`, `GRIP` (pump on, wait for the vacuum switch, else error), `RELEASE`, `CUE_UP`, `CUE_DOWN`, `DECK_START`, `DECK_STOP`, `DECK_33`, `DECK_45`, `BRUSH_DEPLOY`, `BRUSH_PARK`, `CAROUSEL_INDEX`, `STROBE_ON`, `LIGHT_ON`, `LIGHT_OFF`, and `EMERGENCY_LIFT`, which is `CUE_UP` followed by `DECK_STOP` and a motion halt, bound so it can be fired without waiting for the queue.
 

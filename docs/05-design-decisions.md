@@ -46,6 +46,10 @@ The turntable has a manual cue lever. A servo on a frame bracket works it, so ev
 
 The cue-servo bracket initially collided with the arm's inner swing. That collision became a feature: a soft-sleeved pin on the bracket stands in the arm tube's path just past the run-out radius, so whatever the software does, the stylus cannot reach the label.
 
+## Omnitronic DD 3120, not the Stanton T.92
+
+Two decks were available. The Omnitronic has a cue lever, a remote start/stop jack and a pitch output; the Stanton has none of these and a built-in USB converter that is not wanted. The cue lever alone decides it: without one, the machine would need its own damped arm lift, which is the part most likely to damage a record. The remote jack is a bonus that removes all soldering on the start/stop switch.
+
 ## No automatic skip recovery
 
 A skip is detected by audio and by camera at once. The response is to lift the arm via the cue lever within half a second, stop the platter, pause the batch and notify. Re-cueing automatically was rejected because a record that skipped once will usually skip again at the same place, and an unattended retry loop grinding a stylus into a scratch is the one thing the machine must never do.

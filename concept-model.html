@@ -286,7 +286,7 @@
 
   // ---------- turntable ----------
   const TTX = 55;
-  box(45, 9, 37, M.tt, TTX, 4.5, 0); box(45.4, 1.2, 37.4, M.ext, TTX, 0.6, 0);
+  box(45, 9, 35, M.tt, TTX, 4.5, 0); box(45.4, 1.2, 35.4, M.ext, TTX, 0.6, 0);   // Omnitronic DD 3120: 45 × 35 × 9 cm
   const platterG = new THREE.Group(); platterG.position.set(TTX, 0, 0); scene.add(platterG);
   cyl(16.5, 1.5, M.platter, 0, 9.75, 0, platterG, 96); cyl(15.2, 0.3, M.mat, 0, 10.65, 0, platterG, 96);
   for (let i = 0; i < 36; i++) { const a = i / 36 * Math.PI * 2; box(0.5, 0.2, 0.5, M.alu, Math.cos(a) * 16.6, 9.75, Math.sin(a) * 16.6, platterG); }
@@ -530,7 +530,7 @@
     ['Brush arm · on the frame', () => new THREE.Vector3(BR.x, 17, BR.z)],
     ['Dust edge · removable tray', () => new THREE.Vector3(DE.x, 12.5, DE.z)],
     ['Tonearm', () => new THREE.Vector3(PIV.x, 15, PIV.z)],
-    ['Start / stop tapped electrically', () => new THREE.Vector3(TTX - 19, 10.5, 15)],
+    ['Start / stop via the remote jack', () => new THREE.Vector3(TTX - 19, 10.5, 15)],
     ['X rail on 2040 · birch-ply box frame', () => new THREE.Vector3(60, 89, 40)],
     ['Roller ring · 10 × 608 bearings', () => new THREE.Vector3(CC.x + 36, 8, CC.z)],
     ['Printed hub & rim carry the slot angles', () => new THREE.Vector3(CC.x, 33, CC.z)],
