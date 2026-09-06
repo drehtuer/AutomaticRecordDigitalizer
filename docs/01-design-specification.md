@@ -4,13 +4,13 @@ This document describes the machine as it stands after the concept review. Dimen
 
 ## Overview and footprint
 
-The bench is about 190 × 100 cm. From left to right it carries the carousel magazine (Ø 86 cm, standing free on the bench), then the frame (125 × 80 × 90 cm) that spans the flip station and the turntable. The gantry rides on top of the frame; its Z column rises to about 135 cm when fully raised, so the machine wants a metre and a half of headroom.
+The bench is about 190 × 100 cm. From left to right it carries the carousel magazine (Ø 86 cm, standing free on the bench), then the frame (125 × 86 × 90 cm) that spans the flip station and the turntable. The gantry rides on top of the frame; its Z column rises to about 135 cm when fully raised, so the machine wants a metre and a half of headroom.
 
 The frame's left end is open and its X beams overhang it by 8 cm so that the gantry can reach the carousel's pick slot, which is the only point where the two halves of the machine meet. The carousel can be lifted off the bench for loading without touching the frame.
 
 ## Frame
 
-The frame is a glued box of 18 mm birch plywood: two side panels at Y = ±40 cm and one end panel at the deck end, each cut as a frame around a large window so the interior stays open and reachable. The panels give the racking stiffness; there are no diagonals and no corner posts. A 2040 V-slot extrusion is bolted along the top edge of each side panel and is the X axis: the carriages run on Delrin V-wheels in the slot, as on a hobby printer. One 2020 tie across the open end keeps the two beams parallel. Brackets for the cue-lever servo, the deck camera and the LED bar screw directly to the panels' inner faces.
+The frame is a glued box of 18 mm birch plywood: two side panels at Y = ±43 cm and one end panel at the deck end, each cut as a frame around a large window so the interior stays open and reachable. The panels give the racking stiffness; there are no diagonals and no corner posts. A 2040 V-slot extrusion is bolted along the top edge of each side panel and is the X axis: the carriages run on Delrin V-wheels in the slot, as on a hobby printer. One 2020 tie across the open end keeps the two beams parallel. Brackets for the cue-lever servo, the deck camera and the LED bar screw directly to the panels' inner faces.
 
 The Pi, the controller board, the relay card and the vacuum pump live in a box under the flip station, whose post stands on that box.
 
@@ -21,19 +21,19 @@ The gantry is a Cartesian XYZ with one rotary axis:
 | Axis | Mechanism | Travel | Notes |
 |---|---|---|---|
 | X | GT2 belt, NEMA17, Delrin wheels on 2040 V-slot beams | ≈ 80 cm | From the carousel pick slot to the tonearm rest |
-| Y | GT2 belt, NEMA17, Delrin wheels on a 2040 V-slot cross beam | ≈ 45 cm | Set by the two station poses, 22 cm either side of the ring |
+| Y | GT2 belt, NEMA17, Delrin wheels on a 2040 V-slot cross beam | ≈ 45 cm | Set by the two station poses, 22 cm either side of the ring; the frame is 86 cm wide so the fork clears the rear panel at the re-grip pose |
 | Z | T8 lead screw, NEMA17, moving column on an MGN12 rail | ≈ 60 cm | Column slides through a guide on the cross beam; self-locking; the one axis that keeps a linear rail |
 | Wrist | NEMA17 with ≈ 5:1 planetary gearbox, Hall home sensor | −90° … 180° | Axis parallel to X |
 
 The Z axis is a moving column rather than a fixed tower: the 76 cm rail is part of the carriage and slides up through a guide block on the cross beam, so when the carriage is raised nothing hangs below it. Every X move happens at travel height and clears the deck and the station by construction. The lead screw is self-locking, so a power loss leaves the record where it is.
 
-The wrist sits on a 9 cm outrigger beside the column so the arm can swing without meeting it. It carries three things: the vacuum arm (22 cm, with the cup on its end pointing perpendicular to the arm), the wrist camera looking along the cup's axis, and the finger-lift fork on the opposite side of the hub, 10 cm long, which points down when the arm points up.
+The wrist sits on a 9 cm outrigger beside the column so the arm can swing without meeting it. It carries three things: the vacuum arm (22 cm, with the cup on its end pointing perpendicular to the arm), the wrist camera looking along the cup's axis, mounted on the outer (+X) side of the arm 11 cm up from the cup, and the finger-lift fork on the opposite side of the hub, 5.5 cm long, which points down when the arm points up. The cup bracket does not reach below the cup, so the spindle tip, which enters the hollow bellows cup when a record is released over the spindle, meets nothing.
 
 ## Gripper
 
 The gripper is a single 40 mm bellows vacuum cup on the label area, fed by a 12 V diaphragm pump through a solenoid release valve, with a vacuum switch that confirms a seal before any move and aborts a move if the seal is lost. The label area is the one thing every record has in common, so the cup handles 12", 10" and 7" records and shaped discs alike; 7" singles with the large jukebox hole are out of scope.
 
-The cup's bellows give about 5 mm of compliance, which is what lets the cup land on a spoke standing slightly off its nominal position.
+The cup's bellows give about 5 mm of compliance, which is what lets the cup land on a spoke standing slightly off its nominal position. At the pick position the cup stops 8 mm short of the record's face and makes the last 8 mm as a slow approach; the gap between spoke faces at the arm's radius is 65 mm and the cup-to-arm-back assembly is 48 mm, so the approach and a 9 mm margin use the rest.
 
 ## Carousel magazine
 
@@ -55,7 +55,7 @@ The felt DJ slipmat in the photo should be replaced by a rubber or cork mat for 
 
 Start and stop go through the deck's own remote start/stop connector, a 6.3 mm jack made for the fader-start feature of older mixers and hi-fi systems, which started the deck when the fader came up: it expects a contact closure and does nothing but start and stop the platter (speed is chosen with the buttons). One channel of the Conrad 393905 USB relay card (already on hand, driven from the Pi) on a 6.3 mm plug does it, with no wire soldered inside the deck. The 33 and 45 buttons are momentary switches and are pressed by two more channels of the same card wired across the switch contacts inside the deck; a relay is a dry contact, so polarity and the switch's voltage do not matter.
 
-The cue lever is worked by a small linear-push servo on a bracket on the deck-end panel of the frame, whose rod comes in along X at lever height; the lever is only 3 cm from the deck's right edge, so the rod is short and never crosses the arm's swing. A bar from the same bracket runs in front of the arm base, under the arm, and carries a soft-sleeved end-stop pin standing in the arm tube's path at about 6 cm from the pivot, so the arm cannot swing past a stylus radius of roughly 53 mm: the stylus physically cannot reach the label.
+The cue lever is worked by a small linear-push servo on a bracket on the deck-end panel of the frame, whose rod comes in along X at lever height; the lever is only 3 cm from the deck's right edge, so the rod is short and never crosses the arm's swing. A bar from the same bracket runs in front of the arm base, under the arm, and carries a soft-sleeved end-stop pin standing in the arm tube's path 45 mm from the pivot, so the arm cannot swing past a stylus radius of roughly 53 mm: the stylus physically cannot reach the label. At 45 mm the pin stands outside a 12" record's outline; at the 60 mm first drawn it stood under the record's edge.
 
 The tonearm is moved only while the cue lever holds it up, by the fork straddling the headshell's finger lift with prongs fore and aft of it. The fork never carries the arm's weight.
 
@@ -67,7 +67,7 @@ There is no cleaning module. Records are brushed by hand before they go into the
 
 ## Cameras and light
 
-The wrist camera (Pi Camera Module 3 or a small USB module) sits on the wrist arm looking along the cup axis, 6 cm from the cup. Before every grip it sees the face it is about to grip: at the carousel it reads the centre hole position, the label, and the lead-in and run-out radii of side A; at the station it does the same for side B. Both label photographs come from it.
+The wrist camera (Pi Camera Module 3 or a small USB module) sits on the outer side of the wrist arm, 11 cm up from the cup, looking along the cup axis. With the cup pointing down it looks straight down, and that is where it works: hovering over the platter after a record is placed it photographs the label that is facing up, finds the centre (the spindle is in the hole) and measures the lead-in and run-out radii; over the ring rest it photographs the other label before the re-grip. Both label photographs come from it, each taken face-on with nothing in the way. At the carousel it does not look at the record: inside the 65 mm gap between spokes there is no room for a camera at a usable distance, and none is needed, because a record resting against the rim ring has its centre within a millimetre of a known position, which the cup's bellows and the spindle tip absorb.
 
 The deck camera (Pi Camera Module 3) is mounted low on the deck-end panel at platter height, facing the headshell across the platter from 20 to 40 cm. It sees the stylus in profile, the groove bands edge-on and the strobe dots on the platter rim. It tracks the headshell to locate the arm wherever a side ended, confirms the stylus landed on the lead-in, watches for the run-out and for skips, and reads the platter speed.
 

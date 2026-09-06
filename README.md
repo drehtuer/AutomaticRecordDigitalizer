@@ -6,11 +6,13 @@ The project exists because the cheap way of doing this, a second-hand stacking r
 
 ## Status
 
-Concept design, finished and reviewed in September 2026. Nothing has been bought or printed yet. [docs/07-status-and-next-steps.md](docs/07-status-and-next-steps.md) records exactly where the project stands, what is already on hand, and what to do first.
+Concept design finished and reviewed in September 2026; first parametric CAD in place, with the whole cycle passing a scripted collision check. Nothing has been bought or printed yet. [docs/07-status-and-next-steps.md](docs/07-status-and-next-steps.md) records exactly where the project stands, what is already on hand, and what to do first.
 
 ## What is in this repository
 
 `concept-model.html` is an interactive 3D model of the machine (open it in a browser; it loads three.js from a CDN). It steps through the complete operating cycle, including the B-side flip and the fault case, and every step's motion is planned as real waypoints in the order the controller will use.
+
+`cad/` is the parametric CadQuery model with the motion planner and the collision checker; `cad/README.md` explains how to run it, and `cad/export/` holds STEP files that open in FreeCAD and STL files of the first printed parts.
 
 `docs/` holds the design in detail:
 
