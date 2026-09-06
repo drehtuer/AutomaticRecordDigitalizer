@@ -25,16 +25,16 @@ Prices are typical German retail in September 2026, rounded, and will drift; che
 | Vacuum | 12 V diaphragm vacuum pump | 1 | 15 |
 | Vacuum | 12 V 2/2 solenoid valve, vacuum switch, 40 mm bellows cup, 6 mm tubing, fittings | 1 set | 35 |
 | Sensing | End-stops, Hall sensor, slot optical sensor | 1 set | 12 |
-| Deck I/O | 4-channel relay board with opto-isolated inputs, 6.3 mm mono plug and cable for the remote start/stop jack, thin wire | 1 | 10 |
+| Deck I/O | 6.3 mm mono plug and cable for the remote start/stop jack, thin wire (relay card: Conrad 393905, owned) | 1 | 4 |
 | Light | LED bar (12 V, warm white) and logic-level MOSFET | 1 | 8 |
 | Carousel | 608ZZ bearing (rollers) | 10 | 6 |
 | Carousel | 6005 bearing, 25 mm stub shaft | 1 | 8 |
 | Cabling | Cable chain 10 × 20 mm, 2.5 m; wire, connectors, crimps, sleeving | 1 set | 60 |
 | Hardware | M3/M5 screws and nuts, heat-set inserts, felt, rubber sleeve stock | 1 set | 35 |
 | Consumables | PETG 2.5 kg, TPU 0.3 kg | | 70 |
-| **Total** | | | **≈ 870** |
+| **Total** | | | **≈ 865** |
 
-Not included: the 3D printer, the turntable (Omnitronic DD 3120, owned), the Focusrite Scarlett (owned), and an external phono preamp if the deck's own line output is not used (about 40 €).
+Not included: the 3D printer, the turntable (Omnitronic DD 3120, owned), the Focusrite Scarlett (owned), the Conrad 393905 USB relay card (owned), the NXP MIMXRT1010-EVK (owned; replaces the Octopus and its drivers, about 95 €, when a donor board runs the gantry axes), and an external phono preamp if the deck's own line output is not used (about 40 €).
 
 Where to trim further: a used Raspberry Pi 4 saves about 40 € and a USB camera on the wrist instead of the second Pi camera about 20 €.
 
