@@ -1,0 +1,38 @@
+# Dependabot keeps the pinned versions in CI, the devcontainer and the CAD
+# requirements current. Its pull requests run the same checks as any other.
+version: 2
+
+updates:
+  # The actions pinned in .github/workflows/.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: ci
+    groups:
+      actions:
+        patterns:
+          - '*'
+
+  # CadQuery, in cad/requirements.txt.
+  - package-ecosystem: pip
+    directory: /cad
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: cad
+
+  # The base image and the features in .devcontainer/devcontainer.json.
+  - package-ecosystem: devcontainers
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: devcontainer
