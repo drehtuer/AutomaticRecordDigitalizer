@@ -2,6 +2,23 @@ name: Documentation
 
 # The documentation site is published when a release tag is pushed,
 # and on demand from the Actions tab.
+#
+# This needs one setting that does not live in the repository: the github-pages
+# environment must allow deployments from tags. It ships allowing the default
+# branch only, so the build succeeds and the deploy is rejected with
+#
+#     Tag "v0.1.0" is not allowed to deploy to github-pages
+#     due to environment protection rules.
+#
+# Settings > Environments > github-pages > Deployment branches and tags, add the
+# tag rule v*, or:
+#
+#     gh api --method POST \
+#       repos/OWNER/REPO/environments/github-pages/deployment-branch-policies \
+#       -f name='v*' -f type='tag'
+#
+# Switching the trigger to the release event does not avoid this: a release runs
+# on the tag ref too, and is rejected the same way.
 on:
   push:
     tags:

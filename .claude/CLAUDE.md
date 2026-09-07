@@ -58,7 +58,14 @@ The devcontainer (`.devcontainer/`) has CadQuery, ruff and markdownlint-cli2 ins
 ## Documentation site
 
 `.github/workflows/documentation.yml` builds `_config.yml` with GitHub Pages Jekyll and publishes
-it when a `v*` release tag is pushed. There is no Gemfile and none is needed:
+it to <https://drehtuer.github.io/AutomaticRecordDigitalizer/> when a `v*` release tag is pushed.
+
+Publishing depends on one setting that is not in the repository: the `github-pages` environment
+must have a deployment rule for the tag pattern `v*`. It allows the default branch only until
+someone adds it, and then the build succeeds while the deploy is rejected with `Tag "v0.1.0" is
+not allowed to deploy to github-pages due to environment protection rules`. The rule is in place
+on this repository; a fork or a rebuilt repository needs it added again. The comment at the top
+of the workflow has the `gh` command. There is no Gemfile and none is needed:
 `actions/jekyll-build-pages` brings its own `github-pages` gem set. To preview the site locally,
 build it in a throwaway container rather than adding gems to the repository:
 
