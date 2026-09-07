@@ -2,7 +2,8 @@
 
 [![CI](https://github.com/drehtuer/AutomaticRecordDigitalizer/actions/workflows/ci.yml/badge.svg)](https://github.com/drehtuer/AutomaticRecordDigitalizer/actions/workflows/ci.yml)
 [![Documentation](https://github.com/drehtuer/AutomaticRecordDigitalizer/actions/workflows/documentation.yml/badge.svg)](https://github.com/drehtuer/AutomaticRecordDigitalizer/actions/workflows/documentation.yml)
-[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot&logoColor=white)](https://github.com/drehtuer/AutomaticRecordDigitalizer/blob/main/.github/dependabot.yml)
+[![Dependabot Updates](https://github.com/drehtuer/AutomaticRecordDigitalizer/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/drehtuer/AutomaticRecordDigitalizer/actions/workflows/dependabot/dependabot-updates)
+[![License: GPL-2.0](https://img.shields.io/github/license/drehtuer/AutomaticRecordDigitalizer)](https://github.com/drehtuer/AutomaticRecordDigitalizer/blob/main/LICENSE)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 A DIY machine that digitises a vinyl record collection unattended: it takes a record from a magazine, puts it on a Technics-style turntable (an Omnitronic DD 3120), cues the stylus, records the side, flips the record, records the other side, and puts it back — 10 to 20 records per eight-hour run, a full 24-slot magazine over a weekend, with a photo of both labels for the tags. Records are brushed by hand before they go into the magazine.
