@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutomaticRecordDigitalizer — CAD model</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1a1a1a; --dim: #5c5c5c; --bg: #fbfaf7; --line: #dcd8cf; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg: #e8e6e1; --dim: #a3a09a; --bg: #17181a; --line: #33353a; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  .wrap { max-width: 60rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+  h1 { font-size: 1.35rem; margin: 0 0 .2rem; }
+  .sub { color: var(--dim); margin: 0 0 1.25rem; }
+  model-viewer { width: 100%; height: min(70vh, 620px); background: transparent;
+                 border: 1px solid var(--line); border-radius: 6px; }
+  .note { color: var(--dim); font-size: .9rem; margin-top: 1rem; }
+  dl { display: grid; grid-template-columns: auto 1fr; gap: .3rem 1rem;
+       margin: 1.25rem 0 0; font-size: .92rem; }
+  dt { color: var(--dim); }
+  dd { margin: 0; }
+  a { color: inherit; }
+  .bar { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .92rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>The machine, from the CAD</h1>
+  <p class="sub">Drag to orbit, scroll to zoom. Generated from the parametric model — not drawn by hand.</p>
+
+  <model-viewer
+    src="cad/export/web/machine.glb"
+    alt="The AutomaticRecordDigitalizer: carousel magazine, XYZ gantry and turntable on a bench"
+    camera-controls
+    touch-action="pan-y"
+    shadow-intensity="0.6"
+    exposure="1.0"
+    camera-orbit="-38deg 68deg auto"
+    field-of-view="32deg"
+    loading="eager">
+    <div slot="progress-bar"></div>
+  </model-viewer>
+
+  <dl>
+    <dt>Pose</dt><dd>Record placed on the platter, gantry clear of the deck</dd>
+    <dt>Source</dt><dd><code>cad/params.py</code> via <code>python -m cad.export_web</code></dd>
+    <dt>Units</dt><dd>Millimetres</dd>
+  </dl>
+
+  <p class="note">
+    This is a layout model. Every part has its true envelope, position and travel, and the records
+    are real discs, but most printed parts are still envelopes rather than print models.
+  </p>
+
+  <div class="bar">
+    <a href="./">Documentation</a> ·
+    <a href="concept-model.html">Animated concept model</a> ·
+    <a href="https://github.com/drehtuer/AutomaticRecordDigitalizer">Source</a>
+  </div>
+
+</div>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.3.1/dist/model-viewer.min.js"></script>
+</body>
+</html>

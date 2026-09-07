@@ -44,7 +44,12 @@ indentation everywhere except Python, which stays at the four spaces PEP 8 and r
   See `cad/README.md`.
 - `cad/export/` — generated STEP and STL files, committed at reviewed states. Regenerate them
   after changing `cad/params.py`.
-- `concept-model.html` — standalone interactive 3D model of the full cycle.
+- `cad-model.html` — WebGL viewer of the machine, fed by `cad/export/web/machine.glb`. Regenerate
+  the glb with `python -m cad.export_web` after changing `cad/params.py`, in the same breath as
+  the STEP and STL exports.
+- `concept-model.html` — standalone interactive 3D model of the full cycle. Its geometry is its
+  own and predates the CAD corrections, so it is right about the sequence and wrong about
+  dimensions.
 
 ## Working on the model
 
