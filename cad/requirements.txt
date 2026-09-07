@@ -1,1 +1,1 @@
-cadquery>=2.4
+cadquery>=2.8.0
