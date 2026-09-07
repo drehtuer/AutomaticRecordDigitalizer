@@ -1,0 +1,81 @@
+{
+ "units": "mm",
+ "carousel": {
+  "centre": [
+   -400.0,
+   0.0
+  ],
+  "slots": 24
+ },
+ "wrist": {
+  "offsetX": 90.0
+ },
+ "tonearm": {
+  "pivot": [
+   744.0,
+   -84.0,
+   130.0
+  ],
+  "lift": 10.0
+ },
+ "groups": {
+  "static": [
+   "bench",
+   "frame",
+   "station",
+   "plinth",
+   "deck_interface",
+   "deck_camera",
+   "carousel_base"
+  ],
+  "carousel": [
+   "carousel_disc",
+   "record_slot0",
+   "record_slot1",
+   "record_slot2",
+   "record_slot3",
+   "record_slot4",
+   "record_slot5",
+   "record_slot6",
+   "record_slot7",
+   "record_slot8",
+   "record_slot9",
+   "record_slot10",
+   "record_slot11",
+   "record_slot12",
+   "record_slot13",
+   "record_slot14",
+   "record_slot15",
+   "record_slot16",
+   "record_slot17",
+   "record_slot18",
+   "record_slot19",
+   "record_slot20",
+   "record_slot21",
+   "record_slot22",
+   "record_slot23"
+  ],
+  "tonearm": [
+   "tonearm"
+  ],
+  "x": [
+   "x_carriage"
+  ],
+  "y": [
+   "y_carriage"
+  ],
+  "z": [
+   "z_carriage"
+  ],
+  "wrist": [
+   "wrist",
+   "record_held"
+  ]
+ },
+ "visibility": {
+  "held": "record_held",
+  "platter": "record_platter",
+  "ring": "record_ring",
+  "slot": "record_slot0"
+ }
+}

@@ -30,11 +30,11 @@ exclude:
   - .editorconfig
   - .markdownlint-cli2.yaml
   - ruff.toml
-  - cad/cycle.json
   - cad/requirements.txt
   - cad/assembly.py
   - cad/check_collisions.py
   - cad/export_parts.py
+  - cad/export_web.py
   - cad/kinematics.py
   - cad/params.py
   - cad/parts/
