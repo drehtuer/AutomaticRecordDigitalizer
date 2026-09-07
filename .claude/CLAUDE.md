@@ -27,6 +27,9 @@ npx --yes markdownlint-cli2@0.23.2   # Markdown, configured in .markdownlint-cli
 python -m cad.check_collisions       # the full cycle, exit 1 on any intersection
 ```
 
+Dependabot (`.github/dependabot.yml`) keeps the actions, `cad/requirements.txt` and the
+devcontainer image current; its pull requests run the same three checks.
+
 Formatting is governed by `.editorconfig`: UTF-8, LF, a final newline, spaces not tabs, two-space
 indentation everywhere except Python, which stays at the four spaces PEP 8 and ruff assume.
 
