@@ -3,66 +3,376 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AutomaticRecordDigitalizer — CAD model</title>
+<title>AutomaticRecordDigitalizer — the machine</title>
 <style>
-  :root { color-scheme: light dark; --fg: #1a1a1a; --dim: #5c5c5c; --bg: #fbfaf7; --line: #dcd8cf; }
+  :root { color-scheme: light dark;
+          --fg: #1a1a1a; --dim: #5c5c5c; --bg: #fbfaf7; --panel: #fff;
+          --line: #dcd8cf; --accent: #c2410c; }
   @media (prefers-color-scheme: dark) {
-    :root { --fg: #e8e6e1; --dim: #a3a09a; --bg: #17181a; --line: #33353a; }
+    :root { --fg: #e8e6e1; --dim: #a3a09a; --bg: #17181a; --panel: #1e2023;
+            --line: #33353a; --accent: #f97316; }
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--fg);
          font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
-  .wrap { max-width: 60rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
   h1 { font-size: 1.35rem; margin: 0 0 .2rem; }
   .sub { color: var(--dim); margin: 0 0 1.25rem; }
-  model-viewer { width: 100%; height: min(70vh, 620px); background: transparent;
-                 border: 1px solid var(--line); border-radius: 6px; }
-  .note { color: var(--dim); font-size: .9rem; margin-top: 1rem; }
+  .stage { position: relative; border: 1px solid var(--line); border-radius: 6px;
+           overflow: hidden; background: var(--panel); }
+  #view { display: block; width: 100%; height: min(68vh, 600px); }
+  #status { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%);
+            text-align: center; color: var(--dim); font-size: .95rem; padding: 1rem; }
+  .hud { position: absolute; left: .75rem; top: .75rem; pointer-events: none;
+         font-size: .9rem; text-shadow: 0 1px 3px var(--panel); }
+  .hud b { color: var(--accent); }
+  .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
+              margin-top: .85rem; }
+  button { font: inherit; color: inherit; background: var(--panel);
+           border: 1px solid var(--line); border-radius: 5px;
+           padding: .32rem .7rem; cursor: pointer; }
+  button:hover { border-color: var(--accent); }
+  button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  .steps { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .85rem; }
+  .steps button { font-size: .84rem; padding: .24rem .55rem; }
+  label { color: var(--dim); font-size: .9rem; display: flex; align-items: center; gap: .4rem; }
   dl { display: grid; grid-template-columns: auto 1fr; gap: .3rem 1rem;
-       margin: 1.25rem 0 0; font-size: .92rem; }
-  dt { color: var(--dim); }
-  dd { margin: 0; }
-  a { color: inherit; }
+       margin: 1.5rem 0 0; font-size: .92rem; }
+  dt { color: var(--dim); } dd { margin: 0; }
+  .note { color: var(--dim); font-size: .9rem; margin-top: 1rem; }
   .bar { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .92rem; }
+  a { color: inherit; }
+  code { font-size: .92em; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <h1>The machine, from the CAD</h1>
-  <p class="sub">Drag to orbit, scroll to zoom. Generated from the parametric model — not drawn by hand.</p>
+  <h1>The machine</h1>
+  <p class="sub">
+    Drag to orbit, scroll to zoom. Geometry and motion both come from the parametric model —
+    this is the machine the collision checker sweeps, moving the way it sweeps it.
+  </p>
 
-  <model-viewer
-    src="cad/export/web/machine.glb"
-    alt="The AutomaticRecordDigitalizer: carousel magazine, XYZ gantry and turntable on a bench"
-    camera-controls
-    touch-action="pan-y"
-    shadow-intensity="0.6"
-    exposure="1.0"
-    camera-orbit="-38deg 68deg auto"
-    field-of-view="32deg"
-    loading="eager">
-    <div slot="progress-bar"></div>
-  </model-viewer>
+  <div class="stage">
+    <canvas id="view"></canvas>
+    <div class="hud"><b id="poseName">—</b> <span id="poseIndex" style="color:var(--dim)"></span></div>
+    <div id="status">Loading the model…</div>
+  </div>
+
+  <div class="controls">
+    <button id="play" aria-pressed="false">Play</button>
+    <button id="prev">Previous step</button>
+    <button id="next">Next step</button>
+    <label><input type="checkbox" id="loop" checked> Loop</label>
+    <label>Speed
+      <select id="speed">
+        <option value="0.5">0.5×</option>
+        <option value="1" selected>1×</option>
+        <option value="2">2×</option>
+        <option value="4">4×</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="steps" id="steps"></div>
 
   <dl>
-    <dt>Pose</dt><dd>Record placed on the platter, gantry clear of the deck</dd>
-    <dt>Source</dt><dd><code>cad/params.py</code> via <code>python -m cad.export_web</code></dd>
-    <dt>Units</dt><dd>Millimetres</dd>
+    <dt>Source</dt>
+    <dd><code>cad/params.py</code> via <code>python -m cad.export_web</code>, cycle from
+        <code>python -m cad.kinematics</code></dd>
+    <dt>Units</dt><dd>Millimetres, Z up</dd>
+    <dt>Cycle</dt><dd id="cycleFacts">—</dd>
   </dl>
 
   <p class="note">
     This is a layout model. Every part has its true envelope, position and travel, and the records
-    are real discs, but most printed parts are still envelopes rather than print models.
+    are real discs, but most printed parts are still envelopes rather than print models. The motion
+    is the planner's own keyframes, in the order the controller will use, interpolated linearly
+    between them — so it shows the path, not the acceleration.
   </p>
 
   <div class="bar">
     <a href="./">Documentation</a> ·
-    <a href="concept-model.html">Animated concept model</a> ·
+    <a href="concept-model.html">Concept model</a> ·
     <a href="https://github.com/drehtuer/AutomaticRecordDigitalizer">Source</a>
   </div>
 
 </div>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.3.1/dist/model-viewer.min.js"></script>
+
+<script type="importmap">
+{ "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+} }
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const BASE = 'cad/export/web/';
+const status = document.getElementById('status');
+const fail = (m) => { status.textContent = m; status.style.color = 'var(--accent)'; };
+
+// The machine's coordinate system is Z up; adopt it rather than converting.
+THREE.Object3D.DEFAULT_UP.set(0, 0, 1);
+
+const canvas = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35, 1, 10, 20000);
+camera.up.set(0, 0, 1);
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0x556070, 2.2));
+const key = new THREE.DirectionalLight(0xffffff, 1.9);
+key.position.set(900, -1400, 1600);
+scene.add(key);
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.7);
+fillLight.position.set(-1200, 900, 600);
+scene.add(fillLight);
+
+const controls = new OrbitControls(camera, canvas);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+
+// ---------------------------------------------------------------- animation
+const deg = Math.PI / 180;
+let scn, cycle, groups = {}, visNodes = {}, timeline = [], totalTime = 0;
+let clock = new THREE.Clock(), t = 0, playing = false;
+
+/** Flatten the cycle into segments, each a pair of keyframes plus its pose. */
+function buildTimeline() {
+  timeline = [];
+  cycle.forEach((pose, pi) => {
+    for (let i = 0; i < pose.keyframes.length - 1; i++) {
+      const a = pose.keyframes[i], b = pose.keyframes[i + 1];
+      // Duration from how far the machine actually moves, so a long traverse
+      // does not flick past in the same time as a nudge.
+      const d = Math.hypot(b.x - a.x, b.y - a.y, b.z - a.z)
+              + Math.abs(b.phi - a.phi) * 3 + Math.abs(b.c - a.c) * 3
+              + Math.abs(b.a - a.a) * 3;
+      timeline.push({ pose: pi, a, b, dur: Math.max(0.25, d / 420) });
+    }
+    if (pose.keyframes.length === 1) {
+      timeline.push({ pose: pi, a: pose.keyframes[0], b: pose.keyframes[0], dur: 0.5 });
+    }
+  });
+  totalTime = timeline.reduce((s, seg) => s + seg.dur, 0);
+}
+
+function segmentAt(time) {
+  let acc = 0;
+  for (const seg of timeline) {
+    if (time < acc + seg.dur) return { seg, u: (time - acc) / seg.dur };
+    acc += seg.dur;
+  }
+  const seg = timeline[timeline.length - 1];
+  return { seg, u: 1 };
+}
+
+const lerp = (a, b, u) => a + (b - a) * u;
+
+/** Place every group for a state, exactly as assembly.Machine composes it. */
+function applyState(s) {
+  const [cx, cy] = scn.carousel.centre;
+  const [px, py, pz] = scn.tonearm.pivot;
+
+  groups.carousel.position.set(cx, cy, 0);
+  groups.carousel.rotation.z = s.c * deg;
+
+  groups.tonearm.position.set(px, py, pz + s.l * scn.tonearm.lift);
+  groups.tonearm.rotation.z = s.a * deg;
+
+  groups.x.position.set(s.x, 0, 0);
+  groups.y.position.set(s.x, s.y, 0);
+  groups.z.position.set(s.x, s.y, s.z);
+
+  groups.wrist.position.set(s.x + scn.wrist.offsetX, s.y, s.z);
+  groups.wrist.rotation.x = s.phi * deg;
+}
+
+function applyVisibility(vis) {
+  for (const [flag, node] of Object.entries(scn.visibility)) {
+    if (visNodes[node]) visNodes[node].visible = !!vis[flag];
+  }
+}
+
+let shownPose = -1;
+function setFrame(time) {
+  const { seg, u } = segmentAt(time);
+  const a = seg.a, b = seg.b;
+  applyState({
+    x: lerp(a.x, b.x, u), y: lerp(a.y, b.y, u), z: lerp(a.z, b.z, u),
+    phi: lerp(a.phi, b.phi, u), a: lerp(a.a, b.a, u),
+    l: lerp(a.l, b.l, u), c: lerp(a.c, b.c, u),
+  });
+  const pose = cycle[seg.pose];
+  applyVisibility(pose.before);
+  if (seg.pose !== shownPose) {
+    shownPose = seg.pose;
+    document.getElementById('poseName').textContent = pose.name;
+    document.getElementById('poseIndex').textContent = `step ${seg.pose + 1} of ${cycle.length}`;
+    [...document.querySelectorAll('.steps button')].forEach((el, i) =>
+      el.setAttribute('aria-pressed', String(i === seg.pose)));
+  }
+}
+
+function poseStart(pi) {
+  let acc = 0;
+  for (const seg of timeline) { if (seg.pose === pi) return acc; acc += seg.dur; }
+  return 0;
+}
+
+// ---------------------------------------------------------------- load
+async function load() {
+  const [scnRes, cycRes] = await Promise.all([
+    fetch(BASE + 'scene.json'), fetch('cad/cycle.json'),
+  ]);
+  if (!scnRes.ok || !cycRes.ok) throw new Error('could not fetch the model description');
+  scn = await scnRes.json();
+  cycle = await cycRes.json();
+
+  const gltf = await new GLTFLoader().loadAsync(BASE + 'parts.glb');
+  const root = gltf.scene;
+
+  // One group per moving assembly; the meshes keep the rest frames they were
+  // exported in, so the transforms below are the only place motion is defined.
+  //
+  // Reparenting out of the glTF root is deliberate. CadQuery leaves the vertex
+  // data in machine coordinates and puts a -90 degree turn about X on the root
+  // node to present it to a Y-up viewer. This viewer is Z up, like the machine,
+  // so taking the parts out from under that root is what puts them back into
+  // the coordinates params.py is written in.
+  for (const name of ['static', 'carousel', 'tonearm', 'x', 'y', 'z', 'wrist']) {
+    groups[name] = new THREE.Group();
+    scene.add(groups[name]);
+  }
+
+  const missing = [];
+  for (const [group, names] of Object.entries(scn.groups)) {
+    for (const name of names) {
+      const node = root.getObjectByName(name);
+      if (!node) { missing.push(name); continue; }
+      groups[group].add(node);
+      if (Object.values(scn.visibility).includes(name)) visNodes[name] = node;
+    }
+  }
+  if (missing.length) throw new Error('missing parts in parts.glb: ' + missing.join(', '));
+
+  // The carousel and the tonearm rotate about their own axes, so their meshes
+  // sit relative to that axis rather than to the machine origin.
+  const [cx, cy] = scn.carousel.centre;
+  groups.carousel.children.forEach(o => o.position.set(-cx, -cy, 0));
+  const [px, py, pz] = scn.tonearm.pivot;
+  groups.tonearm.children.forEach(o => o.position.set(-px, -py, -pz));
+
+  buildTimeline();
+  setFrame(0);
+  frameCamera();
+
+  document.getElementById('cycleFacts').textContent =
+    `${cycle.length} steps, ${cycle.reduce((n, p) => n + p.keyframes.length, 0)} keyframes`;
+  buildStepButtons();
+  status.remove();
+  playing = true;
+  document.getElementById('play').setAttribute('aria-pressed', 'true');
+  document.getElementById('play').textContent = 'Pause';
+}
+
+function frameCamera() {
+  resize();                                  // so camera.aspect is the real one
+  const box = new THREE.Box3().setFromObject(scene);
+  const centre = box.getCenter(new THREE.Vector3());
+  const half = box.getSize(new THREE.Vector3()).multiplyScalar(0.5);
+  controls.target.copy(centre);
+
+  // Front right and a little above: the carousel, the deck and the gantry are
+  // all visible from there, which no axis-aligned view manages.
+  const dir = new THREE.Vector3(0.62, -0.72, 0.31).normalize();
+
+  // Fit the bounding box, not its sphere: the machine is long and flat, and a
+  // sphere fit wastes most of the frame. Project the box's half-extents onto
+  // the camera's right and up axes and solve each against its own field angle.
+  const fwd = dir.clone().negate();
+  const right = new THREE.Vector3().crossVectors(fwd, camera.up).normalize().negate();
+  const up = new THREE.Vector3().crossVectors(right, fwd).normalize();
+  const extent = (axis) =>
+    Math.abs(half.x * axis.x) + Math.abs(half.y * axis.y) + Math.abs(half.z * axis.z);
+
+  const vfov = camera.fov * deg;
+  const hfov = 2 * Math.atan(Math.tan(vfov / 2) * camera.aspect);
+  const dist = 1.06 * Math.max(extent(up) / Math.tan(vfov / 2),
+                               extent(right) / Math.tan(hfov / 2));
+
+  camera.position.copy(centre).addScaledVector(dir, dist);
+  camera.near = Math.max(1, dist / 500);
+  camera.far = dist * 10;
+  camera.updateProjectionMatrix();
+}
+
+
+function buildStepButtons() {
+  const box = document.getElementById('steps');
+  cycle.forEach((pose, i) => {
+    const b = document.createElement('button');
+    b.textContent = `${i + 1}. ${pose.name}`;
+    b.setAttribute('aria-pressed', 'false');
+    b.onclick = () => { t = poseStart(i); setFrame(t); };
+    box.appendChild(b);
+  });
+}
+
+// ---------------------------------------------------------------- controls
+const playBtn = document.getElementById('play');
+playBtn.onclick = () => {
+  playing = !playing;
+  playBtn.textContent = playing ? 'Pause' : 'Play';
+  playBtn.setAttribute('aria-pressed', String(playing));
+};
+document.getElementById('next').onclick = () => {
+  t = poseStart(Math.min(shownPose + 1, cycle.length - 1)); setFrame(t);
+};
+document.getElementById('prev').onclick = () => {
+  t = poseStart(Math.max(shownPose - 1, 0)); setFrame(t);
+};
+
+function resize() {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (canvas.width !== w || canvas.height !== h) {
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+}
+
+function tick() {
+  requestAnimationFrame(tick);
+  resize();
+  const dt = clock.getDelta();
+  if (playing && timeline.length) {
+    t += dt * parseFloat(document.getElementById('speed').value);
+    if (t >= totalTime) {
+      if (document.getElementById('loop').checked) { t = 0; }
+      else { t = totalTime; playing = false; playBtn.textContent = 'Play';
+             playBtn.setAttribute('aria-pressed', 'false'); }
+    }
+    setFrame(t);
+  }
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+// A handle for checking this viewer against the CAD from outside: the test
+// drives a state here and compares each part's world position with the one
+// assembly.Machine computes for the same state. Nothing in the page uses it.
+window.machineViewer = { scene, groups, applyState, applyVisibility, THREE };
+
+tick();
+load().catch(err => { console.error(err); fail('Could not load the model: ' + err.message); });
+</script>
 </body>
 </html>
