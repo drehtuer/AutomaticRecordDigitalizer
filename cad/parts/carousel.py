@@ -1,9 +1,9 @@
 """Carousel magazine: fixed base with roller ring and centre bearing, rotating plywood disc
 with printed hub, combs, rim segments and GT2 tooth ring, and the records standing as spokes."""
-from math import cos, sin, degrees
-import cadquery as cq
-from .common import box, cyl_z, cyl_y, ring_z, torus_z, union_all, rot_z
+from math import cos, degrees, sin
+
 from .. import params as P
+from .common import box, cyl_y, cyl_z, ring_z, rot_z, torus_z, union_all
 
 
 def base():

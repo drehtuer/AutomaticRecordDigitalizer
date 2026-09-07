@@ -5,8 +5,11 @@
 
 Exit code 1 if any collision above the tolerance is found.
 """
-import argparse, math, sys, time
-from . import params as P
+import argparse
+import math
+import sys
+import time
+
 from . import kinematics as K
 from .assembly import Machine
 

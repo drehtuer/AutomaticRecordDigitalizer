@@ -5,10 +5,12 @@
 """
 import sys
 from pathlib import Path
+
 import cadquery as cq
-from . import params as P
+
 from . import kinematics as K
-from .parts import deck, carousel, frame, gantry, deck_interface
+from . import params as P
+from .parts import carousel, deck, deck_interface, frame, gantry
 
 EXPORT = Path(__file__).parent / "export"
 

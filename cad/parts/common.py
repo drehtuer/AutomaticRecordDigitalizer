@@ -1,6 +1,6 @@
 """Small helpers so the part files read like the specification."""
+
 import cadquery as cq
-from math import degrees
 
 
 def box(sx, sy, sz, cx=0.0, cy=0.0, cz=0.0):

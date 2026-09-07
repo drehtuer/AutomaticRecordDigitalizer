@@ -1,8 +1,8 @@
 """Plywood box frame with V-slot beams, flip station and electronics box."""
-import cadquery as cq
 from math import degrees
-from .common import box, cyl_z, torus_z, union_all
+
 from .. import params as P
+from .common import box, cyl_z, torus_z, union_all
 
 
 def side_panel(y):
