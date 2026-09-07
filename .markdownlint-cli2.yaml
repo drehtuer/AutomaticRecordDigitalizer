@@ -1,0 +1,20 @@
+# Static checks for the design documents.
+# Run: npx --yes markdownlint-cli2 "**/*.md"
+config:
+  default: true
+  # The documents are written as prose paragraphs, one long line each.
+  MD013: false
+  # Bare URLs are fine in the bill of materials.
+  MD034: false
+  # The tables are written with compact separators (|---|---|).
+  MD060: false
+  # The first heading of a file names the document, not the repository.
+  MD041: true
+  MD024:
+    siblings_only: true
+globs:
+  - "**/*.md"
+ignores:
+  - node_modules/
+  - .git/
+  - _site/

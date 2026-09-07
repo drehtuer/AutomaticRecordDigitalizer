@@ -3,8 +3,10 @@
     python -m cad.export_parts
 """
 from pathlib import Path
+
 import cadquery as cq
-from .parts import carousel, frame, gantry, deck_interface, deck
+
+from .parts import carousel, deck, deck_interface, frame, gantry
 
 EXPORT = Path(__file__).parent / "export"
 

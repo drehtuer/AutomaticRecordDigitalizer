@@ -6,8 +6,8 @@ z_carriage(): local origin at (carX, carY, carZ)    - moves in X, Y, Z
 wrist():      local origin at the wrist pivot,      - rotates about the X axis
               arm along -Z, cup facing -Y at wrist angle 0
 """
-from .common import box, cyl_x, cyl_y, cyl_z, union_all
 from .. import params as P
+from .common import box, cyl_x, cyl_y, cyl_z, union_all
 
 
 def x_carriage():

@@ -1,7 +1,8 @@
 """Cue-lever servo bracket on the end panel, pusher rod, inner end stop, deck camera, LED bar."""
-from math import radians, cos, sin
-from .common import box, cyl_z, cyl_x, cyl_y, union_all
+from math import cos, radians, sin
+
 from .. import params as P
+from .common import box, cyl_x, cyl_z, union_all
 
 
 def cue_servo_assembly():

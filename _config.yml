@@ -1,0 +1,44 @@
+# Jekyll configuration for the documentation site built by
+# .github/workflows/documentation.yml and served from GitHub Pages.
+title: AutomaticRecordDigitalizer
+description: >-
+  A DIY machine that digitises a vinyl record collection unattended.
+theme: jekyll-theme-cayman
+
+# The Cayman theme's header needs the repository name; the Actions runner would
+# supply it through PAGES_REPO_NWO, but naming it here lets the site build locally too.
+# url and baseurl are left to actions/configure-pages.
+repository: drehtuer/AutomaticRecordDigitalizer
+
+# jekyll-readme-index makes README.md the index of the site and of cad/;
+# jekyll-relative-links turns the links to docs/*.md into links to the built pages;
+# jekyll-optional-front-matter renders the documents, which carry no front matter.
+plugins:
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-relative-links
+  - jekyll-titles-from-headings
+
+# Nothing here belongs on the documentation site.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .devcontainer/
+  - .github/
+  - .claude/
+  - .editorconfig
+  - .markdownlint-cli2.yaml
+  - ruff.toml
+  - cad/cycle.json
+  - cad/requirements.txt
+  - cad/assembly.py
+  - cad/check_collisions.py
+  - cad/export_parts.py
+  - cad/kinematics.py
+  - cad/params.py
+  - cad/parts/
+
+# cad/export/ holds the STEP and STL files; they are linked from cad/README.md.
+include:
+  - cad/export

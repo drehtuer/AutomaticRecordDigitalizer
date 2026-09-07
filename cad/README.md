@@ -3,7 +3,7 @@
 Parametric CadQuery model of the machine, the motion planner of the cycle, and a collision
 checker that sweeps every step of the cycle against the whole machine.
 
-```
+```sh
 pip install cadquery            # 2.4 or newer; pulls in the OpenCascade kernel
 python -m cad.check_collisions  # sweep the full cycle, exit 1 on any intersection
 python -m cad.assembly place regrip   # STEP of the whole machine at named poses

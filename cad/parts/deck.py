@@ -1,8 +1,8 @@
 """Omnitronic DD 3120 envelope: plinth, platter, spindle, tonearm, cue lever."""
-from math import radians, cos, sin
-import cadquery as cq
-from .common import box, cyl_z, cyl_x, union_all, rot_z
+from math import cos, radians, sin
+
 from .. import params as P
+from .common import box, cyl_x, cyl_z, rot_z, union_all
 
 
 def plinth():

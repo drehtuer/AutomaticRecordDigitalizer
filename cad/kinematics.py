@@ -7,10 +7,11 @@ a (tonearm azimuth, degrees), l (cue lift 0/1), c (carousel angle, degrees).
 The planner produces keyframe lists exactly like the concept model's: retreat, raise, ordered
 horizontal moves, lower, approach, with special plans for the station and the tonearm steps.
 """
-from math import radians, cos, sin
+from math import cos, radians, sin
+
 from . import params as P
-from .parts.deck import finger_lift_point, platter_top_z
 from .parts.carousel import pick_record_centre
+from .parts.deck import finger_lift_point, platter_top_z
 
 TRAVEL = P.TRAVEL_Z
 
@@ -181,7 +182,8 @@ def interpolate(k0, k1, t):
 
 
 if __name__ == "__main__":
-    import json, sys
+    import json
+    import sys
     cyc = [{"id": p["id"], "name": p["name"], "keyframes": ks, "before": p["before"], "after": p.get("after")}
            for p, ks in full_cycle()]
     json.dump(cyc, sys.stdout, indent=1)
