@@ -33,3 +33,13 @@ Records stand like spokes in a 24-slot carousel. A small XYZ gantry with a rotar
 ## Follow-up project
 
 Cutting the recordings into tracks, mastering, and tagging (using the label photos and the batch manifest) is deliberately out of scope until the changer has proven itself on real records.
+
+## License
+
+Copyright (C) 2026 drehtuer
+
+This project is free software; you can redistribute it and/or modify it under the terms of version 2 of the GNU General Public License as published by the Free Software Foundation. The full text is in [LICENSE](LICENSE); the SPDX identifier is `GPL-2.0-only`.
+
+It is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+The licence covers everything here: the CadQuery model and the planner as source code, and the design documents and the concept model as the machine's design.
