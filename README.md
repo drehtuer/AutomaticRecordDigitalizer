@@ -21,6 +21,8 @@ Concept design finished and reviewed in September 2026; first parametric CAD in 
 
 `cad/` is the parametric CadQuery model with the motion planner and the collision checker; `cad/README.md` explains how to run it, and `cad/export/` holds STEP files that open in FreeCAD, STL files of the first printed parts, and `web/` holds the glTF and the scene description the viewer loads.
 
+`sourcing/` is the September 2026 pricing pass: every line of the bill of materials against live German shop pages, with product links and three ways of ordering it, and the corrections it forced back into the design documents.
+
 `docs/` holds the design in detail:
 
 | Document | Contents |

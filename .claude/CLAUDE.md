@@ -27,6 +27,15 @@ npx --yes markdownlint-cli2@0.23.2   # Markdown, configured in .markdownlint-cli
 python -m cad.check_collisions       # the full cycle, exit 1 on any intersection
 ```
 
+markdownlint-cli2 0.23.2 needs Node 22. On a machine with an older Node, `npx` silently falls
+back to nothing useful and an older pinned version lints against a smaller ruleset, which passes
+locally and then fails in CI. Run it in a container instead, so the check matches the one that
+gates the pull request:
+
+```sh
+docker run --rm -v "$PWD":/w -w /w node:22-slim npx --yes markdownlint-cli2@0.23.2
+```
+
 Dependabot (`.github/dependabot.yml`) keeps the actions, `cad/requirements.txt` and the
 devcontainer image current; its pull requests run the same three checks.
 
