@@ -1,6 +1,6 @@
 # Bill of materials
 
-Prices are typical German retail in September 2026, rounded, and will drift; check before ordering. Everything listed is stocked by German shops, so nothing depends on imports. Suggested sources: Motedis and Dold Mechatronik for extrusion, rails, screws, belts and pulleys; 3DJake and Amazon.de for the BIGTREETECH board and drivers; BerryBase and Reichelt for Raspberry Pi, cameras and extenders; Reichelt, Conrad and Amazon.de for motors, servos, pump, valve and sensors; Filamentworld or 3DJake for filament; any Baumarkt for plywood, bearings and fasteners.
+Prices are typical German retail, rounded, and will drift; check before ordering. Every line was priced against live German shop pages on 10 September 2026, and the figures below have been corrected where that sourcing pass disagreed with the estimate; the itemised result, with product links and three ways of ordering it, is in [../sourcing/bom-shopping-list.md](../sourcing/bom-shopping-list.md), and what it changed here is in [../sourcing/2026-09-sourcing-and-bom-corrections.md](../sourcing/2026-09-sourcing-and-bom-corrections.md). Everything listed is stocked by German shops, so nothing depends on imports. Suggested sources: shop.bohrers.de or Dold Mechatronik for V-slot extrusion and the linear rail; roboter-bausatz.de for wheels, belts, pulleys, steppers, the lead screw, the servo and fastener assortments; oyostepper.de for the geared steppers; BerryBase and Reichelt for the Raspberry Pi side, cameras, sensors, LED and cable; druckluft-fachhandel.de for the solenoid valve, tubing and push-in fittings; Filamentworld or 3DJake for filament; any Baumarkt for plywood, bearings and fasteners. Not Motedis: it carries only B-Typ Nut 6 and I-Typ Nut 5 profile and no V-slot at all, so nothing it sells has a wheel-running surface.
 
 ## Bought parts
 
@@ -15,15 +15,15 @@ Prices are typical German retail in September 2026, rounded, and will drift; che
 | Motion | NEMA17 with 5:1 planetary gearbox (wrist, carousel index) | 2 | 70 |
 | Motion | GT2 belt 5 m, 20T pulleys, idlers, tensioners | 1 set | 25 |
 | Motion | T8 lead screw 0.8 m, nut, coupler, bearing block | 1 | 20 |
-| Servos | Micro linear servo (cue lever) | 1 | 12 |
+| Servos | MG996R metal-gear servo driving the printed pusher rod (cue lever) | 1 | 7 |
 | Controller | BIGTREETECH Octopus V1.1 (or: donor printer board + Raspberry Pi Pico, see below) | 1 | 65 |
 | Controller | TMC2209 driver (5 with the Octopus, 1 with the donor-board option) | 5 | 30 |
 | Power | 24 V 150 W supply, 5 V 3 A buck module | 1 set | 35 |
-| Computer | Raspberry Pi 5 4 GB, official PSU, 64 GB microSD | 1 | 90 |
-| Cameras | Raspberry Pi Camera Module 3 | 2 | 60 |
-| Cameras | CSI-to-HDMI extender pair (or USB camera module for the wrist) | 1 | 15 |
-| Vacuum | 12 V diaphragm vacuum pump | 1 | 15 |
-| Vacuum | 12 V 2/2 solenoid valve, vacuum switch, 40 mm bellows cup, 6 mm tubing, fittings | 1 set | 35 |
+| Cameras | Raspberry Pi Camera Module 3 with a 500 mm ribbon (deck camera; the Pi 4B has one CSI port, so the wrist camera is USB and owned) | 1 | 29 |
+| Vacuum | 12 V diaphragm vacuum pump | 1 | 11 |
+| Vacuum | 12 V 2/2 solenoid valve, G 1/8 NC, FKM — **direct-acting**, not pilot-assisted | 1 | 42 |
+| Vacuum | Adafruit MPRLS 0–25 PSI I²C pressure breakout, in place of a vacuum switch | 1 | 31 |
+| Vacuum | 40 mm bellows cup, 6 mm PU tubing, push-in fittings | 1 set | 38 |
 | Sensing | End-stops, Hall sensor, slot optical sensor | 1 set | 12 |
 | Deck I/O | 6.3 mm mono plug and cable for the remote start/stop jack, thin wire (relay card: Conrad 393905, owned) | 1 | 4 |
 | Light | LED bar (12 V, warm white) and logic-level MOSFET | 1 | 8 |
@@ -32,11 +32,21 @@ Prices are typical German retail in September 2026, rounded, and will drift; che
 | Cabling | Cable chain 10 × 20 mm, 2.5 m; wire, connectors, crimps, sleeving | 1 set | 60 |
 | Hardware | M3/M5 screws and nuts, heat-set inserts, felt, rubber sleeve stock | 1 set | 35 |
 | Consumables | PETG 2.5 kg, TPU 0.3 kg | | 70 |
-| **Total** | | | **≈ 865** |
+| **Total** | | | **≈ 832** |
 
-Not included: the 3D printer, the turntable (Omnitronic DD 3120, owned), the Focusrite Scarlett (owned), the Conrad 393905 USB relay card (owned), and an external phono preamp if the deck's own line output is not used (about 40 €).
+Not included, because they are already on hand: the 3D printer, the turntable (Omnitronic DD 3120), the Focusrite Scarlett, the Conrad 393905 USB relay card, the Raspberry Pi 4B (two of them, the second a cold spare) with its 15 W supply and 32 GB card, the external USB 3.0 SSD the recordings are written to, the self-powered USB 3.0 hub everything else hangs off, and the USB webcams for the wrist (two on hand, a 720p Logitech C270 and a 1080p module). Together those are roughly 185 to 195 € that do not have to be spent. Also not included: an external phono preamp if the deck's own line output is not used (about 40 €).
 
-Where to trim further: a used Raspberry Pi 4 saves about 40 € and a USB camera on the wrist instead of the second Pi camera about 20 €.
+The table above is the planning estimate, rounded, and it counts the plywood and the filament. The [10 September 2026 sourcing pass](../sourcing/bom-shopping-list.md) priced every line against live shop pages and costed three ways of actually ordering it, excluding plywood, Baumarkt items and filament, and including shipping:
+
+| Route | Parts | Shipping | Delivered |
+|---|---|---|---|
+| Cheapest per line, 12 suppliers, 12 parcels | 821,60 | 67,15 | **888,75** |
+| Consolidated into 6 suppliers | 758,70 | 37,60 | **796,30** |
+| With a donor printer, 7 suppliers | 599,69 | 42,05 | **641,74** |
+
+Consolidating is close to free rather than a discount: it costs about 28 € more on parts (the MGN12 rail, the camera, the energy chain) and saves about 30 € on shipping. The gap between the first two routes is almost entirely the servo substitution. Five suppliers is not reachable for the complete list, because no German general-purpose shop stocks a NEMA17 with a 5:1 planetary gearbox; either take 10:1 from Dold, which is fine for the wrist and the carousel since both are slow, or accept a sixth shop.
+
+Where to trim further: the donor printer route above is the real saving. The two obvious earlier trims are already taken — the computer is an owned Pi 4B, and the wrist camera is an owned USB webcam rather than a second Pi camera.
 
 ## Donor printer
 
@@ -45,12 +55,16 @@ A used 3D printer is the cheapest source for most of the motion parts and is wor
 | Donor | What it contributes | Notes |
 |---|---|---|
 | Creality CR-10 / CR-10S (300–500 mm) | 4–5 steppers, 2040/4040 V-slot up to 60 cm, 1–2 lead screws 40 cm, wheels, 24 V PSU, board | The best fit: longest extrusions and lead screws of the cheap decks; the S5 (500 mm) variant most of all |
+| Creality Ender 3 Max Neo | 4 steppers, dual Z with two motors, 300 × 300 frame so longer 2040 members than a plain Ender 3, wheels, 350 W supply, 32-bit board | Second only to a CR-10: the bigger frame and the second Z motor and screw are exactly what this machine wants |
 | Creality Ender 3 / 3 Pro / V2 | 4 steppers, short 2020/2040 V-slot, 1 lead screw 36 cm, wheels, 24 V PSU, 4.2.x board (Klipper-capable, 4 drivers) | Plentiful and cheap; the long members must still be bought |
 | Creality Ender 5 / 5 Plus | 4–5 steppers, 2020/2040 V-slot in a box frame, dual Z screws on the Plus, larger PSU | The Plus gives two lead screws and a 350 W supply |
 | Anycubic Kobra / Vyper, Artillery Sidewinder | 4 steppers, 24 V PSU, some extrusion | Less V-slot, boards less Klipper-friendly; take for motors and PSU only |
 | Tevo Tornado, Alfawise U20 | CR-10 clones | Same value as a CR-10 if cheap |
+| Creality Ender 3 S1 / S1 Pro / S1 Plus | **Avoid.** Steppers and PSU only | Its frame is smooth-faced extrusion, not open V-slot: there is no groove for a wheel to run in, so neither the profile nor the wheels are reusable here |
 
-Whatever the donor, the long V-slot beams (2 × 1.3 m) and the 80 cm Z rail and lead screw are bought new; the donor covers motors, wheels, belts, pulleys, end-stops, PSU and fasteners, roughly 150 to 200 € of the list above, for a 50 to 100 € machine. Its board can run the four gantry axes under Klipper with a Raspberry Pi Pico (about 5 €) plus one TMC2209 stick as a second MCU for the carousel stepper and the remaining I/O, which replaces the Octopus and its drivers (about 95 €); or it is kept as a spare and the Octopus bought as planned.
+Whatever the donor, the long V-slot beams (2 × 1.3 m) and the 80 cm Z rail and lead screw are bought new; the donor covers motors, wheels, belts, pulleys, end-stops, PSU and fasteners, roughly 150 to 200 € of the list above, for a 50 to 100 € machine. Its board can run the four gantry axes under Klipper with a Raspberry Pi Pico (about 4 €) plus one TMC2209 stick (about 6 €) as a second MCU for the carousel stepper and the remaining I/O, which replaces the Octopus and its five drivers, about 92 € of the list for about 10 €; or it is kept as a spare and the Octopus bought as planned.
+
+Two things to check on the donor before counting on its board. Only the 32-bit Creality 4.2.2 and 4.2.7 boards run Klipper; an 8-bit 1.1.4 board does not, and then the Octopus goes back on the list. And the TMC drivers on the 4.2.x boards are soldered down, not socketed sticks, so they cannot be harvested — whatever else the donor gives, the drivers for any axis it does not run itself are bought new.
 
 ## Printed parts
 
