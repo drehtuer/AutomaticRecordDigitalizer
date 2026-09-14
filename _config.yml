@@ -3,10 +3,12 @@
 title: AutomaticRecordDigitalizer
 description: >-
   A DIY machine that digitises a vinyl record collection unattended.
-theme: jekyll-theme-cayman
+# Primer is the theme GitHub Pages applies when none is chosen: plain GitHub-style
+# Markdown rendering, no hero header, the documents read as they do in the repository.
+theme: jekyll-theme-primer
 
-# The Cayman theme's header needs the repository name; the Actions runner would
-# supply it through PAGES_REPO_NWO, but naming it here lets the site build locally too.
+# Named here so the SEO tags and the site build the same way locally as on the
+# Actions runner, which would otherwise supply it through PAGES_REPO_NWO.
 # url and baseurl are left to actions/configure-pages.
 repository: drehtuer/AutomaticRecordDigitalizer
 

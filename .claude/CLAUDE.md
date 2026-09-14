@@ -94,8 +94,9 @@ The devcontainer (`.devcontainer/`) has CadQuery, ruff and markdownlint-cli2 ins
 
 ## Documentation site
 
-`.github/workflows/documentation.yml` builds `_config.yml` with GitHub Pages Jekyll and publishes
-it to <https://drehtuer.github.io/AutomaticRecordDigitalizer/> when a `v*` release tag is pushed.
+`.github/workflows/documentation.yml` builds `_config.yml` with GitHub Pages Jekyll, in the Primer
+theme GitHub applies by default, and publishes it to
+<https://drehtuer.github.io/AutomaticRecordDigitalizer/> when a `v*` release tag is pushed.
 
 Publishing depends on one setting that is not in the repository: the `github-pages` environment
 must have a deployment rule for the tag pattern `v*`. It allows the default branch only until
@@ -104,12 +105,15 @@ not allowed to deploy to github-pages due to environment protection rules`. The 
 on this repository; a fork or a rebuilt repository needs it added again. The comment at the top
 of the workflow has the `gh` command. There is no Gemfile and none is needed:
 `actions/jekyll-build-pages` brings its own `github-pages` gem set. To preview the site locally,
-build it in a throwaway container rather than adding gems to the repository:
+build it in a throwaway container rather than adding gems to the repository. Use the
+`github-pages` command, not plain `jekyll build`: only it applies the plugins GitHub adds on its
+own (`jekyll-default-layout` among them), and without those the pages come out as bare HTML
+fragments with no layout, which is not what the site looks like:
 
 ```sh
 docker run --rm -v "$PWD":/srv -w /srv ruby:3.2-slim bash -c \
   'apt-get update -qq && apt-get install -y -qq build-essential git >/dev/null &&
    git config --global --add safe.directory /srv &&
    gem install bundler github-pages --no-document -q &&
-   jekyll build --destination /srv/_site'
+   github-pages build --destination /srv/_site'
 ```
