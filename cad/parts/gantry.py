@@ -14,7 +14,7 @@ def x_carriage():
     px, py, pz = P.XCAR_PLATE
     plates = [box(px, py, pz, 0, y, P.BEAM_Z + 20 + pz / 2) for y in (-P.FRAME_Y, P.FRAME_Y)]
     cross = box(20, P.CROSS_BEAM_L, 40, 0, 0, P.CROSS_BEAM_Z)
-    motor = box(42, 42, 42, 0, P.FRAME_Y + 20, P.CROSS_BEAM_Z + 45)   # X motor on one end
+    motor = box(42, 42, 42, 0, -P.FRAME_Y - 20, P.CROSS_BEAM_Z + 45)   # X motor on the rear end bracket, beside the X chain
     return union_all(plates + [cross, motor])
 
 

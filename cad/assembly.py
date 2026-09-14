@@ -10,7 +10,7 @@ import cadquery as cq
 
 from . import kinematics as K
 from . import params as P
-from .parts import carousel, deck, deck_interface, frame, gantry
+from .parts import carousel, deck, deck_interface, electronics, frame, gantry
 
 EXPORT = Path(__file__).parent / "export"
 
@@ -51,10 +51,29 @@ class Machine:
         self.held0 = gantry.held_record(record_r)
         self.platter_rec = deck.record_on_platter(record_r)
         self.ring_rec = frame.record_on_ring(record_r)
+        # Electronics on the frame: static, and the sweep checks them.
+        self.electronics = electronics.electronics()
+        # Rigid cable runs on the column and the wrist: they move and the sweep checks them.
+        self.column_post0 = electronics.column_post()
+        self.outrigger_cables0 = electronics.outrigger_cables()
+        self.wrist_cables0 = electronics.wrist_cables()
+        # Chains and the cables that feed them, drawn at the home pose: displayed, not checked.
+        self.display_static = {"x_chain": electronics.x_chain(), **electronics.static_cables()}
+        self.display_x = {"y_chain": electronics.y_chain(), **electronics.x_carriage_cables()}
+        self.display_y = {"z_chain": electronics.z_chain(), **electronics.y_carriage_cables()}
+
+    def display(self, s):
+        """The chains and their feed cables, placed for state s but shaped for the home pose."""
+        x, y = s["x"], s["y"]
+        out = dict(self.display_static)
+        out.update({n: p.translate((x, 0, 0)) for n, p in self.display_x.items()})
+        out.update({n: p.translate((x, y, 0)) for n, p in self.display_y.items()})
+        return out
 
     def static(self):
         return {"bench": self.bench, "frame": self.frame, "station": self.station, "plinth": self.plinth,
-                "deck_interface": self.deck_if, "deck_camera": self.deck_cam, "carousel_base": self.car_base}
+                "deck_interface": self.deck_if, "deck_camera": self.deck_cam, "carousel_base": self.car_base,
+                **self.electronics}
 
     def environment(self, s, vis):
         """Static-for-this-pose solids the gantry must not touch."""
@@ -78,6 +97,9 @@ class Machine:
             "y_carriage": self.ycar0.translate((x, y, 0)),
             "z_carriage": self.zcar0.translate((x, y, z)),
             "wrist": _rot_x(self.wrist0, s["phi"]).translate((x + P.WRIST_X, y, z)),
+            "column_post": self.column_post0.translate((x, y, z)),
+            "outrigger_cables": self.outrigger_cables0.translate((x, y, z)),
+            "wrist_cables": _rot_x(self.wrist_cables0, s["phi"]).translate((x + P.WRIST_X, y, z)),
         }
         if vis["held"]:
             parts["record_held"] = _rot_x(self.held0, s["phi"]).translate((x + P.WRIST_X, y, z))
@@ -89,16 +111,26 @@ COLORS = {
     "plinth": (0.78, 0.80, 0.82), "deck_interface": (0.24, 0.27, 0.31), "deck_camera": (0.11, 0.11, 0.13),
     "carousel_base": (0.24, 0.27, 0.31), "carousel_disc": (0.89, 0.79, 0.63), "tonearm": (0.72, 0.75, 0.78),
     "x_carriage": (0.17, 0.18, 0.21), "y_carriage": (0.24, 0.27, 0.31), "z_carriage": (0.24, 0.27, 0.31),
-    "wrist": (0.85, 0.39, 0.17),
+    "wrist": (0.85, 0.39, 0.17), "outrigger_cables": electronics.CABLE_DEFAULT, "wrist_cables": electronics.CABLE_DEFAULT,
+    **electronics.COLORS,
 }
+
+
+def color_of(name):
+    if name in COLORS:
+        return COLORS[name]
+    if name.startswith("record"):
+        return (0.06, 0.06, 0.07)
+    if name.startswith(("cable", "mains", "hose", "tube")):
+        return electronics.CABLE_DEFAULT
+    return (0.5, 0.5, 0.5)
 
 
 def build_assembly(state, vis, record_r=P.RECORD_12_R):
     m = Machine(record_r)
     asm = cq.Assembly(name="AutomaticRecordDigitalizer")
-    for name, solid in {**m.environment(state, vis), **m.moving(state, vis)}.items():
-        col = COLORS.get(name, (0.06, 0.06, 0.07) if name.startswith("record") else (0.5, 0.5, 0.5))
-        asm.add(solid, name=name, color=cq.Color(*col))
+    for name, solid in {**m.environment(state, vis), **m.moving(state, vis), **m.display(state)}.items():
+        asm.add(solid, name=name, color=cq.Color(*color_of(name)))
     return asm
 
 

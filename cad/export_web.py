@@ -20,7 +20,7 @@ from pathlib import Path
 import cadquery as cq
 
 from . import params as P
-from .assembly import COLORS, Machine
+from .assembly import Machine, color_of
 from .parts import deck
 
 EXPORT = Path(__file__).parent / "export" / "web"
@@ -29,17 +29,14 @@ EXPORT = Path(__file__).parent / "export" / "web"
 TOLERANCE = 0.5
 ANGULAR_TOLERANCE = 0.5
 
-DEFAULT_COLOR = (0.5, 0.5, 0.5)
-RECORD_COLOR = (0.06, 0.06, 0.07)
 
 
-def rest_parts():
+def rest_parts(m):
     """Every rigid body at rest, keyed by the node name the viewer looks for.
 
     Machine already caches the moving parts in their own frames; the pose
     transforms live in the viewer instead of being baked in here.
     """
-    m = Machine()
     parts = {
         # Bolted down.
         "bench": m.bench,
@@ -58,6 +55,9 @@ def rest_parts():
         "y_carriage": m.ycar0,
         "z_carriage": m.zcar0,
         "wrist": m.wrist0,
+        "column_post": m.column_post0,
+        "outrigger_cables": m.outrigger_cables0,
+        "wrist_cables": m.wrist_cables0,
         "record_held": m.held0,
         # Shown or hidden by the state of the cycle.
         "record_platter": m.platter_rec,
@@ -66,10 +66,15 @@ def rest_parts():
     for k, rec in enumerate(m.slot_recs0):
         if rec is not None:
             parts[f"record_slot{k}"] = rec
+    # Electronics, chains and cables. The chains and their feed cables are drawn at the home pose.
+    parts.update(m.electronics)
+    parts.update(m.display_static)
+    parts.update(m.display_x)
+    parts.update(m.display_y)
     return parts
 
 
-def scene():
+def scene(m):
     """Constants the viewer needs. Every number is read from params."""
     return {
         "units": "mm",
@@ -80,13 +85,13 @@ def scene():
         # x -> y -> z -> wrist, exactly as Machine.moving composes the transforms.
         "groups": {
             "static": ["bench", "frame", "station", "plinth", "deck_interface",
-                       "deck_camera", "carousel_base"],
+                       "deck_camera", "carousel_base", *m.electronics, *m.display_static],
             "carousel": ["carousel_disc"] + [f"record_slot{k}" for k in range(P.CAR_SLOTS)],
             "tonearm": ["tonearm"],
-            "x": ["x_carriage"],
-            "y": ["y_carriage"],
-            "z": ["z_carriage"],
-            "wrist": ["wrist", "record_held"],
+            "x": ["x_carriage", *m.display_x],
+            "y": ["y_carriage", *m.display_y],
+            "z": ["z_carriage", "column_post", "outrigger_cables"],
+            "wrist": ["wrist", "wrist_cables", "record_held"],
         },
         # Node shown when the named visibility flag is set. "slot" governs the
         # record in slot 0, the one the cycle is handling.
@@ -103,18 +108,18 @@ def main():
     EXPORT.mkdir(parents=True, exist_ok=True)
 
     asm = cq.Assembly(name="AutomaticRecordDigitalizer")
-    for name, solid in rest_parts().items():
-        col = COLORS.get(name, RECORD_COLOR if name.startswith("record") else DEFAULT_COLOR)
-        asm.add(solid, name=name, color=cq.Color(*col))
+    m = Machine()
+    for name, solid in rest_parts(m).items():
+        asm.add(solid, name=name, color=cq.Color(*color_of(name)))
 
     glb = EXPORT / "parts.glb"
     asm.export(str(glb), tolerance=TOLERANCE, angularTolerance=ANGULAR_TOLERANCE)
 
     meta = EXPORT / "scene.json"
-    meta.write_text(json.dumps(scene(), indent=1) + "\n")
+    meta.write_text(json.dumps(scene(m), indent=1) + "\n")
 
     print(f"wrote {glb.name}: {glb.stat().st_size / 1024:.0f} kB, "
-          f"{len(rest_parts())} parts")
+          f"{len(rest_parts(m))} parts")
     print(f"wrote {meta.name}")
 
 

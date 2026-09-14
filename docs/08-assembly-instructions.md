@@ -122,7 +122,7 @@ Bolt a 1290 mm 2040 V-slot beam along the top edge of each side panel with its 4
 
 Build the two X carriage plates: four Delrin V-wheels each, two on fixed spacers and two on eccentrics, so the plate can be pinched onto the beam. Set each plate on its beam and adjust the eccentrics until it rolls the full 1290 mm with no rock and no binding. Join the plates with the 940 mm 2040 cross beam through the end brackets. The cross beam is 940 because the frame is 860 wide over the panels and the plates sit on the beams outside them; an 800 mm beam, which is what the concept had, does not reach.
 
-Fit the X motor on one end bracket, an idler on the other, and run the GT2 belt along the outside of one X beam: fixed at both beam ends, wrapped round the motor pulley and its idler on the carriage. Tension by hand until it hums when plucked. Fit the X end-stop at the deck end of the beam.
+Fit the X motor on the rear end bracket, next to where the X chain arrives, an idler on the front one, and run the GT2 belt along the outside of the rear X beam: fixed at both beam ends, wrapped round the motor pulley and its idler on the carriage. Tension by hand until it hums when plucked. Fit the X end-stop at the deck end of the beam.
 
 ### 4. Y axis
 
@@ -156,7 +156,11 @@ Plug the 6.3 mm mono cable into the deck's remote start/stop jack. Open the deck
 
 ### 9. Electronics
 
-Nothing is boxed. The parts sit on the outside faces of the frame panels, where they are reachable, cool and out of the record's space, in two groups joined by one USB cable.
+Nothing is boxed. The parts sit on the outside faces of the frame panels, where they are reachable, cool and out of the record's space, in two groups joined by one USB cable. The CAD places every board and box at its catalogue size (`cad/parts/electronics.py`), and the two views below are rendered from it: the rear panel with the controller group, the pump and the X chain, and the deck-end panel with the Pi group.
+
+![The rear of the machine: the controller group under the X beam, the pump and valve near the open end, the X chain in its trough, the cables climbing the panel](images/render-rear.png)
+
+![The deck end of the machine: the Pi group on its plate outside the end panel, the Scarlett on the bench, the deck camera's ribbon through the panel](images/render-deck-end.png)
 
 **Controller group, outside the rear panel, just under the X beam and centred on the X chain's fixed end at X ≈ 200 mm.** The Octopus on a printed plate on standoffs; the 24 V supply beside it, with its mains inlet fused and earthed; the 24 → 12 V buck for the pump, the valve and the LED bar; and the 24 → 5 V buck for the servo — the servo alone, never the Pi, because an MG996R stalls at about 2.5 A. Every cable to the gantry climbs 25 cm from here into the X chain instead of a metre up from a box on the bench, which takes most of a metre off every gantry cable.
 
@@ -172,9 +176,13 @@ Three cable chains, 10 × 20 mm, R28, not two: the concept drew one along the X 
 
 | Chain | Runs along | Travel it covers | Length |
 |---|---|---|---|
-| X | The rear X beam, fixed end at mid-travel | 857 mm | 700 mm |
-| Y | The cross beam, fixed end at the X plate | 625 mm | 600 mm |
-| Z | The column, fixed end at the guide block | up to 600 mm | 600 mm |
+| X | A trough on the rear panel's outer face just under the X beam, fixed end at mid-travel | 857 mm | 700 mm |
+| Y | The −X side of the cross beam, fixed end at the rear X plate | 625 mm | 600 mm |
+| Z | Standing above the guide block on the −X side of the column, fixed end on the block, moving end on a post on the column top | up to 600 mm | 600 mm |
+
+![The machine from the front with the chains and cables drawn: the X chain under the rear beam, the Y chain beside the cross beam, the Z chain standing above the guide block, the hose and camera cable down the arm](images/render-overview.png)
+
+The CAD draws the three chains and the cables that feed them at the home pose, since their shape changes with every move; the collision sweep checks the electronics, the post on the column and the cable runs that ride rigidly on the column and the wrist, and leaves the chains out. Three placements came out of drawing them. The X chain cannot share the beam's outside face with the X motor, so it lies in a trough on the panel under the beam and the motor sits on the rear end bracket above it, where its lead is a hand's length from the chain's moving end; a motor on the front bracket would have needed its cable to cross the whole cross beam past the moving Y carriage. The Z chain stands up rather than hanging down: a chain hanging from the guide block beside the column would need 850 mm and would dip between the spokes at the pick, so it is fixed on top of the guide block and its moving end is a post on the column top, which puts its bend about 1.45 m above the bench at the top of the travel, where nothing else is. The gantry cables enter the column top, run down the column's −X slot under a cover, come out above the Z block, cross to the outrigger and enter the wrist hub; the hose and the camera cable then run down the +Y face of the arm, opposite the cup, so they never enter the ring rest's opening.
 
 Everything to the gantry leaves the controller group on the outside of the rear panel, climbs 25 cm to the beam, enters the X chain, crosses to the Y chain on the cross beam, and, for anything on the column or the wrist, enters the Z chain. Dress each chain with its cables laid flat and not crossing, the vacuum hose on the outside of the bend, and a cable tie at each chain end only — nothing tied inside the chain.
 
