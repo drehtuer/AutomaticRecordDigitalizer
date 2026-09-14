@@ -78,3 +78,9 @@ Checking the bill of materials against `cad/params.py` and the planner's actual 
 - **Cable chain: three chains, 700 + 600 + 600 mm.** The Y carriage travels 625 mm along the cross beam, which the concept forgot. The 3 m priced covers it with a metre spare.
 - **PU tube: 7 m, not 5.** With the electronics on the frame the run from the pump to the cup is 4.5 m with wiggle room, and a 2.1 m stub carries the vacuum to the pressure sensor beside the Pi.
 - **Not on the list at all**: about 6 m of 4-core, 12 m of 3-core and 4 m of 2-core extension wire, because the motors come with about 1 m of lead and the sensors with none; a 2 m USB 2.0 A-to-A extension for the wrist camera; and a 3 m USB-C cable from the Pi to the Octopus, now that the two sit at opposite ends of the frame. The 0.5 m camera ribbon is right: the Pi mounts on the deck-end panel, 30 cm from the camera. The routed lengths are tabulated in `docs/08-assembly-instructions.md`.
+
+## Decided since, 14 September 2026
+
+- The `GRIP` post-condition lives in the orchestrator, on the MPRLS alone; no switch, no Klipper interlock. `docs/05-design-decisions.md`.
+- The electronics sit on the frame, not in a box; the Pi is on the deck-end panel and the 0.5 m camera ribbon is right.
+- 720p label photographs: still to be tried on a batch. The 1080p webcam already on hand is the first fallback.

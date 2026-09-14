@@ -42,7 +42,7 @@ Faults never attempt recovery. The orchestrator fires `EMERGENCY_LIFT` when a si
 
 ## Vision
 
-OpenCV in Python on the Pi, with picamera2 for the Pi cameras.
+OpenCV in Python on the Pi: picamera2 for the deck camera on the CSI port, V4L2 for the webcam on the wrist, with its focus, exposure, gain and white balance locked before every batch.
 
 The wrist camera does four things on each face it sees: finds the centre hole (a dark circle of known size; its offset from the camera axis gives the cup-to-hole offset used when placing on the spindle), finds the label edge, finds the transition from label to lead-out band and from lead-in band to the outer edge (the groove bands differ from the smooth bands in reflectance), and saves a face-on label photograph named by slot and side.
 

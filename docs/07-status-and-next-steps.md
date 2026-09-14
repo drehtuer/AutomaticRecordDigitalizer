@@ -1,6 +1,6 @@
 # Status and next steps
 
-Written 6 September 2026, at the end of the concept phase.
+Written 6 September 2026, at the end of the concept phase; the section at the end brings it to 14 September.
 
 ## Where the project stands
 
@@ -36,4 +36,10 @@ Building the CAD and sweeping the cycle changed four numbers and one rule agains
 
 ## Repository
 
-The `concept-design` branch holds the concept phase; `main` has only the initialising commit. The branch is meant to be pushed and merged through a pull request once the concept is accepted.
+`main` is the trunk and every change reaches it through a pull request on its own branch; CI runs ruff, markdownlint and the collision sweep on each one. A `v*` release tag publishes the documentation site. The workflow is written down in `.claude/CLAUDE.md`.
+
+## Since 6 September
+
+The sourcing pass of 10 September priced every line of the bill of materials against live German shops and corrected it: the cue-lever servo is an MG996R on the printed pusher rod, the vacuum sensor is an Adafruit MPRLS, the solenoid valve has to be direct-acting, and Motedis is out because it carries no V-slot. The machine runs on a Raspberry Pi 4B already on hand, which fixed one CSI port and put a USB webcam on the wrist. A consistency check against the CAD then found the concept's 80 cm frame surviving in three cut lengths, one plywood sheet where two are needed, no 12 V supply for three 12 V parts, and a Y travel of 63 cm where the concept said 45. `08-assembly-instructions.md` came out of that, with every cable's routed length.
+
+Three decisions were taken on 14 September and are in `05-design-decisions.md`: the electronics sit on the frame rather than in a box; the ring rest is 100 mm in mean diameter at the label's edge with an O-ring on top; and the grip check lives in the orchestrator, on the MPRLS alone. The collision sweep after the geometry changes reports 831 samples and 0 collisions. Nothing is left in `06-open-questions.md` that is a decision rather than a measurement. Still nothing has been bought, cut or printed; the order of work above stands.
