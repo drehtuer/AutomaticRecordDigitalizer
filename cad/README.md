@@ -9,9 +9,10 @@ python -m cad.check_collisions  # sweep the full cycle with a 12", then the pick
 python -m cad.check_collisions --size 7   # the whole cycle with a 7"
 python -m cad.assembly place regrip   # STEP of the whole machine at named poses
 python -m cad.export_parts      # STL of the printed parts, STEP of the sub-assemblies
-python -m cad.kinematics > cad/cycle.json  # the keyframes of the cycle, for the orchestrator and the viewer (--size 10 or 7 for the smaller records)
+python -m cad.kinematics > cad/cycle.json  # the keyframes of the cycle for every record size, keyed "12", "10", "7" (--size 7 for one, as a bare list)
 python -m cad.export_web        # glTF of every rigid body plus scene.json, for cad-model.html
 python -m cad.render            # PNG views of the machine at rest into docs/images/, for the documents
+python -m cad.render --animate  # the cycle for every record size as animated PNG, into docs/images/
 ```
 
 Run the commands from the repository root.
@@ -46,9 +47,11 @@ and reports every intersection between the Z carriage, the wrist and the held re
 anything else, with the pose, the segment and the position. `export_parts.py` writes the STL
 files for printing and the sub-assembly STEP files for FreeCAD. `export_web.py` writes every rigid body in
 its rest frame as one glTF plus `scene.json`, the constants the viewer in `cad-model.html` needs to assemble
-and animate them; the viewer restates no dimension of its own. `render.py` tessellates the machine at the
-home pose and rasterises orthographic views through a depth buffer with nothing but numpy, since the
-container has no renderer and no browser; the pictures in the documents come from it.
+and animate them; the viewer restates no dimension of its own. `render.py` tessellates the machine and rasterises
+orthographic views through a depth buffer with nothing but numpy, since the container has no renderer and
+no browser; the pictures in the documents come from it, and with `--animate` it samples the planner's
+keyframes on the web viewer's own timeline and places every rest-frame part exactly as the viewer does
+(checked: the same bounding boxes as `Machine` to the last millimetre), writing one animated PNG per size.
 
 `export/` holds generated files. They are committed at reviewed states so the STEP files can
 be opened without running anything; regenerate them after changing `params.py`.
@@ -68,7 +71,9 @@ Every record stands with its centre at `CAR_REC_R`, whatever its diameter, becau
 of each comb is a V with its apex there; `carousel.record_z(r)` gives the centre height for a
 radius. `Machine(record_r)` builds the machine with a record of that radius in slot 0, on the cup,
 on the platter and on the ring, with 12" records in the other slots, and `kinematics.full_cycle(r)`
-plans the cycle for it: only the pick and the return move. The neighbour that matters is slot 1,
+plans the cycle for it: only the pick and the return move. `Machine(load=carousel.DEMO_LOAD)` fills the
+other slots with the mixed load the pictures and the viewer show (three 10", four 7", one empty slot for
+the loading rule, 12" in the rest); the checker never uses it. The neighbour that matters is slot 1,
 the spoke on the front side of the pick, the one the wrist descends beside; `Machine(record_r,
 neighbour_r)` sets it (None leaves it empty). The checker sweeps the whole cycle with a 12" and then
 the pick, the carry away from the slot and the return with a 10" beside a 12" and a 7" beside a 10",

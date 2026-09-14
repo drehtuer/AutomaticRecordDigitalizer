@@ -17,7 +17,7 @@ Concept design finished and reviewed in September 2026; first parametric CAD in 
 
 ## What is in this repository
 
-[cad-model.html](cad-model.html) is the machine in the browser: orbit and zoom it, play the cycle, or jump to any of the fourteen steps. Both halves come from the parametric model — the geometry from `python -m cad.export_web`, the motion from the planner's own keyframes in `cad/cycle.json` — so it shows the machine the collision checker sweeps, moving the way it sweeps it.
+[cad-model.html](cad-model.html) is the machine in the browser: orbit and zoom it, play the cycle for a 12", a 10" or a 7" record, or jump to any of the fourteen steps. Both halves come from the parametric model — the geometry from `python -m cad.export_web`, the motion from the planner's own keyframes in `cad/cycle.json`, one cycle per record size — so it shows the machine the collision checker sweeps, moving the way it sweeps it. The carousel carries a mixed load of all three sizes, with the empty slot the loading rule asks for.
 
 [concept-model.html](concept-model.html) is an interactive 3D model that steps through the complete operating cycle, including the B-side flip and the fault case, with every step's motion planned as real waypoints in the order the controller will use. Its geometry is its own, written during the concept phase, and predates the five corrections the CAD found: read it for the sequence, not for dimensions.
 

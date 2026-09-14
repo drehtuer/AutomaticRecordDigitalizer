@@ -21,7 +21,8 @@ import cadquery as cq
 
 from . import params as P
 from .assembly import Machine, color_of
-from .parts import deck
+from .parts import carousel, deck, frame, gantry
+from .parts.carousel import DEMO_LOAD, RADII
 
 EXPORT = Path(__file__).parent / "export" / "web"
 
@@ -58,13 +59,15 @@ def rest_parts(m):
         "column_post": m.column_post0,
         "outrigger_cables": m.outrigger_cables0,
         "wrist_cables": m.wrist_cables0,
-        "record_held": m.held0,
-        # Shown or hidden by the state of the cycle.
-        "record_platter": m.platter_rec,
-        "record_ring": m.ring_rec,
     }
+    # The record the cycle handles, in every size; the viewer shows the chosen size's nodes.
+    for sz, r in RADII.items():
+        parts[f"record_held_{sz}"] = gantry.held_record(r)
+        parts[f"record_platter_{sz}"] = deck.record_on_platter(r)
+        parts[f"record_ring_{sz}"] = frame.record_on_ring(r)
+        parts[f"record_slot0_{sz}"] = carousel.record_in_slot(0, r)
     for k, rec in enumerate(m.slot_recs0):
-        if rec is not None:
+        if k > 0 and rec is not None:
             parts[f"record_slot{k}"] = rec
     # Electronics, chains and cables. The chains and their feed cables are drawn at the home pose.
     parts.update(m.electronics)
@@ -76,30 +79,36 @@ def rest_parts(m):
 
 def scene(m):
     """Constants the viewer needs. Every number is read from params."""
+    sizes = list(RADII)
     return {
         "units": "mm",
-        "carousel": {"centre": [P.CAR_CX, P.CAR_CY], "slots": P.CAR_SLOTS},
+        "sizes": sizes,
+        "carousel": {"centre": [P.CAR_CX, P.CAR_CY], "slots": P.CAR_SLOTS,
+                     "load": {str(k): sz for k, sz in DEMO_LOAD.items()}},
         "wrist": {"offsetX": P.WRIST_X},
         "tonearm": {"pivot": list(P.ARM_PIVOT), "lift": P.ARM_LIFT},
         # Which node names hang off which moving group. The viewer nests them
         # x -> y -> z -> wrist, exactly as Machine.moving composes the transforms.
         "groups": {
             "static": ["bench", "frame", "station", "plinth", "deck_interface",
-                       "deck_camera", "carousel_base", *m.electronics, *m.display_static],
-            "carousel": ["carousel_disc"] + [f"record_slot{k}" for k in range(P.CAR_SLOTS)],
+                       "deck_camera", "carousel_base", *m.electronics, *m.display_static,
+                       *[f"record_platter_{sz}" for sz in sizes], *[f"record_ring_{sz}" for sz in sizes]],
+            "carousel": ["carousel_disc", *[f"record_slot0_{sz}" for sz in sizes],
+                         *[f"record_slot{k}" for k in range(1, P.CAR_SLOTS) if m.slot_recs0[k] is not None]],
             "tonearm": ["tonearm"],
             "x": ["x_carriage", *m.display_x],
             "y": ["y_carriage", *m.display_y],
             "z": ["z_carriage", "column_post", "outrigger_cables"],
-            "wrist": ["wrist", "wrist_cables", "record_held"],
+            "wrist": ["wrist", "wrist_cables", *[f"record_held_{sz}" for sz in sizes]],
         },
-        # Node shown when the named visibility flag is set. "slot" governs the
-        # record in slot 0, the one the cycle is handling.
+        # Node shown, for each record size, when the named visibility flag is set.
+        # "slot" governs the record in slot 0, the one the cycle is handling; every
+        # size's node exists and the viewer shows the chosen size's.
         "visibility": {
-            "held": "record_held",
-            "platter": "record_platter",
-            "ring": "record_ring",
-            "slot": "record_slot0",
+            "held": {sz: f"record_held_{sz}" for sz in sizes},
+            "platter": {sz: f"record_platter_{sz}" for sz in sizes},
+            "ring": {sz: f"record_ring_{sz}" for sz in sizes},
+            "slot": {sz: f"record_slot0_{sz}" for sz in sizes},
         },
     }
 
@@ -108,7 +117,7 @@ def main():
     EXPORT.mkdir(parents=True, exist_ok=True)
 
     asm = cq.Assembly(name="AutomaticRecordDigitalizer")
-    m = Machine()
+    m = Machine(load=DEMO_LOAD)
     for name, solid in rest_parts(m).items():
         asm.add(solid, name=name, color=cq.Color(*color_of(name)))
 

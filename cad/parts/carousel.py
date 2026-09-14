@@ -12,6 +12,12 @@ from .common import box, cyl_y, cyl_z, ring_z, rot_z, union_all
 
 RADII = {"12": P.RECORD_12_R, "10": P.RECORD_10_R, "7": P.RECORD_7_R}
 
+# A mixed load for pictures and the viewer: slot 0 holds whatever the cycle handles, then three
+# 10", four 7", one empty slot (the loading rule: nothing larger than a 10" on a 7"'s front side,
+# and the last 7" of a run has the empty slot there), and 12" records in the rest.
+DEMO_LOAD = {k: ("10" if k in (1, 2, 3) else "7" if k in (4, 5, 6, 7) else None if k == 8 else "12")
+             for k in range(1, P.CAR_SLOTS)}
+
 
 def record_z(r=P.RECORD_12_R):
     """Centre height of a record of radius r standing in the V of a comb slot."""

@@ -68,13 +68,16 @@ indentation everywhere except Python, which stays at the four spaces PEP 8 and r
   See `cad/README.md`.
 - `cad/export/` — generated STEP and STL files, committed at reviewed states. Regenerate them
   after changing `cad/params.py`.
-- `docs/images/render-*.png` — views of the machine rendered from the CAD by `python -m cad.render`;
-  regenerate them with the exports, since the documents show them.
+- `docs/images/render-*.png` and `cycle-*.png` — views of the machine and animations of the cycle
+  rendered from the CAD by `python -m cad.render` and `python -m cad.render --animate`; regenerate
+  them with the exports, since the documents show them. An animation takes several minutes per
+  size, so run the three sizes as parallel jobs.
 - `cad-model.html` — WebGL viewer: the machine and the animated cycle, from `cad/export/web/`
   (`parts.glb`, every rigid body in its rest frame, and `scene.json`) plus `cad/cycle.json`. It
   defines no geometry and no dimension of its own. Regenerate with `python -m cad.export_web`
   after changing `cad/params.py`, and `python -m cad.kinematics > cad/cycle.json` after changing
-  the planner, in the same breath as the STEP and STL exports.
+  the planner, in the same breath as the STEP and STL exports. `cycle.json` is keyed by record
+  size ("12", "10", "7") and the viewer plays whichever is selected.
 - `concept-model.html` — standalone interactive 3D model of the full cycle. Its geometry is its
   own and predates the CAD corrections, so it is right about the sequence and wrong about
   dimensions.
