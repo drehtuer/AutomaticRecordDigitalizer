@@ -8,7 +8,7 @@ The user brushes each record by hand and loads up to 24 of them into the carouse
 
 ## The steps
 
-**1. Pick from carousel.** At travel height the gantry positions the wrist above the gap beside the spoke at the pick position. The arm descends into the gap with the cup 8 mm from the record's face, then moves along Y onto the label; vacuum on, the vacuum switch confirms the seal, and the record lifts straight up out of its slot. Spokes never touch. The record's centre is known from its resting position against the rim ring; no camera is involved here.
+**1. Pick from carousel.** At travel height the gantry positions the wrist above the gap beside the spoke at the pick position. The arm descends into the gap with the cup 8 mm from the record's face, then moves along Y onto the label; vacuum on, the pressure sensor confirms the seal, and the record lifts straight up out of its slot. Spokes never touch. The record's centre is known from its resting position against the rim ring; no camera is involved here.
 
 **2. Place side A.** The vertical record leaves the carousel along X at travel height, passes beside the flip station, and only when it is over the deck does the wrist turn to −90° so the record is horizontal, cup on top. It is lowered to a few millimetres above the mat, centred over the spindle, and released; the spindle tip enters the hollow cup and does the final centring. The wrist then hovers over the platter with the cup pointing down and the wrist camera photographs the label, finds the centre from the spindle, and measures the lead-in and run-out radii of this side.
 
@@ -64,7 +64,7 @@ A skip is detected two ways at once: a discontinuity in the recorded audio and a
 
 The end-stop pin on the cue-servo bracket means that even if the software fails entirely, the arm cannot swing past the run-out onto the label.
 
-A lost vacuum seal during a carry stops all motion immediately and holds position; the record, if it dropped, is at most a few centimetres above a surface designed to receive it, and the state is reported.
+A lost vacuum seal during a carry is seen by the orchestrator, which polls the pressure sensor throughout every carry, and stops all motion within about a tenth of a second and holds position; the record, if it dropped, is at most a few centimetres above a surface designed to receive it, and the state is reported.
 
 A missing record, a record of the wrong size for its manifest line, or a hole the camera cannot find at the pick position skips that slot and reports it.
 

@@ -31,7 +31,7 @@ The wrist sits on a 9 cm outrigger beside the column so the arm can swing withou
 
 ## Gripper
 
-The gripper is a single 40 mm bellows vacuum cup on the label area, fed by a 12 V diaphragm pump through a solenoid release valve, with a vacuum switch that confirms a seal before any move and aborts a move if the seal is lost. The label area is the one thing every record has in common, so the cup handles 12", 10" and 7" records and shaped discs alike; 7" singles with the large jukebox hole are out of scope.
+The gripper is a single 40 mm bellows vacuum cup on the label area, fed by a 12 V diaphragm pump through a solenoid release valve, with a pressure sensor on the line that confirms a seal before any move and aborts a move if the seal is lost. The label area is the one thing every record has in common, so the cup handles 12", 10" and 7" records and shaped discs alike; 7" singles with the large jukebox hole are out of scope.
 
 The cup's bellows give about 5 mm of compliance, which is what lets the cup land on a spoke standing slightly off its nominal position. At the pick position the cup stops 8 mm short of the record's face and makes the last 8 mm as a slow approach; the gap between spoke faces at the arm's radius is 65 mm and the cup-to-arm-back assembly is 48 mm, so the approach and a 9 mm margin use the rest.
 
