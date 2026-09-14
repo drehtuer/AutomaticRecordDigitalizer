@@ -42,15 +42,15 @@ def frame():
 
 
 def station():
-    """Ring rest on its post, with the opening towards +Y, standing on the electronics box."""
+    """Ring rest on its post, with the opening towards +Y, standing on a foot screwed to the bench."""
     ring = torus_z(P.ST_RING_R, P.ST_RING_TUBE, 0, 0, 0, arc_deg=360 - degrees(P.ST_GAP))
     # revolve starts at +X; rotate so the gap is centred on +Y
     ring = ring.rotate((0, 0, 0), (0, 0, 1), 90 + degrees(P.ST_GAP) / 2).translate((P.ST_X, P.ST_Y, P.ST_Z))
-    post = cyl_z(12, P.ST_Z - P.ST_BOX[2], P.ST_X, P.ST_POST_Y, P.ST_BOX[2])
+    foot = cyl_z(P.ST_FOOT_R, P.ST_FOOT_T, P.ST_X, P.ST_POST_Y, 0)
+    post = cyl_z(12, P.ST_Z - P.ST_FOOT_T, P.ST_X, P.ST_POST_Y, P.ST_FOOT_T)
     arm = box(22, P.ST_Y - P.ST_POST_Y - P.ST_RING_R + 12, 22, P.ST_X, (P.ST_POST_Y + P.ST_Y - P.ST_RING_R + 8) / 2, P.ST_ARM_Z)
     riser = box(22, 16, P.ST_Z - P.ST_ARM_Z, P.ST_X, P.ST_Y - P.ST_RING_R, (P.ST_Z + P.ST_ARM_Z) / 2)
-    ebox = box(*P.ST_BOX, P.ST_X, P.ST_BOX_Y, P.ST_BOX[2] / 2)
-    return union_all([ring, post, arm, riser, ebox])
+    return union_all([ring, post, arm, riser, foot])
 
 
 def ring_rest():

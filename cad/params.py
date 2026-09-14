@@ -77,8 +77,7 @@ ST_RING_R, ST_RING_TUBE = 78.0, 8.0
 ST_GAP = radians(60.0)                      # opening towards +Y
 ST_POST_Y = ST_Y - 140.0
 ST_ARM_Z = ST_Z - 19.0                      # the post's horizontal arm sits under the ring so a record on the ring never touches it
-ST_BOX = (260.0, 180.0, 90.0)               # electronics box under the station
-ST_BOX_Y = ST_Y - 80.0
+ST_FOOT_R, ST_FOOT_T = 40.0, 10.0           # printed foot the post stands on, screwed to the bench; the electronics sit on the frame, not in a box
 
 # ---------------------------------------------------------------- deck (Omnitronic DD 3120)
 DECK_SPINDLE_X, DECK_SPINDLE_Y = 550.0, 0.0

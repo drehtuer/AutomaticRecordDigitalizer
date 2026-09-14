@@ -2,7 +2,7 @@
 
 How the machine goes together, in the order it has to, with every part named: bought, printed, cut from plywood, picked up at the Baumarkt, or already on hand. Dimensions come from `../cad/params.py`, which is the authority; where this document gives a number, that is where it came from. Nothing here has been built yet, so treat the sequence as a plan to be corrected on the first pass and written back.
 
-Read `07-status-and-next-steps.md` first. It front-loads the things that can still change the design — measuring the deck, printing the three parts that decide the geometry — and none of the work below should start before those are done. Four decisions in `06-open-questions.md` also bear on this document and are called out where they land: where the `GRIP` check lives, the ring rest's real diameter, the size of the electronics box, and where the Raspberry Pi sits.
+Read `07-status-and-next-steps.md` first. It front-loads the things that can still change the design — measuring the deck, printing the three parts that decide the geometry — and none of the work below should start before those are done. Two decisions in `06-open-questions.md` also bear on this document and are called out where they land: where the `GRIP` check lives, and the ring rest's real diameter.
 
 ## Already on hand
 
@@ -13,7 +13,7 @@ Nothing in this table is bought. Everything in it has a place in the build.
 | Omnitronic DD 3120 turntable | On the bench under the deck end of the frame | Swap the felt slipmat for rubber or cork before the first record. The Stanton T.92 USB stays a spare and is not used |
 | Ortofon DJ S cartridge | On the deck's headshell | Spherical, tracks at about 3 g; the right stylus for commissioning |
 | Focusrite Scarlett | Beside the deck | USB to the powered hub, not to the Pi. The deck's line output feeds it; the Scarlett has no phono input |
-| Conrad 393905 USB relay card | In the electronics box, or with the Pi if the Pi moves to the deck end | Channel 1 to the deck's remote jack, channels 2 and 3 across the 33 and 45 buttons |
+| Conrad 393905 USB relay card | With the Pi group on the outside of the deck-end panel | Channel 1 to the deck's remote jack, channels 2 and 3 across the 33 and 45 buttons |
 | 2 × Raspberry Pi 4B rev 1.1, 2 GB, with 15 W supplies and 32 GB cards | One runs the machine; the other is the cold spare, kept boxed | rev 1.1 refuses e-marked USB-C cables: use the official supply. The card holds the OS only, never a recording |
 | External USB 3.0 SSD | With the Pi | Every WAV goes here. About 860 MB per side, about 40 GB per full magazine |
 | Self-powered USB 3.0 hub | With the Pi | The Scarlett, the SSD, the wrist camera and the relay card all hang off it; the Pi's own ports budget about 1.2 A across all four |
@@ -86,8 +86,10 @@ PETG unless marked TPU. The CAD marks which parts have their functional features
 | Wrist | Hall sensor mount at the hub | 1 | PETG | Envelope |
 | Station | Ring rest, with the pad groove on top | 1 | PETG | Print-ready, at the CAD's diameter — see the decision below |
 | Station | Ring rest pads | 3 | TPU | — |
-| Station | Post bracket onto the electronics box | 1 | PETG | Envelope |
-| Station | Electronics box, or a bought enclosure | 1 | PETG or bought | Envelope, and too small — see the decision below |
+| Station | Post foot, screwed to the bench | 1 | PETG | Envelope |
+| Electronics | Controller plate for the outside of the rear panel: Octopus on standoffs, the supply, both bucks | 1 | PETG | Envelope |
+| Electronics | Pi plate for the outside of the end panel: Pi, hub, SSD, relay card, MPRLS | 1 | PETG | Envelope |
+| Electronics | Pump and valve mount on rubber feet | 1 | PETG | Envelope |
 | Deck interface | Cue-servo bracket for the MG996R on the end panel | 1 | PETG | Envelope, drawn for a linear servo |
 | Deck interface | Pusher rod guide | 1 | PETG | Envelope |
 | Deck interface | Lever pad on the rod's end | 1 | PETG or TPU | Envelope |
@@ -142,11 +144,9 @@ Before the wrist goes on the machine, test the cup end by hand: 12", 10", 7" and
 
 ### 7. Flip station
 
-The ring rest stands on a post that stands on the electronics box, at X = 200 mm, Y = −120 mm, Z = 300 mm, with its 60° opening towards the front. Screw the post bracket to the box, the post to the bracket, the horizontal arm to the post so it runs under the ring and never touches a record on it, and the ring to the riser. Stick the three TPU pads into the groove on top of the ring.
+The ring rest stands on a post on a printed foot screwed to the bench, at X = 200 mm, Y = −120 mm, Z = 300 mm, with its 60° opening towards the front. Screw the foot to the bench, the post into the foot, the horizontal arm to the post so it runs under the ring and never touches a record on it, and the ring to the riser. Stick the three TPU pads into the groove on top of the ring.
 
 **Decision needed: the ring's diameter.** The specification describes an annulus of 70 mm inner and 86 mm outer *diameter*, so that it touches nothing but the label; the CAD, and the STL in `../cad/export/`, have a major *radius* of 78 mm, so the ring contacts a record between 70 and 86 mm from its centre — outside the 50 mm label, on the lead-out band of a 12" and on the outermost grooves of a 7". One of the two is wrong and it decides what gets printed. The spec size leaves the 24 mm arm only 5.5 mm of clearance each side through the 60° opening; a ring at 43 mm major radius with a 6 mm tube would contact at 37 to 49 mm, inside the label, with 6.5 mm a side. Whichever is chosen goes into `../cad/params.py`, through the collision sweep, and back into `01-design-specification.md`.
-
-**Decision needed: the box.** At 260 × 180 × 90 mm the box under the station cannot hold what `01-design-specification.md` puts in it. The Octopus is 160 × 110 and the 150 W supply 159 × 97; side by side they need 319 mm, stacked 207, and the box offers 260 by 180 — and that is before the Pi, the relay card, the pump, the valve and the hub, whose footprints add up to 116 % of the floor on their own. Either the box grows to about 360 × 260 × 110, which there is room for towards the rear panel, or the supply and the pump leave it: the supply under the bench, where it also gets air, and the pump on a rubber mount outside the box, where its vibration is not next to the Pi. The second is the better machine. The box's size is a parameter in `../cad/params.py` and the post stands on it, so this too goes through the sweep.
 
 ### 8. Deck interface
 
@@ -160,9 +160,13 @@ Plug the 6.3 mm mono cable into the deck's remote start/stop jack. Open the deck
 
 ### 9. Electronics
 
-Mount in the box, or wherever the box decision puts them: the 24 V supply with mains in through a fused, earthed inlet; the Octopus, on standoffs, fed 24 V; the 24 V to 12 V buck for the pump, the valve and the LED bar, since the bill of materials has a 24 V supply and a 5 V buck and nothing in between while all three of those loads are 12 V; the 24 V to 5 V buck for the servo alone — never the Pi, because an MG996R stalls at about 2.5 A; the pump and the direct-acting valve on the vacuum line, with the tee for the MPRLS. The MPRLS is an I²C device and stays within 30 cm of the Pi on the line at the valve, not out on the wrist.
+Nothing is boxed. The parts sit on the outside faces of the frame panels, where they are reachable, cool and out of the record's space, in two groups joined by one USB cable.
 
-The Pi with its own 15 W supply, the powered hub, the SSD, the relay card and the Scarlett form a second group that talks to the first only through the Pi's USB cable to the Octopus. Where that group lives is the last open decision, and the deck camera decides it — see the cable lengths below.
+**Controller group, outside the rear panel, just under the X beam and centred on the X chain's fixed end at X ≈ 200 mm.** The Octopus on a printed plate on standoffs; the 24 V supply beside it, with its mains inlet fused and earthed; the 24 → 12 V buck for the pump, the valve and the LED bar; and the 24 → 5 V buck for the servo — the servo alone, never the Pi, because an MG996R stalls at about 2.5 A. Every cable to the gantry climbs 25 cm from here into the X chain instead of a metre up from a box on the bench, which takes most of a metre off every gantry cable.
+
+**Pump and valve, outside the rear panel near the open end, at about X = −100 mm, on rubber mounts.** As far from the deck as the frame allows: a diaphragm pump is a vibration source, and the deck sits between X = 366 and 816. The hose runs along the outside of the panel to the chain anchor and up. The MPRLS is not here. It is an I²C device, and I²C does not like the 1.7 m to the Pi, but a vacuum line does not care about length: a tube stub tees off at the valve and runs to the sensor beside the Pi. The stub's 20 ml of dead volume is nothing against a 1 L/min pump.
+
+**Pi group, outside the deck-end panel, low, beside the hole for the deck camera's ribbon.** The Pi on a printed plate with a heatsink, its own 15 W supply, the powered hub, the SSD, the relay card and the MPRLS; the Scarlett on the bench beside the deck. The deck camera's ribbon is 30 cm through the panel, the relay card's cables into the deck about a metre, and the Pi's USB-C cable to the Octopus 2.2 m along the outside of the panels. Two mains supplies, one at each end, so a power strip runs along the rear panel.
 
 Wire the five TMC2209 sticks into the Octopus with UART jumpers set, X, Y, Z, wrist and carousel in that order; the servo to the servo header; the pump, valve and LED to three fan or heater MOSFET outputs, the LED on a hardware PWM pin; every end-stop, the Hall sensor and the slot sensor to end-stop inputs. Set the TMC run currents in `printer.cfg` and nowhere else.
 
@@ -176,33 +180,34 @@ Three cable chains, 10 × 20 mm, R28, not two: the concept drew one along the X 
 | Y | The cross beam, fixed end at the X plate | 625 mm | 600 mm |
 | Z | The column, fixed end at the guide block | up to 600 mm | 600 mm |
 
-Everything to the gantry leaves the box, climbs the rear panel to the beam, enters the X chain, crosses to the Y chain on the cross beam, and, for anything on the column or the wrist, enters the Z chain. Dress each chain with its cables laid flat and not crossing, the vacuum hose on the outside of the bend, and a cable tie at each chain end only — nothing tied inside the chain.
+Everything to the gantry leaves the controller group on the outside of the rear panel, climbs 25 cm to the beam, enters the X chain, crosses to the Y chain on the cross beam, and, for anything on the column or the wrist, enters the Z chain. Dress each chain with its cables laid flat and not crossing, the vacuum hose on the outside of the bend, and a cable tie at each chain end only — nothing tied inside the chain.
 
-**Cable lengths.** Each length is the routed path from the box exit, at the top rear corner of the box, to the device, with 15 % added and rounded up to the next 10 cm. The rule is that a cable which turns out too long is fixed with a cable tie and a cable which turns out too short is a new cable, so every number here errs long, and the loop that results is dressed into the chain. Where the bill of materials already names a length, the verdict says whether it reaches.
+**Cable lengths.** Each length is the routed path from where the cable starts — the controller group for anything Klipper drives or reads, the Pi group for anything the Pi drives or reads, the pump for the hose — to the device, with 15 % added and rounded up to the next 10 cm. The rule is that a cable which turns out too long is fixed with a cable tie and a cable which turns out too short is a new cable, so every number here errs long, and the loop that results is dressed into the chain. Where the bill of materials already names a length, the verdict says whether it reaches.
 
 | Cable | Route | Buy | In the BOM | Verdict |
 |---|---|---|---|---|
-| Vacuum hose, pump to cup, 6 × 4 PU | Box, X chain, Y chain, Z chain, arm to the cup neck, plus about 0.4 m of plumbing in the box | 4.8 m | 5 m | Reaches with 20 cm to spare; buy 6 m, it costs a euro |
-| Wrist camera USB, C270 | Same path to the camera mount, 110 mm up the arm | 4.2 m | The C270's fixed 1.5 m | Does not reach. Add a 3 m USB 2.0 A-to-A extension; 4.5 m total is under the 5 m passive limit |
-| Wrist stepper, 4-core | Same path to the outrigger | 4.0 m | Motor lead, about 1 m | Does not reach. 3 m extension |
-| Wrist Hall sensor, 3-core | Same | 4.0 m | Bare module | 4 m of 3-core |
-| Z stepper, 4-core | To the guide block on the Y carriage | 3.1 m | Motor lead, about 1 m | 2 m extension |
-| Z end-stop, 3-core | Same | 3.1 m | 0.5 m lead | 2.6 m extension |
-| Y stepper, 4-core | To the cross-beam end on the X carriage | 2.2 m | Motor lead, about 1 m | 1.2 m extension |
-| Y end-stop, 3-core | Same | 2.2 m | 0.5 m lead | 1.7 m extension |
-| X stepper, 4-core | To the X carriage | 2.2 m | Motor lead, about 1 m | 1.2 m extension |
-| X end-stop, 3-core | Fixed at the deck end of the X beam | 1.9 m | 0.5 m lead | 1.4 m extension |
-| Deck camera CSI ribbon | Box to the end panel, 1.07 m routed | 1.3 m | 0.5 m | **Does not reach, by half.** See below |
-| LED bar, 2-core 12 V | Same | 1.3 m | Strip only | 1.3 m of 2-core |
-| Cue servo, 3-core 5 V | Box to the end panel at lever height | 1.1 m | MG996R lead, 0.3 m | 0.8 m extension |
-| Carousel stepper, 4-core | Box to the base plate at the carousel's far side | 1.8 m | Motor lead, about 1 m | 0.8 m extension |
-| Carousel home sensor, 3-core | Same | 1.8 m | Bare module | 1.8 m of 3-core |
-| Deck remote start/stop, 6.3 mm | Relay card to the deck's rear jack | 0.6 m | 1.8 m | Reaches with 1.2 m to tie up |
-| 33 and 45 button taps, 2 × 2-core thin | Relay card into the deck's front-left board | 1.0 m each | Thin wire | 2 m of thin 2-core |
+| Vacuum hose, pump to cup, 6 × 4 PU | Pump, along the rear panel to the chain anchor, X, Y and Z chains, arm to the cup neck, plus plumbing at the pump | 4.5 m | 7 m | Reaches |
+| Tube stub, valve tee to the MPRLS at the Pi | Along the outside of the rear panel and round the corner | 2.1 m | in the 7 m | Reaches: 6.6 m of the 7 used |
+| Wrist camera USB, C270 | Controller group up the chains to the camera mount, 110 mm up the arm | 3.2 m | The C270's fixed 1.5 m | Does not reach. Add a 2 m USB 2.0 A-to-A extension; 3.5 m total, well under the 5 m passive limit |
+| Wrist stepper, 4-core | Same path to the outrigger | 3.0 m | Motor lead, about 1 m | 2 m extension |
+| Wrist Hall sensor, 3-core | Same | 3.0 m | Bare module | 3 m of 3-core |
+| Z stepper, 4-core | To the guide block on the Y carriage | 2.1 m | Motor lead, about 1 m | 1.1 m extension |
+| Z end-stop, 3-core | Same | 2.1 m | 0.5 m lead | 1.6 m extension |
+| Y stepper, 4-core | To the cross-beam end on the X carriage | 1.3 m | Motor lead, about 1 m | 0.3 m extension, or mount the motor at the near end and use the lead |
+| Y end-stop, 3-core | Same | 1.3 m | 0.5 m lead | 0.8 m extension |
+| X stepper, 4-core | To the X carriage | 1.3 m | Motor lead, about 1 m | 0.3 m extension |
+| X end-stop, 3-core | Fixed at the deck end of the X beam | 1.2 m | 0.5 m lead | 0.7 m extension |
+| Deck camera CSI ribbon | Pi group through the panel to the bracket | 0.3 m | 0.5 m | Reaches with 20 cm to fold |
+| LED bar, 2-core 12 V | Controller group along the outside of the panels to the end panel | 2.3 m | Strip only | 2.3 m of 2-core |
+| Cue servo, 3-core 5 V | Controller group to the end panel at lever height | 2.1 m | MG996R lead, 0.3 m | 1.8 m extension |
+| Carousel stepper, 4-core | Controller group along the rear panel, down to the base plate | 2.6 m | Motor lead, about 1 m | 1.6 m extension |
+| Carousel home sensor, 3-core | Same | 2.6 m | Bare module | 2.6 m of 3-core |
+| Pump and valve drive, 2 × 2-core 12 V | Controller group along the rear panel to the pump mount | 1.0 m each | — | 2 m of 2-core |
+| Pi to Octopus, USB-C | Pi group along the outside of the panels to the controller group | 2.2 m | — | Buy a 3 m USB-C cable; the extra is a tie |
+| Deck remote start/stop, 6.3 mm | Relay card to the deck's rear jack | 1.2 m | 1.8 m | Reaches with 60 cm to tie up |
+| 33 and 45 button taps, 2 × 2-core thin | Relay card into the deck's front-left board | 1.4 m each | Thin wire | 3 m of thin 2-core |
 
-The extensions add up to about 12 m of 4-core for the steppers, 12 m of 3-core for the sensors and the servo, 1.3 m of 2-core for the LED, 2 m of thin 2-core for the buttons, one 3 m USB extension and one longer camera ribbon. Silicone 20 AWG is the right wire for the steppers and the servo; the sensors can take 24 AWG.
-
-**The deck camera decides where the Pi lives.** The box under the station is 1.07 m from the camera on the end panel by the shortest sensible route, and CSI ribbons over a metre are at the edge of what a Camera Module 3 tolerates. There are two clean answers. A 1.3 m ribbon, which exists, works in most builds and is the cheaper try. Or the Pi and its whole USB group — the hub, the SSD, the Scarlett, the relay card — move to a small enclosure on the deck-end panel, which is where three of those four want to be anyway: the Scarlett is next to the deck, the relay card's cables go into the deck, and the ribbon becomes the 0.5 m already bought. Only the Pi-to-Octopus USB cable and the MPRLS I²C lead then cross from the deck end to the station box, and neither minds a metre. The second answer is the better machine; it costs one more enclosure and a longer I²C lead. Decide before drilling the panel.
+The extensions add up to about 6 m of 4-core for the steppers, 12 m of 3-core for the sensors and the servo, 4 m of 2-core for the LED, the pump and the valve, 3 m of thin 2-core for the buttons, a 2 m USB extension, a 3 m USB-C cable and 7 m of tube. Silicone 20 AWG is the right wire for the steppers, the servo and the 12 V loads; the sensors can take 24 AWG.
 
 ### 11. Power-up and commissioning
 

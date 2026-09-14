@@ -12,7 +12,7 @@ The frame's left end is open and its X beams overhang it by 8 cm so that the gan
 
 The frame is a glued box of 18 mm birch plywood: two side panels at Y = ±43 cm and one end panel at the deck end, each cut as a frame around a large window so the interior stays open and reachable. The panels give the racking stiffness; there are no diagonals and no corner posts. A 2040 V-slot extrusion is bolted along the top edge of each side panel and is the X axis: the carriages run on Delrin V-wheels in the slot, as on a hobby printer. One 2020 tie across the open end keeps the two beams parallel. Brackets for the cue-lever servo, the deck camera and the LED bar screw directly to the panels' inner faces.
 
-The Pi, the controller board, the relay card and the vacuum pump live in a box under the flip station, whose post stands on that box.
+The electronics are not boxed: the controller board and its supply mount on the outside of the rear panel under the X beam, the pump and valve on the same panel near the open end, and the Pi with its USB devices on the outside of the deck-end panel. The flip station's post stands on a printed foot on the bench.
 
 ## Gantry
 
