@@ -46,8 +46,8 @@ indentation everywhere except Python, which stays at the four spaces PEP 8 and r
 
 - `README.md` — entry point; every design document is linked from it, and a new one has to be
   added to its table.
-- `docs/01…07-*.md` — the design: specification, operating cycle, electronics and software,
-  bill of materials, design decisions, open questions, status.
+- `docs/01…08-*.md` — the design: specification, operating cycle, electronics and software,
+  bill of materials, design decisions, open questions, status, assembly instructions.
 - `cad/` — the CadQuery model, `kinematics.py` (poses and planner) and `check_collisions.py`;
   `cad/params.py` holds every dimension in millimetres and everything downstream follows it.
   See `cad/README.md`.

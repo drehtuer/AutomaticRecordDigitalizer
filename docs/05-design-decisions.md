@@ -86,6 +86,14 @@ Most of the motion parts (steppers, PSU, belts, pulleys, wheels, a lead screw, e
 
 A full aluminium extrusion frame was replaced by a glued box of 18 mm birch plywood with 2040 V-slot extrusion only where the X axis needs a straight, adjustable running surface. The panels give more racking stiffness than a lattice with diagonals, the interior stays open, brackets screw straight to the panels, and extrusion drops from ten metres to four. Cost is about the same; the choice is about the tools the builder prefers.
 
+## Ring rest at the label's edge
+
+The concept wanted the ring rest to touch nothing but the label, an annulus of 70 to 86 mm diameter; the first CAD drew the same numbers as a radius, which put the ring on the grooves and left a 7" balanced on its outermost two millimetres. Neither survived. The ring is now 100 mm in mean diameter with a 6 mm section, contacting a record between 44 and 56 mm from its centre: the edge of the label, the stiffest part of any record, with a 3 mm rubber O-ring on top for grip. Touching a 12" a few millimetres outside its label was accepted for the sake of stability and of the 7", which now overhangs the ring by 32 mm instead of 2. The size is bounded below by the cup, which needs 16 mm to the ring's inner edge and a 44 mm gap for the arm, and above by the 7".
+
+## Electronics on the frame, not in a box
+
+The concept put the Pi, the controller, the relay card and the pump in a box under the flip station, with the station's post standing on it. At 260 × 180 × 90 mm the box could not hold the Octopus and the 150 W supply side by side, let alone the rest; and the deck camera's ribbon would have run over a metre from it. Instead the parts mount on the outside faces of the frame panels: the controller, the supply and the bucks on the rear panel just under the X beam, centred on the cable chain's fixed end, so every gantry cable climbs 25 cm rather than a metre; the pump and valve on the rear panel near the open end, on rubber mounts, as far from the deck as the frame allows; and the Pi with its USB group on the deck-end panel, where the deck camera's ribbon is 30 cm and the relay card's cables into the deck are short. The station post stands on a printed foot on the bench. The MPRLS reads the vacuum line through a tube stub rather than over a long I²C lead, because a pneumatic line does not care about length and I²C does.
+
 ## Roller ring instead of a lazy susan
 
 The 86 cm carousel rolls on ten printed brackets with 608 bearings around a central 6005 bearing, rather than on a bought lazy-susan ring. It is cheaper, has no play in height, spreads the load, and every part of it is printable except the bearings.
