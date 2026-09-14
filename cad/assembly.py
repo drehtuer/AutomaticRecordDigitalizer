@@ -24,9 +24,15 @@ def _rot_z_about(shape, deg, cx, cy):
 
 
 class Machine:
-    """Caches the static solids; place() returns the moving ones for a state."""
+    """Caches the static solids; place() returns the moving ones for a state.
 
-    def __init__(self):
+    `record_r` is the radius of the record the cycle handles: the one in slot 0, on the cup, on the
+    platter and on the ring. `neighbour_r` is the radius of the record in slot 1, the spoke on the
+    front (+Y) side of the pick, the only neighbour the wrist descends beside; None leaves that slot
+    empty. The other 22 slots hold 12" records."""
+
+    def __init__(self, record_r=P.RECORD_12_R, neighbour_r=P.RECORD_12_R):
+        self.record_r, self.neighbour_r = record_r, neighbour_r
         self.bench = frame.bench()
         self.frame = frame.frame()
         self.station = frame.station()
@@ -35,14 +41,16 @@ class Machine:
         self.deck_cam = deck_interface.deck_camera_and_led()
         self.car_base = carousel.base()
         self.car_disc0 = carousel.disc()
-        self.slot_recs0 = [carousel.record_in_slot(k) for k in range(P.CAR_SLOTS)]
+        radii = {0: record_r, 1: neighbour_r}
+        self.slot_recs0 = [carousel.record_in_slot(k, radii.get(k, P.RECORD_12_R)) if radii.get(k, P.RECORD_12_R) else None
+                           for k in range(P.CAR_SLOTS)]
         self.xcar0 = gantry.x_carriage()
         self.ycar0 = gantry.y_carriage()
         self.zcar0 = gantry.z_carriage()
         self.wrist0 = gantry.wrist()
-        self.held0 = gantry.held_record()
-        self.platter_rec = deck.record_on_platter()
-        self.ring_rec = frame.record_on_ring()
+        self.held0 = gantry.held_record(record_r)
+        self.platter_rec = deck.record_on_platter(record_r)
+        self.ring_rec = frame.record_on_ring(record_r)
 
     def static(self):
         return {"bench": self.bench, "frame": self.frame, "station": self.station, "plinth": self.plinth,
@@ -54,7 +62,7 @@ class Machine:
         env["tonearm"] = deck.tonearm(s["a"], s["l"])
         env["carousel_disc"] = _rot_z_about(self.car_disc0, s["c"], P.CAR_CX, P.CAR_CY)
         for k, rec in enumerate(self.slot_recs0):
-            if k == 0 and not vis["slot"]:
+            if rec is None or (k == 0 and not vis["slot"]):
                 continue
             env[f"record_slot{k}"] = _rot_z_about(rec, s["c"], P.CAR_CX, P.CAR_CY)
         if vis["platter"]:
@@ -85,8 +93,8 @@ COLORS = {
 }
 
 
-def build_assembly(state, vis):
-    m = Machine()
+def build_assembly(state, vis, record_r=P.RECORD_12_R):
+    m = Machine(record_r)
     asm = cq.Assembly(name="AutomaticRecordDigitalizer")
     for name, solid in {**m.environment(state, vis), **m.moving(state, vis)}.items():
         col = COLORS.get(name, (0.06, 0.06, 0.07) if name.startswith("record") else (0.5, 0.5, 0.5))
@@ -94,9 +102,9 @@ def build_assembly(state, vis):
     return asm
 
 
-def state_at(pose_id):
+def state_at(pose_id, record_r=P.RECORD_12_R):
     """State and visibility at the end of the named pose."""
-    for pose, keys in K.full_cycle():
+    for pose, keys in K.full_cycle(record_r):
         if pose["id"] == pose_id:
             vis = pose.get("after") or pose["before"]
             return keys[-1], vis

@@ -5,10 +5,11 @@ checker that sweeps every step of the cycle against the whole machine.
 
 ```sh
 pip install cadquery            # 2.4 or newer; pulls in the OpenCascade kernel
-python -m cad.check_collisions  # sweep the full cycle, exit 1 on any intersection
+python -m cad.check_collisions  # sweep the full cycle with a 12", then the pick with a 10" and a 7"; exit 1 on any intersection
+python -m cad.check_collisions --size 7   # the whole cycle with a 7"
 python -m cad.assembly place regrip   # STEP of the whole machine at named poses
 python -m cad.export_parts      # STL of the printed parts, STEP of the sub-assemblies
-python -m cad.kinematics > cad/cycle.json  # the keyframes of the cycle, for the orchestrator and the viewer
+python -m cad.kinematics > cad/cycle.json  # the keyframes of the cycle, for the orchestrator and the viewer (--size 10 or 7 for the smaller records)
 python -m cad.export_web        # glTF of every rigid body plus scene.json, for cad-model.html
 ```
 
@@ -22,7 +23,7 @@ downstream follows.
 
 `parts/` builds the solids: `deck.py` (plinth, platter, tonearm as a rigid body pivoting about
 the measured pivot, cue lever), `carousel.py` (base with roller ring, rotating disc with hub,
-combs, rim and tooth ring, records as spokes), `frame.py` (plywood box, V-slot beams, flip
+V-floor combs and tooth ring, records of any size as spokes), `frame.py` (plywood box, V-slot beams, flip
 station on its foot), `gantry.py` (X, Y and Z carriages and the wrist with cup, camera and
 fork, each in its own kinematic frame), `deck_interface.py` (cue-lever servo bracket with
 pusher and end stop, deck camera and LED bar).
@@ -54,6 +55,19 @@ centreline. A carriage state is the centre of the Z carriage block; the wrist pi
 hanging with the cup facing −Y, +90 is the cup facing down, −90 the cup facing up, 180 the arm
 pointing up with the fork pointing down.
 
+## Record sizes
+
+Every record stands with its centre at `CAR_REC_R`, whatever its diameter, because the slot floor
+of each comb is a V with its apex there; `carousel.record_z(r)` gives the centre height for a
+radius. `Machine(record_r)` builds the machine with a record of that radius in slot 0, on the cup,
+on the platter and on the ring, with 12" records in the other slots, and `kinematics.full_cycle(r)`
+plans the cycle for it: only the pick and the return move. The neighbour that matters is slot 1,
+the spoke on the front side of the pick, the one the wrist descends beside; `Machine(record_r,
+neighbour_r)` sets it (None leaves it empty). The checker sweeps the whole cycle with a 12" and then
+the pick, the carry away from the slot and the return with a 10" beside a 12" and a 7" beside a 10",
+the largest neighbours the loading rule allows; `--size 7 --neighbour 12 --poses pick` shows why the
+rule exists.
+
 ## Fidelity
 
 This is a layout model: every part has its true envelope, position and travel, the records are
@@ -71,5 +85,7 @@ the cup bracket reached below the cup and met the spindle tip (raised); the end-
 inside a 12" record's outline (moved from 60 to 45 mm from the pivot); the fork pointed through
 the rear panel at the re-grip pose (shortened from 100 to 55 mm, frame widened to 86 cm); and the
 swing to B-up over the deck pushed the record into the front panel (the station plan now swings
-the record to vertical before moving Y). At 20 mm / 5° sampling the full cycle now runs with zero
-intersections.
+the record to vertical before moving Y). Adding the record sizes found a sixth: picking a 7" beside
+a 12" puts the wrist hub 18 mm and the column's foot 7 mm into the neighbour, which no change to
+the slot can fix and became the loading rule in the design decisions. At 20 mm / 5° sampling the
+cycle runs with zero intersections for every size.

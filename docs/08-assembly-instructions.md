@@ -29,7 +29,7 @@ Everything is 18 mm birch plywood. None of the cuts needs to be better than a fe
 |---|---|---|---|
 | Side panel | 1210 × 830 | 2 | Two windows, each about 420 × 570, leaving a 120 mm strip along the bottom, a 140 mm strip along the top, 120 mm posts at both ends and one at 380 mm from the carousel end |
 | End panel | 842 × 830 | 1 | One window about 620 × 570, same strips, 120 mm posts at both sides. 842 is the width between the side panels' inner faces; it sits between them, at the deck end |
-| Carousel disc | Ø 860 | 1 | Ø 26 hole at the centre for the stub shaft bore of the printed hub. Cut with a jigsaw against a trammel; rough is fine, the printed rim and combs carry the geometry |
+| Carousel disc | Ø 860 | 1 | Ø 26 hole at the centre for the stub shaft bore of the printed hub. Cut with a jigsaw against a trammel; rough is fine, the printed hub and combs carry the geometry |
 | Carousel base plate | Ø 880 | 1 | The stub shaft and ten roller brackets bolt to it; a Ø 25 hole at the centre if the shaft is through-bolted |
 | Bench top | 1900 × 1000 | 1 | Only if there is no bench. An existing bench of about that size does the job |
 
@@ -46,7 +46,6 @@ What the bill of materials leaves to a local shop, on top of the plywood.
 - Sanding: 80 and 120 grit, one sheet each; a block.
 - Four rubber feet or adjustable levelling feet for the carousel base plate, so it stands flat on a bench that is not.
 - One rubber O-ring, 3 mm cord, about 97 mm inside diameter (95 × 3 stretches on), NBR: it sits in the groove on top of the ring rest and is what the record actually rests on.
-- Self-adhesive felt, about 1 m of 20 mm strip, to line the tops of the combs where a record's edge sits — or print those in TPU and skip the felt.
 - Cable ties, 100 × 2.5 mm, one bag; and a few cable tie mounts with adhesive backs.
 - Fabric or Kapton tape for holding cable bundles in the chains while they are dressed.
 - Double-sided tape or hook-and-loop for the Pi and relay card if they are not screwed down.
@@ -62,8 +61,7 @@ PETG unless marked TPU. The CAD marks which parts have their functional features
 | Assembly | Part | Qty | Material | In the CAD |
 |---|---|---|---|---|
 | Carousel | Centre hub, 24 comb sockets and the 25 mm shaft bore | 1 | PETG | Print-ready |
-| Carousel | Slot comb, with the 5 mm locating slot on top | 24 | PETG, or TPU top | Print-ready |
-| Carousel | Rim ring segment, 45° each | 8 | PETG | Envelope |
+| Carousel | Slot comb: the 5 mm locating slot on a V floor, 5° each way, apex 260 mm from the axis | 24 | PETG | Print-ready |
 | Carousel | GT2 tooth-ring segment, dovetailed, 45° each | 8 | PETG | Envelope |
 | Carousel | Roller bracket for one 608 bearing | 10 | PETG | Print-ready |
 | Carousel | Index stepper mount with the 20T pulley position | 1 | PETG | Envelope |
@@ -110,9 +108,9 @@ Bolt the stub shaft to the centre of the base plate, upright, and press the 6005
 
 Drill the Ø 26 hole in the centre of the disc. Screw the hub to the top of the disc, centred on the hole, and lower the disc onto the shaft so the hub's bore takes the bearing. Spin it: it should turn on the rollers with no rock. If it rocks, one roller bracket is high; a washer under its neighbours fixes it.
 
-Push the 24 combs into the hub's sockets, then fit the eight rim segments so that each comb's outer end seats in its rim tab; the hub and the rim between them set the 15° pitch, and the comb slots set the record plane. Fit the eight tooth-ring segments to the underside of the disc, dovetails engaged, on the 215 mm radius. Screw the index stepper mount to the base plate at the tooth ring's edge, with the geared NEMA17 and its 20T pulley meshing the ring, and fit the home-mark flag on the disc and the slot sensor on the base plate so the flag passes through it once per turn.
+Push the 24 combs into the hub's sockets and screw each comb's outer end to the disc; the hub sets the 15° pitch, the comb slots set the record plane, and the V floors set the pick radius. Leave the slots bare: a record's edge has to roll along the V to its apex, and felt or a soft lining there would hold it wherever it landed. Fit the eight tooth-ring segments to the underside of the disc, dovetails engaged, on the 215 mm radius. Screw the index stepper mount to the base plate at the tooth ring's edge, with the geared NEMA17 and its 20T pulley meshing the ring, and fit the home-mark flag on the disc and the slot sensor on the base plate so the flag passes through it once per turn.
 
-Stand three records in three adjacent slots and check the gap at the label radius with a ruler: about 65 mm between faces. If it is less, `06-open-questions.md` has the fallback.
+Stand three records in three adjacent slots and check the gap at the label radius with a ruler: about 65 mm between faces. If it is less, `06-open-questions.md` has the fallback. Then drop a 12", a 10" and a 7" in turn into one slot, anywhere along its length, and measure where each comes to rest: the centre should be 260 mm from the axis every time, within a millimetre, and 247, 222 and 184 mm above the bench. A record that stops short needs a steeper V, one number in `cad/params.py`.
 
 ### 2. Frame
 
