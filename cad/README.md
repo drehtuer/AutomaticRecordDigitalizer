@@ -8,7 +8,8 @@ pip install cadquery            # 2.4 or newer; pulls in the OpenCascade kernel
 python -m cad.check_collisions  # sweep the full cycle, exit 1 on any intersection
 python -m cad.assembly place regrip   # STEP of the whole machine at named poses
 python -m cad.export_parts      # STL of the printed parts, STEP of the sub-assemblies
-python -m cad.kinematics > cycle.json # the keyframes of the cycle, for the orchestrator
+python -m cad.kinematics > cad/cycle.json  # the keyframes of the cycle, for the orchestrator and the viewer
+python -m cad.export_web        # glTF of every rigid body plus scene.json, for cad-model.html
 ```
 
 Run the commands from the repository root.
@@ -22,7 +23,7 @@ downstream follows.
 `parts/` builds the solids: `deck.py` (plinth, platter, tonearm as a rigid body pivoting about
 the measured pivot, cue lever), `carousel.py` (base with roller ring, rotating disc with hub,
 combs, rim and tooth ring, records as spokes), `frame.py` (plywood box, V-slot beams, flip
-station, electronics box), `gantry.py` (X, Y and Z carriages and the wrist with cup, camera and
+station on its foot), `gantry.py` (X, Y and Z carriages and the wrist with cup, camera and
 fork, each in its own kinematic frame), `deck_interface.py` (cue-lever servo bracket with
 pusher and end stop, deck camera and LED bar).
 
@@ -37,7 +38,9 @@ samples every keyframe segment (20 mm and 5° by default), rebuilds the moving p
 pose-dependent environment (tonearm angle and lift, carousel angle, which records are where)
 and reports every intersection between the Z carriage, the wrist and the held record and
 anything else, with the pose, the segment and the position. `export_parts.py` writes the STL
-files for printing and the sub-assembly STEP files for FreeCAD.
+files for printing and the sub-assembly STEP files for FreeCAD. `export_web.py` writes every rigid body in
+its rest frame as one glTF plus `scene.json`, the constants the viewer in `cad-model.html` needs to assemble
+and animate them; the viewer restates no dimension of its own.
 
 `export/` holds generated files. They are committed at reviewed states so the STEP files can
 be opened without running anything; regenerate them after changing `params.py`.

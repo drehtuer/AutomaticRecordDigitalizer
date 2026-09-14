@@ -75,4 +75,4 @@ An LED bar beside the deck camera has two modes: pulsed at 50.000 Hz from the co
 
 ## Materials and printing
 
-Printed parts are PETG for structure and TPU wherever a record is touched: the cup lip if not bought, the fork lining, the ring rest pads, the end-stop sleeve. Bought parts are everything long, stiff or precise: extrusion, the Z rail, screws, bearings, motors, electronics; a used 3D printer is the intended source for most of the motion parts. Plywood is used for the frame panels, the bench top, the carousel disc and its base plate, and never for anything whose position matters.
+Printed parts are PETG for structure and TPU wherever a record is touched: the cup lip if not bought, the fork lining, the end-stop sleeve; the ring rest carries a bought rubber O-ring instead. Bought parts are everything long, stiff or precise: extrusion, the Z rail, screws, bearings, motors, electronics; a used 3D printer is the intended source for most of the motion parts. Plywood is used for the frame panels, the bench top, the carousel disc and its base plate, and never for anything whose position matters.

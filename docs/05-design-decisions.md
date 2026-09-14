@@ -12,7 +12,7 @@ A Cartesian gantry with one rotary wrist was chosen over an articulated arm. Lin
 
 ## Vacuum cup on the label
 
-Early concepts gripped the rim with three fingers. That failed on two requirements: 10" and 7" records have a different rim, and shaped records ("sawblades") have no usable rim at all. The label area is the one feature common to every record, so the gripper is a single vacuum cup on the label. A label-pinch gripper (a pin through the centre hole and a jaw on the label) was considered as an alternative that needs no pump and cannot drop a record when power fails; it was set aside because the vacuum cup is simpler and the vacuum switch gives a positive confirmation of grip. 7" singles with the large jukebox hole are excluded.
+Early concepts gripped the rim with three fingers. That failed on two requirements: 10" and 7" records have a different rim, and shaped records ("sawblades") have no usable rim at all. The label area is the one feature common to every record, so the gripper is a single vacuum cup on the label. A label-pinch gripper (a pin through the centre hole and a jaw on the label) was considered as an alternative that needs no pump and cannot drop a record when power fails; it was set aside because the vacuum cup is simpler and a sensor on the line gives a positive confirmation of grip (the switch first drawn became a pressure sensor; see below). 7" singles with the large jukebox hole are excluded.
 
 ## Round magazine instead of racks
 
