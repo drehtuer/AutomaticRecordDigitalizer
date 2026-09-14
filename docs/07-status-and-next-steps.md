@@ -6,7 +6,7 @@ Written 6 September 2026, at the end of the concept phase.
 
 The concept is complete and has been reviewed step by step against an interactive model (`concept-model.html`) that plans every motion of the cycle as waypoints. Every subsystem has a defined mechanism, every step of the cycle has a defined sequence, and every decision and rejected alternative is written down in `05-design-decisions.md`. A first parametric CAD exists under `cad/` (CadQuery), with STEP exports of the whole machine and the sub-assemblies, STL files of the first printed parts, and a collision checker that sweeps the complete cycle; it passes with zero intersections at 20 mm / 5° sampling. Nothing has been bought, cut or printed. There is no machine code yet.
 
-The machine, in its final concept form: a 24-slot carousel magazine with records standing as spokes; a plywood box frame carrying an XYZ gantry on V-slot with a rotary wrist; a single vacuum cup on the label as the gripper, with a camera and a finger-lift fork on the same wrist; a passive ring rest for the side-B flip and the label photos; the Omnitronic DD 3120 as the deck, worked through its remote start/stop jack, its 33/45 buttons and its cue lever; a second camera and a 50 Hz LED strobe facing the headshell; Klipper on a printer mainboard for motion, a Raspberry Pi 5 for orchestration, vision, the web interface and recording through the Focusrite Scarlett. No brush; records are cleaned by hand before loading. No automatic recovery from a skip; the arm lifts, the platter stops, and the machine waits.
+The machine, in its final concept form: a 24-slot carousel magazine with records standing as spokes; a plywood box frame carrying an XYZ gantry on V-slot with a rotary wrist; a single vacuum cup on the label as the gripper, with a camera and a finger-lift fork on the same wrist; a passive ring rest for the side-B flip and the label photos; the Omnitronic DD 3120 as the deck, worked through its remote start/stop jack, its 33/45 buttons and its cue lever; a second camera and a 50 Hz LED strobe facing the headshell; Klipper on a printer mainboard for motion, a Raspberry Pi 4B for orchestration, vision, the web interface and recording through the Focusrite Scarlett. No brush; records are cleaned by hand before loading. No automatic recovery from a skip; the arm lifts, the platter stops, and the machine waits.
 
 ## Decisions taken during the review, in order
 
@@ -14,7 +14,7 @@ The stacking changer was rejected for distortion; a gantry was chosen over an ar
 
 ## Already on hand
 
-The Omnitronic DD 3120 (and a Stanton T.92 USB as spare), the Focusrite Scarlett, the Conrad Components 393905 USB relay card, an Ortofon DJ S cartridge. Not yet: a 3D printer, a Raspberry Pi, cameras, motors, extrusion, a controller board.
+The Omnitronic DD 3120 (and a Stanton T.92 USB as spare), the Focusrite Scarlett, the Conrad Components 393905 USB relay card, an Ortofon DJ S cartridge, two Raspberry Pi 4B rev 1.1 / 2 GB with supplies and cards, an external USB 3.0 SSD, a self-powered USB 3.0 hub, a Logitech C270 and a 1080p USB webcam, and the 3D printer. Not yet: the Pi camera, motors, extrusion, a controller board. The full list with where each item goes is in `08-assembly-instructions.md`.
 
 ## What to buy and do first
 

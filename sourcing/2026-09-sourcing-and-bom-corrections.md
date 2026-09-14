@@ -64,3 +64,17 @@ Add the Ender 3 Max Neo near the top — 300×300 frame, dual Z with two motors,
 - The Pi 4 budgets roughly 1.2 A across all four USB ports. Put the Scarlett, the SSD, the webcam and the relay card on a self-powered hub, and pin every device with a udev rule so `/dev/video*` and the ALSA card index do not shuffle across reboots.
 - Do not run the Pi from the servo's 5 V buck converter: an MG996R stalls at about 2.5 A and will brown the Pi out.
 - CPU is roughly 2 to 2.5× less than a Pi 5. The workload absorbs it because the only sustained vision load is the deck camera tracking the headshell in a known ROI — keep those frames at about 640 × 480, 10–15 fps, and process the 12 MP label shots one at a time.
+
+## Errata from the consistency check, 14 September 2026
+
+Checking the bill of materials against `cad/params.py` and the planner's actual travel changed these lines after the pricing pass. The shopping list above still shows the lengths as priced; order these instead.
+
+- **2040 cross beam: 940 mm, not 800.** The frame is 860 mm wide over the panels and the X carriage plates sit outside it. The 800 mm cut is the concept's 80 cm frame, which the CAD widened to 86 and the cut list never followed. Same profile, same shop; about 2 € more.
+- **2020 end tie: 880 mm, not 800**, over the two X beams. Still cut from the 1 m length.
+- **End panel: 842 × 830, not 800 × 830.** It sits between the side panels' inner faces.
+- **Plywood: two 1500 × 3000 sheets, not one** — panels on one, both carousel discs on the other — and a third if the bench top is cut rather than existing.
+- **V-wheels: 12, not 9.** Four per carriage plate, three plates, six eccentric spacers as priced.
+- **A 24 → 12 V buck, about 3 €**, was missing altogether: the pump, the valve and the LED strip are 12 V parts and the list has only a 24 V supply and a 5 V buck.
+- **Cable chain: three chains, 700 + 600 + 600 mm.** The Y carriage travels 625 mm along the cross beam, which the concept forgot. The 3 m priced covers it with a metre spare.
+- **PU tube: 6 m, not 5.** The routed run to the cup is 4.1 m and 4.8 with wiggle room, before the plumbing in the box.
+- **Not on the list at all**: about 12 m of 4-core and 12 m of 3-core extension wire, because every motor and sensor on the gantry is 2 to 4 m from the box and the motors come with about 1 m; a 3 m USB 2.0 A-to-A extension for the wrist camera; and a 1.3 m CSI ribbon *or* an enclosure for the Pi at the deck end, which is an open decision. The routed lengths are tabulated in `docs/08-assembly-instructions.md`.

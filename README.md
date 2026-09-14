@@ -34,6 +34,7 @@ Concept design finished and reviewed in September 2026; first parametric CAD in 
 | [05-design-decisions.md](docs/05-design-decisions.md) | Why the machine is the way it is, including rejected alternatives |
 | [06-open-questions.md](docs/06-open-questions.md) | What has to be verified on real hardware |
 | [07-status-and-next-steps.md](docs/07-status-and-next-steps.md) | Current state, parts on hand, build order |
+| [08-assembly-instructions.md](docs/08-assembly-instructions.md) | Cut list, Baumarkt list, printed parts, assembly order, cable lengths |
 
 ## The machine in one paragraph
 

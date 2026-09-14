@@ -4,7 +4,7 @@ This document describes the machine as it stands after the concept review. Dimen
 
 ## Overview and footprint
 
-The bench is about 190 × 100 cm. From left to right it carries the carousel magazine (Ø 86 cm, standing free on the bench), then the frame (125 × 86 × 90 cm) that spans the flip station and the turntable. The gantry rides on top of the frame; its Z column rises to about 135 cm when fully raised, so the machine wants a metre and a half of headroom.
+The bench is about 190 × 100 cm. From left to right it carries the carousel magazine (Ø 86 cm, standing free on the bench), then the frame (121 × 88 × 83 cm over the panels) that spans the flip station and the turntable. The gantry rides on top of the frame; its Z column rises to about 135 cm when fully raised, so the machine wants a metre and a half of headroom.
 
 The frame's left end is open and its X beams overhang it by 8 cm so that the gantry can reach the carousel's pick slot, which is the only point where the two halves of the machine meet. The carousel can be lifted off the bench for loading without touching the frame.
 
@@ -21,7 +21,7 @@ The gantry is a Cartesian XYZ with one rotary axis:
 | Axis | Mechanism | Travel | Notes |
 |---|---|---|---|
 | X | GT2 belt, NEMA17, Delrin wheels on 2040 V-slot beams | ≈ 80 cm | From the carousel pick slot to the tonearm rest |
-| Y | GT2 belt, NEMA17, Delrin wheels on a 2040 V-slot cross beam | ≈ 45 cm | Set by the two station poses, 22 cm either side of the ring; the frame is 86 cm wide so the fork clears the rear panel at the re-grip pose |
+| Y | GT2 belt, NEMA17, Delrin wheels on a 2040 V-slot cross beam | ≈ 63 cm | The concept assumed 45 cm; the planner's re-grip poses reach from −34 cm to +28.5 cm. The 94 cm cross beam gives about 70 cm; the frame is 86 cm wide so the fork clears the rear panel at the re-grip pose |
 | Z | T8 lead screw, NEMA17, moving column on an MGN12 rail | ≈ 60 cm | Column slides through a guide on the cross beam; self-locking; the one axis that keeps a linear rail |
 | Wrist | NEMA17 with ≈ 5:1 planetary gearbox, Hall home sensor | −90° … 180° | Axis parallel to X |
 
@@ -39,7 +39,7 @@ The cup's bellows give about 5 mm of compliance, which is what lets the cup land
 
 The magazine is a horizontal disc with 24 radial slots at 15° pitch. Records stand vertically in the slots like spokes, resting against an outer rim ring at a radius of 41 cm, so that every size sits at the same outer radius and the gap between neighbours at the label radius is about 6.5 cm, enough for the 5 cm gripper assembly to descend beside a record.
 
-The disc is 8 mm plywood cut roughly round and is nothing but a floor. It rolls on ten identical printed brackets, each holding a 608 bearing, arranged on a 72 cm circle, and is located by a 6005 bearing on a stub shaft at the centre. A printed GT2 tooth ring in eight dovetailed segments on the disc's underside is driven by a NEMA17 with a small pulley, about 40:1, and an optical sensor reads a home mark; one slot index is therefore repeatable to a fraction of a millimetre at the rim. The 24 slot combs plug into a printed centre hub and printed rim segments, which carry the angular positions, so the wood never has to be cut precisely.
+The disc is 18 mm plywood cut roughly round and is nothing but a floor. It rolls on ten identical printed brackets, each holding a 608 bearing, arranged on a 72 cm circle, and is located by a 6005 bearing on a stub shaft at the centre. A printed GT2 tooth ring in eight dovetailed segments on the disc's underside is driven by a NEMA17 with a 20-tooth pulley, about 34:1 at the ring and about 170:1 with the motor's 5:1 gearbox, and an optical sensor reads a home mark; one slot index is therefore repeatable to a fraction of a millimetre at the rim. The 24 slot combs plug into a printed centre hub and printed rim segments, which carry the angular positions, so the wood never has to be cut precisely.
 
 Each record returns to the slot it came from, so the magazine is both infeed and outfeed, records never touch each other, and pick and return happen at one fixed position: the slot that points along X towards the deck.
 
@@ -55,7 +55,7 @@ The felt DJ slipmat in the photo should be replaced by a rubber or cork mat for 
 
 Start and stop go through the deck's own remote start/stop connector, a 6.3 mm jack made for the fader-start feature of older mixers and hi-fi systems, which started the deck when the fader came up: it expects a contact closure and does nothing but start and stop the platter (speed is chosen with the buttons). One channel of the Conrad 393905 USB relay card (already on hand, driven from the Pi) on a 6.3 mm plug does it, with no wire soldered inside the deck. The 33 and 45 buttons are momentary switches and are pressed by two more channels of the same card wired across the switch contacts inside the deck; a relay is a dry contact, so polarity and the switch's voltage do not matter.
 
-The cue lever is worked by a small linear-push servo on a bracket on the deck-end panel of the frame, whose rod comes in along X at lever height; the lever is only 3 cm from the deck's right edge, so the rod is short and never crosses the arm's swing. A bar from the same bracket runs in front of the arm base, under the arm, and carries a soft-sleeved end-stop pin standing in the arm tube's path 45 mm from the pivot, so the arm cannot swing past a stylus radius of roughly 53 mm: the stylus physically cannot reach the label. At 45 mm the pin stands outside a 12" record's outline; at the 60 mm first drawn it stood under the record's edge.
+The cue lever is worked by an MG996R servo through a pusher rod, on a bracket on the deck-end panel of the frame; the rod comes in along X at lever height; the lever is only 3 cm from the deck's right edge, so the rod is short and never crosses the arm's swing. A bar from the same bracket runs in front of the arm base, under the arm, and carries a soft-sleeved end-stop pin standing in the arm tube's path 45 mm from the pivot, so the arm cannot swing past a stylus radius of roughly 53 mm: the stylus physically cannot reach the label. At 45 mm the pin stands outside a 12" record's outline; at the 60 mm first drawn it stood under the record's edge.
 
 The tonearm is moved only while the cue lever holds it up, by the fork straddling the headshell's finger lift with prongs fore and aft of it. The fork never carries the arm's weight.
 
@@ -67,7 +67,7 @@ There is no cleaning module. Records are brushed by hand before they go into the
 
 ## Cameras and light
 
-The wrist camera (Pi Camera Module 3 or a small USB module) sits on the outer side of the wrist arm, 11 cm up from the cup, looking along the cup axis. With the cup pointing down it looks straight down, and that is where it works: hovering over the platter after a record is placed it photographs the label that is facing up, finds the centre (the spindle is in the hole) and measures the lead-in and run-out radii; over the ring rest it photographs the other label before the re-grip. Both label photographs come from it, each taken face-on with nothing in the way. At the carousel it does not look at the record: inside the 65 mm gap between spokes there is no room for a camera at a usable distance, and none is needed, because a record resting against the rim ring has its centre within a millimetre of a known position, which the cup's bellows and the spindle tip absorb.
+The wrist camera (a USB webcam, a Logitech C270) sits on the outer side of the wrist arm, 11 cm up from the cup, looking along the cup axis. With the cup pointing down it looks straight down, and that is where it works: hovering over the platter after a record is placed it photographs the label that is facing up, finds the centre (the spindle is in the hole) and measures the lead-in and run-out radii; over the ring rest it photographs the other label before the re-grip. Both label photographs come from it, each taken face-on with nothing in the way. At the carousel it does not look at the record: inside the 65 mm gap between spokes there is no room for a camera at a usable distance, and none is needed, because a record resting against the rim ring has its centre within a millimetre of a known position, which the cup's bellows and the spindle tip absorb.
 
 The deck camera (Pi Camera Module 3) is mounted low on the deck-end panel at platter height, facing the headshell across the platter from 20 to 40 cm. It sees the stylus in profile, the groove bands edge-on and the strobe dots on the platter rim. It tracks the headshell to locate the arm wherever a side ended, confirms the stylus landed on the lead-in, watches for the run-out and for skips, and reads the platter speed.
 
