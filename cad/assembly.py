@@ -29,9 +29,10 @@ class Machine:
     `record_r` is the radius of the record the cycle handles: the one in slot 0, on the cup, on the
     platter and on the ring. `neighbour_r` is the radius of the record in slot 1, the spoke on the
     front (+Y) side of the pick, the only neighbour the wrist descends beside; None leaves that slot
-    empty. The other 22 slots hold 12" records."""
+    empty. The other 22 slots hold 12" records, unless `load` maps slot numbers to size keys
+    ("12", "10", "7" or None for an empty slot), as `carousel.DEMO_LOAD` does for pictures."""
 
-    def __init__(self, record_r=P.RECORD_12_R, neighbour_r=P.RECORD_12_R):
+    def __init__(self, record_r=P.RECORD_12_R, neighbour_r=P.RECORD_12_R, load=None):
         self.record_r, self.neighbour_r = record_r, neighbour_r
         self.bench = frame.bench()
         self.frame = frame.frame()
@@ -42,8 +43,10 @@ class Machine:
         self.car_base = carousel.base()
         self.car_disc0 = carousel.disc()
         radii = {0: record_r, 1: neighbour_r}
-        self.slot_recs0 = [carousel.record_in_slot(k, radii.get(k, P.RECORD_12_R)) if radii.get(k, P.RECORD_12_R) else None
-                           for k in range(P.CAR_SLOTS)]
+        if load:
+            radii = {0: record_r, **{k: (carousel.RADII[sz] if sz else None) for k, sz in load.items()}}
+        self.slot_radii = [radii.get(k, P.RECORD_12_R) for k in range(P.CAR_SLOTS)]
+        self.slot_recs0 = [carousel.record_in_slot(k, r) if r else None for k, r in enumerate(self.slot_radii)]
         self.xcar0 = gantry.x_carriage()
         self.ycar0 = gantry.y_carriage()
         self.zcar0 = gantry.z_carriage()

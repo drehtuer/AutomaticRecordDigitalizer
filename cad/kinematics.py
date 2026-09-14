@@ -198,9 +198,13 @@ if __name__ == "__main__":
     import argparse
     import json
     import sys
-    ap = argparse.ArgumentParser(description="print the cycle's keyframes as JSON")
-    ap.add_argument("--size", choices=sorted(RADII), default="12", help='record size in inches (default 12)')
-    r = RADII[ap.parse_args().size]
-    cyc = [{"id": p["id"], "name": p["name"], "keyframes": ks, "before": p["before"], "after": p.get("after")}
-           for p, ks in full_cycle(r)]
-    json.dump(cyc, sys.stdout, indent=1)
+    ap = argparse.ArgumentParser(description="print the cycle's keyframes as JSON, keyed by record size")
+    ap.add_argument("--size", choices=sorted(RADII), help="one size only, as a bare list of poses")
+
+    def poses_json(r):
+        return [{"id": p["id"], "name": p["name"], "keyframes": ks, "before": p["before"], "after": p.get("after")}
+                for p, ks in full_cycle(r)]
+
+    size = ap.parse_args().size
+    out = poses_json(RADII[size]) if size else {sz: poses_json(r) for sz, r in RADII.items()}
+    json.dump(out, sys.stdout, indent=1)

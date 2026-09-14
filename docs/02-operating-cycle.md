@@ -2,6 +2,10 @@
 
 One record goes through fourteen steps. The concept model animates each of them, and the order of the axis moves within each step is the order the controller will use, not an approximation.
 
+The cycle below is rendered from the CAD model along the planner's own keyframes, for a 12" in slot 0 with the carousel's mixed demonstration load around it; the same cycle for a [10"](images/cycle-10.png) and a [7"](images/cycle-7.png) differs only in how deep the wrist descends at the pick and the return. `cad-model.html` plays all three interactively.
+
+![The cycle for a 12" record, rendered from the model: pick, place, cue, play, lift, flip on the ring rest, place side B, return, index](images/cycle-12.png)
+
 ## Before a batch
 
 The user brushes each record by hand and loads up to 24 of them into the carousel and enters the batch manifest in the web interface: one line per slot with size (12", 10" or 7"), speed (33 or 45), and flags for reverse-play or locked-groove sides; a line can also say "by hand" for a record the carousel cannot present (see below). The machine homes every axis, indexes the carousel to slot 1, and checks with the wrist camera from above that a record is present where the manifest says one is and that its spoke has the length its size implies, so a wrong size is caught before the pick. The manifest editor refuses a 12" in the slot on the front side of a 7": the wrist descends beside that spoke, 62 mm deeper for a 7" than for a 12", and a 12" there would be in its way (`05-design-decisions.md`). A 7", a 10" or an empty slot there is fine, so a run of 7"s costs one empty slot.

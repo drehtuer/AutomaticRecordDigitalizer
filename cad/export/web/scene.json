@@ -1,11 +1,41 @@
 {
  "units": "mm",
+ "sizes": [
+  "12",
+  "10",
+  "7"
+ ],
  "carousel": {
   "centre": [
    -400.0,
    0.0
   ],
-  "slots": 24
+  "slots": 24,
+  "load": {
+   "1": "10",
+   "2": "10",
+   "3": "10",
+   "4": "7",
+   "5": "7",
+   "6": "7",
+   "7": "7",
+   "8": null,
+   "9": "12",
+   "10": "12",
+   "11": "12",
+   "12": "12",
+   "13": "12",
+   "14": "12",
+   "15": "12",
+   "16": "12",
+   "17": "12",
+   "18": "12",
+   "19": "12",
+   "20": "12",
+   "21": "12",
+   "22": "12",
+   "23": "12"
+  }
  },
  "wrist": {
   "offsetX": 90.0
@@ -59,11 +89,19 @@
    "cable_ribbon",
    "mains_psu",
    "mains_pi",
-   "mains_deck"
+   "mains_deck",
+   "record_platter_12",
+   "record_platter_10",
+   "record_platter_7",
+   "record_ring_12",
+   "record_ring_10",
+   "record_ring_7"
   ],
   "carousel": [
    "carousel_disc",
-   "record_slot0",
+   "record_slot0_12",
+   "record_slot0_10",
+   "record_slot0_7",
    "record_slot1",
    "record_slot2",
    "record_slot3",
@@ -71,7 +109,6 @@
    "record_slot5",
    "record_slot6",
    "record_slot7",
-   "record_slot8",
    "record_slot9",
    "record_slot10",
    "record_slot11",
@@ -111,13 +148,31 @@
   "wrist": [
    "wrist",
    "wrist_cables",
-   "record_held"
+   "record_held_12",
+   "record_held_10",
+   "record_held_7"
   ]
  },
  "visibility": {
-  "held": "record_held",
-  "platter": "record_platter",
-  "ring": "record_ring",
-  "slot": "record_slot0"
+  "held": {
+   "12": "record_held_12",
+   "10": "record_held_10",
+   "7": "record_held_7"
+  },
+  "platter": {
+   "12": "record_platter_12",
+   "10": "record_platter_10",
+   "7": "record_platter_7"
+  },
+  "ring": {
+   "12": "record_ring_12",
+   "10": "record_ring_10",
+   "7": "record_ring_7"
+  },
+  "slot": {
+   "12": "record_slot0_12",
+   "10": "record_slot0_10",
+   "7": "record_slot0_7"
+  }
  }
 }

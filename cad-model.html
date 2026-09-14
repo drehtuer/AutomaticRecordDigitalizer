@@ -65,6 +65,9 @@
     <button id="prev">Previous step</button>
     <button id="next">Next step</button>
     <label><input type="checkbox" id="loop" checked> Loop</label>
+    <label>Record
+      <select id="size"></select>
+    </label>
     <label>Speed
       <select id="speed">
         <option value="0.5">0.5×</option>
@@ -79,8 +82,8 @@
 
   <dl>
     <dt>Source</dt>
-    <dd><code>cad/params.py</code> via <code>python -m cad.export_web</code>, cycle from
-        <code>python -m cad.kinematics</code></dd>
+    <dd><code>cad/params.py</code> via <code>python -m cad.export_web</code>, cycles from
+        <code>python -m cad.kinematics</code>, one per record size</dd>
     <dt>Units</dt><dd>Millimetres, Z up</dd>
     <dt>Cycle</dt><dd id="cycleFacts">—</dd>
   </dl>
@@ -89,7 +92,11 @@
     This is a layout model. Every part has its true envelope, position and travel, and the records
     are real discs, but most printed parts are still envelopes rather than print models. The motion
     is the planner's own keyframes, in the order the controller will use, interpolated linearly
-    between them — so it shows the path, not the acceleration.
+    between them — so it shows the path, not the acceleration. The record selector plays the
+    cycle for a 12", a 10" or a 7" in slot 0: only the pick and the return change, by the height
+    of the record's centre in its slot. The carousel carries a mixed load, with the empty slot
+    the loading rule asks for at the front end of the run of 7"s. The chains and the cables that
+    feed them are drawn as they lie at the home pose and ride along rigidly.
   </p>
 
   <div class="bar">
@@ -141,7 +148,7 @@ controls.dampingFactor = 0.08;
 
 // ---------------------------------------------------------------- animation
 const deg = Math.PI / 180;
-let scn, cycle, groups = {}, visNodes = {}, timeline = [], totalTime = 0;
+let scn, cycles, cycle, size, groups = {}, visNodes = {}, timeline = [], totalTime = 0;
 let clock = new THREE.Clock(), t = 0, playing = false;
 
 /** Flatten the cycle into segments, each a pair of keyframes plus its pose. */
@@ -195,9 +202,16 @@ function applyState(s) {
   groups.wrist.rotation.x = s.phi * deg;
 }
 
+/** Node names a visibility flag can govern: one per record size, or one for every size. */
+function flagNodes(entry) {
+  return typeof entry === 'string' ? { '*': entry } : entry;
+}
+
 function applyVisibility(vis) {
-  for (const [flag, node] of Object.entries(scn.visibility)) {
-    if (visNodes[node]) visNodes[node].visible = !!vis[flag];
+  for (const [flag, entry] of Object.entries(scn.visibility)) {
+    for (const [sz, node] of Object.entries(flagNodes(entry))) {
+      if (visNodes[node]) visNodes[node].visible = !!vis[flag] && (sz === '*' || sz === size);
+    }
   }
 }
 
@@ -234,7 +248,20 @@ async function load() {
   ]);
   if (!scnRes.ok || !cycRes.ok) throw new Error('could not fetch the model description');
   scn = await scnRes.json();
-  cycle = await cycRes.json();
+  cycles = await cycRes.json();
+  // cycle.json is keyed by record size; an older bare list is the 12" cycle.
+  if (Array.isArray(cycles)) cycles = { '12': cycles };
+  const sizes = (scn.sizes || Object.keys(cycles)).filter(sz => cycles[sz]);
+  size = sizes[0];
+  cycle = cycles[size];
+  const sizeSel = document.getElementById('size');
+  for (const sz of sizes) {
+    const o = document.createElement('option');
+    o.value = sz; o.textContent = sz + '"';
+    sizeSel.appendChild(o);
+  }
+  sizeSel.value = size;
+  sizeSel.onchange = () => setSize(sizeSel.value);
 
   const gltf = await new GLTFLoader().loadAsync(BASE + 'parts.glb');
   const root = gltf.scene;
@@ -258,7 +285,7 @@ async function load() {
       const node = root.getObjectByName(name);
       if (!node) { missing.push(name); continue; }
       groups[group].add(node);
-      if (Object.values(scn.visibility).includes(name)) visNodes[name] = node;
+      if (Object.values(scn.visibility).some(e => Object.values(flagNodes(e)).includes(name))) visNodes[name] = node;
     }
   }
   if (missing.length) throw new Error('missing parts in parts.glb: ' + missing.join(', '));
@@ -274,8 +301,7 @@ async function load() {
   setFrame(0);
   frameCamera();
 
-  document.getElementById('cycleFacts').textContent =
-    `${cycle.length} steps, ${cycle.reduce((n, p) => n + p.keyframes.length, 0)} keyframes`;
+  showCycleFacts();
   buildStepButtons();
   status.remove();
   playing = true;
@@ -314,6 +340,26 @@ function frameCamera() {
   camera.updateProjectionMatrix();
 }
 
+
+function showCycleFacts() {
+  document.getElementById('cycleFacts').textContent =
+    `${size}" record: ${cycle.length} steps, ${cycle.reduce((n, p) => n + p.keyframes.length, 0)} keyframes`;
+}
+
+/** Switch to another record size's cycle, keeping the place in the cycle. */
+function setSize(sz) {
+  if (!cycles[sz]) return;
+  const frac = totalTime ? t / totalTime : 0;
+  size = sz;
+  cycle = cycles[sz];
+  buildTimeline();
+  t = frac * totalTime;
+  shownPose = -1;
+  document.getElementById('steps').replaceChildren();
+  buildStepButtons();
+  showCycleFacts();
+  setFrame(t);
+}
 
 function buildStepButtons() {
   const box = document.getElementById('steps');
@@ -369,7 +415,7 @@ function tick() {
 // A handle for checking this viewer against the CAD from outside: the test
 // drives a state here and compares each part's world position with the one
 // assembly.Machine computes for the same state. Nothing in the page uses it.
-window.machineViewer = { scene, groups, applyState, applyVisibility, THREE };
+window.machineViewer = { scene, groups, applyState, applyVisibility, setSize, THREE };
 
 tick();
 load().catch(err => { console.error(err); fail('Could not load the model: ' + err.message); });
