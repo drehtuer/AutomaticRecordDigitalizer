@@ -4,6 +4,8 @@ Things the concept could not settle and that the first hardware has to answer. E
 
 **The turntable's exact geometry.** The layout in the specification was measured on a top-down photo of the DD 3120 (`images/dd-3120-top.jpg`) and is good to about half a centimetre; perspective in the photo makes the outer positions the least certain. Confirm with a ruler before the CAD: spindle to pivot, pivot to arm rest, the cue lever's position and travel, and the height of the lever above the plinth. The cue-servo bracket, the end-stop pin and the fork's approach all hang on these numbers.
 
+**Whether the re-grip earns its keep.** The flip station is the one place a record is set down and picked up again with nothing centring it, and the decision log keeps it on the condition that it works. Count, over the first batches, how often the re-grip fails to find the hole or to seal, and how often a record on the ring is off its nominal centre by more than the cup's bellows absorb. If it is often, the one-side mode in `02-operating-cycle.md` is the machine's mode and the station comes off; if it is rare, the station stays and the mode remains the fallback.
+
 **Slipmat.** Replace the felt DJ slipmat with a rubber or cork mat before the first batch and check that the vacuum-cup release a few millimetres above it still centres the record on the spindle.
 
 **The remote start/stop jack's behaviour.** Fader start suggests the platter runs while the contact is held and stops when it opens; confirm that it is not a toggle, and whether the front-panel button still works while the remote contact is closed.
