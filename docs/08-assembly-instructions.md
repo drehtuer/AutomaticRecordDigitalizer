@@ -2,7 +2,7 @@
 
 How the machine goes together, in the order it has to, with every part named: bought, printed, cut from plywood, picked up at the Baumarkt, or already on hand. Dimensions come from `../cad/params.py`, which is the authority; where this document gives a number, that is where it came from. Nothing here has been built yet, so treat the sequence as a plan to be corrected on the first pass and written back.
 
-Read `07-status-and-next-steps.md` first. It front-loads the things that can still change the design — measuring the deck, printing the three parts that decide the geometry — and none of the work below should start before those are done. Two decisions in `06-open-questions.md` also bear on this document and are called out where they land: where the `GRIP` check lives, and the ring rest's real diameter.
+Read `07-status-and-next-steps.md` first. It front-loads the things that can still change the design — measuring the deck, printing the three parts that decide the geometry — and none of the work below should start before those are done. One decision in `06-open-questions.md` still bears on this document and is called out where it lands: where the `GRIP` check lives.
 
 ## Already on hand
 
@@ -45,6 +45,7 @@ What the bill of materials leaves to a local shop, on top of the plywood.
 - Wood screws: 4 × 40 mm, about 40, for the panel joints and the beam blocks; 3.5 × 25 mm, about 60, for printed parts onto plywood; 3.5 × 16 mm, about 40, for the roller brackets and small brackets. Countersunk, Torx.
 - Sanding: 80 and 120 grit, one sheet each; a block.
 - Four rubber feet or adjustable levelling feet for the carousel base plate, so it stands flat on a bench that is not.
+- One rubber O-ring, 3 mm cord, about 97 mm inside diameter (95 × 3 stretches on), NBR: it sits in the groove on top of the ring rest and is what the record actually rests on.
 - Self-adhesive felt, about 1 m of 20 mm strip, to line the tops of the combs where a record's edge sits — or print those in TPU and skip the felt.
 - Cable ties, 100 × 2.5 mm, one bag; and a few cable tie mounts with adhesive backs.
 - Fabric or Kapton tape for holding cable bundles in the chains while they are dressed.
@@ -84,8 +85,7 @@ PETG unless marked TPU. The CAD marks which parts have their functional features
 | Wrist | Finger-lift fork, 55 mm, with prongs 28 mm apart | 1 | PETG | Print-ready |
 | Wrist | Fork lining | 1 | TPU | To be added to the fork |
 | Wrist | Hall sensor mount at the hub | 1 | PETG | Envelope |
-| Station | Ring rest, with the pad groove on top | 1 | PETG | Print-ready, at the CAD's diameter — see the decision below |
-| Station | Ring rest pads | 3 | TPU | — |
+| Station | Ring rest, 100 mm mean diameter, with the O-ring groove on top | 1 | PETG | Print-ready |
 | Station | Post foot, screwed to the bench | 1 | PETG | Envelope |
 | Electronics | Controller plate for the outside of the rear panel: Octopus on standoffs, the supply, both bucks | 1 | PETG | Envelope |
 | Electronics | Pi plate for the outside of the end panel: Pi, hub, SSD, relay card, MPRLS | 1 | PETG | Envelope |
@@ -144,9 +144,7 @@ Before the wrist goes on the machine, test the cup end by hand: 12", 10", 7" and
 
 ### 7. Flip station
 
-The ring rest stands on a post on a printed foot screwed to the bench, at X = 200 mm, Y = −120 mm, Z = 300 mm, with its 60° opening towards the front. Screw the foot to the bench, the post into the foot, the horizontal arm to the post so it runs under the ring and never touches a record on it, and the ring to the riser. Stick the three TPU pads into the groove on top of the ring.
-
-**Decision needed: the ring's diameter.** The specification describes an annulus of 70 mm inner and 86 mm outer *diameter*, so that it touches nothing but the label; the CAD, and the STL in `../cad/export/`, have a major *radius* of 78 mm, so the ring contacts a record between 70 and 86 mm from its centre — outside the 50 mm label, on the lead-out band of a 12" and on the outermost grooves of a 7". One of the two is wrong and it decides what gets printed. The spec size leaves the 24 mm arm only 5.5 mm of clearance each side through the 60° opening; a ring at 43 mm major radius with a 6 mm tube would contact at 37 to 49 mm, inside the label, with 6.5 mm a side. Whichever is chosen goes into `../cad/params.py`, through the collision sweep, and back into `01-design-specification.md`.
+The ring rest stands on a post on a printed foot screwed to the bench, at X = 200 mm, Y = −120 mm, Z = 300 mm, with its 60° opening towards the front. Screw the foot to the bench, the post into the foot, the horizontal arm to the post so it runs under the ring and never touches a record on it, and the ring to the riser. Seat the O-ring in the groove on top; it stands a millimetre proud and the record rests on it, not on the print. The ring is 100 mm in mean diameter, so it holds a record at the edge of its label: a 7" overhangs it by 32 mm, the cup has 16 mm to its inner edge, and the arm passes through the 60° opening with 10 mm a side.
 
 ### 8. Deck interface
 

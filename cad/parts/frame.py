@@ -54,15 +54,18 @@ def station():
 
 
 def ring_rest():
-    """Printed ring rest alone, at the origin, opening towards +Y, with a TPU pad groove on top."""
+    """Printed ring rest alone, at the origin, opening towards +Y, with a groove on top for a 3 mm O-ring.
+
+    The groove is 3.4 wide and 2 deep, so the O-ring stands ST_PAD proud and the record sits on rubber.
+    """
     ring = torus_z(P.ST_RING_R, P.ST_RING_TUBE, 0, 0, 0, arc_deg=360 - degrees(P.ST_GAP))
     ring = ring.rotate((0, 0, 0), (0, 0, 1), 90 + degrees(P.ST_GAP) / 2)
-    groove = torus_z(P.ST_RING_R, 2.0, 0, 0, P.ST_RING_TUBE - 1.0)
+    groove = torus_z(P.ST_RING_R, 1.7, 0, 0, P.ST_RING_TUBE - 0.3)
     return ring.cut(groove)
 
 
 def record_on_ring(r=P.RECORD_12_R):
-    z = P.ST_Z + P.ST_RING_TUBE
+    z = P.ST_Z + P.ST_RING_TUBE + P.ST_PAD
     return cyl_z(r, P.RECORD_T, P.ST_X, P.ST_Y, z).cut(cyl_z(P.HOLE_R, P.RECORD_T + 2, P.ST_X, P.ST_Y, z - 1))
 
 

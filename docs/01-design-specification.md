@@ -45,7 +45,7 @@ Each record returns to the slot it came from, so the magazine is both infeed and
 
 ## Flip and photo station
 
-A ring rest on a post 12 cm behind the machine's centreline, at X = 20 cm, Z = 30 cm: an annulus of 70 mm inner and 86 mm outer diameter, TPU-padded, so it touches only the label of any record size, with a 60° opening towards the front through which the vacuum arm enters. The station is deliberately off the centreline so that a vertical record travelling along X at travel height passes beside it.
+A ring rest on a post 12 cm behind the machine's centreline, at X = 20 cm, Z = 30 cm: a printed ring of 100 mm mean diameter and 6 mm section, so it contacts a record between 44 and 56 mm from its centre — the edge of the label, where the record is stiffest — with a 3 mm rubber O-ring in a groove on top that the record actually rests on. It holds a 7" with 32 mm of overhang, leaves 16 mm between the cup and its inner edge, and its 60° opening towards the front, 44 mm wide at the inner edge, passes the 24 mm arm with 10 mm a side. That the ring touches a 12" just outside the label is accepted: the O-ring is soft, and stability matters more than the last millimetre of dead wax. The station is deliberately off the centreline so that a vertical record travelling along X at travel height passes beside it.
 
 ## Turntable interface
 

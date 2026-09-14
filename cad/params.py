@@ -73,7 +73,8 @@ TRAVEL_Z_STATION = 580.0                    # pivot height while crossing the st
 
 # ---------------------------------------------------------------- flip station
 ST_X, ST_Y, ST_Z = 200.0, -120.0, 300.0     # ring rest centre
-ST_RING_R, ST_RING_TUBE = 78.0, 8.0
+ST_RING_R, ST_RING_TUBE = 50.0, 6.0         # contact at 44..56 mm from the record's centre: the label's edge; holds a 7" with 32 mm overhang, clears the cup by 16
+ST_PAD = 1.0                                # a 3 mm rubber O-ring in the groove on top stands this much proud; the record rests on it
 ST_GAP = radians(60.0)                      # opening towards +Y
 ST_POST_Y = ST_Y - 140.0
 ST_ARM_Z = ST_Z - 19.0                      # the post's horizontal arm sits under the ring so a record on the ring never touches it

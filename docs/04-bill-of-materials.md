@@ -30,9 +30,9 @@ Prices are typical German retail, rounded, and will drift; check before ordering
 | Carousel | 608ZZ bearing (rollers) | 10 | 6 |
 | Carousel | 6005 bearing, 25 mm stub shaft | 1 | 8 |
 | Cabling | Cable chain 10 × 20 mm, 3 m for three chains (X 0.7, Y 0.6, Z 0.6 m); 6 m of 4-core, 12 m of 3-core and 4 m of 2-core extension wire; a 2 m USB 2.0 extension for the wrist camera and a 3 m USB-C cable from the Pi to the controller; connectors, crimps, sleeving | 1 set | 78 |
-| Hardware | M3/M5 screws and nuts, heat-set inserts, felt, rubber sleeve stock | 1 set | 35 |
+| Hardware | M3/M5 screws and nuts, heat-set inserts, felt, rubber sleeve stock, one 97 × 3 NBR O-ring for the ring rest | 1 set | 36 |
 | Consumables | PETG 2.5 kg, TPU 0.3 kg | | 70 |
-| **Total** | | | **≈ 932** |
+| **Total** | | | **≈ 933** |
 
 Not included, because they are already on hand: the 3D printer, the turntable (Omnitronic DD 3120), the Focusrite Scarlett, the Conrad 393905 USB relay card, the Raspberry Pi 4B (two of them, the second a cold spare) with its 15 W supply and 32 GB card, the external USB 3.0 SSD the recordings are written to, the self-powered USB 3.0 hub everything else hangs off, and the USB webcams for the wrist (two on hand, a 720p Logitech C270 and a 1080p module). Together those are roughly 185 to 195 € that do not have to be spent. Also not included: an external phono preamp if the deck's own line output is not used (about 40 €).
 
@@ -75,11 +75,11 @@ Roughly 30 distinct parts, 50 to 70 hours of printing. PETG unless marked TPU.
 | Gantry | 2 V-wheel carriage plates for the X beams (or the donor's), cross-beam end brackets, Y wheel plate, Z guide block, Z carriage with outrigger, lead-screw nut holder, column end caps |
 | Wrist | hub with bearing seats, arm, cup bracket, hose clip, wrist camera mount, finger-lift fork with TPU lining, Hall sensor mount |
 | Carousel | centre hub, 24 slot combs, 8 rim segments, 8 GT2 tooth-ring segments, 10 roller brackets, stepper mount with pulley, home-mark flag and sensor mount |
-| Station | ring rest with TPU pads, post foot; controller plate and Pi plate for the panel outsides, pump mount on rubber feet |
+| Station | ring rest with a rubber O-ring in its top groove, post foot; controller plate and Pi plate for the panel outsides, pump mount on rubber feet |
 | Deck interface | cue-servo bracket, pusher rod guide, lever pad, end-stop pin base with TPU sleeve |
 | Cameras and light | deck camera bracket, LED bar housing, cable-chain end brackets |
 
-TPU goes on every surface that touches a record: the cup lip if it is not bought, the fork lining, the ring rest pads, the end-stop sleeve.
+Something soft goes on every surface that touches a record: TPU for the cup lip if it is not bought, the fork lining and the end-stop sleeve; a bought rubber O-ring on the ring rest.
 
 ## Wood and other cut parts
 
