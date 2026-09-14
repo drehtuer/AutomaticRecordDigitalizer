@@ -26,7 +26,40 @@
    "plinth",
    "deck_interface",
    "deck_camera",
-   "carousel_base"
+   "carousel_base",
+   "pcb_octopus",
+   "psu_24v",
+   "buck_12v",
+   "buck_5v",
+   "power_strip",
+   "pump",
+   "valve",
+   "pi_plate",
+   "pcb_pi",
+   "usb_hub",
+   "ssd",
+   "pcb_relay",
+   "pcb_mprls",
+   "psu_pi",
+   "scarlett",
+   "x_chain",
+   "cable_climb",
+   "cable_x_endstop",
+   "cable_pump",
+   "cable_valve",
+   "hose",
+   "tube_mprls",
+   "cable_usbc",
+   "cable_servo",
+   "cable_led",
+   "cable_carousel",
+   "cable_relay",
+   "cable_audio",
+   "cable_scarlett_usb",
+   "cable_ribbon",
+   "mains_psu",
+   "mains_pi",
+   "mains_deck"
   ],
   "carousel": [
    "carousel_disc",
@@ -59,16 +92,25 @@
    "tonearm"
   ],
   "x": [
-   "x_carriage"
+   "x_carriage",
+   "y_chain",
+   "cable_y_chain_feed",
+   "cable_x_motor"
   ],
   "y": [
-   "y_carriage"
+   "y_carriage",
+   "z_chain",
+   "cable_z_motor",
+   "cable_z_chain_feed"
   ],
   "z": [
-   "z_carriage"
+   "z_carriage",
+   "column_post",
+   "outrigger_cables"
   ],
   "wrist": [
    "wrist",
+   "wrist_cables",
    "record_held"
   ]
  },

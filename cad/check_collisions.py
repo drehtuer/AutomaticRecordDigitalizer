@@ -39,7 +39,7 @@ def samples(k0, k1, step_mm, step_deg):
     return [(i / n, K.interpolate(k0, k1, i / n)) for i in range(n + 1)]
 
 
-CHECK_MOVING = ("z_carriage", "wrist", "record_held")     # x/y carriages ride on the beams by design
+CHECK_MOVING = ("z_carriage", "wrist", "record_held", "column_post", "outrigger_cables", "wrist_cables")   # x/y carriages ride on the beams by design
 SKIP_PAIRS = {("wrist", "tonearm")}                        # the fork straddles the finger lift: checked separately with a margin
 
 

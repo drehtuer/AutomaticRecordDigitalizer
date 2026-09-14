@@ -11,6 +11,7 @@ python -m cad.assembly place regrip   # STEP of the whole machine at named poses
 python -m cad.export_parts      # STL of the printed parts, STEP of the sub-assemblies
 python -m cad.kinematics > cad/cycle.json  # the keyframes of the cycle, for the orchestrator and the viewer (--size 10 or 7 for the smaller records)
 python -m cad.export_web        # glTF of every rigid body plus scene.json, for cad-model.html
+python -m cad.render            # PNG views of the machine at rest into docs/images/, for the documents
 ```
 
 Run the commands from the repository root.
@@ -26,7 +27,11 @@ the measured pivot, cue lever), `carousel.py` (base with roller ring, rotating d
 V-floor combs and tooth ring, records of any size as spokes), `frame.py` (plywood box, V-slot beams, flip
 station on its foot), `gantry.py` (X, Y and Z carriages and the wrist with cup, camera and
 fork, each in its own kinematic frame), `deck_interface.py` (cue-lever servo bracket with
-pusher and end stop, deck camera and LED bar).
+pusher and end stop, deck camera and LED bar), `electronics.py` (every board and box on the frame
+at its catalogue size, the three cable chains, and the cable and hose runs as tubes along their
+routes). The chains and the cables that feed them are drawn at the home pose, because their shape
+changes with every move; the sweep checks the electronics and the cable runs that ride rigidly on
+the column and the wrist, and does not check the chains.
 
 `kinematics.py` is the forward kinematics (where the cup and the fork are for a carriage
 position and wrist angle), the fourteen poses of the cycle, and the planner that turns two
@@ -41,7 +46,9 @@ and reports every intersection between the Z carriage, the wrist and the held re
 anything else, with the pose, the segment and the position. `export_parts.py` writes the STL
 files for printing and the sub-assembly STEP files for FreeCAD. `export_web.py` writes every rigid body in
 its rest frame as one glTF plus `scene.json`, the constants the viewer in `cad-model.html` needs to assemble
-and animate them; the viewer restates no dimension of its own.
+and animate them; the viewer restates no dimension of its own. `render.py` tessellates the machine at the
+home pose and rasterises orthographic views through a depth buffer with nothing but numpy, since the
+container has no renderer and no browser; the pictures in the documents come from it.
 
 `export/` holds generated files. They are committed at reviewed states so the STEP files can
 be opened without running anything; regenerate them after changing `params.py`.
