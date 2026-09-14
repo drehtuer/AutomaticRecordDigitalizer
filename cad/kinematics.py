@@ -10,7 +10,7 @@ horizontal moves, lower, approach, with special plans for the station and the to
 from math import cos, radians, sin
 
 from . import params as P
-from .parts.carousel import pick_record_centre
+from .parts.carousel import RADII, pick_record_centre
 from .parts.deck import finger_lift_point, platter_top_z
 
 TRAVEL = P.TRAVEL_Z
@@ -45,8 +45,14 @@ def fork_on(arm_state):
 
 
 # ---------------------------------------------------------------- targets
-PICK = pick_record_centre()
-PICK_CUP = (PICK[0], PICK[1] + P.RECORD_T / 2 + P.CUP_H / 2, PICK[2])
+def pick_cup(r=P.RECORD_12_R):
+    """Cup centre against the face of the record in slot 0: the same X and Y for every size, a height
+    that follows the record's radius, because every size stands with its centre at CAR_REC_R."""
+    px, py, pz = pick_record_centre(r)
+    return (px, py + P.RECORD_T / 2 + P.CUP_H / 2, pz)
+
+
+PICK_CUP = pick_cup()
 PLATTER_REC_Z = platter_top_z() + 3.0 + P.RECORD_T / 2            # released 3 mm above the mat
 PLACE_CUP = (P.DECK_SPINDLE_X, P.DECK_SPINDLE_Y, PLATTER_REC_Z + P.RECORD_T / 2 + P.CUP_H / 2)
 RING_TOP = P.ST_Z + P.ST_RING_TUBE + P.ST_PAD                        # the record rests on the O-ring, not the print
@@ -60,36 +66,43 @@ def V(held, slot, platter, ring):
     return {"held": held, "slot": slot, "platter": platter, "ring": ring}
 
 
-POSES = [
-    dict(id="pick", name="Pick from carousel", car=lambda: carriage_for_cup(*PICK_CUP, 0.0),
-         approach=(0, 8, 0), before=V(False, True, False, False), after=V(True, False, False, False), spin=False),
-    dict(id="place", name="Place side A", car=lambda: carriage_for_cup(*PLACE_CUP, 90.0),
-         before=V(True, False, False, False), spin=False),
-    dict(id="liftarm", name="Lift arm, engage fork", car=lambda: fork_on("rest"), approach=(0, 0, 40),
-         before=V(False, False, True, False), arm=("rest", 1), spin=False, plan="liftarm"),
-    dict(id="toleadin", name="Carry arm to lead-in", car=lambda: fork_on("leadin"),
-         before=V(False, False, True, False), arm=("leadin", 1), spin=False, plan="direct"),
-    dict(id="drop", name="Lower needle, start", car=lambda: {**fork_on("leadin"), "z": fork_on("leadin")["z"] + 80},
-         before=V(False, False, True, False), arm=("leadin", 0), spin=True, plan="drop"),
-    dict(id="runout", name="Run-out: stop, lift, find arm", car=lambda: fork_on("runout"), approach=(0, 0, 40),
-         before=V(False, False, True, False), arm=("runout", 1), spin=False, plan="runout"),
-    dict(id="torest", name="Carry arm to rest, lower", car=lambda: {**fork_on("rest"), "z": fork_on("rest")["z"] + 80},
-         before=V(False, False, True, False), arm=("rest", 0), spin=False, plan="torest"),
-    dict(id="lift", name="Lift record off the platter", car=lambda: carriage_for_cup(*PLACE_CUP, 90.0),
-         before=V(False, False, True, False), after=V(True, False, False, False), spin=False),
-    dict(id="station", name="Carry to station, B up", car=lambda: carriage_for_cup(*STATION_CUP, -90.0),
-         before=V(True, False, False, False), spin=False, plan="station"),
-    dict(id="release", name="Release & withdraw", car=lambda: carriage_for_cup(P.ST_X, P.ST_Y, P.ST_Z - 60.0, -90.0),
-         before=V(False, False, False, True), spin=False, plan="direct"),
-    dict(id="regrip", name="Re-grip from above", car=lambda: carriage_for_cup(*REGRIP_CUP, 90.0), approach=(0, 0, 30),
-         before=V(False, False, False, True), after=V(True, False, False, False), spin=False, plan="regrip"),
-    dict(id="placeB", name="Place side B", car=lambda: carriage_for_cup(*PLACE_CUP, 90.0),
-         before=V(True, False, False, False), spin=False),
-    dict(id="return", name="Return to its slot", car=lambda: carriage_for_cup(*PICK_CUP, 0.0),
-         before=V(True, False, False, False), after=V(False, True, False, False), retreat=(0, 8, 0), spin=False),
-    dict(id="index", name="Index carousel", car=lambda: {"x": 200.0, "y": 30.0, "z": TRAVEL, "phi": 0.0},
-         carousel=360.0 / P.CAR_SLOTS, before=V(False, True, False, False), spin=False),
-]
+def poses(r=P.RECORD_12_R):
+    """The fourteen poses of the cycle for a record of radius r. Only the pick and the return depend on
+    the size; the platter and the ring rest take every record at its centre."""
+    pc = pick_cup(r)
+    return [
+        dict(id="pick", name="Pick from carousel", car=lambda: carriage_for_cup(*pc, 0.0),
+             approach=(0, 8, 0), before=V(False, True, False, False), after=V(True, False, False, False), spin=False),
+        dict(id="place", name="Place side A", car=lambda: carriage_for_cup(*PLACE_CUP, 90.0),
+             before=V(True, False, False, False), spin=False),
+        dict(id="liftarm", name="Lift arm, engage fork", car=lambda: fork_on("rest"), approach=(0, 0, 40),
+             before=V(False, False, True, False), arm=("rest", 1), spin=False, plan="liftarm"),
+        dict(id="toleadin", name="Carry arm to lead-in", car=lambda: fork_on("leadin"),
+             before=V(False, False, True, False), arm=("leadin", 1), spin=False, plan="direct"),
+        dict(id="drop", name="Lower needle, start", car=lambda: {**fork_on("leadin"), "z": fork_on("leadin")["z"] + 80},
+             before=V(False, False, True, False), arm=("leadin", 0), spin=True, plan="drop"),
+        dict(id="runout", name="Run-out: stop, lift, find arm", car=lambda: fork_on("runout"), approach=(0, 0, 40),
+             before=V(False, False, True, False), arm=("runout", 1), spin=False, plan="runout"),
+        dict(id="torest", name="Carry arm to rest, lower", car=lambda: {**fork_on("rest"), "z": fork_on("rest")["z"] + 80},
+             before=V(False, False, True, False), arm=("rest", 0), spin=False, plan="torest"),
+        dict(id="lift", name="Lift record off the platter", car=lambda: carriage_for_cup(*PLACE_CUP, 90.0),
+             before=V(False, False, True, False), after=V(True, False, False, False), spin=False),
+        dict(id="station", name="Carry to station, B up", car=lambda: carriage_for_cup(*STATION_CUP, -90.0),
+             before=V(True, False, False, False), spin=False, plan="station"),
+        dict(id="release", name="Release & withdraw", car=lambda: carriage_for_cup(P.ST_X, P.ST_Y, P.ST_Z - 60.0, -90.0),
+             before=V(False, False, False, True), spin=False, plan="direct"),
+        dict(id="regrip", name="Re-grip from above", car=lambda: carriage_for_cup(*REGRIP_CUP, 90.0), approach=(0, 0, 30),
+             before=V(False, False, False, True), after=V(True, False, False, False), spin=False, plan="regrip"),
+        dict(id="placeB", name="Place side B", car=lambda: carriage_for_cup(*PLACE_CUP, 90.0),
+             before=V(True, False, False, False), spin=False),
+        dict(id="return", name="Return to its slot", car=lambda: carriage_for_cup(*pc, 0.0),
+             before=V(True, False, False, False), after=V(False, True, False, False), retreat=(0, 8, 0), spin=False),
+        dict(id="index", name="Index carousel", car=lambda: {"x": 200.0, "y": 30.0, "z": TRAVEL, "phi": 0.0},
+             carousel=360.0 / P.CAR_SLOTS, before=V(False, True, False, False), spin=False),
+    ]
+
+
+POSES = poses()
 
 HOME = {"x": 200.0, "y": 30.0, "z": TRAVEL, "phi": 0.0, "a": P.ARM_ANGLE["rest"], "l": 0.0, "c": 0.0}
 
@@ -167,10 +180,10 @@ def plan(pose, f, prev=None):
     return default_plan(f, g, retreat, pose.get("approach"))
 
 
-def full_cycle():
-    """List of (pose, keyframes, visibility_before, visibility_after) for one record."""
+def full_cycle(r=P.RECORD_12_R):
+    """List of (pose, keyframes) for one record of radius r."""
     state, prev, out = dict(HOME), None, []
-    for pose in POSES:
+    for pose in poses(r):
         keys = plan(pose, state, prev)
         out.append((pose, keys))
         state, prev = keys[-1], pose
@@ -182,8 +195,12 @@ def interpolate(k0, k1, t):
 
 
 if __name__ == "__main__":
+    import argparse
     import json
     import sys
+    ap = argparse.ArgumentParser(description="print the cycle's keyframes as JSON")
+    ap.add_argument("--size", choices=sorted(RADII), default="12", help='record size in inches (default 12)')
+    r = RADII[ap.parse_args().size]
     cyc = [{"id": p["id"], "name": p["name"], "keyframes": ks, "before": p["before"], "after": p.get("after")}
-           for p, ks in full_cycle()]
+           for p, ks in full_cycle(r)]
     json.dump(cyc, sys.stdout, indent=1)

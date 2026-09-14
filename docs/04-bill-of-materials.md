@@ -74,7 +74,7 @@ Roughly 30 distinct parts, 50 to 70 hours of printing. PETG unless marked TPU.
 |---|---|
 | Gantry | 2 V-wheel carriage plates for the X beams (or the donor's), cross-beam end brackets, Y wheel plate, Z guide block, Z carriage with outrigger, lead-screw nut holder, column end caps |
 | Wrist | hub with bearing seats, arm, cup bracket, hose clip, wrist camera mount, finger-lift fork with TPU lining, Hall sensor mount |
-| Carousel | centre hub, 24 slot combs, 8 rim segments, 8 GT2 tooth-ring segments, 10 roller brackets, stepper mount with pulley, home-mark flag and sensor mount |
+| Carousel | centre hub, 24 slot combs with V floors, 8 GT2 tooth-ring segments, 10 roller brackets, stepper mount with pulley, home-mark flag and sensor mount |
 | Station | ring rest with a rubber O-ring in its top groove, post foot; controller plate and Pi plate for the panel outsides, pump mount on rubber feet |
 | Deck interface | cue-servo bracket, pusher rod guide, lever pad, end-stop pin base with TPU sleeve |
 | Cameras and light | deck camera bracket, LED bar housing, cable-chain end brackets |
@@ -83,4 +83,4 @@ Something soft goes on every surface that touches a record: TPU for the cup lip 
 
 ## Wood and other cut parts
 
-From the plywood: two side panels 121 × 83 cm with windows, one end panel 84 × 83 cm with a window (it sits between the side panels, whose inner faces are 84.2 cm apart), the bench top 190 × 100 cm (or an existing bench), the carousel disc Ø 86 cm, and the carousel base plate Ø 88 cm. That is two 1500 × 3000 sheets without the bench top and three with it; the cut list with the window sizes and the nesting is in `08-assembly-instructions.md`. None of the cuts needs to be better than a few millimetres; the precise surfaces are all bought (rails on extrusion) or printed (carousel hub and rim).
+From the plywood: two side panels 121 × 83 cm with windows, one end panel 84 × 83 cm with a window (it sits between the side panels, whose inner faces are 84.2 cm apart), the bench top 190 × 100 cm (or an existing bench), the carousel disc Ø 86 cm, and the carousel base plate Ø 88 cm. That is two 1500 × 3000 sheets without the bench top and three with it; the cut list with the window sizes and the nesting is in `08-assembly-instructions.md`. None of the cuts needs to be better than a few millimetres; the precise surfaces are all bought (rails on extrusion) or printed (carousel hub and combs).

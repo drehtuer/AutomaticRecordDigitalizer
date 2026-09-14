@@ -64,7 +64,8 @@ def rest_parts():
         "record_ring": m.ring_rec,
     }
     for k, rec in enumerate(m.slot_recs0):
-        parts[f"record_slot{k}"] = rec
+        if rec is not None:
+            parts[f"record_slot{k}"] = rec
     return parts
 
 

@@ -4,11 +4,11 @@ One record goes through fourteen steps. The concept model animates each of them,
 
 ## Before a batch
 
-The user brushes each record by hand and loads up to 24 of them into the carousel and enters the batch manifest in the web interface: one line per slot with size, speed (33 or 45), and flags for reverse-play or locked-groove sides. The machine homes every axis, indexes the carousel to slot 1, and checks with the wrist camera that a record is present where the manifest says one is.
+The user brushes each record by hand and loads up to 24 of them into the carousel and enters the batch manifest in the web interface: one line per slot with size (12", 10" or 7"), speed (33 or 45), and flags for reverse-play or locked-groove sides; a line can also say "by hand" for a record the carousel cannot present (see below). The machine homes every axis, indexes the carousel to slot 1, and checks with the wrist camera from above that a record is present where the manifest says one is and that its spoke has the length its size implies, so a wrong size is caught before the pick. The manifest editor refuses a 12" in the slot on the front side of a 7": the wrist descends beside that spoke, 62 mm deeper for a 7" than for a 12", and a 12" there would be in its way (`05-design-decisions.md`). A 7", a 10" or an empty slot there is fine, so a run of 7"s costs one empty slot.
 
 ## The steps
 
-**1. Pick from carousel.** At travel height the gantry positions the wrist above the gap beside the spoke at the pick position. The arm descends into the gap with the cup 8 mm from the record's face, then moves along Y onto the label; vacuum on, the pressure sensor confirms the seal, and the record lifts straight up out of its slot. Spokes never touch. The record's centre is known from its resting position against the rim ring; no camera is involved here.
+**1. Pick from carousel.** At travel height the gantry positions the wrist above the gap beside the spoke at the pick position. The arm descends into the gap to the centre height of the record's size, with the cup 8 mm from the record's face, then moves along Y onto the label; vacuum on, the pressure sensor confirms the seal, and the record lifts straight up out of its slot. Spokes never touch. The record's centre is known: every size rolls to the apex of the V floor in its comb, so the radius is fixed and the height follows from the manifest's size; no camera is involved here.
 
 **2. Place side A.** The vertical record leaves the carousel along X at travel height, passes beside the flip station, and only when it is over the deck does the wrist turn to −90° so the record is horizontal, cup on top. It is lowered to a few millimetres above the mat, centred over the spindle, and released; the spindle tip enters the hollow cup and does the final centring. The wrist then hovers over the platter with the cup pointing down and the wrist camera photographs the label, finds the centre from the spindle, and measures the lead-in and run-out radii of this side.
 
@@ -42,7 +42,7 @@ Every move between two poses is a list of waypoints, one axis at a time, generat
 
 Retreat first. If the previous pose left the cup against or under something (a spoke face, a record on the ring), the first move is a short retreat along the approach direction.
 
-Raise to travel height. The wrist pivot travels at 54 cm above the bench: high enough that a vertical record clears the carousel rim and the station ring's neighbourhood, and a horizontal record clears everything.
+Raise to travel height. The wrist pivot travels at 54 cm above the bench: high enough that a vertical record clears the carousel's combs and the station ring's neighbourhood, and a horizontal record clears everything.
 
 Order the horizontal moves by direction. Leaving the carousel the order is X, then Y, then wrist; heading towards it the order is wrist, then Y, then X. This keeps a vertical record moving in its own plane while it is between spokes, and only turns the wrist over the deck, where there is room to swing.
 
@@ -50,7 +50,11 @@ Lower, then approach. The final descent stops a few millimetres short and the la
 
 Station poses have their own plans, because the arm has to get out from under a record before it can rise.
 
-Every target position is either a fixed mechanical datum (the pick slot, the spindle, the ring rest, the arm rest) or a camera measurement against one. Nothing is inferred from how many records are left or how far something moved last time.
+Every target position is either a fixed mechanical datum (the pick slot, the spindle, the ring rest, the arm rest) or a camera measurement against one. Nothing is inferred from how many records are left or how far something moved last time. The one thing the planner takes from the manifest is the record's size, and it changes only the pick and the return, by the height of the record's centre in its slot: the platter and the ring rest take every record at its centre, so steps 2 to 12 are the same for a 7" as for a 12".
+
+## Records placed by hand
+
+The carousel locates a record by its round edge, and the pick assumes the label at the centre of that circle. A shaped picture disc (a sawblade, a heart, a star) has no round edge to roll on, and a disc whose outline is not centred on its hole comes to rest at a height nobody can predict; the cup could hold either by its label, but the machine could not find the label. A manifest line marked "by hand" therefore skips the carousel: when the batch reaches it the gantry parks, the platter stopped, and the interface asks the user to lay the record on the spindle. From "continue" the machine does what it does for any other record: the wrist hovers over the platter and photographs and measures the side, the arm is carried to the lead-in, the side is recorded, and the arm is returned to its rest. Then it parks again and asks the user to turn the record over, and after side B to take it off. Its slot in the carousel stays empty. The same mode serves a record that is too precious to be picked, or a 10" or 7" that the user would rather not stand in a slot.
 
 ## Timing
 

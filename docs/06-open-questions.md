@@ -24,7 +24,7 @@ Things the concept could not settle and that the first hardware has to answer. E
 
 **Carousel indexing accuracy.** Whether a printed GT2 ring in eight segments indexes to within a millimetre at the rim over many revolutions, or whether the per-slot optical mark is needed for every index rather than only for homing.
 
-**Vertical record at travel height.** The planned travel height leaves about 3 cm between a hanging 12" record and the carousel rim while it moves along X. Confirm the real rim height and the record's swing when the gantry accelerates; raise the travel height if needed.
+**Vertical record at travel height.** The planned travel height leaves about 5 cm between the lower edge of a hanging 12" record and the tops of the carousel's combs while it moves along X. Confirm the record's swing when the gantry accelerates; raise the travel height if needed.
 
 **Deck camera view.** Whether the low, oblique view from the end panel sees the headshell over the whole arc and resolves the stylus, or wants a slightly higher mounting; and whether the raking LED at that angle shows the groove bands reliably on dark and on coloured vinyl.
 
@@ -38,6 +38,6 @@ Things the concept could not settle and that the first hardware has to answer. E
 
 **V-wheel play on X.** With Delrin wheels on V-slot the carriages must be adjusted with their eccentric spacers until there is no rock and no binding over the whole 1.3 m; check that the cup's position at the pick slot repeats to within half a millimetre after a full X traverse, and fall back to a rail on X if it does not.
 
-**Pick without a camera.** The pick relies on the record's centre being within about a millimetre of its nominal position when it rests against the rim ring. Check this on the printed combs and rim with a 12", a 10" and a 7": if a size sits further off, the wrist camera can take one look from above the slot before the arm descends, at the cost of a few seconds.
+**Pick without a camera.** The pick relies on the record's centre being within about a millimetre of its nominal position when it has rolled to the apex of the V in its comb. Check this on a printed comb with a 12", a 10" and a 7": drop each into the slot anywhere along its length and measure where it comes to rest. A record that stops short on the 5° slope needs a steeper V, which is one number in `cad/params.py`; if a size still sits off, the wrist camera can take one look from above the slot before the arm descends, at the cost of a few seconds.
 
 **Spindle in the cup.** The spindle tip enters the hollow bellows cup by about 10 mm when a record is released 3 mm above the mat. Confirm the cup's inner depth allows that with the chosen cup; otherwise release from a little higher.
