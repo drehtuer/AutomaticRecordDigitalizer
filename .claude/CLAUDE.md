@@ -14,6 +14,21 @@ request on its own branch:
 3. `git push -u origin <topic-branch>` and open the pull request (`gh pr create`).
 4. **Switch back to `main` afterwards** (`git switch main`), so the working tree is never left
    sitting on a pushed topic branch.
+5. **Once the pull request is merged on origin, delete the local branch.** Pull `main`, prune the
+   remote-tracking refs, and delete with `-d`, which refuses anything not yet merged:
+
+   ```sh
+   git switch main && git pull --ff-only && git fetch --prune
+   git branch -d <topic-branch>
+   ```
+
+   To clear every branch that has already been merged in one go:
+
+   ```sh
+   git branch --merged main | grep -v '^\*' | xargs -r git branch -d
+   ```
+
+   Never `-D`: a branch that `-d` refuses is one whose work has not reached `main`.
 
 Wait for CI to pass on the pull request before asking for a merge.
 
