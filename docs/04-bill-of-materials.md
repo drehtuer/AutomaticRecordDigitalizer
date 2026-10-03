@@ -1,12 +1,12 @@
 # Bill of materials
 
-Prices are typical German retail, rounded, and will drift; check before ordering. Every line was priced against live German shop pages on 10 September 2026, and the figures below have been corrected where that sourcing pass disagreed with the estimate; the itemised result, with product links and three ways of ordering it, is in [../sourcing/bom-shopping-list.md](../sourcing/bom-shopping-list.md), and what it changed here is in [../sourcing/2026-09-sourcing-and-bom-corrections.md](../sourcing/2026-09-sourcing-and-bom-corrections.md). Everything listed is stocked by German shops, so nothing depends on imports. Suggested sources: shop.bohrers.de or Dold Mechatronik for V-slot extrusion and the linear rail; roboter-bausatz.de for wheels, belts, pulleys, steppers, the lead screw, the servo and fastener assortments; oyostepper.de for the geared steppers; BerryBase and Reichelt for the Raspberry Pi side, cameras, sensors, LED and cable; druckluft-fachhandel.de for the solenoid valve, tubing and push-in fittings; Filamentworld or 3DJake for filament; any Baumarkt for plywood, bearings and fasteners. Not Motedis: it carries only B-Typ Nut 6 and I-Typ Nut 5 profile and no V-slot at all, so nothing it sells has a wheel-running surface.
+Prices are typical German retail, rounded, and will drift; check before ordering. Every line was priced against live German shop pages on 10 September 2026 and re-verified on 3 October 2026, and the figures below have been corrected where those passes disagreed with the estimate; the itemised result, with product links, three ways of ordering it and a sheet for the Baumarkt, is in [../sourcing/bom-shopping-list.md](../sourcing/bom-shopping-list.md), and what it changed here is in [../sourcing/2026-09-sourcing-and-bom-corrections.md](../sourcing/2026-09-sourcing-and-bom-corrections.md). Everything listed is stocked by German shops, so nothing depends on imports. Suggested sources: shop.bohrers.de or Dold Mechatronik for V-slot extrusion and the linear rail; roboter-bausatz.de for wheels, belts, pulleys, steppers, the lead screw, the servo and fastener assortments; 3DJake for the Octopus, which roboter-bausatz no longer carries; oyostepper.de for the geared steppers; BerryBase and Reichelt for the Raspberry Pi side, cameras, the display, sensors and LED; Conrad for the multi-core extension wire and the USB cables; druckluft-fachhandel.de for the solenoid valve, tubing and push-in fittings; Filamentworld or 3DJake for filament; Hornbach or any Baumarkt for plywood, glue and wood screws. Not Motedis: it carries only B-Typ Nut 6 and I-Typ Nut 5 profile and no V-slot at all, so nothing it sells has a wheel-running surface.
 
 ## Bought parts
 
 | Group | Part | Qty | ≈ € |
 |---|---|---|---|
-| Frame | 18 mm birch plywood, 1500 × 3000 mm: one sheet for the three panels, one for the two carousel discs; a third for the bench top only if there is no bench | 2 | 120 |
+| Frame | 18 mm birch multiplex, 3000 × 1500 mm, for the three panels; 18 mm MDF, 2440 × 1220 mm, for the two carousel discs; a third sheet for the bench top only if there is no bench | 1 + 1 | 273 |
 | Frame | 2040 V-slot extrusion 1.3 m (X beams) | 2 | 30 |
 | Frame | 2040 V-slot 0.94 m (cross beam, spanning the 86 cm frame with the plates outside it), 2020 0.88 m (end tie), brackets, T-nuts, bolts | 1 set | 42 |
 | Linear | Delrin V-wheels, four per carriage plate (X ×2, Y ×1), six of them on eccentric spacers | 12 + 6 | 45 |
@@ -20,6 +20,7 @@ Prices are typical German retail, rounded, and will drift; check before ordering
 | Controller | TMC2209 driver (5 with the Octopus, 1 with the donor-board option) | 5 | 30 |
 | Power | 24 V 150 W supply; 24 → 5 V 3 A buck for the servo; 24 → 12 V 3 A buck for the pump, the valve and the LED bar, which are all 12 V | 1 set | 38 |
 | Cameras | Raspberry Pi Camera Module 3 (deck camera; the Pi 4B has one CSI port, so the wrist camera is USB and owned) with a 500 mm ribbon; the Pi sits on the deck-end panel 30 cm away | 1 | 29 |
+| Display | Waveshare 4.3″ capacitive touch display, DSI, 800 × 480, on the Pi's free DSI port, with a 500 mm 15-pin ribbon: cycle state, fault screen, the current side's label photo | 1 | 41 |
 | Vacuum | 12 V diaphragm vacuum pump | 1 | 11 |
 | Vacuum | 12 V 2/2 solenoid valve, G 1/8 NC, FKM — **direct-acting**, not pilot-assisted | 1 | 42 |
 | Vacuum | Adafruit MPRLS 0–25 PSI I²C pressure breakout, in place of a vacuum switch | 1 | 31 |
@@ -29,24 +30,25 @@ Prices are typical German retail, rounded, and will drift; check before ordering
 | Light | LED bar (12 V, warm white) and logic-level MOSFET | 1 | 8 |
 | Carousel | 608ZZ bearing (rollers) | 10 | 6 |
 | Carousel | 6005 bearing, 25 mm stub shaft | 1 | 8 |
-| Cabling | Cable chain 10 × 20 mm, 3 m for three chains (X 0.7, Y 0.6, Z 0.6 m); 6 m of 4-core, 12 m of 3-core and 4 m of 2-core extension wire; a 2 m USB 2.0 extension for the wrist camera and a 3 m USB-C cable from the Pi to the controller; connectors, crimps, sleeving | 1 set | 78 |
+| Cabling | Cable chain 10 × 20 mm, 3 m for three chains (X 0.7, Y 0.6, Z 0.6 m); 7 m of 4-core and 15 m of 3-core extension wire (LiYY 0.25 mm², two cores of the 3-core for the button taps), 10 m of 20 AWG pair for the 12 V loads; an active 5 m USB 2.0 repeater for the wrist camera and a 3 m USB-A to USB-C cable from the Pi to the controller; connectors, crimps, sleeving | 1 set | 138 |
 | Hardware | M3/M5 screws and nuts, heat-set inserts, felt, rubber sleeve stock, one 97 × 3 NBR O-ring for the ring rest | 1 set | 36 |
 | Consumables | PETG 2.5 kg, TPU 0.3 kg | | 70 |
-| **Total** | | | **≈ 933** |
+| **Total** | | | **≈ 1 187** |
 
 Not included, because they are already on hand: the 3D printer, the turntable (Omnitronic DD 3120), the Focusrite Scarlett, the Conrad 393905 USB relay card, the Raspberry Pi 4B (two of them, the second a cold spare) with its 15 W supply and 32 GB card, the external USB 3.0 SSD the recordings are written to, the self-powered USB 3.0 hub everything else hangs off, and the USB webcams for the wrist (two on hand, a 720p Logitech C270 and a 1080p module). Together those are roughly 185 to 195 € that do not have to be spent. Also not included: an external phono preamp if the deck's own line output is not used (about 40 €).
 
-The table above is the planning estimate, rounded, and it counts the plywood and the filament. The [10 September 2026 sourcing pass](../sourcing/bom-shopping-list.md) priced every line against live shop pages and costed three ways of actually ordering it, excluding plywood, Baumarkt items and filament, and including shipping:
+The table above is the planning estimate, rounded, and it counts the plywood and the filament. The [sourcing pass](../sourcing/bom-shopping-list.md) priced every line against live shop pages on 10 September and again on 3 October 2026, and costed three ways of actually ordering it, including shipping and excluding filament, plywood and the other Baumarkt items. The routes include the crimp tool and the heat gun, about 48 €, which this table leaves out with the other tools; parts already ordered on 3 October count as owned. The Baumarkt sheet, priced at Hornbach for pickup, comes on top of whichever route is ordered:
 
 | Route | Parts | Shipping | Delivered |
 |---|---|---|---|
-| Cheapest per line, 12 suppliers, 12 parcels | 821,60 | 67,15 | **888,75** |
-| Consolidated into 6 suppliers | 758,70 | 37,60 | **796,30** |
-| With a donor printer, 7 suppliers | 599,69 | 42,05 | **641,74** |
+| Cheapest per line, 12 suppliers, 12 parcels | 905,67 | 57,30 | **962,97** |
+| Consolidated into 8 suppliers | 839,22 | 37,60 | **876,82** |
+| With a donor printer, 7 suppliers and the donor | 673,69 | 37,60 | **711,29** |
+| Baumarkt, Hornbach pickup, on top of any route | 362,81 | — | **362,81** |
 
-Consolidating is close to free rather than a discount: it costs about 28 € more on parts (the MGN12 rail, the camera, the energy chain) and saves about 30 € on shipping. The gap between the first two routes is almost entirely the servo substitution. Five suppliers is not reachable for the complete list, because no German general-purpose shop stocks a NEMA17 with a 5:1 planetary gearbox; either take 10:1 from Dold, which is fine for the wrist and the carousel since both are slow, or accept a sixth shop.
+Consolidating is close to free rather than a discount: it costs about 28 € more on parts (the MGN12 rail, the camera, the energy chain) and saves about 30 € on shipping. The gap between the first two routes is almost entirely the servo substitution. Five suppliers is not reachable for the complete list. No German general-purpose shop stocks a NEMA17 with a 5:1 planetary gearbox, so either take 10:1 from Dold, which is fine for the wrist and the carousel since both are slow, or accept another shop; and since October the Octopus and the multi-core wire each pull in one more, 3DJake and Conrad. Six is the realistic floor: 10:1 motors from Dold and the wire from Reichelt.
 
-Where to trim further: the donor printer route above is the real saving. The two obvious earlier trims are already taken — the computer is an owned Pi 4B, and the wrist camera is an owned USB webcam rather than a second Pi camera.
+Where to trim further: the donor printer route above is the real saving, and on the Baumarkt sheet the panel wood is a choice. Two sheets of OSB 3 instead of the one birch sheet save about 160 € at the price of a rough face that chips at the cut-outs; maritime-pine plywood saves 35 €; birch-faced eucalyptus saves only 5 € but is in stock rather than a four-to-five-week store order. The two obvious earlier trims are already taken — the computer is an owned Pi 4B, and the wrist camera is an owned USB webcam rather than a second Pi camera.
 
 ## Donor printer
 
@@ -83,4 +85,4 @@ Something soft goes on every surface that touches a record: TPU for the cup lip 
 
 ## Wood and other cut parts
 
-From the plywood: two side panels 121 × 83 cm with windows, one end panel 84 × 83 cm with a window (it sits between the side panels, whose inner faces are 84.2 cm apart), the bench top 190 × 100 cm (or an existing bench), the carousel disc Ø 86 cm, and the carousel base plate Ø 88 cm. That is two 1500 × 3000 sheets without the bench top and three with it; the cut list with the window sizes and the nesting is in `08-assembly-instructions.md`. None of the cuts needs to be better than a few millimetres; the precise surfaces are all bought (rails on extrusion) or printed (carousel hub and combs).
+From the sheet material: two side panels 121 × 83 cm with windows, one end panel 84 × 83 cm with a window (it sits between the side panels, whose inner faces are 84.2 cm apart), the bench top 190 × 100 cm (or an existing bench), the carousel disc Ø 86 cm, and the carousel base plate Ø 88 cm. That is one 3000 × 1500 birch sheet for the panels and one 2440 × 1220 MDF sheet for the discs, which fit side by side with 700 mm to spare, plus a third sheet for the bench top; any panel material cheaper than birch comes only in 2500 × 1250 or smaller and needs two sheets for the panels. The cut list with the window sizes and the nesting is in `08-assembly-instructions.md`. None of the cuts needs to be better than a few millimetres; the precise surfaces are all bought (rails on extrusion) or printed (carousel hub and combs).

@@ -18,12 +18,12 @@ Nothing in this table is bought. Everything in it has a place in the build.
 | External USB 3.0 SSD | With the Pi | Every WAV goes here. About 860 MB per side, about 40 GB per full magazine |
 | Self-powered USB 3.0 hub | With the Pi | The Scarlett, the SSD, the wrist camera and the relay card all hang off it; the Pi's own ports budget about 1.2 A across all four |
 | Logitech C270 webcam | On the wrist | The wrist camera. Fixed focus, set once by hand at the working distance over a label, then focus, exposure, gain and white balance locked |
-| 1080p USB webcam | Kept | The first fallback if 720p label photographs turn out not to be enough for tagging |
+| 1080p USB webcam | Kept | The fallback for the wrist if the C270 fails or turns out not to resolve the centre hole and the groove bands; the label photographs no longer decide anything, since a record's identity comes from the manifest |
 | 3D printer | Prints every part in the printed-parts table | PETG for structure, TPU wherever a record is touched |
 
 ## Plywood
 
-Everything is 18 mm birch plywood. None of the cuts needs to be better than a few millimetres — every position that matters is carried by a printed or bought part that registers to the wood — but the carousel disc wants to be flat, so take it from the middle of a sheet, not an edge that has been standing in a corner.
+The panels are 18 mm birch multiplex and the two carousel discs 18 mm MDF, which is flat and cheap and carries under 5 kg of records. None of the cuts needs to be better than a few millimetres — every position that matters is carried by a printed or bought part that registers to the wood — but the carousel disc wants to be flat, so take it from the middle of a sheet, not an edge that has been standing in a corner.
 
 | Piece | Size (mm) | Qty | Cut-outs |
 |---|---|---|---|
@@ -33,13 +33,13 @@ Everything is 18 mm birch plywood. None of the cuts needs to be better than a fe
 | Carousel base plate | Ø 880 | 1 | The stub shaft and ten roller brackets bolt to it; a Ø 25 hole at the centre if the shaft is through-bolted |
 | Bench top | 1900 × 1000 | 1 | Only if there is no bench. An existing bench of about that size does the job |
 
-**Sheets.** This does not come out of one sheet, whatever the earlier bill of materials said. On a 1500 × 3000 sheet the two side panels stack (1210 × 1660) with the end panel below them (842 × 830) — that is sheet one, with a 290 mm strip left over. The two discs need 880 × 1740 between them and fill most of sheet two; a bench top is a third sheet, or spruce, or the bench that is already there. Have the shop cut the sheets into the rectangles at least; the windows and the discs are jigsaw work at home.
+**Sheets.** This does not come out of one sheet, whatever the earlier bill of materials said. On a 1500 × 3000 birch sheet the two side panels stack (1210 × 1660) with the end panel below them (842 × 830) — that is sheet one, with a 290 mm strip left over; it is a store order of four to five weeks at Hornbach, so order the wood first. The two discs need 880 × 1740 between them and fit a 2440 × 1220 MDF sheet with 700 mm to spare. A cheaper panel material (OSB 3, maritime pine, birch-faced eucalyptus) only comes in 2500 × 1250 or 2440 × 1220 and needs two sheets for the three panels; the prices are in the [shopping list](../sourcing/bom-shopping-list.md#hornbach-local). A bench top is a third sheet, or spruce, or the bench that is already there. Have the shop cut the sheets into the rectangles at least; the windows and the discs are jigsaw work at home.
 
 **Windows.** Drill a starter hole in each corner, jigsaw between them, and do not bother with a clean edge: the windows exist so the interior stays open, and nothing registers to them. Sand the edges where hands will go.
 
 ## Baumarkt
 
-What the bill of materials leaves to a local shop, on top of the plywood.
+What the bill of materials leaves to a local shop, on top of the plywood. The [shopping list](../sourcing/bom-shopping-list.md#hornbach-local) prices all of it at Hornbach, with article numbers; two items are not stocked there and go on an online order instead, the O-ring (on the druckluft-fachhandel order) and four M4 rubber-metal buffers for the pump mount.
 
 - Wood glue, D3, one 250 g bottle. The frame is a glued box; the screws are clamps.
 - Wood screws: 4 × 40 mm, about 40, for the panel joints and the beam blocks; 3.5 × 25 mm, about 60, for printed parts onto plywood; 3.5 × 16 mm, about 40, for the roller brackets and small brackets. Countersunk, Torx.
@@ -49,10 +49,11 @@ What the bill of materials leaves to a local shop, on top of the plywood.
 - Cable ties, 100 × 2.5 mm, one bag; and a few cable tie mounts with adhesive backs.
 - Fabric or Kapton tape for holding cable bundles in the chains while they are dressed.
 - Double-sided tape or hook-and-loop for the Pi and relay card if they are not screwed down.
-- A rubber or cork turntable mat if the deck's felt slipmat is the only one there.
+- A rubber or cork turntable mat if the deck's felt slipmat is the only one there. A 4 mm cork sheet is cheap but thicker than the 3 mm the CAD assumes; see `06-open-questions.md`.
+- Thread locker, medium strength (Loctite 243), for the pulley grub screws and the stepper mounts.
 - Optional: a small can of clear wax or oil for the plywood, and a 40 mm hole saw for the cable exits through the panels.
 
-Tools, if they are not there already: a jigsaw with a wood blade, a cordless drill with a 4 mm and an 8 mm wood bit and a countersink, a long straightedge and a square, four clamps of at least 90 cm reach or strap clamps, hex keys 2 to 5 mm, a set of small spanners, a soldering iron, a crimp tool for Dupont and JST-SM contacts, a heat gun for the shrink tube, digital calipers, and a spirit level.
+Tools, if they are not there already: a jigsaw with a wood blade, a cordless drill with a 4 mm and an 8 mm wood bit and a countersink, a long straightedge and a square, four clamps of at least 90 cm reach or strap clamps, hex keys 2 to 5 mm, a set of small spanners, a soldering iron, a crimp tool for JST-XH contacts, which are what the Octopus's motor and end-stop headers take, and Dupont (an SN-01BM does both), a heat gun for the shrink tube, digital calipers, and a spirit level.
 
 ## Printed parts
 
@@ -166,7 +167,7 @@ Nothing is boxed. The parts sit on the outside faces of the frame panels, where 
 
 **Pump and valve, outside the rear panel near the open end, at about X = −100 mm, on rubber mounts.** As far from the deck as the frame allows: a diaphragm pump is a vibration source, and the deck sits between X = 366 and 816. The hose runs along the outside of the panel to the chain anchor and up. The MPRLS is not here. It is an I²C device, and I²C does not like the 1.7 m to the Pi, but a vacuum line does not care about length: a tube stub tees off at the valve and runs to the sensor beside the Pi. The stub's 20 ml of dead volume is nothing against a 1 L/min pump.
 
-**Pi group, outside the deck-end panel, low, beside the hole for the deck camera's ribbon.** The Pi on a printed plate with a heatsink, its own 15 W supply, the powered hub, the SSD, the relay card and the MPRLS; the Scarlett on the bench beside the deck. The deck camera's ribbon is 30 cm through the panel, the relay card's cables into the deck about a metre, and the Pi's USB-C cable to the Octopus 2.2 m along the outside of the panels. Two mains supplies, one at each end, so a power strip runs along the rear panel.
+**Pi group, outside the deck-end panel, low, beside the hole for the deck camera's ribbon.** The Pi on a printed plate in its aluminium shell with twin fans, its own 15 W supply, the powered hub, the SSD, the relay card and the MPRLS; the Scarlett on the bench beside the deck. The status display sits on the panel's front post, where its 50 cm DSI ribbon reaches from the Pi with 9 cm to spare, angled so its light stays off the platter. The deck camera's ribbon is 30 cm through the panel, the relay card's cables into the deck about a metre, and the Pi's USB-C cable to the Octopus 2.2 m along the outside of the panels. Two mains supplies, one at each end, so a power strip runs along the rear panel.
 
 Wire the five TMC2209 sticks into the Octopus with UART jumpers set, X, Y, Z, wrist and carousel in that order; the servo to the servo header; the pump, valve and LED to three fan or heater MOSFET outputs, the LED on a hardware PWM pin; every end-stop, the Hall sensor and the slot sensor to end-stop inputs. Set the TMC run currents in `printer.cfg` and nowhere else.
 
@@ -192,9 +193,9 @@ Everything to the gantry leaves the controller group on the outside of the rear 
 |---|---|---|---|---|
 | Vacuum hose, pump to cup, 6 × 4 PU | Pump, along the rear panel to the chain anchor, X, Y and Z chains, arm to the cup neck, plus plumbing at the pump | 4.5 m | 7 m | Reaches |
 | Tube stub, valve tee to the MPRLS at the Pi | Along the outside of the rear panel and round the corner | 2.1 m | in the 7 m | Reaches: 6.6 m of the 7 used |
-| Wrist camera USB, C270 | Controller group up the chains to the camera mount, 110 mm up the arm | 3.2 m | The C270's fixed 1.5 m | Does not reach. Add a 2 m USB 2.0 A-to-A extension; 3.5 m total, well under the 5 m passive limit |
-| Wrist stepper, 4-core | Same path to the outrigger | 3.0 m | Motor lead, about 1 m | 2 m extension |
-| Wrist Hall sensor, 3-core | Same | 3.0 m | Bare module | 3 m of 3-core |
+| Wrist camera USB, C270 | Pi group's hub along the outside of both panels to the chain anchor, up the chains to the camera mount, 110 mm up the arm | 5.6 m | The C270's fixed 1.5 m | Does not reach, and past the 5 m passive USB 2.0 limit: an active 5 m repeater cable, 6.5 m in two legs with the C270's lead |
+| Wrist stepper, 4-core | Controller group up the chains to the outrigger | 3.0 m | Geared motor's bare lead, 0.5 m | 2.5 m extension |
+| Wrist Hall sensor, 3-core | Same as the wrist stepper | 3.0 m | Bare module | 3 m of 3-core |
 | Z stepper, 4-core | To the guide block on the Y carriage | 2.1 m | Motor lead, about 1 m | 1.1 m extension |
 | Z end-stop, 3-core | Same | 2.1 m | 0.5 m lead | 1.6 m extension |
 | Y stepper, 4-core | To the cross-beam end on the X carriage | 1.3 m | Motor lead, about 1 m | 0.3 m extension, or mount the motor at the near end and use the lead |
@@ -202,16 +203,17 @@ Everything to the gantry leaves the controller group on the outside of the rear 
 | X stepper, 4-core | To the X carriage | 1.3 m | Motor lead, about 1 m | 0.3 m extension |
 | X end-stop, 3-core | Fixed at the deck end of the X beam | 1.2 m | 0.5 m lead | 0.7 m extension |
 | Deck camera CSI ribbon | Pi group through the panel to the bracket | 0.3 m | 0.5 m | Reaches with 20 cm to fold |
+| Status display DSI ribbon | Pi group to the deck-end panel's front post | 0.41 m | 0.5 m | Reaches with 9 cm to fold |
 | LED bar, 2-core 12 V | Controller group along the outside of the panels to the end panel | 2.3 m | Strip only | 2.3 m of 2-core |
 | Cue servo, 3-core 5 V | Controller group to the end panel at lever height | 2.1 m | MG996R lead, 0.3 m | 1.8 m extension |
-| Carousel stepper, 4-core | Controller group along the rear panel, down to the base plate | 2.6 m | Motor lead, about 1 m | 1.6 m extension |
+| Carousel stepper, 4-core | Controller group along the rear panel, down to the base plate | 2.6 m | Geared motor's bare lead, 0.5 m | 2.1 m extension |
 | Carousel home sensor, 3-core | Same | 2.6 m | Bare module | 2.6 m of 3-core |
 | Pump and valve drive, 2 × 2-core 12 V | Controller group along the rear panel to the pump mount | 1.0 m each | — | 2 m of 2-core |
-| Pi to Octopus, USB-C | Pi group along the outside of the panels to the controller group | 2.2 m | — | Buy a 3 m USB-C cable; the extra is a tie |
+| Pi to Octopus, USB-A to USB-C | Pi group along the outside of the panels to the controller group | 2.2 m | — | Buy a 3 m USB-A to USB-C cable; the extra is a tie |
 | Deck remote start/stop, 6.3 mm | Relay card to the deck's rear jack | 1.2 m | 1.8 m | Reaches with 60 cm to tie up |
-| 33 and 45 button taps, 2 × 2-core thin | Relay card into the deck's front-left board | 1.4 m each | Thin wire | 3 m of thin 2-core |
+| 33 and 45 button taps, 2 × 2-core thin | Relay card into the deck's front-left board | 1.4 m each | Thin wire | 3 m of 3-core, two cores used |
 
-The extensions add up to about 6 m of 4-core for the steppers, 12 m of 3-core for the sensors and the servo, 4 m of 2-core for the LED, the pump and the valve, 3 m of thin 2-core for the buttons, a 2 m USB extension, a 3 m USB-C cable and 7 m of tube. Silicone 20 AWG is the right wire for the steppers, the servo and the 12 V loads; the sensors can take 24 AWG.
+The extensions add up to about 7 m of 4-core for the steppers, 15 m of 3-core for the sensors, the servo and the button taps, 4 m of 2-core for the LED, the pump and the valve, an active 5 m USB repeater, a 3 m USB-A to USB-C cable and 7 m of tube. The Z chain then carries the hose, the USB cable, the 4-core and the 3-core side by side at about 19 of its 20 mm: full, so nothing more goes into it later. Silicone 20 AWG is the right wire for the steppers, the servo and the 12 V loads; the sensors can take 24 AWG.
 
 ### 11. Power-up and commissioning
 
