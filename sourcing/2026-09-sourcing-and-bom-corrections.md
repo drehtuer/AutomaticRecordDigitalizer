@@ -2,7 +2,7 @@
 
 Every line of `docs/04-bill-of-materials.md` priced against live German shop pages on 10 September 2026, incl. 19 % VAT, delivered to Germany. Amazon.de and Conrad.de block automated fetching, so they were excluded rather than guessed at.
 
-The itemised result, with product links, three ways of ordering it and a sheet for the local Baumarkt, is in [bom-shopping-list.md](bom-shopping-list.md). Every priced line was fetched again on 3 October 2026; what that re-check changed is at the end of this file.
+The itemised result, with product links, three ways of ordering it and a sheet for the local Baumarkt, is in [bom-shopping-list.md](bom-shopping-list.md). Every priced line was fetched again on 3 October 2026, and the panel material was decided on 4 October; what those changed is at the end of this file.
 
 The headline: the BOM's estimate of ≈ 865 € holds up in aggregate, but only because it is the sum of two large errors in opposite directions plus a lot of accurate lines. The corrections below have been absorbed into the repo docs.
 
@@ -130,3 +130,17 @@ Everything Klipper-side reaches as tabulated. Three things did not. The wrist we
 *Status · affects `sourcing/bom-shopping-list.md`*
 
 The BerryBase part of the list was ordered on 3 October: the Camera Module 3, the display, the pump, the MPRLS, the KY-003 Hall sensor, the JST connector kit and an Armor aluminium shell with twin fans for the Pi. Those rows are now at 0,00 € like the other owned hardware. The heat gun and both USB cables moved to Conrad, which is in the order for the wire anyway and passes its free-shipping line with them, and the two 50 cm ribbons to welectron.
+
+## Decided 4 October 2026: OSB panels, steel where OSB is weak, MDF discs
+
+*Decision · affects `docs/01-design-specification.md`, `docs/04-bill-of-materials.md`, `docs/05-design-decisions.md`, `docs/08-assembly-instructions.md`*
+
+The three frame panels are OSB 3, 18 mm, from two 2500 × 1250 sheets at 31,09 € each, in place of the 222,80 € birch sheet with its four-to-five-week store order. Both side panels come from one sheet and the end panel from the other, cut to rectangles at the Markt so nothing larger than 1210 × 830 has to go in the car; the second sheet leaves about 1.1 m² of offcut. The maritime-pine and birch-faced eucalyptus alternatives priced on 3 October are out. The discs stay MDF E1, cut at the Markt into an 880 and an 860 square.
+
+OSB is stiff enough for a glued box but weak in three places, and each gets steel or a fastener instead:
+
+- Screws into its edge hold poorly, so the two corners where the side panels meet the end panel get a 25 × 25 × 3 steel angle the full 830 mm height, screwed into both faces with 3.5 × 16 screws every 120 mm. The glue and the edge screws stay as well.
+- Wood screws strip it when taken out and put back, so every part that comes off again sits on M4 T-nuts pressed in from the far face, with M4 × 30 machine screws: the controller plate, the Pi plate, the cue-servo and camera brackets, the display mount and the pump mount, about 18 positions. Printed parts that stay put still go on 3.5 mm wood screws into the face, which hold fine.
+- A bolt head pulls into its strands, so the M5 beam bolts get 15 mm penny washers on the panels' outer faces.
+
+The window corners get a 20 to 26 mm hole drilled first, so the jigsaw never has to turn in OSB; round corners stop both chipping and cracks. The metal and fasteners add 24,70 €. Wood and metal together come to 136,83 €, where birch and MDF alone were 272,75 €, and the Hornbach sheet drops from 362,81 € to 226,89 €, all shelf stock with no lead time.

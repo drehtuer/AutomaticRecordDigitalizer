@@ -9,7 +9,7 @@ A DIY machine that digitises a vinyl record collection unattended: it takes a re
 
 The project exists because the cheap way of doing this, a second-hand stacking record changer, drops records onto each other and the recordings show it. Here nothing ever touches a record except a vacuum cup on the label, the slot it stands in, and the turntable mat.
 
-![The machine, rendered from the CAD model: the carousel of records on the left, the gantry on its plywood frame, the turntable on the right, the electronics on the outside of the panels](docs/images/render-overview.png)
+![The machine, rendered from the CAD model: the carousel of records on the left, the gantry on its wooden frame, the turntable on the right, the electronics on the outside of the panels](docs/images/render-overview.png)
 
 ## Status
 
