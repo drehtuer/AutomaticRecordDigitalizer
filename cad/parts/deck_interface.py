@@ -19,9 +19,9 @@ def cue_servo_assembly():
     ex = px + P.END_STOP_R * cos(radians(P.END_STOP_ANGLE))
     ey = py + P.END_STOP_R * sin(radians(P.END_STOP_ANGLE))
     bar_y = -20.0
-    bar = box(x_panel - ex, 8, 10, (x_panel + ex) / 2, bar_y, 98)
-    stub = box(10, abs(ey - bar_y) + 8, 8, ex, (ey + bar_y) / 2, 98)
-    pin = cyl_z(5, 50, ex, ey, 100).union(cyl_z(9, 22, ex, ey, 128))
+    bar = box(x_panel - ex, 8, 10, (x_panel + ex) / 2, bar_y, P.DECK_H + 8)
+    stub = box(10, abs(ey - bar_y) + 8, 8, ex, (ey + bar_y) / 2, P.DECK_H + 8)
+    pin = cyl_z(5, 50, ex, ey, P.DECK_H + 10).union(cyl_z(9, 22, ex, ey, P.DECK_H + 38))
     return union_all([bracket, servo, rod, guide, pad, bar, stub, pin])
 
 

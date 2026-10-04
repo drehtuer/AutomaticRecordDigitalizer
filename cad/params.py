@@ -5,7 +5,8 @@ Y across the bench (positive towards the front), Z up. Origin: bench top,
 20 cm left of the flip station post (the same origin the concept model uses).
 
 Values marked MEASURE were taken from a photo of the deck and must be confirmed
-with a ruler; everything else comes from the concept design.
+with a ruler; the deck's outline and the spindle's place in it have been measured.
+Everything else comes from the concept design.
 """
 from math import radians
 
@@ -82,15 +83,15 @@ ST_FOOT_R, ST_FOOT_T = 40.0, 10.0           # printed foot the post stands on, s
 
 # ---------------------------------------------------------------- deck (Omnitronic DD 3120)
 DECK_SPINDLE_X, DECK_SPINDLE_Y = 550.0, 0.0
-DECK_W, DECK_D, DECK_H = 450.0, 360.0, 90.0
-DECK_SPINDLE_FROM_LEFT = 184.0              # MEASURE
-DECK_SPINDLE_FROM_REAR = 186.0              # MEASURE
+DECK_W, DECK_D, DECK_H = 449.0, 351.0, 86.0  # measured on the deck, 4 October 2026
+DECK_SPINDLE_FROM_LEFT = 179.0              # measured
+DECK_SPINDLE_FROM_REAR = 174.0              # measured
 DECK_CX = DECK_SPINDLE_X - DECK_SPINDLE_FROM_LEFT + DECK_W / 2
 DECK_CY = DECK_SPINDLE_Y + DECK_SPINDLE_FROM_REAR - DECK_D / 2   # rear edge is -Y
 PLATTER_R, PLATTER_T = 165.0, 15.0
 MAT_T = 3.0
 SPINDLE_R, SPINDLE_H = 3.6, 22.0
-ARM_PIVOT = (DECK_SPINDLE_X + 194.0, DECK_SPINDLE_Y - 84.0, 130.0)   # MEASURE
+ARM_PIVOT = (DECK_SPINDLE_X + 194.0, DECK_SPINDLE_Y - 84.0, DECK_H + 40.0)   # MEASURE
 ARM_EFF_L = 230.0                           # pivot to stylus
 ARM_REST_XY = (DECK_SPINDLE_X + 189.0, DECK_SPINDLE_Y + 125.0)       # MEASURE
 ARM_ANGLE = {                               # stylus azimuth from the pivot, degrees, recomputed for the measured pivot
@@ -98,7 +99,7 @@ ARM_ANGLE = {                               # stylus azimuth from the pivot, deg
 }
 ARM_LIFT = 10.0                             # cue lift height
 FINGER_LIFT_LOCAL = (ARM_EFF_L - 6.0, 22.0, -4.0)   # relative to the pivot, arm along +X (X, Y outward, Z)
-CUE_LEVER = (DECK_SPINDLE_X + 235.0, DECK_SPINDLE_Y - 46.0, 102.0)   # MEASURE
+CUE_LEVER = (DECK_SPINDLE_X + 235.0, DECK_SPINDLE_Y - 46.0, DECK_H + 12.0)   # MEASURE
 END_STOP_ANGLE, END_STOP_R = 143.8, 45.0   # arm-tube azimuth and radius from the pivot at which the stop stands (45 mm keeps the pin outside a 12" record's outline)
 DECK_CAM = (FRAME_X1 - 30.0, 20.0, 155.0)
 

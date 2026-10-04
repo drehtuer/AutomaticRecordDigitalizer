@@ -11,7 +11,7 @@ def plinth():
     mat = cyl_z(P.PLATTER_R - 13, P.MAT_T, P.DECK_SPINDLE_X, P.DECK_SPINDLE_Y, P.DECK_H + P.PLATTER_T)
     spindle = cyl_z(P.SPINDLE_R, P.SPINDLE_H, P.DECK_SPINDLE_X, P.DECK_SPINDLE_Y, P.DECK_H + P.PLATTER_T)
     base = cyl_z(32, 40, P.ARM_PIVOT[0], P.ARM_PIVOT[1], P.DECK_H)             # arm base
-    rest = box(24, 12, 6, P.ARM_REST_XY[0], P.ARM_REST_XY[1], 124).union(
+    rest = box(24, 12, 6, P.ARM_REST_XY[0], P.ARM_REST_XY[1], P.DECK_H + 34).union(
         cyl_z(9, 35, P.ARM_REST_XY[0], P.ARM_REST_XY[1], P.DECK_H))              # arm rest post + clip
     fader = box(16, 100, 4, P.DECK_SPINDLE_X + 230, P.DECK_SPINDLE_Y + 64, P.DECK_H + 2)
     startstop = box(45, 30, 8, P.DECK_SPINDLE_X - 145, P.DECK_SPINDLE_Y + 153, P.DECK_H + 4)

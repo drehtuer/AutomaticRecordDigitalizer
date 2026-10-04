@@ -20,7 +20,8 @@ Run the commands from the repository root.
 ## Layout
 
 `params.py` holds every dimension in millimetres, including the deck measurements marked
-MEASURE that still have to be confirmed with a ruler. Change a number there and everything
+MEASURE that still have to be confirmed with a ruler; the deck's outline and spindle position
+are measured. Change a number there and everything
 downstream follows.
 
 `parts/` builds the solids: `deck.py` (plinth, platter, tonearm as a rigid body pivoting about
