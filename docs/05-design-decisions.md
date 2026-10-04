@@ -92,9 +92,11 @@ X and Y run on 2040 V-slot with Delrin wheels, as on a hobby printer, instead of
 
 Most of the motion parts (steppers, PSU, belts, pulleys, wheels, a lead screw, end-stops, a Klipper-capable board) come cheapest as a used 3D printer; a CR-10 class machine is the best fit because of its long extrusions and lead screws. Only the two long X beams and the Z rail are bought new.
 
-## Plywood frame, extrusion beams
+## Wooden frame, extrusion beams
 
-A full aluminium extrusion frame was replaced by a glued box of 18 mm birch plywood with 2040 V-slot extrusion only where the X axis needs a straight, adjustable running surface. The panels give more racking stiffness than a lattice with diagonals, the interior stays open, brackets screw straight to the panels, and extrusion drops from ten metres to four. Cost is about the same; the choice is about the tools the builder prefers.
+A full aluminium extrusion frame was replaced by a glued box of 18 mm sheet material with 2040 V-slot extrusion only where the X axis needs a straight, adjustable running surface. The panels give more racking stiffness than a lattice with diagonals, the interior stays open, brackets fix straight to the panels, and extrusion drops from ten metres to four. Cost is about the same; the choice is about the tools the builder prefers.
+
+The panels are OSB 3, decided on 4 October 2026. Birch multiplex was the plan, but the only birch sheet large enough for all three panels in one piece, 3000 × 1500, costs 222,80 € and is a four-to-five-week store order, while two 2500 × 1250 sheets of OSB cost 62,18 € and are on the shelf. OSB is as stiff as the box needs; what it does badly is hold a screw in its edge, hold a wood screw that is taken out and put back, and resist a bolt head pulling into its strands. Each of those gets metal instead of wood: a 25 × 25 × 3 steel angle the full height of each inside corner, M4 T-nuts for every part that comes off again, and penny washers under the M5 beam bolts, together about 25 €. Birch was rejected for price and lead time, and the maritime-pine and birch-faced alternatives because they cost three times as much as OSB for a smoother face nothing needs. The two carousel discs are MDF, which is flat, and flatness is the only thing the discs need.
 
 ## Vacuum sensing on the Pi, the grip check in the orchestrator
 
@@ -122,7 +124,7 @@ The 86 cm carousel rolls on ten printed brackets with 608 bearings around a cent
 
 ## Precision where it is printed, cheapness where it is wood
 
-The carousel disc and base plate, the frame panels and the bench top are plywood cut to a few millimetres. Every position that matters, the slot angles, the rail line, the ring rest, is carried by a printed or bought part that registers to the wood without depending on how accurately it was cut.
+The carousel disc and base plate, the frame panels and the bench top are sheet material cut to a few millimetres. Every position that matters, the slot angles, the rail line, the ring rest, is carried by a printed or bought part that registers to the wood without depending on how accurately it was cut.
 
 ## CAD in CadQuery, checked by script
 

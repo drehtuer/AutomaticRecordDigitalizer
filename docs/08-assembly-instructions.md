@@ -1,6 +1,6 @@
 # Assembly instructions
 
-How the machine goes together, in the order it has to, with every part named: bought, printed, cut from plywood, picked up at the Baumarkt, or already on hand. Dimensions come from `../cad/params.py`, which is the authority; where this document gives a number, that is where it came from. Nothing here has been built yet, so treat the sequence as a plan to be corrected on the first pass and written back.
+How the machine goes together, in the order it has to, with every part named: bought, printed, cut from sheet material, picked up at the Baumarkt, or already on hand. Dimensions come from `../cad/params.py`, which is the authority; where this document gives a number, that is where it came from. Nothing here has been built yet, so treat the sequence as a plan to be corrected on the first pass and written back.
 
 Read `07-status-and-next-steps.md` first. It front-loads the things that can still change the design — measuring the deck, printing the three parts that decide the geometry — and none of the work below should start before those are done.
 
@@ -21,9 +21,9 @@ Nothing in this table is bought. Everything in it has a place in the build.
 | 1080p USB webcam | Kept | The fallback for the wrist if the C270 fails or turns out not to resolve the centre hole and the groove bands; the label photographs no longer decide anything, since a record's identity comes from the manifest |
 | 3D printer | Prints every part in the printed-parts table | PETG for structure, TPU wherever a record is touched |
 
-## Plywood
+## Panels and discs
 
-The panels are 18 mm birch multiplex and the two carousel discs 18 mm MDF, which is flat and cheap and carries under 5 kg of records. None of the cuts needs to be better than a few millimetres — every position that matters is carried by a printed or bought part that registers to the wood — but the carousel disc wants to be flat, so take it from the middle of a sheet, not an edge that has been standing in a corner.
+The panels are 18 mm OSB 3 and the two carousel discs 18 mm MDF, which is flat and cheap and carries under 5 kg of records. OSB is stiff enough for the box but weak at its edges and under screws that come out again, so steel and T-nuts take those jobs; see the frame step and `05-design-decisions.md`. None of the cuts needs to be better than a few millimetres — every position that matters is carried by a printed or bought part that registers to the wood — but the carousel disc wants to be flat, so take it from the middle of a sheet, not an edge that has been standing in a corner.
 
 | Piece | Size (mm) | Qty | Cut-outs |
 |---|---|---|---|
@@ -33,16 +33,19 @@ The panels are 18 mm birch multiplex and the two carousel discs 18 mm MDF, which
 | Carousel base plate | Ø 880 | 1 | The stub shaft and ten roller brackets bolt to it; a Ø 25 hole at the centre if the shaft is through-bolted |
 | Bench top | 1900 × 1000 | 1 | Only if there is no bench. An existing bench of about that size does the job |
 
-**Sheets.** This does not come out of one sheet, whatever the earlier bill of materials said. On a 1500 × 3000 birch sheet the two side panels stack (1210 × 1660) with the end panel below them (842 × 830) — that is sheet one, with a 290 mm strip left over; it is a store order of four to five weeks at Hornbach, so order the wood first. The two discs need 880 × 1740 between them and fit a 2440 × 1220 MDF sheet with 700 mm to spare. A cheaper panel material (OSB 3, maritime pine, birch-faced eucalyptus) only comes in 2500 × 1250 or 2440 × 1220 and needs two sheets for the three panels; the prices are in the [shopping list](../sourcing/bom-shopping-list.md#hornbach-local). A bench top is a third sheet, or spruce, or the bench that is already there. Have the shop cut the sheets into the rectangles at least; the windows and the discs are jigsaw work at home.
+**Sheets.** Two 2500 × 1250 OSB sheets for the panels: the two side panels stack on the first (1210 × 1660), and the end panel (842 × 830) comes from the second, which leaves about 1.1 m² of offcut for the deck stop, the feet and test pieces. The two discs need 880 × 1740 between them and fit one 2440 × 1220 MDF sheet with 700 mm to spare. All three sheets are shelf stock at Hornbach; the prices are in the [shopping list](../sourcing/bom-shopping-list.md#hornbach-local). A bench top is a further sheet, or spruce, or the bench that is already there. Have the Markt cut the panels to their rectangles and the MDF into an 880 and an 860 square, so nothing larger than 1210 × 830 has to travel, and check that the 880 square fits the car; the windows and the circles are jigsaw work at home.
 
-**Windows.** Drill a starter hole in each corner, jigsaw between them, and do not bother with a clean edge: the windows exist so the interior stays open, and nothing registers to them. Sand the edges where hands will go.
+**Windows.** Drill a 20 to 26 mm hole in each corner first, so the jigsaw never has to turn in OSB and the corners come out round, which stops both chipping and cracks; then jigsaw between them, and do not bother with a clean edge: the windows exist so the interior stays open, and nothing registers to them. Sand the edges where hands will go.
 
 ## Baumarkt
 
-What the bill of materials leaves to a local shop, on top of the plywood. The [shopping list](../sourcing/bom-shopping-list.md#hornbach-local) prices all of it at Hornbach, with article numbers; two items are not stocked there and go on an online order instead, the O-ring (on the druckluft-fachhandel order) and four M4 rubber-metal buffers for the pump mount.
+What the bill of materials leaves to a local shop, on top of the sheet material. The [shopping list](../sourcing/bom-shopping-list.md#hornbach-local) prices all of it at Hornbach, with article numbers; two items are not stocked there and go on an online order instead, the O-ring (on the druckluft-fachhandel order) and four M4 rubber-metal buffers for the pump mount.
 
 - Wood glue, D3, one 250 g bottle. The frame is a glued box; the screws are clamps.
-- Wood screws: 4 × 40 mm, about 40, for the panel joints and the beam blocks; 3.5 × 25 mm, about 60, for printed parts onto plywood; 3.5 × 16 mm, about 40, for the roller brackets and small brackets. Countersunk, Torx.
+- Steel angle, 25 × 25 × 3 mm, one 2 m length, cut into two 830 mm corner posts.
+- M4 T-nuts (Einschlagmuttern), about 20, and M4 × 30 socket-head screws, for every part on the panels that comes off again: the controller plate, the Pi plate, the cue-servo and camera brackets, the display mount and the pump mount.
+- Penny washers, DIN 9021 for M5, under the heads of the beam bolts on the panels' outer faces.
+- Wood screws: 4 × 40 mm, about 40, for the panel joints and the beam blocks; 3.5 × 25 mm, about 60, for printed parts that stay put; 3.5 × 16 mm, about 40, for the roller brackets and small brackets. Countersunk, Torx.
 - Sanding: 80 and 120 grit, one sheet each; a block.
 - Four rubber feet or adjustable levelling feet for the carousel base plate, so it stands flat on a bench that is not.
 - One rubber O-ring, 3 mm cord, about 97 mm inside diameter (95 × 3 stretches on), NBR: it sits in the groove on top of the ring rest and is what the record actually rests on.
@@ -51,9 +54,9 @@ What the bill of materials leaves to a local shop, on top of the plywood. The [s
 - Double-sided tape or hook-and-loop for the Pi and relay card if they are not screwed down.
 - A rubber or cork turntable mat if the deck's felt slipmat is the only one there. A 4 mm cork sheet is cheap but thicker than the 3 mm the CAD assumes; see `06-open-questions.md`.
 - Thread locker, medium strength (Loctite 243), for the pulley grub screws and the stepper mounts.
-- Optional: a small can of clear wax or oil for the plywood, and a 40 mm hole saw for the cable exits through the panels.
+- Optional: a small can of clear wax or oil for the panels, and a 40 mm hole saw for the cable exits through the panels.
 
-Tools, if they are not there already: a jigsaw with a wood blade, a cordless drill with a 4 mm and an 8 mm wood bit and a countersink, a long straightedge and a square, four clamps of at least 90 cm reach or strap clamps, hex keys 2 to 5 mm, a set of small spanners, a soldering iron, a crimp tool for JST-XH contacts, which are what the Octopus's motor and end-stop headers take, and Dupont (an SN-01BM does both), a heat gun for the shrink tube, digital calipers, and a spirit level.
+Tools, if they are not there already: a jigsaw with a wood blade, a cordless drill with a 4 mm, a 4.5 mm and an 8 mm bit, a 20 to 26 mm Forstner bit and a countersink, a hacksaw for the steel angle, a long straightedge and a square, four clamps of at least 90 cm reach or strap clamps, hex keys 2 to 5 mm, a set of small spanners, a soldering iron, a crimp tool for JST-XH contacts, which are what the Octopus's motor and end-stop headers take, and Dupont (an SN-01BM does both), a heat gun for the shrink tube, digital calipers, and a spirit level.
 
 ## Printed parts
 
@@ -115,9 +118,9 @@ Stand three records in three adjacent slots and check the gap at the label radiu
 
 ### 2. Frame
 
-Glue and screw the two side panels to the end panel, end panel between the sides, square on the bench top. Clamp, check the diagonals, let the glue cure. Screw a block of plywood offcut into each of the three lower corners as a foot if the bench is not flat.
+Before assembly, press the M4 T-nuts into the panels from the far face at every position where a part will come off again; it is far easier with the panels flat on the bench. Glue and screw the two side panels to the end panel, end panel between the sides, square on the bench top. Clamp, check the diagonals, let the glue cure. Then fit a steel angle the full 830 mm height into each of the two inside corners, drilled 4.5 mm and countersunk every 120 mm, screwed into both panels with 3.5 × 16 screws: the screws into the end panel's edge hold poorly in OSB, and the angle is what actually holds the corner. Screw a block of offcut into each of the three lower corners as a foot if the bench is not flat.
 
-Bolt a 1290 mm 2040 V-slot beam along the top edge of each side panel with its 40 mm face vertical and the slot facing the other beam, overhanging the open carousel end by 80 mm, using M5 bolts through the panel into T-nuts. Shim until the two beams are parallel and in one plane — this is the one alignment that matters on the whole frame, because the X carriages ride in these slots; a long straightedge across both beams, checked at three points, is the test. Bolt the 2020 tie across the open end, 880 mm long over the beams, so they stay parallel under load.
+Bolt a 1290 mm 2040 V-slot beam along the top edge of each side panel with its 40 mm face vertical and the slot facing the other beam, overhanging the open carousel end by 80 mm, using M5 bolts through the panel into T-nuts, with a penny washer under each bolt head so it does not pull into the OSB. Shim until the two beams are parallel and in one plane — this is the one alignment that matters on the whole frame, because the X carriages ride in these slots; a long straightedge across both beams, checked at three points, is the test. Bolt the 2020 tie across the open end, 880 mm long over the beams, so they stay parallel under load.
 
 ### 3. X axis
 
@@ -147,7 +150,7 @@ The ring rest stands on a post on a printed foot screwed to the bench, at X = 20
 
 ### 8. Deck interface
 
-Set the deck on the bench inside the frame with its spindle at X = 550, Y = 0, and screw a plywood stop against two of its feet so it goes back to the same place after every lift-out. Measure everything `07-status-and-next-steps.md` says to measure before this point; the bracket positions below depend on those numbers.
+Set the deck on the bench inside the frame with its spindle at X = 550, Y = 0, and screw an offcut stop against two of its feet so it goes back to the same place after every lift-out. Measure everything `07-status-and-next-steps.md` says to measure before this point; the bracket positions below depend on those numbers.
 
 Screw the cue-servo bracket to the inside of the end panel at the cue lever's height, with the MG996R in it and the pusher rod through its guide so the rod's pad meets the lever's tip along X. The servo's horn drives the rod through a short link; the rod's travel is the lever's travel plus a few millimetres, and its end stop is the bracket, so the servo can never push the lever past its own stop. Screw the end-stop bar to the same bracket so it runs in front of the arm base and under the arm, with the TPU-sleeved pin standing 45 mm from the arm pivot; with the arm swung by hand, the tube must meet the sleeve before the stylus reaches a radius of about 53 mm.
 
