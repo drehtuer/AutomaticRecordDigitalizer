@@ -20,15 +20,16 @@ Run the commands from the repository root.
 ## Layout
 
 `params.py` holds every dimension in millimetres, including the deck measurements marked
-MEASURE that still have to be confirmed with a ruler. Change a number there and everything
+MEASURE that still have to be confirmed with a ruler; the deck's outline, platter height,
+spindle, arm pivot and cue-lever travel are measured. Change a number there and everything
 downstream follows.
 
 `parts/` builds the solids: `deck.py` (plinth, platter, tonearm as a rigid body pivoting about
 the measured pivot, cue lever), `carousel.py` (base with roller ring, rotating disc with hub,
 V-floor combs and tooth ring, records of any size as spokes), `frame.py` (plywood box, V-slot beams, flip
 station on its foot), `gantry.py` (X, Y and Z carriages and the wrist with cup, camera and
-fork, each in its own kinematic frame), `deck_interface.py` (cue-lever servo bracket with
-pusher and end stop, deck camera and LED bar), `electronics.py` (every board and box on the frame
+fork, each in its own kinematic frame), `deck_interface.py` (cue-lever servo on its beam with
+horn and yoke, the end stop, deck camera and LED bar), `electronics.py` (every board and box on the frame
 at its catalogue size, the three cable chains, and the cable and hose runs as tubes along their
 routes). The chains and the cables that feed them are drawn at the home pose, because their shape
 changes with every move; the sweep checks the electronics and the cable runs that ride rigidly on

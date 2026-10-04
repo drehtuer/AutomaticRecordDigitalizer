@@ -160,7 +160,7 @@ def static_cables():
     # Pi to Octopus, USB-C, along the outside of both panels
     out["cable_usbc"] = tube([(END + 12, -10, 100), (xe, -10, 330), (xe, y + 10, 330), (982, y, 330), (290, y, 330), (290, y, 700), (280, REAR - 12, 740)], CABLE_R["usb"])
     # cue servo and LED bar, along the rear panel to the deck-end panel and through it
-    out["cable_servo"] = tube([(170, REAR - 12, 705), (170, y, 360), (982, y, 360), (xe, y + 10, 360), (xe, P.CUE_SERVO_Y, 360), (xe, P.CUE_SERVO_Y, 130), (975, P.CUE_SERVO_Y, 130), (958, P.CUE_SERVO_Y, P.CUE_SERVO_Z)], CABLE_R["wire"])
+    out["cable_servo"] = tube([(170, REAR - 12, 705), (170, y, 360), (982, y, 360), (xe, y + 10, 360), (xe, P.CUE_SERVO_Y, 360), (xe, P.CUE_SERVO_Y, 130), (975, P.CUE_SERVO_Y, 130), (958, P.CUE_SERVO_Y, P.CUE_SERVO_Z + 52), (P.CUE_SERVO_X + 32, P.CUE_SERVO_Y, P.CUE_SERVO_Z + 52)], CABLE_R["wire"])
     out["cable_led"] = tube([(xe, P.CUE_SERVO_Y, 200), (xe, 65, 200), (xe, 65, 130), (975, 65, 130), (958, 65, 117)], CABLE_R["wire"])
     # carousel stepper and home sensor, along the rear panel, round its open end and over the base plate
     out["cable_carousel"] = tube([(140, REAR - 12, 705), (140, y, 400), (-225, y, 400), (-225, y, 25), (-232, -420, 24), (-156, -336, 24),
