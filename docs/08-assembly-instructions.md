@@ -92,9 +92,8 @@ PETG unless marked TPU. The CAD marks which parts have their functional features
 | Electronics | Controller plate for the outside of the rear panel: Octopus on standoffs, the supply, both bucks | 1 | PETG | Envelope |
 | Electronics | Pi plate for the outside of the end panel: Pi, hub, SSD, relay card, MPRLS | 1 | PETG | Envelope |
 | Electronics | Pump and valve mount on rubber feet | 1 | PETG | Envelope |
-| Deck interface | Cue-servo bracket for the MG996R on the end panel | 1 | PETG | Envelope, drawn for a linear servo |
-| Deck interface | Pusher rod guide | 1 | PETG | Envelope |
-| Deck interface | Lever pad on the rod's end | 1 | PETG or TPU | Envelope |
+| Deck interface | Cue-servo post and beam off the end panel, the MG996R hanging from the beam's end over the lever | 1 | PETG | Envelope |
+| Deck interface | Yoke on the servo horn, straddling the lever's top | 1 | PETG or TPU | Envelope |
 | Deck interface | End-stop bar and pin base | 1 | PETG | Envelope |
 | Deck interface | End-stop pin sleeve | 1 | TPU | — |
 | Cameras and light | Deck camera bracket on the end panel | 1 | PETG | Envelope |
@@ -152,7 +151,7 @@ The ring rest stands on a post on a printed foot screwed to the bench, at X = 20
 
 Set the deck on the bench inside the frame with its spindle at X = 550, Y = 0, and screw an offcut stop against two of its feet so it goes back to the same place after every lift-out. Measure everything `07-status-and-next-steps.md` says to measure before this point; the bracket positions below depend on those numbers.
 
-Screw the cue-servo bracket to the inside of the end panel at the cue lever's height, with the MG996R in it and the pusher rod through its guide so the rod's pad meets the lever's tip along X. The servo's horn drives the rod through a short link; the rod's travel is the lever's travel plus a few millimetres, and its end stop is the bracket, so the servo can never push the lever past its own stop. Screw the end-stop bar to the same bracket so it runs in front of the arm base and under the arm, with the TPU-sleeved pin standing 45 mm from the arm pivot; with the arm swung by hand, the tube must meet the sleeve before the stylus reaches a radius of about 53 mm.
+Fix the cue-servo post to the inside of the end panel's bottom strip, in line with the middle of the lever's travel, with its beam reaching out over the right edge of the deck and the MG996R hanging from the beam's end, shaft down, 28 mm to the right of the lever. Fit the yoke to the horn so it straddles the lever's top with a millimetre of play, and set the servo's two angles in `printer.cfg` by hand: the lever's top travels 24 mm front to back, about 25° of horn either side of the middle, and the angles must stop short of the lever's own stops at both ends so the servo never stalls against them. Fix the end-stop bar's foot to the panel beside the post so the bar runs in front of the lever and under the arm, ending short of the platter's rim, with the TPU-sleeved pin standing 45 mm from the arm pivot; with the arm swung by hand, the tube must meet the sleeve before the stylus reaches a radius of about 53 mm.
 
 Screw the deck camera bracket low on the end panel at platter height, 30 mm inside the panel, 20 mm to the front, 155 mm up, facing the headshell across the platter, with the LED bar housing beside it aimed low across the platter surface. Run the Camera Module 3 ribbon and the LED wires out through a hole in the panel.
 

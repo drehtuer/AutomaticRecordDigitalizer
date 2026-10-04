@@ -88,7 +88,7 @@ indentation everywhere except Python, which stays at the four spaces PEP 8 and r
 files. After any change to geometry or to the planner, run the collision checker and say what it
 reported; CI runs it too, so a change that makes the machine hit itself cannot be merged. The
 sweep runs the whole cycle with a 12" record and the size-dependent poses with a 10" and a 7",
-takes about three minutes, and currently reports 1299 samples with 0 collisions.
+takes about three minutes, and currently reports 1301 samples with 0 collisions.
 
 The devcontainer (`.devcontainer/`) has CadQuery, ruff and markdownlint-cli2 installed.
 

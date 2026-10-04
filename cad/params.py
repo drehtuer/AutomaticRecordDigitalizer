@@ -5,10 +5,11 @@ Y across the bench (positive towards the front), Z up. Origin: bench top,
 20 cm left of the flip station post (the same origin the concept model uses).
 
 Values marked MEASURE were taken from a photo of the deck and must be confirmed
-with a ruler; the deck's outline, the spindle's place in it and the platter's height have been measured.
+with a ruler; the deck's outline, the spindle's place in it, the platter's height, the arm pivot and
+the cue lever's travel have been measured.
 Everything else comes from the concept design.
 """
-from math import radians
+from math import acos, atan2, degrees, hypot, radians
 
 # ---------------------------------------------------------------- records
 RECORD_12_R = 150.0
@@ -91,18 +92,35 @@ DECK_CY = DECK_SPINDLE_Y + DECK_SPINDLE_FROM_REAR - DECK_D / 2   # rear edge is 
 PLATTER_R, PLATTER_T = 165.0, 18.0             # the platter's height above the case top is measured
 MAT_T = 3.0
 SPINDLE_R, SPINDLE_H = 3.6, 22.0
-ARM_PIVOT = (DECK_SPINDLE_X + 194.0, DECK_SPINDLE_Y - 84.0, DECK_H + 40.0)   # MEASURE
-ARM_EFF_L = 230.0                           # pivot to stylus
-ARM_REST_XY = (DECK_SPINDLE_X + 189.0, DECK_SPINDLE_Y + 125.0)       # MEASURE
-ARM_ANGLE = {                               # stylus azimuth from the pivot, degrees, recomputed for the measured pivot
-    "rest": 91.3, "leadin": 118.0, "runout": 140.0, "mid": 129.0,
+DECK_RIGHT = DECK_SPINDLE_X - DECK_SPINDLE_FROM_LEFT + DECK_W        # the deck's right edge
+DECK_REAR = DECK_SPINDLE_Y - DECK_SPINDLE_FROM_REAR                  # the deck's rear edge
+ARM_PIVOT = (DECK_RIGHT - 69.5, DECK_REAR + 93.5, DECK_H + 40.0)     # the screw on top of the bearing, measured from the right and rear edges; height MEASURE
+ARM_EFF_L = 230.0                           # pivot to stylus; the measured pivot is 216 mm from the spindle, a 14 mm overhang
+ARM_REST_XY = (ARM_PIVOT[0] - 5.0, ARM_PIVOT[1] + 209.0)             # MEASURE: from the photo, taken relative to the pivot
+ARM_STYLUS_R = {"leadin": 147.0, "mid": 107.0, "runout": 66.0}       # stylus radius from the spindle at each named arm position
+
+
+def arm_azimuth(r):
+    """Stylus azimuth from the pivot, degrees, with the stylus r from the spindle."""
+    dx, dy = DECK_SPINDLE_X - ARM_PIVOT[0], DECK_SPINDLE_Y - ARM_PIVOT[1]
+    d = hypot(dx, dy)
+    return degrees(atan2(dy, dx) - acos((ARM_EFF_L ** 2 + d ** 2 - r ** 2) / (2 * ARM_EFF_L * d)))
+
+
+ARM_ANGLE = {                               # stylus azimuth from the pivot, degrees, following the pivot
+    "rest": degrees(atan2(ARM_REST_XY[1] - ARM_PIVOT[1], ARM_REST_XY[0] - ARM_PIVOT[0])),
+    **{k: arm_azimuth(r) for k, r in ARM_STYLUS_R.items()},
 }
 ARM_LIFT = 10.0                             # cue lift height
 FINGER_LIFT_LOCAL = (ARM_EFF_L - 6.0, 22.0, -4.0)   # relative to the pivot, arm along +X (X, Y outward, Z)
-CUE_LEVER = (DECK_SPINDLE_X + 235.0, DECK_SPINDLE_Y - 46.0, DECK_H + 12.0)   # MEASURE
-END_STOP_ANGLE, END_STOP_R = 143.8, 45.0   # arm-tube azimuth and radius from the pivot at which the stop stands (45 mm keeps the pin outside a 12" record's outline)
+CUE_LEVER_X = DECK_RIGHT - 40.0             # the lever's top travels front to back, 40 mm inside the right edge: measured
+CUE_LEVER_Y_DOWN = DECK_REAR + 146.0        # arm down: measured
+CUE_LEVER_Y_UP = DECK_REAR + 122.0          # arm lifted, 24 mm towards the rear: measured
+CUE_LEVER_Z = DECK_H + 14.5                 # MEASURE: height of the lever's top
+END_STOP_ANGLE, END_STOP_R = arm_azimuth(52.5), 45.0   # arm-tube azimuth (stylus 52.5 mm from the spindle) and radius from the pivot at which the stop stands (45 mm keeps the pin outside a 12" record's outline)
 DECK_CAM = (FRAME_X1 - 30.0, 20.0, 155.0)
 
 # ---------------------------------------------------------------- deck interface hardware
-CUE_SERVO_Y = CUE_LEVER[1]
-CUE_SERVO_Z = CUE_LEVER[2]
+CUE_SERVO_X = CUE_LEVER_X + 28.0            # servo shaft, vertical, beside the lever; the horn reaches back to it
+CUE_SERVO_Y = (CUE_LEVER_Y_DOWN + CUE_LEVER_Y_UP) / 2   # mid-travel, so the horn swings about 25 degrees either way
+CUE_SERVO_Z = CUE_LEVER_Z + 12.0            # underside of the servo body; horn and yoke hang below it over the lever's top

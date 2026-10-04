@@ -15,7 +15,7 @@ Prices are typical German retail, rounded, and will drift; check before ordering
 | Motion | NEMA17 with 5:1 planetary gearbox (wrist, carousel index) | 2 | 70 |
 | Motion | GT2 belt 5 m, 20T pulleys, idlers, tensioners | 1 set | 25 |
 | Motion | T8 lead screw 0.8 m, nut, coupler, bearing block | 1 | 20 |
-| Servos | MG996R metal-gear servo driving the printed pusher rod (cue lever) | 1 | 7 |
+| Servos | MG996R metal-gear servo working the cue lever through a printed yoke on its horn | 1 | 7 |
 | Controller | BIGTREETECH Octopus V1.1 (or: donor printer board + Raspberry Pi Pico, see below) | 1 | 65 |
 | Controller | TMC2209 driver (5 with the Octopus, 1 with the donor-board option) | 5 | 30 |
 | Power | 24 V 150 W supply; 24 → 5 V 3 A buck for the servo; 24 → 12 V 3 A buck for the pump, the valve and the LED bar, which are all 12 V | 1 set | 38 |
@@ -78,7 +78,7 @@ Roughly 30 distinct parts, 50 to 70 hours of printing. PETG unless marked TPU.
 | Wrist | hub with bearing seats, arm, cup bracket, hose clip, wrist camera mount, finger-lift fork with TPU lining, Hall sensor mount |
 | Carousel | centre hub, 24 slot combs with V floors, 8 GT2 tooth-ring segments, 10 roller brackets, stepper mount with pulley, home-mark flag and sensor mount |
 | Station | ring rest with a rubber O-ring in its top groove, post foot; controller plate and Pi plate for the panel outsides, pump mount on rubber feet |
-| Deck interface | cue-servo bracket, pusher rod guide, lever pad, end-stop pin base with TPU sleeve |
+| Deck interface | cue-servo post and beam, horn yoke for the lever, end-stop bar and pin base with TPU sleeve |
 | Cameras and light | deck camera bracket, LED bar housing, cable-chain end brackets |
 
 Something soft goes on every surface that touches a record: TPU for the cup lip if it is not bought, the fork lining and the end-stop sleeve; a bought rubber O-ring on the ring rest.

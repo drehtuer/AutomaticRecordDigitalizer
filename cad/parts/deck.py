@@ -15,7 +15,9 @@ def plinth():
         cyl_z(9, 35, P.ARM_REST_XY[0], P.ARM_REST_XY[1], P.DECK_H))              # arm rest post + clip
     fader = box(16, 100, 4, P.DECK_SPINDLE_X + 230, P.DECK_SPINDLE_Y + 64, P.DECK_H + 2)
     startstop = box(45, 30, 8, P.DECK_SPINDLE_X - 145, P.DECK_SPINDLE_Y + 153, P.DECK_H + 4)
-    lever = box(34, 8, 5, P.CUE_LEVER[0] + 12, P.CUE_LEVER[1], P.CUE_LEVER[2])     # cue lever, resting position
+    travel = P.CUE_LEVER_Y_DOWN - P.CUE_LEVER_Y_UP
+    lever = box(10, travel + 10, P.CUE_LEVER_Z - P.DECK_H, P.CUE_LEVER_X, (P.CUE_LEVER_Y_DOWN + P.CUE_LEVER_Y_UP) / 2,
+                (P.CUE_LEVER_Z + P.DECK_H) / 2)                                    # cue lever: everything its top sweeps, down to lifted
     return union_all([body, platter, mat, spindle, base, rest, fader, startstop, lever])
 
 
