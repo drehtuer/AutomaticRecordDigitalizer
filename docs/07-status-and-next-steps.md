@@ -20,7 +20,7 @@ The Omnitronic DD 3120 (and a Stanton T.92 USB as spare), the Focusrite Scarlett
 
 The order below front-loads the things that could still change the design, so that nothing expensive is bought on an assumption.
 
-First, measure the DD 3120 with a ruler and record the numbers in `01-design-specification.md`. The outline and the spindle's position are done (4 October: 44.9 × 35.1 × 8.6 cm, spindle 17.9 cm from the left and 17.4 cm from the rear); what remains is spindle to arm pivot, pivot to arm rest, the cue lever's position, travel and force, the lever's height above the plinth, the finger lift's shape. Check the remote jack's behaviour (held or toggle) with a paper clip, measure the voltage across the 33 and 45 switches, find out what the pitch output carries, and swap the felt slipmat for a rubber or cork mat.
+First, measure the DD 3120 with a ruler and record the numbers in `01-design-specification.md`. The outline, the platter's height and the spindle's position are done (4 October: 44.9 × 35.1 × 8.6 cm to the case top, the platter 1.8 cm above it, spindle 17.9 cm from the left and 17.4 cm from the rear); what remains is spindle to arm pivot, pivot to arm rest, the cue lever's position, travel and force, the lever's height above the plinth, the finger lift's shape. Check the remote jack's behaviour (held or toggle) with a paper clip, measure the voltage across the 33 and 45 switches, find out what the pitch output carries, and swap the felt slipmat for a rubber or cork mat.
 
 Second, buy the 3D printer, since it is needed for everything after this point, and then a used donor printer (CR-10 class preferred) for motors, PSU, wheels, belts and a possible controller board.
 
