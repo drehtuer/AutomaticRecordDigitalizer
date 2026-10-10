@@ -144,3 +144,11 @@ OSB is stiff enough for a glued box but weak in three places, and each gets stee
 - A bolt head pulls into its strands, so the M5 beam bolts get 15 mm penny washers on the panels' outer faces.
 
 The window corners get a 20 to 26 mm hole drilled first, so the jigsaw never has to turn in OSB; round corners stop both chipping and cracks. The metal and fasteners add 24,70 €. Wood and metal together come to 136,83 €, where birch and MDF alone were 272,75 €, and the Hornbach sheet drops from 362,81 € to 226,89 €, all shelf stock with no lead time.
+
+The sheet bought for the carousel base plate is 18 mm, where `cad/params.py` had drawn the plate 15 mm thick (`CAR_BASE_T`), a figure that predated the material decision. The model now draws it at 18 mm, and the disc sits on its rollers 3 mm higher with it, so every pick height follows; exports, renders and the collision sweep were regenerated with the change.
+
+## Donor bought, 6 October 2026
+
+*Status · affects `sourcing/bom-shopping-list.md`, `docs/04-bill-of-materials.md`, `docs/07-status-and-next-steps.md`*
+
+The donor for the third route is a Creality Ender 3 V2, bought on eBay for 55 € including delivery, against the 75 € the route had been priced with; it arrives the week of 12 October. The donor route drops to 653,69 € of parts and 691,29 € delivered. What it actually contains still decides several of that route's lines: run it once before stripping it, note the board revision and the MCU marking (an STM32F103, or a GD32 clone that needs different Klipper build options), and count the wheels and eccentrics against the 12 and 6 the build needs before ordering the rest.

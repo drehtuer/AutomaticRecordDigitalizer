@@ -20,6 +20,8 @@ Nothing in this table is bought. Everything in it has a place in the build.
 | Logitech C270 webcam | On the wrist | The wrist camera. Fixed focus, set once by hand at the working distance over a label, then focus, exposure, gain and white balance locked |
 | 1080p USB webcam | Kept | The fallback for the wrist if the C270 fails or turns out not to resolve the centre hole and the groove bands; the label photographs no longer decide anything, since a record's identity comes from the manifest |
 | 3D printer | Prints every part in the printed-parts table | PETG for structure, TPU wherever a record is touched |
+| 2 × RCA to 2 × 6.3 mm jack lead | From the deck's line output into the Scarlett | The audio path; confirmed on hand on 3 October |
+| Multimetrix DMM105 multimeter | On the bench while wiring | Sets the two adjustable bucks and checks the button taps. An old meter wants two checks first: a fresh battery, and its reading against a known source, such as the 5 V of a USB port, before a buck is trusted to it |
 
 ## Panels and discs
 
@@ -52,11 +54,11 @@ What the bill of materials leaves to a local shop, on top of the sheet material.
 - Cable ties, 100 × 2.5 mm, one bag; and a few cable tie mounts with adhesive backs.
 - Fabric or Kapton tape for holding cable bundles in the chains while they are dressed.
 - Double-sided tape or hook-and-loop for the Pi and relay card if they are not screwed down.
-- A rubber or cork turntable mat if the deck's felt slipmat is the only one there. A 4 mm cork sheet is cheap but thicker than the 3 mm the CAD assumes; see `06-open-questions.md`.
+- A rubber or cork turntable mat if the deck's felt slipmat is the only one there. A 4 mm cork sheet is cheap and is what the CAD draws; a mat of another thickness wants `MAT_T` changed, see `06-open-questions.md`.
 - Thread locker, medium strength (Loctite 243), for the pulley grub screws and the stepper mounts.
 - Optional: a small can of clear wax or oil for the panels, and a 40 mm hole saw for the cable exits through the panels.
 
-Tools, if they are not there already: a jigsaw with a wood blade, a cordless drill with a 4 mm, a 4.5 mm and an 8 mm bit, a 20 to 26 mm Forstner bit and a countersink, a hacksaw for the steel angle, a long straightedge and a square, four clamps of at least 90 cm reach or strap clamps, hex keys 2 to 5 mm, a set of small spanners, a soldering iron, a crimp tool for JST-XH contacts, which are what the Octopus's motor and end-stop headers take, and Dupont (an SN-01BM does both), a heat gun for the shrink tube, digital calipers, and a spirit level.
+Tools, if they are not there already: a jigsaw with a wood blade, a cordless drill with a 4 mm, a 4.5 mm and an 8 mm bit, a 20 to 26 mm Forstner bit and a countersink, a hacksaw for the steel angle, a long straightedge and a square, four clamps of at least 90 cm reach or strap clamps, hex keys 2 to 5 mm, a set of small spanners, a soldering iron with a heat-set insert tip for the M3 inserts, a multimeter, wire strippers and flush cutters, T15 and T20 Torx bits for the wood screws, a crimp tool for JST-XH contacts, which are what the Octopus's motor and end-stop headers take, and Dupont (an SN-01BM does both), a heat gun for the shrink tube, digital calipers, and a spirit level.
 
 ## Printed parts
 
@@ -169,7 +171,7 @@ Nothing is boxed. The parts sit on the outside faces of the frame panels, where 
 
 **Pump and valve, outside the rear panel near the open end, at about X = −100 mm, on rubber mounts.** As far from the deck as the frame allows: a diaphragm pump is a vibration source, and the deck sits between X = 371 and 820. The hose runs along the outside of the panel to the chain anchor and up. The MPRLS is not here. It is an I²C device, and I²C does not like the 1.7 m to the Pi, but a vacuum line does not care about length: a tube stub tees off at the valve and runs to the sensor beside the Pi. The stub's 20 ml of dead volume is nothing against a 1 L/min pump.
 
-**Pi group, outside the deck-end panel, low, beside the hole for the deck camera's ribbon.** The Pi on a printed plate in its aluminium shell with twin fans, its own 15 W supply, the powered hub, the SSD, the relay card and the MPRLS; the Scarlett on the bench beside the deck. The status display sits on the panel's front post, where its 50 cm DSI ribbon reaches from the Pi with 9 cm to spare, angled so its light stays off the platter. The deck camera's ribbon is 30 cm through the panel, the relay card's cables into the deck about a metre, and the Pi's USB-C cable to the Octopus 2.2 m along the outside of the panels. Two mains supplies, one at each end, so a power strip runs along the rear panel.
+**Pi group, outside the deck-end panel, low, beside the hole for the deck camera's ribbon.** The Pi on a printed plate in its aluminium shell with twin fans, the powered hub, the SSD, the relay card and the MPRLS; the Scarlett on the bench beside the deck. The Pi's official 15 W supply is a wall plug, so it stands in the power strip on the rear panel and its fixed 1.5 m USB-C lead runs along the panel and round the corner to the Pi. The status display sits on the panel's front post, where its 50 cm DSI ribbon reaches from the Pi with 9 cm to spare, angled so its light stays off the platter. The deck camera's ribbon is 30 cm through the panel, the relay card's cables into the deck about a metre, and the Pi's USB-C cable to the Octopus 2.2 m along the outside of the panels. Two mains supplies, one at each end, so a power strip runs along the rear panel.
 
 Wire the five TMC2209 sticks into the Octopus with UART jumpers set, X, Y, Z, wrist and carousel in that order; the servo to the servo header; the pump, valve and LED to three fan or heater MOSFET outputs, the LED on a hardware PWM pin; every end-stop, the Hall sensor and the slot sensor to end-stop inputs. Set the TMC run currents in `printer.cfg` and nowhere else.
 
@@ -204,13 +206,14 @@ Everything to the gantry leaves the controller group on the outside of the rear 
 | Y end-stop, 3-core | Same | 1.3 m | 0.5 m lead | 0.8 m extension |
 | X stepper, 4-core | To the X carriage | 1.3 m | Motor lead, about 1 m | 0.3 m extension |
 | X end-stop, 3-core | Fixed at the deck end of the X beam | 1.2 m | 0.5 m lead | 0.7 m extension |
-| Deck camera CSI ribbon | Pi group through the panel to the bracket | 0.3 m | 0.5 m | Reaches with 20 cm to fold |
+| Deck camera CSI ribbon | Pi group through the panel to the bracket | 0.1 m | The camera's own 200 mm, and a 0.5 m spare | Reaches |
 | Status display DSI ribbon | Pi group to the deck-end panel's front post | 0.41 m | 0.5 m | Reaches with 9 cm to fold |
 | LED bar, 2-core 12 V | Controller group along the outside of the panels to the end panel | 2.3 m | Strip only | 2.3 m of 2-core |
 | Cue servo, 3-core 5 V | Controller group to the end panel at lever height | 2.1 m | MG996R lead, 0.3 m | 1.8 m extension |
 | Carousel stepper, 4-core | Controller group along the rear panel, down to the base plate | 2.6 m | Geared motor's bare lead, 0.5 m | 2.1 m extension |
 | Carousel home sensor, 3-core | Same | 2.6 m | Bare module | 2.6 m of 3-core |
 | Pump and valve drive, 2 × 2-core 12 V | Controller group along the rear panel to the pump mount | 1.0 m each | — | 2 m of 2-core |
+| Pi supply, USB-C | Wall plug in the power strip, along the rear panel and round the corner to the Pi | 1.2 m | The official supply's fixed 1.5 m | Reaches, if the plug sits in the strip's end sockets |
 | Pi to Octopus, USB-A to USB-C | Pi group along the outside of the panels to the controller group | 2.2 m | — | Buy a 3 m USB-A to USB-C cable; the extra is a tie |
 | Deck remote start/stop, 6.3 mm | Relay card to the deck's rear jack | 1.2 m | 1.8 m | Reaches with 60 cm to tie up |
 | 33 and 45 button taps, 2 × 2-core thin | Relay card into the deck's front-left board | 1.4 m each | Thin wire | 3 m of 3-core, two cores used |

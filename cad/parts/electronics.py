@@ -2,7 +2,8 @@
 
 Positions follow `docs/08-assembly-instructions.md`: the controller group outside the rear panel
 under the X beam, the pump and valve outside the rear panel near the open end, the Pi group
-outside the deck-end panel, the Scarlett and the power strip on the bench. Everything here is an
+outside the deck-end panel, the status display on that panel's front post, the Scarlett and the power strip on the
+bench, with the Pi's wall-plug supply in the strip. Everything here is an
 envelope: the boards and boxes have their catalogue sizes, the cables their routed paths.
 
 The chains and the cables that feed them change shape as the gantry moves, so they are drawn at
@@ -15,6 +16,7 @@ from .. import params as P
 from .common import box, cyl_z, union_all
 
 REAR = -P.FRAME_Y - P.PLY / 2            # outer face of the rear panel
+PSU_PI_X = 420.0                          # the Pi's wall-plug supply, in the last sockets of the power strip
 END = P.FRAME_X1                          # outer face of the deck-end panel
 HOME = {"x": 200.0, "y": 30.0, "z": P.TRAVEL_Z}   # the carriage at rest, as in kinematics.HOME
 
@@ -78,6 +80,7 @@ def controller_group():
         "buck_12v": box(45, 16, 22, 95, y - 8, 785),
         "buck_5v": box(45, 16, 22, 95, y - 8, 745),
         "power_strip": box(300, 40, 42, 300, y - 31, 21),
+        "psu_pi": box(55, 36, 70, PSU_PI_X, y - 31, 42 + 35),   # the official 15 W supply is a wall plug, standing in the strip
     }
 
 
@@ -89,18 +92,37 @@ def pump_group():
     return {"pump": pump.union(mounts), "valve": box(50, 32, 30, -160, y - 17, 260)}
 
 
+PI_L, PI_W, PI_H = P.PI_SHELL
+PI_Z = 85.0                                # centre height of the Pi in its shell on the plate
+
+
 def pi_group():
-    """Pi, hub, SSD, relay card, MPRLS and the Pi's supply on a plate outside the deck-end panel."""
+    """Pi in its heatsink shell, hub, SSD, relay card and MPRLS on a plate outside the deck-end panel.
+    The shell stands on the plate with its long side along Y; the CSI, DSI and USB-C runs leave over its top."""
     x = END
     return {
         "pi_plate": box(4, 340, 110, x + 2, 0, 60),
-        "pcb_pi": box(20, 85, 56, x + 14, 0, 85),
+        "pcb_pi": box(PI_H, PI_L, PI_W, x + 4 + PI_H / 2, 0, PI_Z),
         "usb_hub": box(18, 100, 40, x + 13, 110, 95),
         "ssd": box(12, 100, 70, x + 10, 110, 40),
         "pcb_relay": box(22, 85, 55, x + 15, -110, 60),
         "pcb_mprls": box(8, 18, 13, x + 8, 150, 25),
-        "psu_pi": box(30, 55, 28, x + 19, -45, 20),
     }
+
+
+def display_group():
+    """The 4.3" DSI status display on the deck-end panel's front post: four M2.5 standoffs at the Pi's
+    hole pattern, the driver board on them and the glass in front, facing +X, away from the platter."""
+    x, y, z = END, P.DISPLAY_Y, P.DISPLAY_Z
+    bw, bh, bt = P.DISPLAY_BOARD
+    hx, hz = P.DISPLAY_HOLES
+    so = P.DISPLAY_STANDOFF
+    standoffs = union_all([cq.Workplane("YZ").circle(2.5).extrude(so).translate((x, y + sy * hx / 2, z + sz * hz / 2))
+                           for sy in (-1, 1) for sz in (-1, 1)])
+    board = box(bt, bw, bh, x + so + bt / 2, y, z)
+    glass_t = P.DISPLAY_T - so - bt
+    glass = box(glass_t, P.DISPLAY_W, P.DISPLAY_H, x + so + bt + glass_t / 2, y, z)
+    return {"display_standoffs": standoffs, "display_board": board, "display_glass": glass}
 
 
 def bench_items():
@@ -109,7 +131,7 @@ def bench_items():
 
 def electronics():
     """Every static electronics part, keyed by node name."""
-    return {**controller_group(), **pump_group(), **pi_group(), **bench_items()}
+    return {**controller_group(), **pump_group(), **pi_group(), **display_group(), **bench_items()}
 
 
 # ---------------------------------------------------------------- chains, drawn at the home pose
@@ -158,7 +180,8 @@ def static_cables():
     out["hose"] = tube([(-205, REAR - 27, 210), (-215, y, 300), (60, y, 300), (60, y, 840), (195, X_CHAIN_Y, X_CHAIN_Z - 9)], CABLE_R["hose"])
     out["tube_mprls"] = tube([(-135, REAR - 12, 262), (-120, y, 290), (982, y, 290), (xe, y + 10, 290), (xe, 150, 290), (xe, 150, 40), (END + 5, 150, 30)], CABLE_R["tube"])
     # Pi to Octopus, USB-C, along the outside of both panels
-    out["cable_usbc"] = tube([(END + 12, -10, 100), (xe, -10, 330), (xe, y + 10, 330), (982, y, 330), (290, y, 330), (290, y, 700), (280, REAR - 12, 740)], CABLE_R["usb"])
+    shell_top = PI_Z + PI_W / 2 + 4                          # the runs that leave the Pi clear its shell
+    out["cable_usbc"] = tube([(END + 20, -30, shell_top), (xe, -30, 330), (xe, -10, 330), (xe, y + 10, 330), (982, y, 330), (290, y, 330), (290, y, 700), (280, REAR - 12, 740)], CABLE_R["usb"])
     # cue servo and LED bar, along the rear panel to the deck-end panel and through it
     out["cable_servo"] = tube([(170, REAR - 12, 705), (170, y, 360), (982, y, 360), (xe, y + 10, 360), (xe, P.CUE_SERVO_Y, 360), (xe, P.CUE_SERVO_Y, 130), (975, P.CUE_SERVO_Y, 130), (958, P.CUE_SERVO_Y, P.CUE_SERVO_Z + 52), (P.CUE_SERVO_X + 32, P.CUE_SERVO_Y, P.CUE_SERVO_Z + 52)], CABLE_R["wire"])
     out["cable_led"] = tube([(xe, P.CUE_SERVO_Y, 200), (xe, 65, 200), (xe, 65, 130), (975, 65, 130), (958, 65, 117)], CABLE_R["wire"])
@@ -170,10 +193,21 @@ def static_cables():
     out["cable_audio"] = tube([(700, -180, 80), (700, -200, 12), (830, -200, 12), (830, 300, 12), (690, 300, 25)], CABLE_R["wire"])
     out["cable_scarlett_usb"] = tube([(690, 290, 45), (975, 300, 130), (xe, 300, 130), (xe, 130, 130), (END + 13, 130, 116)], CABLE_R["usb"])
     # deck camera ribbon through the panel
-    out["cable_ribbon"] = tube([(END + 14, 20, 113), (xe, 20, 150), (END - 10, 20, 155), (960, 20, 155)], CABLE_R["ribbon"])
+    out["cable_ribbon"] = tube([(END + 20, 20, shell_top), (xe, 20, 150), (END - 10, 20, 155), (960, 20, 155)], CABLE_R["ribbon"])
+    # status display ribbon: off the Pi's +Y end, over the hub, along the panel at Z = 126 and up behind the standoffs
+    yd = P.DISPLAY_Y
+    xd = END + 5                                             # flat against the panel, under the display's board
+    out["cable_dsi"] = tube([(END + 20, PI_L / 2, PI_Z + 10), (END + 20, PI_L / 2 + 6, shell_top), (xd, 70, shell_top),
+                             (xd, yd, shell_top), (xd, yd, P.DISPLAY_Z - P.DISPLAY_BOARD[1] / 2 - 5)], CABLE_R["ribbon"])
     # mains: supply, Pi supply and deck to the strip
     out["mains_psu"] = tube([(330, y, 45), (330, y, 690), (360, REAR - 12, 711)], CABLE_R["mains"])
-    out["mains_pi"] = tube([(END + 19, -45, 34), (xe, -100, 20), (xe, -452, 20), (982, -452, 20), (450, y, 40)], CABLE_R["mains"])
+    # the Pi's supply: USB-C from the wall plug in the strip, along the rear panel and round the corner to the Pi's -Y end
+    xp = END + 8                                             # off the Pi plate, under the relay card
+    out["cable_pi_power"] = tube([(PSU_PI_X + 28, REAR - 31, 60), (PSU_PI_X + 40, y, 20), (982, y, 20), (xp, y + 10, 20),
+                                  (xp, -PI_L / 2 - 9, 20), (xp, -PI_L / 2 - 9, PI_Z - 20), (END + 20, -PI_L / 2, PI_Z - 20)], CABLE_R["usb"])
+    # wrist camera USB: from the hub beside the Pi-to-Octopus cable, along both panels to the X chain's anchor
+    out["cable_webcam_usb"] = tube([(END + 20, 110, 120), (xe, 110, 340), (xe, y + 10, 340), (982, y, 340), (296, y, 340),
+                                    (296, y, 830), (205, REAR - 12, 820), (205, X_CHAIN_Y, X_CHAIN_Z - 9)], CABLE_R["usb"])
     out["mains_deck"] = tube([(830, -185, 60), (900, -300, 130), (xe, -300, 130), (xe, -452, 24), (982, -452, 24), (460, y, 44)], CABLE_R["mains"])   # out through the end panel's window
     return out
 
@@ -210,16 +244,17 @@ def wrist_cables():
 
 COLORS = {
     "pcb_octopus": (0.10, 0.30, 0.20), "pcb_pi": (0.10, 0.35, 0.22), "pcb_relay": (0.10, 0.30, 0.20),
-    "pcb_mprls": (0.15, 0.20, 0.45), "psu_24v": (0.75, 0.76, 0.78), "psu_pi": (0.15, 0.15, 0.16),
+    "pcb_mprls": (0.15, 0.20, 0.45), "psu_24v": (0.75, 0.76, 0.78), "psu_pi": (0.92, 0.92, 0.92),
+    "display_standoffs": (0.75, 0.68, 0.40), "display_board": (0.10, 0.30, 0.20), "display_glass": (0.06, 0.07, 0.09),
     "buck_12v": (0.15, 0.20, 0.45), "buck_5v": (0.15, 0.20, 0.45), "power_strip": (0.90, 0.90, 0.90),
     "pump": (0.20, 0.20, 0.22), "valve": (0.70, 0.60, 0.25), "pi_plate": (0.85, 0.39, 0.17),
     "usb_hub": (0.20, 0.20, 0.22), "ssd": (0.35, 0.36, 0.38), "scarlett": (0.80, 0.15, 0.12),
     "x_chain": (0.12, 0.12, 0.13), "y_chain": (0.12, 0.12, 0.13), "z_chain": (0.12, 0.12, 0.13),
     "column_post": (0.24, 0.27, 0.31),
     "hose": (0.55, 0.70, 0.90), "tube_mprls": (0.55, 0.70, 0.90),
-    "cable_usbc": (0.20, 0.40, 0.80), "cable_scarlett_usb": (0.20, 0.40, 0.80),
-    "cable_ribbon": (0.90, 0.55, 0.15),
-    "mains_psu": (0.05, 0.05, 0.05), "mains_pi": (0.05, 0.05, 0.05), "mains_deck": (0.05, 0.05, 0.05),
+    "cable_usbc": (0.20, 0.40, 0.80), "cable_scarlett_usb": (0.20, 0.40, 0.80), "cable_webcam_usb": (0.20, 0.40, 0.80),
+    "cable_pi_power": (0.92, 0.92, 0.92), "cable_ribbon": (0.90, 0.55, 0.15), "cable_dsi": (0.90, 0.55, 0.15),
+    "mains_psu": (0.05, 0.05, 0.05), "mains_deck": (0.05, 0.05, 0.05),
 }
 CABLE_DEFAULT = (0.45, 0.45, 0.48)
 RIGID_MOVING = ("outrigger_cables", "wrist_cables", "column_post")   # checked by the sweep; the rest is drawn at home

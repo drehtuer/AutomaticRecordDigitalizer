@@ -6,7 +6,7 @@ Things the concept could not settle and that the first hardware has to answer. E
 
 **Whether the re-grip earns its keep.** The flip station is the one place a record is set down and picked up again with nothing centring it, and the decision log keeps it on the condition that it works. Count, over the first batches, how often the re-grip fails to find the hole or to seal, and how often a record on the ring is off its nominal centre by more than the cup's bellows absorb. If it is often, the one-side mode in `02-operating-cycle.md` is the machine's mode and the station comes off; if it is rare, the station stays and the mode remains the fallback.
 
-**Slipmat.** Replace the felt DJ slipmat with a rubber or cork mat before the first batch and check that the vacuum-cup release a few millimetres above it still centres the record on the spindle. The Baumarkt sheet prices a 4 mm cork sheet to cut the mat from, where the CAD assumes a 3 mm mat (`MAT_T` in `cad/params.py`): either set `MAT_T` to the mat actually fitted and rerun the collision sweep, or buy a 3 mm rubber mat.
+**Slipmat.** Replace the felt DJ slipmat with a rubber or cork mat before the first batch and check that the vacuum-cup release a few millimetres above it still centres the record on the spindle. The Baumarkt sheet prices a 4 mm cork sheet to cut the mat from, and the CAD now draws a 4 mm mat (`MAT_T` in `cad/params.py`); if a different mat is fitted, set `MAT_T` to it and rerun the collision sweep.
 
 **The remote start/stop jack's behaviour.** Fader start suggests the platter runs while the contact is held and stops when it opens; confirm that it is not a toggle, and whether the front-panel button still works while the remote contact is closed.
 
