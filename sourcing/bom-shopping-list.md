@@ -10,7 +10,7 @@ Prices drift — re-check before ordering. Lines marked ESTIMATE could not be fe
 |---|---|---|---|
 | [Cheapest per item](#cheapest-per-item) | 905,67 | 57,30 | **962,97** |
 | [Fewest suppliers](#fewest-suppliers) | 839,22 | 37,60 | **876,82** |
-| [Donor printer route](#donor-printer-route) | 673,69 | 37,60 | **711,29** |
+| [Donor printer route](#donor-printer-route) | 653,69 | 37,60 | **691,29** |
 | [Hornbach (local)](#hornbach-local) | 226,89 | 0,00 | **226,89** |
 
 The notes under each route call the first three sheet 1, sheet 2 and sheet 3, in the order of the table above.
@@ -236,11 +236,11 @@ Totals for this route: parts 839,22 €, shipping 37,60 €, delivered **876,82 
 
 ## Donor printer route
 
-A used 3D printer supplies the motion hardware; a Pi Pico + 1 TMC2209 replaces the Octopus. Prices incl. 19% VAT, verified 10 September 2026, re-verified 3 October 2026.
+A used 3D printer supplies the motion hardware; a Pi Pico + 1 TMC2209 replaces the Octopus. Prices incl. 19% VAT, verified 10 September 2026, re-verified 3 October 2026. The donor, an Ender 3 V2, was bought on 6 October 2026 for 55 €.
 
 | Group | Part | Qty | Unit € | Line € | Supplier | Note |
 |---|---|---|---|---|---|---|
-| Donor | [Used 3D printer (Creality Ender 3 / CR-10 / Ender 5) as donor](https://www.kleinanzeigen.de/s-3d-drucker/k0) | 1 | 75,00 | 75,00 | eBay Kleinanzeigen / used | ESTIMATE - not verified; local pickup. Supplies 4-5 NEMA17, 24 V PSU, GT2 belt+pulleys+idlers, wheels, carriage plates, end-stops, board |
+| Donor | Creality Ender 3 V2, used, as donor | 1 | 55,00 | 55,00 | BOUGHT (eBay) | BOUGHT 06.10.2026 on eBay for 55,00 € incl. delivery, arriving the week of 12.10. Supplies 4 NEMA17 (X, Y, Z + a spare), the 24 V supply, GT2 belts, pulleys and idlers, V-wheels with eccentrics, end-stops and a 32-bit 4.2.2 or 4.2.7 board. On arrival: run it once before stripping, note the board version and the MCU marking (STM32F103 or a GD32 clone, which needs different Klipper build options), count wheels (12 needed) and eccentrics (6) |
 | Frame | [Aluprofil 20x40 V-Typ Nut 6, cut 1300 mm (X beams - too long for any donor)](https://www.dold-mechatronik.de/Aluminiumprofil-20x40-V-Typ-Nut-6-062kg-m-Zuschnitt-50-6000mm) | 2 | 18,70 | 37,40 | dold-mechatronik.de | verified 10.09.2026 |
 | Frame | [Aluprofil 20x40 V-Typ Nut 6, cut 940 mm (cross beam)](https://www.dold-mechatronik.de/Aluminiumprofil-20x40-V-Typ-Nut-6-062kg-m-Zuschnitt-50-6000mm) | 1 | 13,66 | 13,66 | dold-mechatronik.de | verified 03.10.2026; 940 mm per docs/04 (list had 800). No donor extrusion reaches 940 mm |
 | Frame | [Aluprofil 20x20 V-Typ Nut 6, cut 880 mm (end tie)](https://www.dold-mechatronik.de/Aluminiumprofil-20x20-V-Typ-Nut-6-044kg-m-Zuschnitt-50-6000mm) | 1 | 7,54 | 7,54 | dold-mechatronik.de | verified 03.10.2026; 880 mm per docs/04 |
@@ -307,13 +307,13 @@ A used 3D printer supplies the motion hardware; a Pi Pico + 1 TMC2209 replaces t
 | Tools | [SN-01BM Crimpzange fuer PH2.0 / XH2.54, 0.08-0.5 mm2 (JST-XH and PH contacts; Dupont acceptably)](https://www.roboter-bausatz.de/p/sn-01bm-crimpzange-fuer-ph2.0-xh2.54-0.08-0.5mm2) | 1 | 28,65 | 28,65 | roboter-bausatz.de | verified 20.09.2026; in stock. The one crimp tool for this build: the Octopus motor and end-stop headers are JST-XH. Dupont-only tools (SN-28B, BerryBase CT-DUP) were out of stock |
 | Tools | [Einhell TH-HA 2000/1 Heissluftgeblaese 2000 W, 2 Stufen 350/550 C, mit Reduzier-, Reflektor-, Breitstrahl- und Abstrahlduese, im Koffer (heat gun for shrink tube)](https://www.conrad.de/de/heissluftgeblaese-inkl-zubehoer-inkl-koffer-2000-w-einhell-th-ha-20001-4520179-1181037.html) | 1 | 19,32 | 19,32 | conrad.de | verified 03.10.2026; Best.-Nr. 1181037, 97 in stock. Re-sourced from BerryBase to Conrad: cheaper than the McPower and the reflector nozzle is the one that shrinks tube evenly. Hornbach pickup alternatives: Pattfield PHG200D.1 25,00 € (art. 10392316, 3 stages, in-store), Steinel HM 1620 S 34,90 € (art. 12296139, no nozzle - add Reflektorduese 946156, 7,95 €) |
 
-Totals for this route: parts 673,69 €, shipping 37,60 €, delivered **711,29 €**.
+Totals for this route: parts 653,69 €, shipping 37,60 €, delivered **691,29 €**.
 
 ### Shipping
 
 | Supplier | Order value € | Shipping € | Rule |
 |---|---|---|---|
-| eBay Kleinanzeigen / used | 75,00 | 0,00 | Local pickup - a donor printer is not worth shipping |
+| BOUGHT (eBay) | 55,00 | 0,00 | Ender 3 V2 bought 06.10.2026, delivery included in the price |
 | dold-mechatronik.de | 179,49 | 12,90 | DPD up to 1.5 m, <=10 kg |
 | roboter-bausatz.de | 137,59 | 0,00 | Free from 99 € gross - reached |
 | reichelt.de | 24,73 | 5,95 | DHL <=10 kg |
@@ -329,7 +329,7 @@ Totals for this route: parts 673,69 €, shipping 37,60 €, delivered **711,29 
 - **3.** Controller: the donor's Creality 4.2.x board runs the four gantry axes under Klipper. A Raspberry Pi Pico (4,10 €) plus one TMC2209 (6,05 €) acts as a second MCU for the carousel stepper and the remaining I/O. That replaces the Octopus and its five drivers - 92,58 € saved for 10,15 €.
 - **4.** What the donor cannot cover, whatever you buy: the 2x 1.3 m V-slot beams, the 800 mm Z rail and lead screw, the two geared steppers, and everything electronic on the Raspberry Pi side.
 - **5.** Donor ranking from the BOM: CR-10 / CR-10S (especially the S5) is best - longest extrusions and lead screws. Ender 3 / 3 Pro / V2 is the cheapest and most plentiful but its profiles are short. Ender 5 Plus gives two lead screws and a 350 W supply. Anycubic and Artillery: take for motors and PSU only.
-- **6.** Buy the donor FIRST. What it turns out to contain decides several lines above, and a worn belt or a seized wheel is worth replacing rather than fitting.
+- **6.** DONOR BOUGHT 06.10.2026: a Creality Ender 3 V2 on eBay for 55,00 € (20 € under the 75 € estimate), arriving the week of 12.10. What it turns out to contain still decides several lines above - the wheel count, the belt condition and the board - so check it before ordering the rest of this route, and replace a worn belt or a seized wheel rather than fitting it.
 - **7.** Check the donor's board revision before counting on it: only 32-bit Creality 4.2.2 / 4.2.7 boards run Klipper. An 8-bit 1.1.4 board does not, and then you are back to the Octopus. The TMC drivers on 4.2.x boards are soldered down, so they cannot be harvested for anything else.
 - **8.** ALREADY OWNED, shown as 0,00 € rows: 2x Raspberry Pi 4B rev 1.1 / 2 GB (one is the cold spare), their 32 GB cards and 15 W supplies, an external USB 3.0 SSD, a self-powered USB 3.0 hub, and the Trust HD1080p webcam as the wrist camera. Together that removes roughly 185 to 195 € depending on the sheet. Also already on hand and never in these lists: the Omnitronic DD 3120, the Focusrite Scarlett, the Conrad 393905 relay card and the 3D printer.
 - **9.** Three Pi 4 gotchas worth reading before you wire anything: rev 1.1 boards refuse e-marked USB-C cables (use the official supply); rev 1.1 puts the SD-card voltage regulator on the underside next to the slot where it can be knocked off, so set the card up once and leave it; and the enclosed electronics box needs a heatsink and a fan on a Pi 4 under sustained vision load.
@@ -360,7 +360,7 @@ Plywood, glue, screws, feet, cork, sandpaper, cable ties and tape: what the asse
 | Metal | [Einschlagmutter M4 x 6 mm verzinkt, 10 Stueck (removable parts on the panels: controller plate, Pi plate, cue-servo and camera brackets, display mount, pump mount)](https://www.hornbach.de/p/einschlagmutter-m4x6-mm-galv-verzinkt-10-stueck/3857237/) | 2 | 2,90 | 5,80 | hornbach.de (Markt) | verified 04.10.2026 at hornbach.de; art. 3857237. Added with the OSB panels: a wood screw that is taken out and put back strips OSB after a few times; a T-nut pressed in from the far face takes a machine screw indefinitely. 20 pieces for about 18 positions |
 | Hardware | [Tarrox Schutzpuffer zum Schrauben O 20 x 10 mm, 4 Stueck (feet for the carousel base plate)](https://www.hornbach.de/p/tarrox-schutzpuffer-zum-schrauben-schwarz-o-20x10-mm-4-stueck/10565300/) | 1 | 1,95 | 1,95 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de; fixed feet. If the bench is not flat, Hettich Bodenausgleichsschrauben M8x35 (2,50 €, art. 6794617) level it but need M8 inserts in the plate |
 | Hardware | [Loctite 243 Schraubensicherung mittelfest, 5 ml (blue, for pulley grub screws and stepper mounts)](https://www.hornbach.de/p/loctite-schraubensicherung-zertifiziert-nach-ansi-nsf-standard-61-243-mittelfest-normal-5-ml/7663487/) | 1 | 9,95 | 9,95 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de; 5 ml is plenty. Medium strength, so it comes apart again with a hex key |
-| Deck | [HOMESTAR Korkplatte 50 x 100 cm x 4 mm - cut a O 295 mm turntable mat with a 7,3 mm centre hole](https://www.hornbach.de/p/homestar-korkplatte-50-x-100-cm-x-4mm-pinnwand-daemmplatte/12240982/) | 1 | 6,40 | 6,40 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de; replaces the felt slipmat. 4 mm where the CAD assumes 3 (MAT_T): set MAT_T = 4 in params.py, or buy a 3 mm rubber mat online. The 3 mm cork roll is 20,99 € for 2,5 m2 - silly for one mat |
+| Deck | [HOMESTAR Korkplatte 50 x 100 cm x 4 mm - cut a O 295 mm turntable mat with a 7,3 mm centre hole](https://www.hornbach.de/p/homestar-korkplatte-50-x-100-cm-x-4mm-pinnwand-daemmplatte/12240982/) | 1 | 6,40 | 6,40 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de; replaces the felt slipmat. The CAD draws a 4 mm mat (MAT_T = 4 in params.py since 10.10.2026), so this sheet needs no change to the model. The 3 mm cork roll is 20,99 € for 2,5 m2 - silly for one mat |
 | Finishing | [RAUTNER Schleifpapier 230 x 280 mm K 60/80/120/180/240, 15 Stueck (3 per grit)](https://www.hornbach.de/p/rautner-schleifpapier-alox-plus-fuer-handschleifer-schwingschleifer-230-x-280-mm-k-60-80-120-180-240-ungelocht-15-stueck/10501474/) | 1 | 11,95 | 11,95 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de; covers the 80 and 120 the instructions ask for. Single-grit K80 only comes in 50-packs |
 | Finishing | [Kork-Schleifklotz 120 x 40 x 60 mm](https://www.hornbach.de/p/kork-schleifklotz-120-x-40-x-60-mm/3885471/) | 1 | 2,95 | 2,95 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de |
 | Cabling | [Haupa Kabelbinder 100 x 2,5 mm Nylon, 100 Stueck](https://www.hornbach.de/p/haupa-262502-kabelbinder-100x2-5-mm-nylon-transparent-100-stueck/7459011/) | 1 | 3,32 | 3,32 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de |
