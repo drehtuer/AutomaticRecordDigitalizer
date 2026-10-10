@@ -43,7 +43,7 @@ The table above is the planning estimate, rounded, and it counts the sheet mater
 |---|---|---|---|
 | Cheapest per line, 12 suppliers, 12 parcels | 905,67 | 57,30 | **962,97** |
 | Consolidated into 8 suppliers | 839,22 | 37,60 | **876,82** |
-| With a donor printer, 7 suppliers and the donor | 673,69 | 37,60 | **711,29** |
+| With a donor printer, 7 suppliers and the donor | 653,69 | 37,60 | **691,29** |
 | Baumarkt, Hornbach pickup, on top of any route | 226,89 | — | **226,89** |
 
 Consolidating is close to free rather than a discount: it costs about 28 € more on parts (the MGN12 rail, the camera, the energy chain) and saves about 30 € on shipping. The gap between the first two routes is almost entirely the servo substitution. Five suppliers is not reachable for the complete list. No German general-purpose shop stocks a NEMA17 with a 5:1 planetary gearbox, so either take 10:1 from Dold, which is fine for the wrist and the carousel since both are slow, or accept another shop; and since October the Octopus and the multi-core wire each pull in one more, 3DJake and Conrad. Six is the realistic floor: 10:1 motors from Dold and the wire from Reichelt.
@@ -65,6 +65,8 @@ A used 3D printer is the cheapest source for most of the motion parts and is wor
 | Creality Ender 3 S1 / S1 Pro / S1 Plus | **Avoid.** Steppers and PSU only | Its frame is smooth-faced extrusion, not open V-slot: there is no groove for a wheel to run in, so neither the profile nor the wheels are reusable here |
 
 Whatever the donor, the long V-slot beams (2 × 1.3 m) and the 80 cm Z rail and lead screw are bought new; the donor covers motors, wheels, belts, pulleys, end-stops, PSU and fasteners, roughly 150 to 200 € of the list above, for a 50 to 100 € machine. Its board can run the four gantry axes under Klipper with a Raspberry Pi Pico (about 4 €) plus one TMC2209 stick (about 6 €) as a second MCU for the carousel stepper and the remaining I/O, which replaces the Octopus and its five drivers, about 92 € of the list for about 10 €; or it is kept as a spare and the Octopus bought as planned.
+
+The donor is bought: a Creality Ender 3 V2, on 6 October 2026 for 55 € including delivery, 20 € under the estimate the donor route was priced with. It arrives the week of 12 October; until it has been run once, stripped and counted, the lines it is meant to cover stay open.
 
 Two things to check on the donor before counting on its board. Only the 32-bit Creality 4.2.2 and 4.2.7 boards run Klipper; an 8-bit 1.1.4 board does not, and then the Octopus goes back on the list. And the TMC drivers on the 4.2.x boards are soldered down, not socketed sticks, so they cannot be harvested — whatever else the donor gives, the drivers for any axis it does not run itself are bought new.
 
