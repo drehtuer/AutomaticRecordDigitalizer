@@ -13,7 +13,7 @@ The project exists because the cheap way of doing this, a second-hand stacking r
 
 ## Status
 
-Concept design finished and reviewed in September 2026; first parametric CAD in place, with the whole cycle passing a scripted collision check. Nothing has been bought or printed yet. [docs/07-status-and-next-steps.md](docs/07-status-and-next-steps.md) records exactly where the project stands, what is already on hand, and what to do first.
+Concept design finished and reviewed in September 2026; first parametric CAD in place, with the whole cycle passing a scripted collision check. Nothing has been printed yet. The Pi-side electronics, the cable chains, the wiring and a used Ender 3 V2 as the donor printer have been bought; the frame, the motion parts and the controller have not. [docs/07-status-and-next-steps.md](docs/07-status-and-next-steps.md) records exactly where the project stands, what is already on hand, and what to do first.
 
 ## What is in this repository
 

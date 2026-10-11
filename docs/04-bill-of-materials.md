@@ -37,13 +37,13 @@ Prices are typical German retail, rounded, and will drift; check before ordering
 
 Not included, because they are already on hand: the 3D printer, the turntable (Omnitronic DD 3120), the Focusrite Scarlett, the Conrad 393905 USB relay card, the Raspberry Pi 4B (two of them, the second a cold spare) with its 15 W supply and 32 GB card, the external USB 3.0 SSD the recordings are written to, the self-powered USB 3.0 hub everything else hangs off, and the USB webcams for the wrist (two on hand, a 720p Logitech C270 and a 1080p module). Together those are roughly 185 to 195 € that do not have to be spent. Also not included: an external phono preamp if the deck's own line output is not used (about 40 €).
 
-The table above is the planning estimate, rounded, and it counts the sheet material and the filament. The [sourcing pass](../sourcing/bom-shopping-list.md) priced every line against live shop pages on 10 September and again on 3 October 2026, and costed three ways of actually ordering it, including shipping and excluding filament, sheet material and the other Baumarkt items. The routes include the crimp tool and the heat gun, about 48 €, which this table leaves out with the other tools; parts already ordered on 3 October count as owned. The Baumarkt sheet, priced at Hornbach for pickup, comes on top of whichever route is ordered:
+The table above is the planning estimate, rounded, and it counts the sheet material and the filament. The [sourcing pass](../sourcing/bom-shopping-list.md) priced every line against live shop pages on 10 September and again on 3 October 2026, and costed three ways of actually ordering it, including shipping and excluding filament, sheet material and the other Baumarkt items. The routes include the crimp tool and the heat gun, about 48 €, which this table leaves out with the other tools; parts already ordered on 3 October and bought on 7 October count as owned, which is why these totals are lower than the 3 October figures. The Baumarkt sheet, priced at Hornbach for pickup, comes on top of whichever route is ordered:
 
 | Route | Parts | Shipping | Delivered |
 |---|---|---|---|
-| Cheapest per line, 12 suppliers, 12 parcels | 905,67 | 57,30 | **962,97** |
-| Consolidated into 8 suppliers | 839,22 | 37,60 | **876,82** |
-| With a donor printer, 7 suppliers and the donor | 653,69 | 37,60 | **691,29** |
+| Cheapest per line, 10 suppliers, 10 parcels | 789,18 | 51,40 | **840,58** |
+| Consolidated into 7 suppliers | 705,85 | 37,60 | **743,45** |
+| With a donor printer, 6 suppliers and the donor | 520,32 | 37,60 | **557,92** |
 | Baumarkt, Hornbach pickup, on top of any route | 226,89 | — | **226,89** |
 
 Consolidating is close to free rather than a discount: it costs about 28 € more on parts (the MGN12 rail, the camera, the energy chain) and saves about 30 € on shipping. The gap between the first two routes is almost entirely the servo substitution. Five suppliers is not reachable for the complete list. No German general-purpose shop stocks a NEMA17 with a 5:1 planetary gearbox, so either take 10:1 from Dold, which is fine for the wrist and the carousel since both are slow, or accept another shop; and since October the Octopus and the multi-core wire each pull in one more, 3DJake and Conrad. Six is the realistic floor: 10:1 motors from Dold and the wire from Reichelt.
