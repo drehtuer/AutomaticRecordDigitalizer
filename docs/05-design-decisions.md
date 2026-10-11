@@ -90,7 +90,11 @@ X and Y run on 2040 V-slot with Delrin wheels, as on a hobby printer, instead of
 
 ## A used printer as parts donor
 
-Most of the motion parts (steppers, PSU, belts, pulleys, wheels, a lead screw, end-stops, a Klipper-capable board) come cheapest as a used 3D printer; a CR-10 class machine is the best fit because of its long extrusions and lead screws. Only the two long X beams and the Z rail are bought new.
+Most of the motion parts (steppers, PSU, pulleys, wheels, a lead screw, end-stops, a Klipper-capable board) come cheapest as a used 3D printer; a CR-10 class machine would have been the best fit because of its long extrusions and lead screws. What came up at the right price, on 6 October 2026, was an Ender 3 V2 for 55 €, and the build follows it: it supplies the X, Y and Z steppers, the 24 V supply, the V-wheels and eccentrics, two pulleys and two idlers, the Z coupler, three end-stops, the corner brackets and its 32-bit board. Bought new, because no small printer has them: the two 1.3 m X beams, the 0.94 m cross beam and the 0.88 m tie, the 0.8 m Z rail and lead screw, the two geared motors, and — found when the route was checked against the machine on 11 October — the belts, which an Ender's 0.75 m lengths cannot cover, a third idler and a third pulley with an 8 mm bore for the geared carousel motor.
+
+## The donor's board and a Pico, not the Octopus
+
+The controller was planned as a BIGTREETECH Octopus V1.1 with five TMC2209 sticks, one board carrying every axis and every output. The Ender 3 V2's 4.2.x board runs Klipper and has four drivers, which is one short of the five axes and leaves no free outputs for the pump, the valve, the LED and the servo. Rather than buy the Octopus anyway, the build takes the donor board for X, Y, Z and the wrist and adds a Raspberry Pi Pico as a second Klipper MCU for the rest — the carousel stepper on one TMC2209 stick, the servo, the three MOSFET-switched loads and the two home sensors. Klipper runs two MCUs natively and the Pico was already on hand, so the trade is 92 € of board and drivers against about 10 € of stick and carrier board. The costs are real but small: the board's drivers are soldered and standalone, so their current is set by trimmer rather than in `printer.cfg` and they report no stall detection; the wrist's geared motor runs at the top of their range; and there are two USB leads to the controller group instead of one. The Octopus stays in the shopping list as the fallback if the donor's board turns out to be an 8-bit 1.1.x or dead.
 
 ## Wooden frame, extrusion beams
 

@@ -6,7 +6,7 @@ Read `07-status-and-next-steps.md` first. It front-loads the things that can sti
 
 ## Already on hand
 
-Nothing in this table is bought. Everything in it has a place in the build.
+Nothing in this table is still to buy. Everything in it has a place in the build; what arrived from the October orders is listed in `07-status-and-next-steps.md`.
 
 | Item | Goes | Notes |
 |---|---|---|
@@ -21,7 +21,9 @@ Nothing in this table is bought. Everything in it has a place in the build.
 | 1080p USB webcam | Kept | The fallback for the wrist if the C270 fails or turns out not to resolve the centre hole and the groove bands; the label photographs no longer decide anything, since a record's identity comes from the manifest |
 | 3D printer | Prints every part in the printed-parts table | PETG for structure, TPU wherever a record is touched |
 | 2 × RCA to 2 × 6.3 mm jack lead | From the deck's line output into the Scarlett | The audio path; confirmed on hand on 3 October |
-| Multimetrix DMM105 multimeter | On the bench while wiring | Sets the two adjustable bucks and checks the button taps. An old meter wants two checks first: a fresh battery, and its reading against a known source, such as the 5 V of a USB port, before a buck is trusted to it |
+| Creality Ender 3 V2, used, the donor printer | Stripped for the X, Y and Z steppers, the 24 V supply, the V-wheels and eccentrics, two pulleys and two idlers, the Z coupler, the three end-stops, the corner brackets and its 4.2.x board | Run it once before stripping. Note the board revision and the MCU marking, count the wheels (12 needed) and eccentrics (6). Its belts are too short for this frame and are spares; its extruder motor is a spare too |
+| Raspberry Pi Pico | On the Pico carrier in the controller group | The second Klipper MCU: the carousel stepper through a TMC2209 stick, the cue servo, the pump, the valve, the LED bar and the Hall and slot sensors |
+| Multimetrix DMM105 multimeter | On the bench while wiring | Sets the two adjustable bucks and the Vref of the four soldered drivers on the Creality board, and checks the button taps. An old meter wants two checks first: a fresh battery, and its reading against a known source, such as the 5 V of a USB port, before a buck is trusted to it |
 
 ## Panels and discs
 
@@ -58,7 +60,7 @@ What the bill of materials leaves to a local shop, on top of the sheet material.
 - Thread locker, medium strength (Loctite 243), for the pulley grub screws and the stepper mounts.
 - Optional: a small can of clear wax or oil for the panels, and a 40 mm hole saw for the cable exits through the panels.
 
-Tools, if they are not there already: a jigsaw with a wood blade, a cordless drill with a 4 mm, a 4.5 mm and an 8 mm bit, a 20 to 26 mm Forstner bit and a countersink, a hacksaw for the steel angle, a long straightedge and a square, four clamps of at least 90 cm reach or strap clamps, hex keys 2 to 5 mm, a set of small spanners, a soldering iron with a heat-set insert tip for the M3 inserts, a multimeter, wire strippers and flush cutters, T15 and T20 Torx bits for the wood screws, a crimp tool for JST-XH contacts, which are what the Octopus's motor and end-stop headers take, and Dupont (an SN-01BM does both), a heat gun for the shrink tube, digital calipers, and a spirit level.
+Tools, if they are not there already: a jigsaw with a wood blade, a cordless drill with a 4 mm, a 4.5 mm and an 8 mm bit, a 20 to 26 mm Forstner bit and a countersink, a hacksaw for the steel angle, a long straightedge and a square, four clamps of at least 90 cm reach or strap clamps, hex keys 2 to 5 mm, a set of small spanners, a soldering iron with a heat-set insert tip for the M3 inserts, a multimeter, wire strippers and flush cutters, T15 and T20 Torx bits for the wood screws, a crimp tool for JST-XH contacts, which are what the Creality board's motor and end-stop headers take, and Dupont (an SN-01BM does both), a heat gun for the shrink tube, digital calipers, and a spirit level.
 
 ## Printed parts
 
@@ -88,10 +90,12 @@ PETG unless marked TPU. The CAD marks which parts have their functional features
 | Wrist | Wrist camera mount, outer side of the arm, 110 mm up | 1 | PETG | Envelope |
 | Wrist | Finger-lift fork, 55 mm, with prongs 28 mm apart | 1 | PETG | Print-ready |
 | Wrist | Fork lining | 1 | TPU | To be added to the fork |
+| Wrist | Bellows cup lip on the G 1/8 nipple, unless a bought cup is fitted | 1 | TPU | To be drawn; see `06-open-questions.md`, cup size |
 | Wrist | Hall sensor mount at the hub | 1 | PETG | Envelope |
 | Station | Ring rest, 100 mm mean diameter, with the O-ring groove on top | 1 | PETG | Print-ready |
 | Station | Post foot, screwed to the bench | 1 | PETG | Envelope |
-| Electronics | Controller plate for the outside of the rear panel: Octopus on standoffs, the supply, both bucks | 1 | PETG | Envelope |
+| Electronics | Controller plate for the outside of the rear panel: the donor's Creality board on standoffs, the Pico carrier beside it, the donor's supply, both bucks | 1 | PETG | Envelope |
+| Electronics | Display mount on the deck-end panel's front post, the display's M2.5 standoffs at the Pi's hole pattern, angled so its light stays off the platter | 1 | PETG | Envelope |
 | Electronics | Pi plate for the outside of the end panel: Pi, hub, SSD, relay card, MPRLS | 1 | PETG | Envelope |
 | Electronics | Pump and valve mount on rubber feet | 1 | PETG | Envelope |
 | Deck interface | Cue-servo post and beam off the end panel, the MG996R hanging from the beam's end over the lever | 1 | PETG | Envelope |
@@ -113,7 +117,7 @@ Bolt the stub shaft to the centre of the base plate, upright, and press the 6005
 
 Drill the Ø 26 hole in the centre of the disc. Screw the hub to the top of the disc, centred on the hole, and lower the disc onto the shaft so the hub's bore takes the bearing. Spin it: it should turn on the rollers with no rock. If it rocks, one roller bracket is high; a washer under its neighbours fixes it.
 
-Push the 24 combs into the hub's sockets and screw each comb's outer end to the disc; the hub sets the 15° pitch, the comb slots set the record plane, and the V floors set the pick radius. Leave the slots bare: a record's edge has to roll along the V to its apex, and felt or a soft lining there would hold it wherever it landed. Fit the eight tooth-ring segments to the underside of the disc, dovetails engaged, on the 215 mm radius. Screw the index stepper mount to the base plate at the tooth ring's edge, with the geared NEMA17 and its 20T pulley meshing the ring, and fit the home-mark flag on the disc and the slot sensor on the base plate so the flag passes through it once per turn.
+Push the 24 combs into the hub's sockets and screw each comb's outer end to the disc; the hub sets the 15° pitch, the comb slots set the record plane, and the V floors set the pick radius. Leave the slots bare: a record's edge has to roll along the V to its apex, and felt or a soft lining there would hold it wherever it landed. Fit the eight tooth-ring segments to the underside of the disc, dovetails engaged, on the 215 mm radius. Screw the index stepper mount to the base plate at the tooth ring's edge, with the geared NEMA17 and its 20T pulley meshing the ring (an 8 mm bore: the gearbox's output shaft is 8 mm, not a plain NEMA17's 5), and fit the home-mark flag on the disc and the slot sensor on the base plate so the flag passes through it once per turn.
 
 Stand three records in three adjacent slots and check the gap at the label radius with a ruler: about 65 mm between faces. If it is less, `06-open-questions.md` has the fallback. Then drop a 12", a 10" and a 7" in turn into one slot, anywhere along its length, and measure where each comes to rest: the centre should be 260 mm from the axis every time, within a millimetre, and 247, 222 and 184 mm above the bench. A record that stops short needs a steeper V, one number in `cad/params.py`.
 
@@ -127,21 +131,21 @@ Bolt a 1290 mm 2040 V-slot beam along the top edge of each side panel with its 4
 
 Build the two X carriage plates: four Delrin V-wheels each, two on fixed spacers and two on eccentrics, so the plate can be pinched onto the beam. Set each plate on its beam and adjust the eccentrics until it rolls the full 1290 mm with no rock and no binding. Join the plates with the 940 mm 2040 cross beam through the end brackets. The cross beam is 940 because the frame is 860 wide over the panels and the plates sit on the beams outside them; an 800 mm beam, which is what the concept had, does not reach.
 
-Fit the X motor on the rear end bracket, next to where the X chain arrives, an idler on the front one, and run the GT2 belt along the outside of the rear X beam: fixed at both beam ends, wrapped round the motor pulley and its idler on the carriage. Tension by hand until it hums when plucked. Fit the X end-stop at the deck end of the beam.
+Fit the X motor on the rear end bracket, next to where the X chain arrives, an idler on the front one, and run the GT2 belt along the outside of the rear X beam: fixed at both beam ends, wrapped round the motor pulley and its idler on the carriage. Tension by hand until it hums when plucked, with a tensioner kit at one fixed end if hand tension does not hold. Fit the X end-stop, one of the donor's three, at the deck end of the beam.
 
 ### 4. Y axis
 
-Build the Y wheel plate — four wheels, two eccentric — and set it on the cross beam. Screw the Z guide block to it. Fit the Y motor on one end bracket of the cross beam, an idler at the other, and run the belt fixed at both ends of the cross beam, round the pulley and idler on the Y plate. Fit the Y end-stop on the cross beam at the rear.
+Build the Y wheel plate — four wheels, two eccentric — and set it on the cross beam. Screw the Z guide block to it. Fit the Y motor on one end bracket of the cross beam and an idler at the other, as on the donor's own X axis, and run the belt as a loop from the pulley to the idler with the Y plate clamped to its lower run; the motor and the idler stand still and the plate travels. Fit the Y end-stop on the cross beam at the rear.
 
 The planner uses 625 mm of Y travel, not the 45 cm the concept assumed: the re-grip poses reach from −340 mm to +285 mm. With 80 mm plates at both ends and an 80 mm guide block, the 940 mm cross beam gives about 700 mm, so it fits, but it means the Y cables need a chain of their own along the cross beam, not a loop.
 
 ### 5. Z column
 
-Bolt the 800 mm MGN12 rail to the 760 mm column and its carriage into the guide block, so the column slides through the block. Fit the KFL08 bearing at the top of the column, the lead-screw nut holder on the guide block, and the T8 screw through them, coupled to the Z motor on the guide block. The column carries the screw; the nut is fixed; turning the screw lifts the column. Fit the end caps, and the Z end-stop on the guide block so the column trips it at its top. The cycle uses 430 mm of Z; the screw and rail have room for 600.
+Bolt the 800 mm MGN12 rail to the 760 mm column and its carriage into the guide block, so the column slides through the block. Fit the KFL08 bearing at the top of the column, the lead-screw nut holder on the guide block, and the T8 screw through them, coupled to the Z motor on the guide block through the donor's 5 → 8 mm coupler. The column carries the screw; the nut is fixed; turning the screw lifts the column. Fit the end caps, and the Z end-stop on the guide block so the column trips it at its top. The cycle uses 430 mm of Z; the screw and rail have room for 600.
 
 ### 6. Wrist
 
-Bolt the Z carriage block to the bottom of the column and the wrist hub to the end of its 90 mm outrigger, on the +X side, with the geared NEMA17 driving the hub through the coupling. Fit the arm to the hub pointing down, the cup bracket at its end, the bellows cup on its neck facing −Y, and the fork on the hub opposite the arm, pointing up. Fit the camera mount 110 mm up the arm on the +X side and the C270 in it, looking along the cup's axis. Fit the Hall sensor at the hub and its magnet on the arm at the hanging position.
+Bolt the Z carriage block to the bottom of the column and the wrist hub to the end of its 90 mm outrigger, on the +X side, with the geared NEMA17 driving the hub through the coupling on its 8 mm output shaft, the hub turning on two 608 bearings in its seats. Fit the arm to the hub pointing down, the cup bracket at its end, the bellows cup on its neck facing −Y, and the fork on the hub opposite the arm, pointing up. Fit the camera mount 110 mm up the arm on the +X side and the C270 in it, looking along the cup's axis. Fit the Hall sensor at the hub and its magnet on the arm at the hanging position.
 
 Before the wrist goes on the machine, test the cup end by hand: 12", 10", 7" and a picture disc, held by their labels with a hand pump. Test the fork on a handle against the real headshell's finger lift. Both are in `07-status-and-next-steps.md` as the first things to print, and both have to pass before the frame is worth building.
 
@@ -167,13 +171,13 @@ Nothing is boxed. The parts sit on the outside faces of the frame panels, where 
 
 ![The deck end of the machine: the Pi group on its plate outside the end panel, the Scarlett on the bench, the deck camera's ribbon through the panel](images/render-deck-end.png)
 
-**Controller group, outside the rear panel, just under the X beam and centred on the X chain's fixed end at X ≈ 200 mm.** The Octopus on a printed plate on standoffs; the 24 V supply beside it, with its mains inlet fused and earthed; the 24 → 12 V buck for the pump, the valve and the LED bar; and the 24 → 5 V buck for the servo — the servo alone, never the Pi, because an MG996R stalls at about 2.5 A. Every cable to the gantry climbs 25 cm from here into the X chain instead of a metre up from a box on the bench, which takes most of a metre off every gantry cable.
+**Controller group, outside the rear panel, just under the X beam and centred on the X chain's fixed end at X ≈ 200 mm.** The donor's Creality 4.2.x board on a printed plate on standoffs, with the Pico carrier beside it — a scrap of perfboard carrying the Pico on headers, the one TMC2209 stick in a breakout socket with its 24 V motor supply, and the three IRLZ44N MOSFETs for the pump, the valve and the LED bar; the donor's 24 V supply next to them, with its mains inlet fused and earthed; the 24 → 12 V buck for the pump, the valve and the LED bar; and the 24 → 5 V buck for the servo — the servo alone, never the Pi, because an MG996R stalls at about 2.5 A. Every cable to the gantry climbs 25 cm from here into the X chain instead of a metre up from a box on the bench, which takes most of a metre off every gantry cable.
 
 **Pump and valve, outside the rear panel near the open end, at about X = −100 mm, on rubber mounts.** As far from the deck as the frame allows: a diaphragm pump is a vibration source, and the deck sits between X = 371 and 820. The hose runs along the outside of the panel to the chain anchor and up. The MPRLS is not here. It is an I²C device, and I²C does not like the 1.7 m to the Pi, but a vacuum line does not care about length: a tube stub tees off at the valve and runs to the sensor beside the Pi. The stub's 20 ml of dead volume is nothing against a 1 L/min pump.
 
-**Pi group, outside the deck-end panel, low, beside the hole for the deck camera's ribbon.** The Pi on a printed plate in its aluminium shell with twin fans, the powered hub, the SSD, the relay card and the MPRLS; the Scarlett on the bench beside the deck. The Pi's official 15 W supply is a wall plug, so it stands in the power strip on the rear panel and its fixed 1.5 m USB-C lead runs along the panel and round the corner to the Pi. The status display sits on the panel's front post, where its 50 cm DSI ribbon reaches from the Pi with 9 cm to spare, angled so its light stays off the platter. The deck camera's ribbon is 30 cm through the panel, the relay card's cables into the deck about a metre, and the Pi's USB-C cable to the Octopus 2.2 m along the outside of the panels. Two mains supplies, one at each end, so a power strip runs along the rear panel.
+**Pi group, outside the deck-end panel, low, beside the hole for the deck camera's ribbon.** The Pi on a printed plate in its aluminium shell with twin fans, the powered hub, the SSD, the relay card and the MPRLS; the Scarlett on the bench beside the deck. The Pi's official 15 W supply is a wall plug, so it stands in the power strip on the rear panel and its fixed 1.5 m USB-C lead runs along the panel and round the corner to the Pi. The status display sits on the panel's front post, where its 50 cm DSI ribbon reaches from the Pi with 9 cm to spare, angled so its light stays off the platter. The deck camera's ribbon is 30 cm through the panel, the relay card's cables into the deck about a metre, and the Pi's two USB leads to the controller group, micro-B on the Creality board and on the Pico, 2.2 m each along the outside of the panels. Two mains supplies, one at each end, so a power strip runs along the rear panel.
 
-Wire the five TMC2209 sticks into the Octopus with UART jumpers set, X, Y, Z, wrist and carousel in that order; the servo to the servo header; the pump, valve and LED to three fan or heater MOSFET outputs, the LED on a hardware PWM pin; every end-stop, the Hall sensor and the slot sensor to end-stop inputs. Set the TMC run currents in `printer.cfg` and nowhere else.
+Wire the X, Y and Z steppers and the wrist's geared motor to the Creality board's X, Y, Z and E ports, and the three end-stops to its X, Y and Z end-stop inputs; nothing else goes on that board. Its four drivers are soldered down and run standalone, so Klipper cannot set their current: set each one's Vref with the multimeter before a motor is connected, the wrist's at the top of the drivers' range, since the geared motor is rated 1.68 A and the drivers give about 1.4 A RMS at most. On the Pico carrier: the carousel stepper on the TMC2209 stick, UART to the Pico, its run current set in `printer.cfg`; the cue servo on a PWM pin, fed from the 5 V buck; the pump, the valve and the LED bar each through an IRLZ44N from the 12 V buck, the LED on a pin that can hold 50.000 Hz; the Hall sensor and the slot sensor on input pins. The Pico itself is powered over its USB lead from the Pi.
 
 ### 10. Cabling
 
@@ -214,15 +218,15 @@ Everything to the gantry leaves the controller group on the outside of the rear 
 | Carousel home sensor, 3-core | Same | 2.6 m | Bare module | 2.6 m of 3-core |
 | Pump and valve drive, 2 × 2-core 12 V | Controller group along the rear panel to the pump mount | 1.0 m each | — | 2 m of 2-core |
 | Pi supply, USB-C | Wall plug in the power strip, along the rear panel and round the corner to the Pi | 1.2 m | The official supply's fixed 1.5 m | Reaches, if the plug sits in the strip's end sockets |
-| Pi to Octopus, USB-A to USB-C | Pi group along the outside of the panels to the controller group | 2.2 m | — | Buy a 3 m USB-A to USB-C cable; the extra is a tie |
+| Pi to the Creality board, and Pi to the Pico, 2 × USB-A to micro-B | Pi group along the outside of the panels to the controller group | 2.2 m each | — | Two 3 m USB-A to micro-B leads; the extra is a tie |
 | Deck remote start/stop, 6.3 mm | Relay card to the deck's rear jack | 1.2 m | 1.8 m | Reaches with 60 cm to tie up |
 | 33 and 45 button taps, 2 × 2-core thin | Relay card into the deck's front-left board | 1.4 m each | Thin wire | 3 m of 3-core, two cores used |
 
-The extensions add up to about 7 m of 4-core for the steppers, 15 m of 3-core for the sensors, the servo and the button taps, 4 m of 2-core for the LED, the pump and the valve, an active 5 m USB repeater, a 3 m USB-A to USB-C cable and 7 m of tube. The Z chain then carries the hose, the USB cable, the 4-core and the 3-core side by side at about 19 of its 20 mm: full, so nothing more goes into it later. Silicone 20 AWG is the right wire for the steppers, the servo and the 12 V loads; the sensors can take 24 AWG.
+The extensions add up to about 7 m of 4-core for the steppers, 15 m of 3-core for the sensors, the servo and the button taps, 4 m of 2-core for the LED, the pump and the valve, an active 5 m USB repeater, two 3 m USB-A to micro-B leads and 7 m of tube. The Z chain then carries the hose, the USB cable, the 4-core and the 3-core side by side at about 19 of its 20 mm: full, so nothing more goes into it later. Silicone 20 AWG is the right wire for the steppers, the servo and the 12 V loads; the sensors can take 24 AWG.
 
 ### 11. Power-up and commissioning
 
-Power the Octopus alone first, no motors connected, and flash Klipper. Connect one stepper at a time and jog it a few millimetres in each direction at low current before connecting the next; a stepper wired backwards is found here and nowhere worse. Home each axis by hand against its end-stop and set the soft limits in `printer.cfg` from what the ruler says, not from the CAD, then confirm that the Z hard limit stops the column above its lowest working height.
+Power the Creality board alone first, no motors connected, and flash Klipper onto it from its SD card, built for the MCU its marking says (an STM32F103 or a GD32 clone); flash the Pico over USB, and check that Klipper's host sees both MCUs. Set the four Vref trimmers before any motor is connected. Then connect one stepper at a time and jog it a few millimetres in each direction at low current before connecting the next; a stepper wired backwards is found here and nowhere worse. Home each axis by hand against its end-stop and set the soft limits in `printer.cfg` from what the ruler says, not from the CAD, then confirm that the Z hard limit stops the column above its lowest working height.
 
 Power the Pi from its own supply, with the hub, and bring up Moonraker, the orchestrator and the web interface. Calibrate the datums through the interface with the cameras live, in this order: the pick slot's centre, the spindle, the ring rest, the arm pivot, and the arm's rest, lead-in and run-out angles for the deck as measured. Run the cycle in step-through mode with no record, then with a sacrificial record, then with a good one, and only then a batch.
 

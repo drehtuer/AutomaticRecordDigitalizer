@@ -26,7 +26,7 @@ downstream follows.
 
 `parts/` builds the solids: `deck.py` (plinth, platter, tonearm as a rigid body pivoting about
 the measured pivot, cue lever), `carousel.py` (base with roller ring, rotating disc with hub,
-V-floor combs and tooth ring, records of any size as spokes), `frame.py` (plywood box, V-slot beams, flip
+V-floor combs and tooth ring, records of any size as spokes), `frame.py` (OSB box, V-slot beams, flip
 station on its foot), `gantry.py` (X, Y and Z carriages and the wrist with cup, camera and
 fork, each in its own kinematic frame), `deck_interface.py` (cue-lever servo on its beam with
 horn and yoke, the end stop, deck camera and LED bar), `electronics.py` (every board and box on the frame
