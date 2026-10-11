@@ -152,3 +152,13 @@ The sheet bought for the carousel base plate is 18 mm, where `cad/params.py` had
 *Status · affects `sourcing/bom-shopping-list.md`, `docs/04-bill-of-materials.md`, `docs/07-status-and-next-steps.md`*
 
 The donor for the third route is a Creality Ender 3 V2, bought on eBay for 55 € including delivery, against the 75 € the route had been priced with; it arrives the week of 12 October. The donor route drops to 653,69 € of parts and 691,29 € delivered. What it actually contains still decides several of that route's lines: run it once before stripping it, note the board revision and the MCU marking (an STM32F103, or a GD32 clone that needs different Klipper build options), and count the wheels and eccentrics against the 12 and 6 the build needs before ordering the rest.
+
+## Orders received, 11 October 2026
+
+*Status · affects `sourcing/bom-shopping-list.md`, `docs/04-bill-of-materials.md`, `docs/07-status-and-next-steps.md`*
+
+The Conrad, cnc-zubehoer and welectron orders placed on 7 October have arrived, and their rows are at 0,00 € like the other owned hardware. From Conrad: the heat gun, the active USB repeater, 7 m of the 4-core and 15 m of the 3-core LifYY. From cnc-zubehoer: the three 1 m cable chains, 22,73 € with shipping. On the fewest-suppliers and donor routes they replace the Dold CK10 chain and its connection elements, so Dold's order there is 33,71 € smaller. From welectron: both 50 cm ribbons, which shipped free.
+
+Conrad charged more than the 3 October re-check found. The four lines kept cost 113,86 € against 93,86 € listed: the heat gun 29,99 € instead of 19,32 €, the repeater 10,99 € instead of 10,08 €, and the wire 3,49 and 3,23 €/m instead of 2,93 €/m, without the 10 m tier.
+
+The USB-A to USB-C cable for the Octopus was not in the order; the invoice carries a Hama Lightning-to-USB-A 1 m cable instead, which fits neither the Pi nor the Octopus. It is the one Conrad line left, below the free-shipping threshold, so it now carries 4,95 € of shipping on every route. With the bought lines out, the three routes stand at 840,58, 743,45 and 557,92 € delivered.
