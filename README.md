@@ -13,7 +13,7 @@ The project exists because the cheap way of doing this, a second-hand stacking r
 
 ## Status
 
-Concept design finished and reviewed in September 2026; first parametric CAD in place, with the whole cycle passing a scripted collision check. Nothing has been printed yet. The Pi-side electronics, the cable chains, the wiring and a used Ender 3 V2 as the donor printer have been bought; the frame, the motion parts and the controller have not. [docs/07-status-and-next-steps.md](docs/07-status-and-next-steps.md) records exactly where the project stands, what is already on hand, and what to do first.
+Concept design finished and reviewed in September 2026; first parametric CAD in place, with the whole cycle passing a scripted collision check. Nothing has been printed yet. The build follows the donor-printer route: a used Ender 3 V2 supplies the motion parts and the controller board, with a Raspberry Pi Pico as Klipper's second MCU. The Pi-side electronics, the cable chains, the wiring and the donor have been bought; the frame and the long motion parts have not. [docs/07-status-and-next-steps.md](docs/07-status-and-next-steps.md) records exactly where the project stands, what is already on hand, and what to do first.
 
 ## What is in this repository
 
@@ -23,7 +23,7 @@ Concept design finished and reviewed in September 2026; first parametric CAD in 
 
 `cad/` is the parametric CadQuery model with the motion planner and the collision checker; `cad/README.md` explains how to run it, and `cad/export/` holds STEP files that open in FreeCAD, STL files of the first printed parts, and `web/` holds the glTF and the scene description the viewer loads.
 
-`sourcing/` is the pricing pass of September 2026, re-verified on 3 October: every line of the bill of materials against live German shop pages, with product links, three ways of ordering it and a sheet for the local Baumarkt, and the corrections it forced back into the design documents.
+`sourcing/` is the pricing pass of September 2026, re-verified on 3 October: every line of the bill of materials against live German shop pages, with product links, three ways of ordering it — the donor-printer route is the one being built — and a sheet for the local Baumarkt, and the corrections it forced back into the design documents.
 
 `docs/` holds the design in detail:
 
@@ -40,7 +40,7 @@ Concept design finished and reviewed in September 2026; first parametric CAD in 
 
 ## The machine in one paragraph
 
-Records stand like spokes in a 24-slot carousel. A small XYZ gantry with a rotary wrist carries a vacuum cup that takes each record by its label, lifts it out of its slot, turns it flat over the deck and sets it on the spindle. The deck's own cue lever, worked by a servo, lifts the tonearm while a fork on the wrist walks it to the lead-in groove found by a camera; the platter is stopped before every needle placement and removal. After the run-out, the record goes to a ring rest where the cup lets go and re-grips the other face, both labels get photographed, and side B is recorded the same way. The record returns to its own slot and the carousel indexes to the next one. The deck's remote start/stop connector starts and stops the platter. Recording runs through a Focusrite Scarlett into a Raspberry Pi, which also runs the cameras, the web interface for the batch list, and the orchestration on top of Klipper running on a printer mainboard, with a USB relay card working the deck's remote start/stop jack and speed buttons.
+Records stand like spokes in a 24-slot carousel. A small XYZ gantry with a rotary wrist carries a vacuum cup that takes each record by its label, lifts it out of its slot, turns it flat over the deck and sets it on the spindle. The deck's own cue lever, worked by a servo, lifts the tonearm while a fork on the wrist walks it to the lead-in groove found by a camera; the platter is stopped before every needle placement and removal. After the run-out, the record goes to a ring rest where the cup lets go and re-grips the other face, both labels get photographed, and side B is recorded the same way. The record returns to its own slot and the carousel indexes to the next one. The deck's remote start/stop connector starts and stops the platter. Recording runs through a Focusrite Scarlett into a Raspberry Pi, which also runs the cameras, the web interface for the batch list, and the orchestration on top of Klipper running on a printer mainboard, with a USB relay card working the deck's remote start/stop jack and speed buttons. The printer mainboard is the donor's, with a Raspberry Pi Pico as a second Klipper MCU for what it has no outputs for.
 
 ## Follow-up project
 
