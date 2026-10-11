@@ -8,9 +8,9 @@ Prices drift — re-check before ordering. Lines marked ESTIMATE could not be fe
 
 | Route | Parts | Shipping | Delivered |
 |---|---|---|---|
-| [Cheapest per item](#cheapest-per-item) | 824,48 | 48,87 | **873,35** |
-| [Fewest suppliers](#fewest-suppliers) | 733,00 | 40,62 | **773,62** |
-| [Donor printer route](#donor-printer-route) - **the build** | 563,74 | 25,35 | **589,09** |
+| [Cheapest per item](#cheapest-per-item) | 824,22 | 48,87 | **873,09** |
+| [Fewest suppliers](#fewest-suppliers) | 732,72 | 40,62 | **773,34** |
+| [Donor printer route](#donor-printer-route) - **the build** | 563,46 | 25,35 | **588,81** |
 | [Hornbach (local)](#hornbach-local) | 226,89 | 0,00 | **226,89** |
 
 The notes under each route call the first three sheet 1, sheet 2 and sheet 3, in the order of the table above.
@@ -23,7 +23,7 @@ Sourced from German shops, delivered to Germany. Prices incl. 19% VAT, verified 
 
 | Group | Part | Qty | Unit € | Line € | Supplier | Note |
 |---|---|---|---|---|---|---|
-| Frame | [Aluprofil 2040 V-Slot Nut 6 black, cut 1300 mm (12,90 €/m)](https://shop.bohrers.de/V-Slot-2040-Zuschnitt.html) | 2 | 16,77 | 33,54 | shop.bohrers.de | verified 03.10.2026; X beams. 1300 mm needs the extended-length option in the configurator and the cut fee is charged on top - the cart shows the final figure |
+| Frame | [Aluprofil 2040 V-Slot Nut 6 black, cut 1290 mm (12,90 €/m)](https://shop.bohrers.de/V-Slot-2040-Zuschnitt.html) | 2 | 16,64 | 33,28 | shop.bohrers.de | LENGTH 12.10.2026: 1290 mm, the CAD's exact length, not 1300. verified 03.10.2026; X beams. 1300 mm needs the extended-length option in the configurator and the cut fee is charged on top - the cart shows the final figure |
 | Frame | [Aluprofil 2040 V-Slot Nut 6 black, cut 940 mm (cross beam)](https://shop.bohrers.de/V-Slot-2040-Zuschnitt.html) | 1 | 12,13 | 12,13 | shop.bohrers.de | verified 03.10.2026; docs/04 wants 940 mm, the list had 800 - corrected |
 | Frame | [V-Slot 2020 profile, black, 1 m (end tie, cut to 880 mm)](https://www.roboter-bausatz.de/p/v-slot-aluminiumprofil-2020-1-meter-schwarz) | 1 | 5,95 | 5,95 | roboter-bausatz.de | verified 03.10.2026; docs/04 wants 880 mm, the list had 800 - a 1 m length still covers it |
 | Frame | [Aluprofil 2040 V-Slot Nut 6 black, cut 760 mm (Z column, carries the MGN12 rail)](https://shop.bohrers.de/V-Slot-2040-Zuschnitt.html) | 1 | 9,80 | 9,80 | shop.bohrers.de | ADDED 12.10.2026, ESTIMATE at 12,90 €/m with the cut fee on top: the column was on no sheet - see the donor route's note 20 |
@@ -93,13 +93,13 @@ Sourced from German shops, delivered to Germany. Prices incl. 19% VAT, verified 
 | Tools | [SN-01BM Crimpzange fuer PH2.0 / XH2.54, 0.08-0.5 mm2 (JST-XH and PH contacts; Dupont acceptably)](https://www.roboter-bausatz.de/p/sn-01bm-crimpzange-fuer-ph2.0-xh2.54-0.08-0.5mm2) | 1 | 28,65 | 28,65 | roboter-bausatz.de | link and price re-checked 12.10.2026 in Chrome: Sofort verfuegbar. verified 20.09.2026; in stock. The one crimp tool for this build: the Octopus motor and end-stop headers are JST-XH. Dupont-only tools (SN-28B, BerryBase CT-DUP) were out of stock |
 | Tools | [Einhell TH-HA 2000/1 Heissluftgeblaese 2000 W, 2 Stufen 350/550 C, mit Reduzier-, Reflektor-, Breitstrahl- und Abstrahlduese, im Koffer (heat gun for shrink tube)](https://www.conrad.de/de/heissluftgeblaese-inkl-zubehoer-inkl-koffer-2000-w-einhell-th-ha-20001-4520179-1181037.html) | — | — | 0,00 | ALREADY OWNED | BOUGHT at Conrad on 07.10.2026 (invoice 9790625168), paid 29,99 € (listed 19,32 €) - now on hand. verified 03.10.2026; Best.-Nr. 1181037, 97 in stock. Re-sourced from BerryBase to Conrad: cheaper than the McPower and the reflector nozzle is the one that shrinks tube evenly. Hornbach pickup alternatives: Pattfield PHG200D.1 25,00 € (art. 10392316, 3 stages, in-store), Steinel HM 1620 S 34,90 € (art. 12296139, no nozzle - add Reflektorduese 946156, 7,95 €) |
 
-Totals for this route: parts 824,48 €, shipping 48,87 €, delivered **873,35 €**.
+Totals for this route: parts 824,22 €, shipping 48,87 €, delivered **873,09 €**.
 
 ### Shipping
 
 | Supplier | Order value € | Shipping € | Rule |
 |---|---|---|---|
-| shop.bohrers.de | 94,47 | 12,90 | Long goods >1 m - estimate, cart shows final |
+| shop.bohrers.de | 94,21 | 12,90 | Long goods >1 m - estimate, cart shows final |
 | roboter-bausatz.de | 271,62 | 0,00 | Free from 99 € gross - reached |
 | 3djake.de | 65,99 | 0,00 | Free from 52,90 € - reached with the Octopus alone (5,79 € below that) |
 | dold-mechatronik.de | 14,56 | 6,90 | DHL up to 1 m, <=2 kg: 6,90 €. No free threshold |
@@ -138,7 +138,7 @@ Same build, consolidated into 8 orders instead of 14. Prices incl. 19% VAT, veri
 
 | Group | Part | Qty | Unit € | Line € | Supplier | Note |
 |---|---|---|---|---|---|---|
-| Frame | [Aluprofil 20x40 V-Typ Nut 6, cut 1300 mm (14,00 €/m + 0,50 € cut)](https://www.dold-mechatronik.de/Aluminiumprofil-20x40-V-Typ-Nut-6-062kg-m-Zuschnitt-50-6000mm) | 2 | 18,70 | 37,40 | dold-mechatronik.de | verified 10.09.2026; price basis €/m + cut fee confirmed on page |
+| Frame | [Aluprofil 20x40 V-Typ Nut 6, cut 1290 mm (14,00 €/m + 0,50 € cut; the CAD's exact length)](https://www.dold-mechatronik.de/Aluminiumprofil-20x40-V-Typ-Nut-6-062kg-m-Zuschnitt-50-6000mm) | 2 | 18,56 | 37,12 | dold-mechatronik.de | LENGTH 12.10.2026: 1290 mm, not 1300 - Dold cuts to the millimetre (checked in Chrome: 'Länge in mm, zwischen 50 und 6000', 14,00 €/m + 0,50 € cut, 4-5 working days), and 1290 is what cad/params.py draws (BEAM_X0 -300 to BEAM_X1 990) and docs/08 bolts on; nothing to trim at home. verified 10.09.2026; price basis €/m + cut fee confirmed on page |
 | Frame | [Aluprofil 20x40 V-Typ Nut 6, cut 940 mm (cross beam)](https://www.dold-mechatronik.de/Aluminiumprofil-20x40-V-Typ-Nut-6-062kg-m-Zuschnitt-50-6000mm) | 1 | 13,66 | 13,66 | dold-mechatronik.de | verified 03.10.2026; docs/04 wants 940 mm, the list had 800 - corrected |
 | Frame | [Aluprofil 20x20 V-Typ Nut 6, cut 880 mm (8,00 €/m + 0,50 € cut)](https://www.dold-mechatronik.de/Aluminiumprofil-20x20-V-Typ-Nut-6-044kg-m-Zuschnitt-50-6000mm) | 1 | 7,54 | 7,54 | dold-mechatronik.de | verified 03.10.2026; docs/04 wants 880 mm, the list had 800 - corrected |
 | Frame | [Aluprofil 20x40 V-Typ Nut 6, cut 760 mm (Z column, carries the MGN12 rail)](https://www.dold-mechatronik.de/Aluminiumprofil-20x40-V-Typ-Nut-6-062kg-m-Zuschnitt-50-6000mm) | 1 | 11,14 | 11,14 | dold-mechatronik.de | ADDED 12.10.2026: the column was on no sheet. The CAD draws it 760 mm long and 40 mm wide with the rail on its face (COLUMN_L, COLUMN_W in cad/params.py) and docs/08 bolts the rail to it, but docs/01 and 04 had read the rail itself as the column. A 12 mm rail cannot carry a 90 mm outrigger over 760 mm on its own; a 2040 profile can. 14,00 €/m + 0,50 € cut, verified 12.10.2026 in Chrome. No donor has a 760 mm member |
@@ -209,13 +209,13 @@ Same build, consolidated into 8 orders instead of 14. Prices incl. 19% VAT, veri
 | Tools | [SN-01BM Crimpzange fuer PH2.0 / XH2.54, 0.08-0.5 mm2 (JST-XH and PH contacts; Dupont acceptably)](https://www.roboter-bausatz.de/p/sn-01bm-crimpzange-fuer-ph2.0-xh2.54-0.08-0.5mm2) | 1 | 28,65 | 28,65 | roboter-bausatz.de | link and price re-checked 12.10.2026 in Chrome: Sofort verfuegbar. verified 20.09.2026; in stock. The one crimp tool for this build: the Octopus motor and end-stop headers are JST-XH. Dupont-only tools (SN-28B, BerryBase CT-DUP) were out of stock |
 | Tools | [Einhell TH-HA 2000/1 Heissluftgeblaese 2000 W, 2 Stufen 350/550 C, mit Reduzier-, Reflektor-, Breitstrahl- und Abstrahlduese, im Koffer (heat gun for shrink tube)](https://www.conrad.de/de/heissluftgeblaese-inkl-zubehoer-inkl-koffer-2000-w-einhell-th-ha-20001-4520179-1181037.html) | — | — | 0,00 | ALREADY OWNED | BOUGHT at Conrad on 07.10.2026 (invoice 9790625168), paid 29,99 € (listed 19,32 €) - now on hand. verified 03.10.2026; Best.-Nr. 1181037, 97 in stock. Re-sourced from BerryBase to Conrad: cheaper than the McPower and the reflector nozzle is the one that shrinks tube evenly. Hornbach pickup alternatives: Pattfield PHG200D.1 25,00 € (art. 10392316, 3 stages, in-store), Steinel HM 1620 S 34,90 € (art. 12296139, no nozzle - add Reflektorduese 946156, 7,95 €) |
 
-Totals for this route: parts 733,00 €, shipping 40,62 €, delivered **773,62 €**.
+Totals for this route: parts 732,72 €, shipping 40,62 €, delivered **773,34 €**.
 
 ### Shipping
 
 | Supplier | Order value € | Shipping € | Rule |
 |---|---|---|---|
-| dold-mechatronik.de | 186,40 | 12,90 | DPD up to 1.5 m, <=10 kg - required for the 1.3 m profiles |
+| dold-mechatronik.de | 186,12 | 12,90 | DPD up to 1.5 m, <=10 kg - required for the 1.3 m profiles |
 | roboter-bausatz.de | 244,68 | 0,00 | Free from 99 € gross - reached |
 | 3djake.de | 65,99 | 0,00 | Free from 52,90 € - reached with the Octopus alone |
 | oyostepper.de | 74,04 | 15,27 | Owner's basket 11.10.2026 (the list had estimated 6,90 €) |
@@ -251,7 +251,7 @@ Totals for this route: parts 733,00 €, shipping 40,62 €, delivered **773,62 
 | Group | Part | Qty | Unit € | Line € | Supplier | Note |
 |---|---|---|---|---|---|---|
 | Donor | Creality Ender 3 V2, used, as donor | 1 | 55,00 | 55,00 | BOUGHT (eBay) | BOUGHT 06.10.2026 on eBay for 55,00 € incl. delivery, arriving the week of 12.10. What the build takes from it: the X, Y and Z steppers (the extruder motor is a spare), the 24 V 350 W supply, the two 20T motor pulleys and two idlers, the X and Y belts only as spares (too short, see the belt row), the Delrin V-wheels with their eccentrics, the 5 -> 8 mm Z coupler, the three end-stops with their leads, the frame's inside corner brackets, M3/M4/M5 fasteners, and the 32-bit 4.2.2 or 4.2.7 board, which runs X, Y, Z and the wrist under Klipper over its micro-USB port. On arrival: run it once before stripping, note the board version and the MCU marking (STM32F103 or a GD32 clone, which needs different Klipper build options), count wheels (12 needed) and eccentrics (6) |
-| Frame | [Aluprofil 20x40 V-Typ Nut 6, cut 1300 mm (X beams - too long for any donor)](https://www.dold-mechatronik.de/Aluminiumprofil-20x40-V-Typ-Nut-6-062kg-m-Zuschnitt-50-6000mm) | 2 | 18,70 | 37,40 | dold-mechatronik.de | verified 10.09.2026 |
+| Frame | [Aluprofil 20x40 V-Typ Nut 6, cut 1290 mm (X beams, the CAD's exact length - too long for any donor)](https://www.dold-mechatronik.de/Aluminiumprofil-20x40-V-Typ-Nut-6-062kg-m-Zuschnitt-50-6000mm) | 2 | 18,56 | 37,12 | dold-mechatronik.de | LENGTH 12.10.2026: 1290 mm, not 1300 - Dold cuts to the millimetre (checked in Chrome: 'Länge in mm, zwischen 50 und 6000', 14,00 €/m + 0,50 € cut, 4-5 working days), and 1290 is what cad/params.py draws (BEAM_X0 -300 to BEAM_X1 990) and docs/08 bolts on; nothing to trim at home. verified 10.09.2026 |
 | Frame | [Aluprofil 20x40 V-Typ Nut 6, cut 940 mm (cross beam)](https://www.dold-mechatronik.de/Aluminiumprofil-20x40-V-Typ-Nut-6-062kg-m-Zuschnitt-50-6000mm) | 1 | 13,66 | 13,66 | dold-mechatronik.de | verified 03.10.2026; 940 mm per docs/04 (list had 800). No donor extrusion reaches 940 mm |
 | Frame | [Aluprofil 20x20 V-Typ Nut 6, cut 880 mm (end tie)](https://www.dold-mechatronik.de/Aluminiumprofil-20x20-V-Typ-Nut-6-044kg-m-Zuschnitt-50-6000mm) | 1 | 7,54 | 7,54 | dold-mechatronik.de | verified 03.10.2026; 880 mm per docs/04 |
 | Frame | [Aluprofil 20x40 V-Typ Nut 6, cut 760 mm (Z column, carries the MGN12 rail)](https://www.dold-mechatronik.de/Aluminiumprofil-20x40-V-Typ-Nut-6-062kg-m-Zuschnitt-50-6000mm) | 1 | 11,14 | 11,14 | dold-mechatronik.de | ADDED 12.10.2026: the column was on no sheet. The CAD draws it 760 mm long and 40 mm wide with the rail on its face (COLUMN_L, COLUMN_W in cad/params.py) and docs/08 bolts the rail to it, but docs/01 and 04 had read the rail itself as the column. A 12 mm rail cannot carry a 90 mm outrigger over 760 mm on its own; a 2040 profile can. 14,00 €/m + 0,50 € cut, verified 12.10.2026 in Chrome. No donor has a 760 mm member |
@@ -325,14 +325,14 @@ Totals for this route: parts 733,00 €, shipping 40,62 €, delivered **773,62 
 | Tools | [SN-01BM Crimpzange fuer PH2.0 / XH2.54, 0.08-0.5 mm2 (JST-XH and PH contacts; Dupont acceptably)](https://www.roboter-bausatz.de/p/sn-01bm-crimpzange-fuer-ph2.0-xh2.54-0.08-0.5mm2) | 1 | 28,65 | 28,65 | roboter-bausatz.de | link and price re-checked 12.10.2026 in Chrome: Sofort verfuegbar. verified 20.09.2026; in stock. The one crimp tool for this build: the Creality board's motor and end-stop headers are JST-XH, as the Octopus's were. Dupont-only tools (SN-28B, BerryBase CT-DUP) were out of stock |
 | Tools | [Einhell TH-HA 2000/1 Heissluftgeblaese 2000 W, 2 Stufen 350/550 C, mit Reduzier-, Reflektor-, Breitstrahl- und Abstrahlduese, im Koffer (heat gun for shrink tube)](https://www.conrad.de/de/heissluftgeblaese-inkl-zubehoer-inkl-koffer-2000-w-einhell-th-ha-20001-4520179-1181037.html) | — | — | 0,00 | ALREADY OWNED | BOUGHT at Conrad on 07.10.2026 (invoice 9790625168), paid 29,99 € (listed 19,32 €) - now on hand. verified 03.10.2026; Best.-Nr. 1181037, 97 in stock. Re-sourced from BerryBase to Conrad: cheaper than the McPower and the reflector nozzle is the one that shrinks tube evenly. Hornbach pickup alternatives: Pattfield PHG200D.1 25,00 € (art. 10392316, 3 stages, in-store), Steinel HM 1620 S 34,90 € (art. 12296139, no nozzle - add Reflektorduese 946156, 7,95 €) |
 
-Totals for this route: parts 563,74 €, shipping 25,35 €, delivered **589,09 €**.
+Totals for this route: parts 563,46 €, shipping 25,35 €, delivered **588,81 €**.
 
 ### Shipping
 
 | Supplier | Order value € | Shipping € | Rule |
 |---|---|---|---|
 | BOUGHT (eBay) | 55,00 | 0,00 | Ender 3 V2 bought 06.10.2026, delivery included in the price |
-| dold-mechatronik.de | 134,90 | 12,90 | DPD up to 1.5 m, <=10 kg |
+| dold-mechatronik.de | 134,62 | 12,90 | DPD up to 1.5 m, <=10 kg |
 | roboter-bausatz.de | 143,41 | 0,00 | Free from 99 € gross - reached |
 | druckluft-fachhandel.de | 42,44 | 6,90 | Estimate; the valve only since 12.10.2026 - the nipple it could not supply moved to Amazon, the tube, fittings, tee and O-ring the day before |
 | amazon.de | 187,99 | 5,55 | Free with Prime on every row but one: the Riegler nipple ships from Blumenbecker Industriebedarf as its own marketplace parcel, 5,55 € |

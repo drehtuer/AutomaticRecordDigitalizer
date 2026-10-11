@@ -42,9 +42,9 @@ The table above is the planning estimate, rounded, and it counts the sheet mater
 
 | Route | Parts | Shipping | Delivered |
 |---|---|---|---|
-| Cheapest per line, 9 suppliers, 9 parcels | 824,48 | 48,87 | **873,35** |
-| Consolidated into 6 suppliers | 733,00 | 40,62 | **773,62** |
-| **With the donor printer, 4 suppliers and the donor — the build** | 563,74 | 25,35 | **589,09** |
+| Cheapest per line, 9 suppliers, 9 parcels | 824,22 | 48,87 | **873,09** |
+| Consolidated into 6 suppliers | 732,72 | 40,62 | **773,34** |
+| **With the donor printer, 4 suppliers and the donor — the build** | 563,46 | 25,35 | **588,81** |
 | Baumarkt, Hornbach pickup, on top of any route | 226,89 | — | **226,89** |
 
 Consolidating is close to free rather than a discount: it costs about 28 € more on parts (the MGN12 rail, the camera, the energy chain) and saves about 30 € on shipping. The gap between the first two routes is almost entirely the servo substitution. On the donor route four suppliers remain — Dold, roboter-bausatz, druckluft-fachhandel and Amazon — because the donor's board removes 3DJake, its micro-USB ports remove the Conrad cable, Amazon took over Reichelt's small parts and the pneumatic consumables on 11 October, and on 12 October the geared motors too: Oyostepper had raised them to 37,02 € and charges 15,27 € shipping, while STEPPERONLINE sells the same motor on Amazon with Prime at 43,00 €, 3 € less for the pair delivered. Amazon sells the small parts in packs where Reichelt sold singles, so that move costs about 15 € and buys one parcel fewer and Prime delivery, not money; every Amazon line was looked up live, so the shopping list links the listings. The same check found roboter-bausatz's Nutensteine at nearly twice the September price, 11 € on the fifty the beams need.
