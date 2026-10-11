@@ -42,12 +42,12 @@ The table above is the planning estimate, rounded, and it counts the sheet mater
 
 | Route | Parts | Shipping | Delivered |
 |---|---|---|---|
-| Cheapest per line, 9 suppliers, 9 parcels | 805,67 | 40,50 | **846,17** |
-| Consolidated into 6 suppliers | 716,97 | 26,70 | **743,67** |
-| **With the donor printer, 5 suppliers and the donor — the build** | 528,59 | 26,70 | **555,29** |
+| Cheapest per line, 9 suppliers, 9 parcels | 806,19 | 40,50 | **846,69** |
+| Consolidated into 6 suppliers | 717,49 | 26,70 | **744,19** |
+| **With the donor printer, 5 suppliers and the donor — the build** | 533,65 | 26,70 | **560,35** |
 | Baumarkt, Hornbach pickup, on top of any route | 226,89 | — | **226,89** |
 
-Consolidating is close to free rather than a discount: it costs about 28 € more on parts (the MGN12 rail, the camera, the energy chain) and saves about 30 € on shipping. The gap between the first two routes is almost entirely the servo substitution. On the donor route five suppliers remain — Dold, roboter-bausatz, Oyostepper, druckluft-fachhandel and Amazon — because the donor's board removes 3DJake, its micro-USB ports remove the Conrad cable, and Amazon took over Reichelt's small parts and the pneumatic consumables on 11 October. Amazon sells those in packs where Reichelt sold singles, so that move costs about 10 € and buys one parcel fewer and Prime delivery, not money. The one way to four is 10:1 geared motors from Dold instead of Oyostepper's 5:1, which the slow wrist and carousel would tolerate.
+Consolidating is close to free rather than a discount: it costs about 28 € more on parts (the MGN12 rail, the camera, the energy chain) and saves about 30 € on shipping. The gap between the first two routes is almost entirely the servo substitution. On the donor route five suppliers remain — Dold, roboter-bausatz, Oyostepper, druckluft-fachhandel and Amazon — because the donor's board removes 3DJake, its micro-USB ports remove the Conrad cable, and Amazon took over Reichelt's small parts and the pneumatic consumables on 11 October. Amazon sells those in packs where Reichelt sold singles, so that move costs about 15 € and buys one parcel fewer and Prime delivery, not money; every Amazon line was looked up live, so the shopping list links the listings. The one way to four is 10:1 geared motors from Dold instead of Oyostepper's 5:1, which the slow wrist and carousel would tolerate.
 
 Where to trim further: the donor printer route above is the real saving. The panels are already the cheap option, OSB 3 instead of birch multiplex, about 136 € less with the steel that makes up for OSB's weak edges (see `05-design-decisions.md`). The two obvious earlier trims are already taken — the computer is an owned Pi 4B, and the wrist camera is an owned USB webcam rather than a second Pi camera.
 
