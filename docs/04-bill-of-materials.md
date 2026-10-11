@@ -8,9 +8,9 @@ Prices are typical German retail, rounded, and will drift; check before ordering
 |---|---|---|---|
 | Frame | 18 mm OSB 3, two 2500 × 1250 mm sheets, for the three panels; 18 mm MDF, 2440 × 1220 mm, for the two carousel discs; a 25 × 25 × 3 steel angle for the two inside corners, M4 T-nuts and machine screws for the parts that come off again, penny washers for the beam bolts; a further sheet for the bench top only if there is no bench | 2 + 1 | 137 |
 | Frame | 2040 V-slot extrusion 1.3 m (X beams) | 2 | 30 |
-| Frame | 2040 V-slot 0.94 m (cross beam, spanning the 86 cm frame with the plates outside it), 2020 0.88 m (end tie), T-nuts, bolts; the corner brackets come from the donor | 1 set | 45 |
+| Frame | 2040 V-slot 0.94 m (cross beam, spanning the 86 cm frame with the plates outside it) and 0.76 m (the Z column, carrying the rail), 2020 0.88 m (end tie), 25 M5 slide-in nuts and 20 T-head bolts, M3 T-nuts for the rail; the corner brackets and the rest of the slot hardware come from the donor | 1 set | 45 |
 | Linear | Delrin V-wheels, four per carriage plate (X ×2, Y ×1), six of them on eccentric spacers — from the donor; a top-up kit is about 4 € if it comes up short | 12 + 6 | donor |
-| Linear | MGN12H rail 0.8 m with carriage (Z column) | 1 | 30 |
+| Linear | MGN12H rail 0.8 m with carriage, on the 2040 Z column | 1 | 30 |
 | Motion | NEMA17 stepper, plain (X, Y, Z) — from the donor, which also leaves its extruder motor spare | 3 | donor |
 | Motion | NEMA17 with 5:1 planetary gearbox (wrist, carousel index) | 2 | 86 |
 | Motion | GT2 belt, 10 m roll (the donor's belts are too short for these runs); one 20T pulley with an 8 mm bore for the carousel's geared motor and one idler, the other two pulleys and two idlers from the donor; two tensioner kits | 1 set | 23 |
@@ -42,9 +42,9 @@ The table above is the planning estimate, rounded, and it counts the sheet mater
 
 | Route | Parts | Shipping | Delivered |
 |---|---|---|---|
-| Cheapest per line, 9 suppliers, 9 parcels | 827,08 | 48,87 | **875,95** |
-| Consolidated into 6 suppliers | 734,26 | 40,62 | **774,88** |
-| **With the donor printer, 4 suppliers and the donor — the build** | 565,00 | 25,35 | **590,35** |
+| Cheapest per line, 9 suppliers, 9 parcels | 824,48 | 48,87 | **873,35** |
+| Consolidated into 6 suppliers | 733,00 | 40,62 | **773,62** |
+| **With the donor printer, 4 suppliers and the donor — the build** | 563,74 | 25,35 | **589,09** |
 | Baumarkt, Hornbach pickup, on top of any route | 226,89 | — | **226,89** |
 
 Consolidating is close to free rather than a discount: it costs about 28 € more on parts (the MGN12 rail, the camera, the energy chain) and saves about 30 € on shipping. The gap between the first two routes is almost entirely the servo substitution. On the donor route four suppliers remain — Dold, roboter-bausatz, druckluft-fachhandel and Amazon — because the donor's board removes 3DJake, its micro-USB ports remove the Conrad cable, Amazon took over Reichelt's small parts and the pneumatic consumables on 11 October, and on 12 October the geared motors too: Oyostepper had raised them to 37,02 € and charges 15,27 € shipping, while STEPPERONLINE sells the same motor on Amazon with Prime at 43,00 €, 3 € less for the pair delivered. Amazon sells the small parts in packs where Reichelt sold singles, so that move costs about 15 € and buys one parcel fewer and Prime delivery, not money; every Amazon line was looked up live, so the shopping list links the listings. The same check found roboter-bausatz's Nutensteine at nearly twice the September price, 11 € on the fifty the beams need.
