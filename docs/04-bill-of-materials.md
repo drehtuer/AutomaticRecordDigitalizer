@@ -8,11 +8,11 @@ Prices are typical German retail, rounded, and will drift; check before ordering
 |---|---|---|---|
 | Frame | 18 mm OSB 3, two 2500 × 1250 mm sheets, for the three panels; 18 mm MDF, 2440 × 1220 mm, for the two carousel discs; a 25 × 25 × 3 steel angle for the two inside corners, M4 T-nuts and machine screws for the parts that come off again, penny washers for the beam bolts; a further sheet for the bench top only if there is no bench | 2 + 1 | 137 |
 | Frame | 2040 V-slot extrusion 1.3 m (X beams) | 2 | 30 |
-| Frame | 2040 V-slot 0.94 m (cross beam, spanning the 86 cm frame with the plates outside it), 2020 0.88 m (end tie), T-nuts, bolts; the corner brackets come from the donor | 1 set | 32 |
+| Frame | 2040 V-slot 0.94 m (cross beam, spanning the 86 cm frame with the plates outside it), 2020 0.88 m (end tie), T-nuts, bolts; the corner brackets come from the donor | 1 set | 45 |
 | Linear | Delrin V-wheels, four per carriage plate (X ×2, Y ×1), six of them on eccentric spacers — from the donor; a top-up kit is about 4 € if it comes up short | 12 + 6 | donor |
 | Linear | MGN12H rail 0.8 m with carriage (Z column) | 1 | 30 |
 | Motion | NEMA17 stepper, plain (X, Y, Z) — from the donor, which also leaves its extruder motor spare | 3 | donor |
-| Motion | NEMA17 with 5:1 planetary gearbox (wrist, carousel index) | 2 | 70 |
+| Motion | NEMA17 with 5:1 planetary gearbox (wrist, carousel index) | 2 | 86 |
 | Motion | GT2 belt, 10 m roll (the donor's belts are too short for these runs); one 20T pulley with an 8 mm bore for the carousel's geared motor and one idler, the other two pulleys and two idlers from the donor; two tensioner kits | 1 set | 23 |
 | Motion | T8 lead screw 0.8 m, nut, bearing block; the 5 → 8 mm coupler from the donor | 1 | 16 |
 | Servos | MG996R metal-gear servo working the cue lever through a printed yoke on its horn | 1 | 7 |
@@ -34,7 +34,7 @@ Prices are typical German retail, rounded, and will drift; check before ordering
 | Hardware | M3/M5 screws and nuts, heat-set inserts, felt, rubber sleeve stock, one 95 × 3 NBR O-ring for the ring rest, four M4 rubber-metal buffers for the pump mount | 1 set | 44 |
 | Consumables | PETG 2.5 kg, TPU 0.3 kg | | 70 |
 | Donor | Creality Ender 3 V2, used: the steppers, the supply, the wheels and eccentrics, two pulleys and two idlers, the Z coupler, the end-stops, the corner brackets and the 4.2.x board above | 1 | 55 |
-| **Total** | | | **≈ 892** |
+| **Total** | | | **≈ 921** |
 
 Not included, because they are already on hand: the 3D printer, the turntable (Omnitronic DD 3120), the Focusrite Scarlett, the Conrad 393905 USB relay card, the Raspberry Pi 4B (two of them, the second a cold spare) with its 15 W supply and 32 GB card, the external USB 3.0 SSD the recordings are written to, the self-powered USB 3.0 hub everything else hangs off, and the USB webcams for the wrist (two on hand, a 720p Logitech C270 and a 1080p module). Together those are roughly 185 to 195 € that do not have to be spent. Also not included: an external phono preamp if the deck's own line output is not used (about 40 €).
 
@@ -42,12 +42,12 @@ The table above is the planning estimate, rounded, and it counts the sheet mater
 
 | Route | Parts | Shipping | Delivered |
 |---|---|---|---|
-| Cheapest per line, 9 suppliers, 9 parcels | 806,19 | 40,50 | **846,69** |
-| Consolidated into 6 suppliers | 717,49 | 26,70 | **744,19** |
-| **With the donor printer, 5 suppliers and the donor — the build** | 533,65 | 26,70 | **560,35** |
+| Cheapest per line, 9 suppliers, 9 parcels | 827,08 | 48,87 | **875,95** |
+| Consolidated into 6 suppliers | 734,45 | 35,07 | **769,52** |
+| **With the donor printer, 4 suppliers and the donor — the build** | 565,19 | 19,80 | **584,99** |
 | Baumarkt, Hornbach pickup, on top of any route | 226,89 | — | **226,89** |
 
-Consolidating is close to free rather than a discount: it costs about 28 € more on parts (the MGN12 rail, the camera, the energy chain) and saves about 30 € on shipping. The gap between the first two routes is almost entirely the servo substitution. On the donor route five suppliers remain — Dold, roboter-bausatz, Oyostepper, druckluft-fachhandel and Amazon — because the donor's board removes 3DJake, its micro-USB ports remove the Conrad cable, and Amazon took over Reichelt's small parts and the pneumatic consumables on 11 October. Amazon sells those in packs where Reichelt sold singles, so that move costs about 15 € and buys one parcel fewer and Prime delivery, not money; every Amazon line was looked up live, so the shopping list links the listings. The one way to four is 10:1 geared motors from Dold instead of Oyostepper's 5:1, which the slow wrist and carousel would tolerate.
+Consolidating is close to free rather than a discount: it costs about 28 € more on parts (the MGN12 rail, the camera, the energy chain) and saves about 30 € on shipping. The gap between the first two routes is almost entirely the servo substitution. On the donor route four suppliers remain — Dold, roboter-bausatz, druckluft-fachhandel and Amazon — because the donor's board removes 3DJake, its micro-USB ports remove the Conrad cable, Amazon took over Reichelt's small parts and the pneumatic consumables on 11 October, and on 12 October the geared motors too: Oyostepper had raised them to 37,02 € and charges 15,27 € shipping, while STEPPERONLINE sells the same motor on Amazon with Prime at 43,00 €, 3 € less for the pair delivered. Amazon sells the small parts in packs where Reichelt sold singles, so that move costs about 15 € and buys one parcel fewer and Prime delivery, not money; every Amazon line was looked up live, so the shopping list links the listings. The same check found roboter-bausatz's Nutensteine at nearly twice the September price, 11 € on the fifty the beams need.
 
 Where to trim further: the donor printer route above is the real saving. The panels are already the cheap option, OSB 3 instead of birch multiplex, about 136 € less with the steel that makes up for OSB's weak edges (see `05-design-decisions.md`). The two obvious earlier trims are already taken — the computer is an owned Pi 4B, and the wrist camera is an owned USB webcam rather than a second Pi camera.
 

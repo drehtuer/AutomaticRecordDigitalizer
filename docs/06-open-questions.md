@@ -22,7 +22,7 @@ Things the concept could not settle and that the first hardware has to answer. E
 
 **Finger-lift shape.** Whether the fork's U straddles the actual finger lift cleanly across the whole arc from rest to run-out, or needs a different opening width or a slight yaw. A printed test fork on a hand-held handle answers this in an afternoon before any gantry exists.
 
-**Cup size against 7" labels.** A 40 mm bellows cup on an 88 mm label leaves margin; confirm the seal on printed and glossy labels, on labels with embossed text, and on a shaped picture disc's centre.
+**Cup size against 7" labels.** A 40 mm bellows cup on an 88 mm label leaves margin; confirm the seal on printed and glossy labels, on labels with embossed text, and on a shaped picture disc's centre. The build prints the lip in TPU on a G 1/8 nipple; if that lip does not seal, a bought cup is the fallback, and the pneumatics shop on the route stocks none above 25 mm, so it would be a Riegler 42 mm silicone bellows cup with its own nipple (Amazon) or morali's 40 mm NBR cup.
 
 **What catches a mis-loaded magazine.** A record's identity comes from the manifest the user fills in at loading, not from the label photograph, so nothing the machine measures checks that slot 7 actually holds the record its manifest line names; a slip while loading produces a recording labelled confidently and wrongly. The planned answer is a per-side review screen that shows the label photograph beside the manifest text. Try it on the first batches: is a glance at a 720p photograph enough to catch a swapped record, how long does reviewing a full magazine take, and does anything cheaper, such as flagging sides whose label photo looks unlike the one stored for that release, earn its keep.
 
