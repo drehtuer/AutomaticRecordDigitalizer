@@ -25,7 +25,7 @@ The gantry is a Cartesian XYZ with one rotary axis:
 | Z | T8 lead screw, NEMA17, moving column on an MGN12 rail | ≈ 60 cm | Column slides through a guide on the cross beam; self-locking; the one axis that keeps a linear rail |
 | Wrist | NEMA17 with ≈ 5:1 planetary gearbox, Hall home sensor | −90° … 180° | Axis parallel to X |
 
-The Z axis is a moving column rather than a fixed tower: the 76 cm rail is part of the carriage and slides up through a guide block on the cross beam, so when the carriage is raised nothing hangs below it. Every X move happens at travel height and clears the deck and the station by construction. The lead screw is self-locking, so a power loss leaves the record where it is.
+The Z axis is a moving column rather than a fixed tower: a 76 cm length of 2040 profile carrying an 80 cm MGN12 rail is part of the carriage and slides up through a guide block on the cross beam, so when the carriage is raised nothing hangs below it. Every X move happens at travel height and clears the deck and the station by construction. The lead screw is self-locking, so a power loss leaves the record where it is.
 
 The wrist sits on a 9 cm outrigger beside the column so the arm can swing without meeting it. It carries three things: the vacuum arm (22 cm, with the cup on its end pointing perpendicular to the arm), the wrist camera looking along the cup's axis, mounted on the outer (+X) side of the arm 11 cm up from the cup, and the finger-lift fork on the opposite side of the hub, 5.5 cm long, which points down when the arm points up. The cup bracket does not reach below the cup, so the spindle tip, which enters the hollow bellows cup when a record is released over the spindle, meets nothing.
 

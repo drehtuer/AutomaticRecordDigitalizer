@@ -141,7 +141,7 @@ The planner uses 625 mm of Y travel, not the 45 cm the concept assumed: the re-g
 
 ### 5. Z column
 
-Bolt the 800 mm MGN12 rail to the 760 mm column and its carriage into the guide block, so the column slides through the block. Fit the KFL08 bearing at the top of the column, the lead-screw nut holder on the guide block, and the T8 screw through them, coupled to the Z motor on the guide block through the donor's 5 → 8 mm coupler. The column carries the screw; the nut is fixed; turning the screw lifts the column. Fit the end caps, and the Z end-stop on the guide block so the column trips it at its top. The cycle uses 430 mm of Z; the screw and rail have room for 600.
+Bolt the 800 mm MGN12 rail to the 760 mm 2040 column with M3 screws into spring-ball T-nuts at every other hole, and its carriage into the guide block, so the column slides through the block. Fit the KFL08 bearing at the top of the column, the lead-screw nut holder on the guide block, and the T8 screw through them, coupled to the Z motor on the guide block through the donor's 5 → 8 mm coupler. The column carries the screw; the nut is fixed; turning the screw lifts the column. Fit the end caps, and the Z end-stop on the guide block so the column trips it at its top. The cycle uses 430 mm of Z; the screw and rail have room for 600.
 
 ### 6. Wrist
 
