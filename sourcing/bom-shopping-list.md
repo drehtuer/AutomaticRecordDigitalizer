@@ -11,7 +11,7 @@ Prices drift — re-check before ordering. Lines marked ESTIMATE could not be fe
 | [Cheapest per item](#cheapest-per-item) | 824,22 | 48,87 | **873,09** |
 | [Fewest suppliers](#fewest-suppliers) | 730,47 | 40,62 | **771,09** |
 | [Donor printer route](#donor-printer-route) - **the build** | 561,21 | 25,35 | **586,56** |
-| [Hornbach (local)](#hornbach-local) | 226,89 | 0,00 | **226,89** |
+| [Hornbach (local)](#hornbach-local) | 223,97 | 0,00 | **223,97** |
 
 The notes under each route call the first three sheet 1, sheet 2 and sheet 3, in the order of the table above.
 
@@ -367,9 +367,9 @@ Plywood, glue, screws, feet, cork, sandpaper, cable ties and tape: what the asse
 | Panels | [OSB3 Platte 2500 x 1250 x 18 mm stumpfe Kante ungeschliffen - the three frame panels; sheet 1: both side panels 1210x830, sheet 2: the end panel 842x830](https://www.hornbach.de/p/osb-3-platte-2500-x-1250-x-18-mm/3397986/) | 2 | 31,09 | 62,18 | hornbach.de (Markt) | verified 04.10.2026 at hornbach.de; art. 3397986, IN STOCK (61 at the Markt). DECIDED 04.10.2026: replaces the birch multiplex 3000x1500 at 222,80 € (store order, 4-5 weeks) - 160,62 € less. Have the Markt cut the three rectangles (Zuschnitt, fee per the Markt price list, not in this total): nothing larger than 1210x830 goes in the car. The second sheet leaves about 1.1 m2 of offcut for the deck stop, feet and test pieces. Steel takes the loads OSB handles badly - see the four metal rows below and note 6 |
 | Discs | [MDF-Platte E1 2440 x 1220 x 18 mm - the two carousel discs (O 860 and O 880 side by side)](https://www.hornbach.de/p/mdf-platte-e1-2440-x-1220-x-18-mm/3809826/) | 1 | 49,95 | 49,95 | hornbach.de (Markt) | verified 03.10.2026 at hornbach.de; art. 3809826, IN STOCK and online-orderable. Have the Markt cut it into two squares, 880x880 and 860x860 - the circles are jigsaw work at home. 880 is wider than the 830 panels, so check that a square that size fits the car. Replaces the 2800x2070 MDF roh at 97,25 € (store order): both discs fit the smaller sheet with 700 mm to spare, so this is a straight 47,30 € saving. The discs need flatness, not stiffness - MDF is the right material here |
 | Glue | [Ponal Holzleim wasserfest (D3), 225 g](https://hornbach.de/p/ponal-holzleim-wasserfest-225-g/2540387) | 1 | 8,15 | 8,15 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de; the frame is a glued box, the screws are clamps |
-| Screws | [Spax Universalschraube T-STAR plus Senkkopf TX 4 x 40 mm WIROX, 125 Stueck (panel joints, beam blocks)](https://www.hornbach.de/p/spax-universalschraube-t-star-plus-senkkopf-tx-teilgewinde-4x40-mm-wirox-125-stueck/7254717/) | 1 | 8,75 | 8,75 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de |
-| Screws | [Spanplattenschraube Senkkopf TX 3,5 x 25 mm Edelstahl A2, 100 Stueck (printed parts onto plywood; 2 packs = 200)](https://www.hornbach.de/p/spanplattenschraube-senkkopf-tx-3-5x25-mm-edelstahl-a2-100-stueck/10529674/) | 2 | 2,92 | 5,84 | hornbach.de (Markt) | verified 03.10.2026 at hornbach.de; art. 10529674, TX T15, online-orderable. Replaces the SWG 3,5x25 200-pack, which is no longer orderable. Spax does not do 3,5x25 in small packs |
-| Screws | [Spax Universalschraube T-STAR plus Senkkopf TX 3,5 x 16 mm WIROX, 300 Stueck (roller brackets, small brackets)](https://www.hornbach.de/p/spax-universalschraube-t-star-plus-senkkopf-tx-vollgewinde-3-5x16-mm-wirox-300-stueck/7627278/) | 1 | 10,45 | 10,45 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de |
+| Screws | [Spax Universalschraube T-STAR plus Senkkopf TX 4 x 40 mm WIROX, 125 Stueck (panel joints, beam blocks)](https://www.hornbach.de/p/spax-universalschraube-t-star-plus-senkkopf-tx-teilgewinde-4x40-mm-wirox-125-stueck/7254717/) | 1 | 8,75 | 8,75 | hornbach.de (Markt) | COUNT 15.10.2026: docs/08 needs about 40; 125 is the smallest WIROX pack Hornbach listed online on 02.10 - take a 100-pack if the Markt has one on the shelf. verified 02.10.2026 at hornbach.de |
+| Screws | [Spanplattenschraube Senkkopf TX 3,5 x 25 mm Edelstahl A2, 100 Stueck (printed parts onto the panels and discs; docs/08 counts about 60)](https://www.hornbach.de/p/spanplattenschraube-senkkopf-tx-3-5x25-mm-edelstahl-a2-100-stueck/10529674/) | 1 | 2,92 | 2,92 | hornbach.de (Markt) | COUNT CORRECTED 15.10.2026: one pack of 100, not two - docs/08 needs about 60. verified 03.10.2026 at hornbach.de; art. 10529674, TX T15, online-orderable. Replaces the SWG 3,5x25 200-pack, which is no longer orderable. Spax does not do 3,5x25 in small packs |
+| Screws | [Spax Universalschraube T-STAR plus Senkkopf TX 3,5 x 16 mm WIROX, 300 Stueck (roller brackets, small brackets)](https://www.hornbach.de/p/spax-universalschraube-t-star-plus-senkkopf-tx-vollgewinde-3-5x16-mm-wirox-300-stueck/7627278/) | 1 | 10,45 | 10,45 | hornbach.de (Markt) | COUNT 15.10.2026: docs/08 needs about 40 (ten roller brackets at three or four each, plus the small brackets); the 300-pack is what was listed online on 02.10 - a 100- or 200-pack from the shelf is plenty if the Markt has one, roughly 4-7 € less. verified 02.10.2026 at hornbach.de |
 | Hardware | [Zylinderschraube Innensechskant DIN 912 M4 x 30 mm 8.8 verzinkt, 10 Stueck (608 roller axles, and the screws into the M4 T-nuts; 4 packs = 40)](https://www.hornbach.de/p/zylinderschraube-m-innensechskant-inbus-din-912-teilgewinde-m4x30-mm-8-8-galv-verzinkt-10-stueck/10715743/) | 4 | 2,95 | 11,80 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de; the online screw assortment's M4s stop at 20 mm, too short for a 7 mm bearing between two bracket arms. Two packs added 04.10.2026 for the T-nuts: 30 mm passes a printed plate of up to 6 mm and the 18 mm panel into the nut |
 | Hardware | [Reyher Sicherungsmutter DIN 985 M4 verzinkt, 100 Stueck (nyloc, for the axles)](https://www.hornbach.de/p/reyher-sechskant-sicherungsmutter-selbstsichernd-din-985-m4-galv-verzinkt-100-stueck/10316869/) | 1 | 2,60 | 2,60 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de |
 | Hardware | [Reyher Unterlegscheibe DIN 9021 O 4,3 mm verzinkt, 100 Stueck](https://www.hornbach.de/p/reyher-unterlegscheibe-din-9021-o-4-3-mm-galv-verzinkt-100-stueck/10316718/) | 1 | 1,85 | 1,85 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de |
@@ -386,13 +386,13 @@ Plywood, glue, screws, feet, cork, sandpaper, cable ties and tape: what the asse
 | Cabling | [Klettband selbstklebend 19 mm x 1 m (relay card, loose boards)](https://www.hornbach.de/p/klettband-weiss-selbstklebend-1-m/5222184/) | 1 | 3,95 | 3,95 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de |
 | Cabling | [Gewebeband silber 50 mm x 50 m (dressing the cable chains)](https://www.hornbach.de/p/gewebeband-silber-50-mm-x-50-m/10705941/) | 1 | 3,95 | 3,95 | hornbach.de (Markt) | verified 02.10.2026 at hornbach.de |
 
-Totals for this route: parts 226,89 €, shipping 0,00 €, delivered **226,89 €**.
+Totals for this route: parts 223,97 €, shipping 0,00 €, delivered **223,97 €**.
 
 ### Shipping
 
 | Supplier | Order value € | Shipping € | Rule |
 |---|---|---|---|
-| hornbach.de (Markt) | 226,89 | 0,00 | Local pickup at the Markt. Everything is shelf stock, both sheet materials included; the Zuschnitt is charged at the Markt on top |
+| hornbach.de (Markt) | 223,97 | 0,00 | Local pickup at the Markt. Everything is shelf stock, both sheet materials included; the Zuschnitt is charged at the Markt on top |
 
 ### Notes
 
