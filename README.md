@@ -23,7 +23,7 @@ Concept design finished and reviewed in September 2026; first parametric CAD in 
 
 `cad/` is the parametric CadQuery model with the motion planner and the collision checker; `cad/README.md` explains how to run it, and `cad/export/` holds STEP files that open in FreeCAD, STL files of the first printed parts, and `web/` holds the glTF and the scene description the viewer loads.
 
-`sourcing/` is the pricing pass of September 2026, re-verified on 3 October: every line of the bill of materials against live German shop pages, with product links, three ways of ordering it — the donor-printer route is the one being built — and a sheet for the local Baumarkt, and the corrections it forced back into the design documents.
+`sourcing/` is the pricing pass of September 2026, re-verified on 3 October: every line of the bill of materials against live German shop pages, with product links, three ways of ordering it — the donor-printer route is the one being built — and a sheet for the local Baumarkt, and the corrections it forced back into the design documents. Since 17 October 2026 the shopping list also books what has arrived, invoice by invoice, with an order status of what is received and what is still open, and `sourcing/2026-10-17-diy-shop-list.md` lists the open local-shop items in a form any DIY store can match.
 
 `docs/` holds the design in detail:
 
