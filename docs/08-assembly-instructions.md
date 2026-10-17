@@ -90,7 +90,7 @@ PETG unless marked TPU. The CAD marks which parts have their functional features
 | Wrist | Wrist camera mount, outer side of the arm, 110 mm up | 1 | PETG | Envelope |
 | Wrist | Finger-lift fork, 55 mm, with prongs 28 mm apart | 1 | PETG | Print-ready |
 | Wrist | Fork lining | 1 | TPU | To be added to the fork |
-| Wrist | Bellows cup lip on the G 1/8 nipple, unless a bought cup is fitted | 1 | TPU | To be drawn; see `06-open-questions.md`, cup size |
+| Wrist | Two-lip bellows cup on the G 1/8 nipple: outer lip 40 mm, inner lip about 14 mm around the centre hole, centre pocket for the spindle tip; a bought cup needs an inner-seal insert instead | 1 | TPU | To be drawn; see `05-design-decisions.md`, two lips, and `06-open-questions.md`, the two-lip cup's seal |
 | Wrist | Hall sensor mount at the hub | 1 | PETG | Envelope |
 | Station | Ring rest, 100 mm mean diameter, with the O-ring groove on top | 1 | PETG | Print-ready |
 | Station | Post foot, screwed to the bench | 1 | PETG | Envelope |
