@@ -6,7 +6,7 @@ These are the parts still open on the build after everything received up to 17 O
 
 - **Second MDF piece:** the receipt says 680 x 880 mm, and the Ø 860 disc needs 860 x 860. If it really is 680, add item 11.
 - **Glue:** done. Two 120 g bottles of Ponal Classic (D2) are on hand, 240 g against the 225 g the list planned.
-- **M2.5 standoffs for the display:** they should be in the Waveshare box. A DIY shop is unlikely to stock them; BerryBase sells a 4-pack for 1-2 €.
+- **M2.5 standoffs for the display:** the display is rev 2.2, with mount points on its back. The standoffs should be in the Waveshare box. A DIY shop is unlikely to stock them; BerryBase sells a 4-pack for 1-2 €.
 
 ## To buy
 
