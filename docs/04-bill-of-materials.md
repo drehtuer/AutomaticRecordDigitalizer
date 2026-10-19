@@ -12,7 +12,7 @@ Prices are typical German retail, rounded, and will drift; check before ordering
 | Linear | Delrin V-wheels, four per carriage plate (X ×2, Y ×1), six of them on eccentric spacers — from the donor; a top-up kit is about 4 € if it comes up short | 12 + 6 | donor |
 | Linear | MGN12H rail 0.8 m with carriage, on the 2040 Z column | 1 | 48 |
 | Motion | NEMA17 stepper, plain (X, Y, Z) — from the donor, which also leaves its extruder motor spare | 3 | donor |
-| Motion | NEMA17 with 5:1 planetary gearbox (wrist, carousel index) | 2 | 86 |
+| Motion | NEMA17 with a 57:11 (≈ 5.18:1) planetary gearbox, STEPPERONLINE 17HS15-1684S-PG5, 8 mm output shaft, about 87 mm long overall (wrist, carousel index) | 2 | 86 |
 | Motion | GT2 belt, 10 m roll (the donor's belts are too short for these runs); one 20T pulley with an 8 mm bore for the carousel's geared motor and one idler, the other two pulleys and two idlers from the donor; two tensioner kits | 1 set | 23 |
 | Motion | T8 lead screw 0.8 m, nut, bearing block; the 5 → 8 mm coupler from the donor | 1 | 16 |
 | Servos | MG996R metal-gear servo working the cue lever through a printed yoke on its horn | 1 | 7 |
