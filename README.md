@@ -13,7 +13,7 @@ The project exists because the cheap way of doing this, a second-hand stacking r
 
 ## Status
 
-Concept design finished and reviewed in September 2026; first parametric CAD in place, with the whole cycle passing a scripted collision check. Nothing has been printed yet. The build follows the donor-printer route: a used Ender 3 V2 supplies the motion parts and the controller board, with a Raspberry Pi Pico as Klipper's second MCU. The Pi-side electronics, the cable chains, the wiring and the donor have been bought; the frame and the long motion parts have not. [docs/07-status-and-next-steps.md](docs/07-status-and-next-steps.md) records exactly where the project stands, what is already on hand, and what to do first.
+Concept design finished and reviewed in September 2026; first parametric CAD in place, with the whole cycle passing a scripted collision check. Nothing has been printed yet. The build follows the donor-printer route: a used Ender 3 V2 supplies the motion parts and the controller board, with a Raspberry Pi Pico as Klipper's second MCU. Every online part of the build has arrived, the donor has been checked and run, and the frame panels and carousel discs have been bought cut to size; what is left to buy is the rest of the Baumarkt list. [docs/07-status-and-next-steps.md](docs/07-status-and-next-steps.md) records exactly where the project stands, what is already on hand, and what to do first.
 
 ## What is in this repository
 
