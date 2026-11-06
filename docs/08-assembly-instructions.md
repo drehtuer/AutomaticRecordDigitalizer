@@ -230,4 +230,6 @@ Power the Creality board alone first, no motors connected, and flash Klipper ont
 
 Power the Pi from its own supply, with the hub, and bring up Moonraker, the orchestrator and the web interface. Calibrate the datums through the interface with the cameras live, in this order: the pick slot's centre, the spindle, the ring rest, the arm pivot, and the arm's rest, lead-in and run-out angles for the deck as measured. Run the cycle in step-through mode with no record, then with a sacrificial record, then with a good one, and only then a batch.
 
+> **Warning: never stand a 12" in the slot on the front side of a 7"**, the slot the machine picks just before it. The foot of the column, the wrist hub and the wrist's cables are driven into the 12"'s top edge, up to 18 mm deep, and nothing senses it. Load the first mixed batches from sacrificial records, and check the magazine by eye against the manifest every time: the manifest editor checks only what was typed. `02-operating-cycle.md` says which slot that is.
+
 The collision sweep in `../cad/check_collisions.py` runs against the CAD, not the machine. Every number that a ruler changed on the real deck goes into `../cad/params.py` first, the sweep runs, and only a clean sweep is allowed to become a soft limit.
