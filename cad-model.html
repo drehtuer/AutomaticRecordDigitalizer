@@ -237,7 +237,10 @@ function setFrame(time) {
 
 function poseStart(pi) {
   let acc = 0;
-  for (const seg of timeline) { if (seg.pose === pi) return acc; acc += seg.dur; }
+  for (const seg of timeline) {
+    if (seg.pose === pi) return acc;
+    acc += seg.dur;
+  }
   return 0;
 }
 
@@ -400,7 +403,7 @@ function tick() {
   resize();
   const dt = clock.getDelta();
   if (playing && timeline.length) {
-    t += dt * parseFloat(document.getElementById('speed').value);
+    t += dt * Number.parseFloat(document.getElementById('speed').value);
     if (t >= totalTime) {
       if (document.getElementById('loop').checked) { t = 0; }
       else { t = totalTime; playing = false; playBtn.textContent = 'Play';
@@ -418,7 +421,12 @@ function tick() {
 window.machineViewer = { scene, groups, applyState, applyVisibility, setSize, THREE };
 
 tick();
-load().catch(err => { console.error(err); fail('Could not load the model: ' + err.message); });
+try {
+  await load();
+} catch (err) {
+  console.error(err);
+  fail('Could not load the model: ' + err.message);
+}
 </script>
 </body>
 </html>
