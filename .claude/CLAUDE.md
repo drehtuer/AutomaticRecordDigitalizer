@@ -51,8 +51,19 @@ gates the pull request:
 docker run --rm -v "$PWD":/w -w /w node:22-slim npx --yes markdownlint-cli2@0.23.2
 ```
 
-Dependabot (`.github/dependabot.yml`) keeps the actions, `cad/requirements.txt` and the
-devcontainer image current; its pull requests run the same three checks.
+Dependabot (`.github/dependabot.yml`) keeps the actions, the CAD requirements and the devcontainer
+image current; its pull requests run the same three checks.
+
+`cad/requirements.in` names what the CAD needs and `cad/requirements.txt` is the lock compiled from
+it, every package pinned with its hashes, for Python 3.12 on Linux. CI and the devcontainer install
+it wheels only, so no package's setup script runs. After changing `requirements.in`, recompile it
+with pip-tools from the repository root. It hashes every platform's wheel of the large packages, so
+a first run takes about 25 minutes and fills some 15 GB of `~/.cache/pip-tools`:
+
+```sh
+pip-compile --generate-hashes --allow-unsafe --pip-args "--only-binary :all:" \
+  --output-file cad/requirements.txt cad/requirements.in
+```
 
 Formatting is governed by `.editorconfig`: UTF-8, LF, a final newline, spaces not tabs, two-space
 indentation everywhere except Python, which stays at the four spaces PEP 8 and ruff assume.

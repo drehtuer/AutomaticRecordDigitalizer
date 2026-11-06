@@ -62,7 +62,7 @@ REGRIP_CUP = (P.ST_X, P.ST_Y, RING_REC_Z + P.RECORD_T / 2 + P.CUP_H / 2)
 PARK = {"x": 200.0, "y": -220.0, "z": TRAVEL, "phi": 180.0}
 
 
-def V(held, slot, platter, ring):
+def visible(held, slot, platter, ring):
     return {"held": held, "slot": slot, "platter": platter, "ring": ring}
 
 
@@ -71,34 +71,34 @@ def poses(r=P.RECORD_12_R):
     the size; the platter and the ring rest take every record at its centre."""
     pc = pick_cup(r)
     return [
-        dict(id="pick", name="Pick from carousel", car=lambda: carriage_for_cup(*pc, 0.0),
-             approach=(0, 8, 0), before=V(False, True, False, False), after=V(True, False, False, False), spin=False),
-        dict(id="place", name="Place side A", car=lambda: carriage_for_cup(*PLACE_CUP, 90.0),
-             before=V(True, False, False, False), spin=False),
-        dict(id="liftarm", name="Lift arm, engage fork", car=lambda: fork_on("rest"), approach=(0, 0, 40),
-             before=V(False, False, True, False), arm=("rest", 1), spin=False, plan="liftarm"),
-        dict(id="toleadin", name="Carry arm to lead-in", car=lambda: fork_on("leadin"),
-             before=V(False, False, True, False), arm=("leadin", 1), spin=False, plan="direct"),
-        dict(id="drop", name="Lower needle, start", car=lambda: {**fork_on("leadin"), "z": fork_on("leadin")["z"] + 80},
-             before=V(False, False, True, False), arm=("leadin", 0), spin=True, plan="drop"),
-        dict(id="runout", name="Run-out: stop, lift, find arm", car=lambda: fork_on("runout"), approach=(0, 0, 40),
-             before=V(False, False, True, False), arm=("runout", 1), spin=False, plan="runout"),
-        dict(id="torest", name="Carry arm to rest, lower", car=lambda: {**fork_on("rest"), "z": fork_on("rest")["z"] + 80},
-             before=V(False, False, True, False), arm=("rest", 0), spin=False, plan="torest"),
-        dict(id="lift", name="Lift record off the platter", car=lambda: carriage_for_cup(*PLACE_CUP, 90.0),
-             before=V(False, False, True, False), after=V(True, False, False, False), spin=False),
-        dict(id="station", name="Carry to station, B up", car=lambda: carriage_for_cup(*STATION_CUP, -90.0),
-             before=V(True, False, False, False), spin=False, plan="station"),
-        dict(id="release", name="Release & withdraw", car=lambda: carriage_for_cup(P.ST_X, P.ST_Y, P.ST_Z - 60.0, -90.0),
-             before=V(False, False, False, True), spin=False, plan="direct"),
-        dict(id="regrip", name="Re-grip from above", car=lambda: carriage_for_cup(*REGRIP_CUP, 90.0), approach=(0, 0, 30),
-             before=V(False, False, False, True), after=V(True, False, False, False), spin=False, plan="regrip"),
-        dict(id="placeB", name="Place side B", car=lambda: carriage_for_cup(*PLACE_CUP, 90.0),
-             before=V(True, False, False, False), spin=False),
-        dict(id="return", name="Return to its slot", car=lambda: carriage_for_cup(*pc, 0.0),
-             before=V(True, False, False, False), after=V(False, True, False, False), retreat=(0, 8, 0), spin=False),
-        dict(id="index", name="Index carousel", car=lambda: {"x": 200.0, "y": 30.0, "z": TRAVEL, "phi": 0.0},
-             carousel=360.0 / P.CAR_SLOTS, before=V(False, True, False, False), spin=False),
+        {"id": "pick", "name": "Pick from carousel", "car": lambda: carriage_for_cup(*pc, 0.0),
+         "approach": (0, 8, 0), "before": visible(False, True, False, False), "after": visible(True, False, False, False), "spin": False},
+        {"id": "place", "name": "Place side A", "car": lambda: carriage_for_cup(*PLACE_CUP, 90.0),
+         "before": visible(True, False, False, False), "spin": False},
+        {"id": "liftarm", "name": "Lift arm, engage fork", "car": lambda: fork_on("rest"), "approach": (0, 0, 40),
+         "before": visible(False, False, True, False), "arm": ("rest", 1), "spin": False, "plan": "liftarm"},
+        {"id": "toleadin", "name": "Carry arm to lead-in", "car": lambda: fork_on("leadin"),
+         "before": visible(False, False, True, False), "arm": ("leadin", 1), "spin": False, "plan": "direct"},
+        {"id": "drop", "name": "Lower needle, start", "car": lambda: {**fork_on("leadin"), "z": fork_on("leadin")["z"] + 80},
+         "before": visible(False, False, True, False), "arm": ("leadin", 0), "spin": True, "plan": "drop"},
+        {"id": "runout", "name": "Run-out: stop, lift, find arm", "car": lambda: fork_on("runout"), "approach": (0, 0, 40),
+         "before": visible(False, False, True, False), "arm": ("runout", 1), "spin": False, "plan": "runout"},
+        {"id": "torest", "name": "Carry arm to rest, lower", "car": lambda: {**fork_on("rest"), "z": fork_on("rest")["z"] + 80},
+         "before": visible(False, False, True, False), "arm": ("rest", 0), "spin": False, "plan": "torest"},
+        {"id": "lift", "name": "Lift record off the platter", "car": lambda: carriage_for_cup(*PLACE_CUP, 90.0),
+         "before": visible(False, False, True, False), "after": visible(True, False, False, False), "spin": False},
+        {"id": "station", "name": "Carry to station, B up", "car": lambda: carriage_for_cup(*STATION_CUP, -90.0),
+         "before": visible(True, False, False, False), "spin": False, "plan": "station"},
+        {"id": "release", "name": "Release & withdraw", "car": lambda: carriage_for_cup(P.ST_X, P.ST_Y, P.ST_Z - 60.0, -90.0),
+         "before": visible(False, False, False, True), "spin": False, "plan": "direct"},
+        {"id": "regrip", "name": "Re-grip from above", "car": lambda: carriage_for_cup(*REGRIP_CUP, 90.0), "approach": (0, 0, 30),
+         "before": visible(False, False, False, True), "after": visible(True, False, False, False), "spin": False, "plan": "regrip"},
+        {"id": "placeB", "name": "Place side B", "car": lambda: carriage_for_cup(*PLACE_CUP, 90.0),
+         "before": visible(True, False, False, False), "spin": False},
+        {"id": "return", "name": "Return to its slot", "car": lambda: carriage_for_cup(*pc, 0.0),
+         "before": visible(True, False, False, False), "after": visible(False, True, False, False), "retreat": (0, 8, 0), "spin": False},
+        {"id": "index", "name": "Index carousel", "car": lambda: {"x": 200.0, "y": 30.0, "z": TRAVEL, "phi": 0.0},
+         "carousel": 360.0 / P.CAR_SLOTS, "before": visible(False, True, False, False), "spin": False},
     ]
 
 

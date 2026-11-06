@@ -14,14 +14,15 @@ sudo apt-get install -y --no-install-recommends \
   libgl1 libglu1-mesa libxi6 libxrender1 libxcursor1 libxft2 libxinerama1 \
   build-essential
 
-python -m pip install --upgrade pip
+# Wheels only, so that installing a package never runs its setup script.
+python -m pip install --only-binary :all: --upgrade pip
 
-# CadQuery, pinned by cad/requirements.txt; the wheels carry the OpenCascade kernel.
-python -m pip install -r cad/requirements.txt
+# CadQuery, locked with hashes by cad/requirements.txt; the wheels carry the OpenCascade kernel.
+python -m pip install --only-binary :all: --require-hashes -r cad/requirements.txt
 
-python -m pip install ruff
+python -m pip install --only-binary :all: ruff
 
-sudo npm install --global markdownlint-cli2@0.23.2
+sudo npm install --global --ignore-scripts markdownlint-cli2@0.23.2
 
 # Prove the OpenCascade kernel actually loads, not just that the wheel unpacked.
 python -c "import cadquery; print('cadquery', cadquery.__version__)"

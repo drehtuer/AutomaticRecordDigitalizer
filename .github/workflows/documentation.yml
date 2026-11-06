@@ -27,8 +27,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Never let two publishes of the site overlap, and never cancel one halfway.
 concurrency:
@@ -39,6 +37,9 @@ jobs:
   build:
     name: Build with Jekyll
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read      # configure-pages looks up the site's settings
     steps:
       - uses: actions/checkout@v7
 
@@ -55,6 +56,9 @@ jobs:
     name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write     # to publish the site
+      id-token: write  # to prove the deployment comes from this workflow
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

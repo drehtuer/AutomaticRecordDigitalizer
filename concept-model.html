@@ -116,19 +116,23 @@
   <p class="note">This revision: the brush module is gone — records are brushed by hand before they go into the carousel, which saves a servo, a bracket and a step. X and Y run on 2040 V-slot with Delrin wheels instead of linear rails; only the Z column keeps a rail. The deck is the Omnitronic DD 3120 with its layout measured from a photo: the cue lever sits at the front-right of the arm base, so its servo lives on the frame’s end panel with a short pusher, and the end-stop pin hangs off a bar from the same bracket. An automatic turntable was considered and rejected: it cannot handle locked grooves, inside-out records or non-standard start and end positions, which is exactly why both cameras stay.</p>
 </aside>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';document.head.appendChild(s);"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js" integrity="sha512-auFmPm+de880vk/c+bgBmuOnQ7BM28z7zPWmepVgX8737t75OHZjElOnQqERwP8cE4DIyCJ+gb1kE0b/eLWcnA==" crossorigin="anonymous" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';s.integrity='sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==';s.crossOrigin='anonymous';document.head.appendChild(s);"></script>
 <script>
-(function boot(){
-  if (typeof THREE === 'undefined') { setTimeout(boot, 60); return; }
-
+(function whenThreeLoaded(start) {
+  if (typeof THREE === 'undefined') { setTimeout(() => whenThreeLoaded(start), 60); return; }
+  start();
+})(function boot() {
   // ---------- renderer / scene ----------
   const stage = document.getElementById('stage');
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  if ('outputColorSpace' in renderer && THREE.SRGBColorSpace) renderer.outputColorSpace = THREE.SRGBColorSpace;
-  else if ('outputEncoding' in renderer && THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
+  function setOutputColorSpace() {   // the r128 fallback still calls it an encoding
+    if ('outputColorSpace' in renderer && THREE.SRGBColorSpace) renderer.outputColorSpace = THREE.SRGBColorSpace;
+    else if ('outputEncoding' in renderer && THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
+  }
+  setOutputColorSpace();
   stage.appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
@@ -136,8 +140,11 @@
 
   function syncBg(){ scene.background = new THREE.Color(getComputedStyle(document.body).backgroundColor); }
   syncBg();
-  new MutationObserver(syncBg).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-  if (window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTimeout(syncBg, 30));
+  function followColorScheme() {
+    new MutationObserver(syncBg).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    if (window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTimeout(syncBg, 30));
+  }
+  followColorScheme();
 
   scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8f96, 0.9));
   const sun = new THREE.DirectionalLight(0xffffff, 1.6);
@@ -167,42 +174,45 @@
   const deg = (d) => d * Math.PI / 180;
 
   const shadowed = (m) => { m.castShadow = true; m.receiveShadow = true; return m; };
-  function box(w, h, d, mat, x, y, z, parent) {
+  function box(w, h, d, mat, [x, y, z], parent) {
     const m = shadowed(new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat)); m.position.set(x, y, z); (parent || scene).add(m); return m;
   }
-  function cyl(r, h, mat, x, y, z, parent, seg) {
+  function cyl(r, h, mat, [x, y, z], parent, seg) {
     const m = shadowed(new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, seg || 48), mat)); m.position.set(x, y, z); (parent || scene).add(m); return m;
   }
   // record with its normal along Z (face towards ±Z)
   function recordZ(r, labelColor, parent) {
     const g = new THREE.Group();
     const lab = new THREE.MeshStandardMaterial({ color: labelColor, roughness: 0.8 });
-    for (const [rr, h, mat, seg] of [[r, 0.3, M.vinyl, 96], [r * 0.33, 0.34, lab, 48], [0.37, 0.4, M.top, 16]]) { const c = cyl(rr, h, mat, 0, 0, 0, g, seg); c.rotation.x = Math.PI / 2; }
+    for (const [rr, h, mat, seg] of [[r, 0.3, M.vinyl, 96], [r * 0.33, 0.34, lab, 48], [0.37, 0.4, M.top, 16]]) { const c = cyl(rr, h, mat, [0, 0, 0], g, seg); c.rotation.x = Math.PI / 2; }
     (parent || scene).add(g); return g;
   }
   function recordFlat(r, labelColor, x, y, z, parent) {
     const g = new THREE.Group();
-    cyl(r, 0.3, M.vinyl, 0, 0, 0, g, 96);
-    cyl(r * 0.33, 0.34, new THREE.MeshStandardMaterial({ color: labelColor, roughness: 0.8 }), 0, 0, 0, g, 48);
+    cyl(r, 0.3, M.vinyl, [0, 0, 0], g, 96);
+    cyl(r * 0.33, 0.34, new THREE.MeshStandardMaterial({ color: labelColor, roughness: 0.8 }), [0, 0, 0], g, 48);
     g.position.set(x, y, z); (parent || scene).add(g); return g;
   }
 
   // ---------- worktop & frame ----------
-  box(190, 2, 100, M.top, 6, -1, 0).receiveShadow = true;
+  box(190, 2, 100, M.top, [6, -1, 0]).receiveShadow = true;
   // frame only around deck and station; it just reaches the carousel's pick slot, the magazine itself stands outside
   // frame: 18 mm birch-ply side and end panels glued into a box (window cut-outs keep it light and open),
   // with a 2040 extrusion along each top edge carrying the X rail. The left end stays open for the carousel.
   const PZ = [-40, 40], RAIL_Y = 85, FX0 = -30, FX1 = 99, FXC = (FX0 + FX1) / 2, FLEN = FX1 - FX0;
   const PLY = 1.8, SX0 = -22, SX1 = 99, SXC = (SX0 + SX1) / 2, SLEN = SX1 - SX0, PH = 83;
-  for (const z of PZ) {                                                            // side panels as frames around a window
-    box(SLEN, 12, PLY, M.ply, SXC, 6, z);                                           // bottom strip
-    box(SLEN, 14, PLY, M.ply, SXC, PH - 7, z);                                      // top strip
-    for (const x of [SX0 + 6, 38, SX1 - 6]) box(12, PH, PLY, M.ply, x, PH / 2, z);  // verticals
+  function buildFrame() {
+    for (const z of PZ) {                                                            // side panels as frames around a window
+      box(SLEN, 12, PLY, M.ply, [SXC, 6, z]);                                           // bottom strip
+      box(SLEN, 14, PLY, M.ply, [SXC, PH - 7, z]);                                      // top strip
+      for (const x of [SX0 + 6, 38, SX1 - 6]) box(12, PH, PLY, M.ply, [x, PH / 2, z]);  // verticals
+    }
+    box(PLY, 12, 80, M.ply, [SX1 - 0.9, 6, 0]); box(PLY, 14, 80, M.ply, [SX1 - 0.9, PH - 7, 0]);   // right end panel with window
+    for (const z of [-34, 34]) box(PLY, PH, 12, M.ply, [SX1 - 0.9, PH / 2, z]);
+    box(3, 3, 83, M.ext, [FX0 + 1.5, RAIL_Y, 0]);                                      // extrusion tie across the open left end
+    for (const z of PZ) box(FLEN, 4, 2, M.ext, [FXC, RAIL_Y, z]);   // 2040 V-slot beams: the carriages run on Delrin wheels in the slot
   }
-  box(PLY, 12, 80, M.ply, SX1 - 0.9, 6, 0); box(PLY, 14, 80, M.ply, SX1 - 0.9, PH - 7, 0);   // right end panel with window
-  for (const z of [-34, 34]) box(PLY, PH, 12, M.ply, SX1 - 0.9, PH / 2, z);
-  box(3, 3, 83, M.ext, FX0 + 1.5, RAIL_Y, 0);                                      // extrusion tie across the open left end
-  for (const z of PZ) box(FLEN, 4, 2, M.ext, FXC, RAIL_Y, z);   // 2040 V-slot beams: the carriages run on Delrin wheels in the slot
+  buildFrame();
   // XYZ triad at the bench corner (machine axes: X along the bench, Y across it, Z up)
   const AX = new THREE.Vector3(-92, 0, 48);
   const arrow = (dir, color) => { const a = new THREE.ArrowHelper(dir, AX, 18, color, 4, 2.2); scene.add(a); return AX.clone().addScaledVector(dir, 21); };
@@ -210,58 +220,61 @@
 
   // ---------- gantry ----------
   const xCar = new THREE.Group(); scene.add(xCar);
-  for (const z of PZ) { box(8, 3, 8, M.print, 0, RAIL_Y + 3.5, z, xCar); for (const dx of [-3, 3]) cyl(1.2, 1.1, M.rubber, dx, RAIL_Y, z + 1.6, xCar, 20).rotation.x = Math.PI / 2; }   // wheel plates on the V-slot
-  box(4, 4, 88, M.ext, 0, RAIL_Y + 4, 0, xCar);                                 // cross beam above the rails
+  function buildWheelPlates() {   // wheel plates on the V-slot
+    for (const z of PZ) { box(8, 3, 8, M.print, [0, RAIL_Y + 3.5, z], xCar); for (const dx of [-3, 3]) cyl(1.2, 1.1, M.rubber, [dx, RAIL_Y, z + 1.6], xCar, 20).rotation.x = Math.PI / 2; }
+  }
+  buildWheelPlates();
+  box(4, 4, 88, M.ext, [0, RAIL_Y + 4, 0], xCar);                                 // cross beam above the rails
   const yCar = new THREE.Group(); xCar.add(yCar);
-  box(8, 12, 8, M.print, 0, RAIL_Y + 4, 0, yCar);
-  cyl(2.1, 5, M.ext, 0, RAIL_Y + 10, 6.5, yCar);
+  box(8, 12, 8, M.print, [0, RAIL_Y + 4, 0], yCar);
+  cyl(2.1, 5, M.ext, [0, RAIL_Y + 10, 6.5], yCar);
   const zCar = new THREE.Group(); yCar.add(zCar);
-  box(7, 8, 7, M.print, 0, 0, 0, zCar);
+  box(7, 8, 7, M.print, [0, 0, 0], zCar);
   const COL = 76;
-  box(4, COL, 4, M.ext, 0, COL / 2, 0, zCar);
-  cyl(0.5, COL, M.alu, 0, COL / 2, 3.2, zCar, 10);
+  box(4, COL, 4, M.ext, [0, COL / 2, 0], zCar);
+  cyl(0.5, COL, M.alu, [0, COL / 2, 3.2], zCar, 10);
 
   // wrist: axis along X, pivot on an outrigger beside the column
   const WRIST_X = 9, L = 22, F = 10;
-  box(WRIST_X - 1, 3.5, 3.5, M.print, (WRIST_X - 1) / 2, 0, 0, zCar);
-  cyl(2.2, 4, M.ext, WRIST_X + 3.3, 0, 0, zCar).rotation.z = Math.PI / 2;
+  box(WRIST_X - 1, 3.5, 3.5, M.print, [(WRIST_X - 1) / 2, 0, 0], zCar);
+  cyl(2.2, 4, M.ext, [WRIST_X + 3.3, 0, 0], zCar).rotation.z = Math.PI / 2;
   const wrist = new THREE.Group(); wrist.position.set(WRIST_X, 0, 0); zCar.add(wrist);
-  cyl(2.6, 2.6, M.print, 0, 0, 0, wrist).rotation.z = Math.PI / 2;               // hub
-  box(2.4, L, 2.4, M.ext, 0, -L / 2, 0, wrist);                                    // arm
-  box(3, 3, 3, M.print, 0, -L, -1.2, wrist);
-  const cup = cyl(2.8, 1.6, M.rubber, 0, -L, -2.8, wrist); cup.rotation.x = Math.PI / 2;
-  cyl(1.4, 1.2, M.accent, 0, -L, -1.6, wrist).rotation.x = Math.PI / 2;
-  cyl(0.45, L, M.rubber, -1.7, -L / 2, 0, wrist, 12);                              // hose on the -X side
+  cyl(2.6, 2.6, M.print, [0, 0, 0], wrist).rotation.z = Math.PI / 2;               // hub
+  box(2.4, L, 2.4, M.ext, [0, -L / 2, 0], wrist);                                    // arm
+  box(3, 3, 3, M.print, [0, -L, -1.2], wrist);
+  const cup = cyl(2.8, 1.6, M.rubber, [0, -L, -2.8], wrist); cup.rotation.x = Math.PI / 2;
+  cyl(1.4, 1.2, M.accent, [0, -L, -1.6], wrist).rotation.x = Math.PI / 2;
+  cyl(0.45, L, M.rubber, [-1.7, -L / 2, 0], wrist, 12);                              // hose on the -X side
   const held = recordZ(15, 0xD9642B, wrist); held.position.set(0, -L, -3.75);
   // wrist camera looking along the cup axis
-  box(3, 1, 1.2, M.print, -2.6, -L + 8, 0, wrist);
-  const wcam = box(2.2, 2.2, 2.4, M.cam, -5, -L + 8, 0, wrist);
-  cyl(0.7, 0.6, M.alu, -5, -L + 8, -1.4, wrist).rotation.x = Math.PI / 2;
+  box(3, 1, 1.2, M.print, [-2.6, -L + 8, 0], wrist);
+  const wcam = box(2.2, 2.2, 2.4, M.cam, [-5, -L + 8, 0], wrist);
+  cyl(0.7, 0.6, M.alu, [-5, -L + 8, -1.4], wrist).rotation.x = Math.PI / 2;
   // finger-lift fork, opposite the arm
-  box(1.2, F - 2, 1.2, M.alu, 0, (F + 2) / 2, 0, wrist);
-  box(1.2, 0.6, 3.4, M.accent, 0, F, 0, wrist);                                     // U straddles the finger lift, prongs fore and aft of it
-  for (const sz of [-1.4, 1.4]) box(1.2, 1.6, 0.6, M.accent, 0, F + 0.5, sz, wrist);
+  box(1.2, F - 2, 1.2, M.alu, [0, (F + 2) / 2, 0], wrist);
+  box(1.2, 0.6, 3.4, M.accent, [0, F, 0], wrist);                                     // U straddles the finger lift, prongs fore and aft of it
+  for (const sz of [-1.4, 1.4]) box(1.2, 1.6, 0.6, M.accent, [0, F + 0.5, sz], wrist);
 
   // ---------- carousel magazine ----------
   const CC = new THREE.Vector3(-40, 0, 0), NSLOT = 24, DPHI = 2 * Math.PI / NSLOT, RREC = 26;
   const carG = new THREE.Group(); carG.position.copy(CC); scene.add(carG);
   // fixed base: plywood plate, centre bearing on a stub shaft, ten printed roller brackets with 608 bearings on a ring
-  cyl(44, 1.5, M.ply, CC.x, 0.75, CC.z, scene, 96);
-  cyl(2.0, 5, M.alu, CC.x, 3.5, CC.z); cyl(3.2, 1.6, M.ext, CC.x, 5.2, CC.z);      // shaft + 6005 bearing
+  cyl(44, 1.5, M.ply, [CC.x, 0.75, CC.z], scene, 96);
+  cyl(2.0, 5, M.alu, [CC.x, 3.5, CC.z]); cyl(3.2, 1.6, M.ext, [CC.x, 5.2, CC.z]);      // shaft + 6005 bearing
   for (let i = 0; i < 10; i++) {
     const a = i / 10 * Math.PI * 2, rx = CC.x + Math.cos(a) * 36, rz = CC.z + Math.sin(a) * 36;
-    const br = box(3.2, 3.6, 3.2, M.print, rx, 3.3, rz); br.rotation.y = -a;
-    const bb = cyl(1.1, 0.7, M.ext, rx, 5.3, rz, scene, 24); bb.rotation.z = Math.PI / 2; bb.rotation.y = -a;   // 608 bearing as roller
+    const br = box(3.2, 3.6, 3.2, M.print, [rx, 3.3, rz]); br.rotation.y = -a;
+    const bb = cyl(1.1, 0.7, M.ext, [rx, 5.3, rz], scene, 24); bb.rotation.z = Math.PI / 2; bb.rotation.y = -a;   // 608 bearing as roller
   }
-  const idx = cyl(2.1, 4, M.ext, CC.x - 24.5, 3, CC.z + 9); idx.rotation.x = Math.PI / 2;   // index stepper under the disc
-  cyl(1.0, 1.2, M.print, CC.x - 24.5, 5.4, CC.z + 9, scene, 20);                     // its pulley
-  cyl(43, 2, M.ply, 0, 7, 0, carG, 96);                                             // plywood disc — just the floor
-  cyl(21.5, 1.0, M.print, 0, 5.5, 0, carG, 96);                                     // GT2 tooth ring, 8 printed segments, under the disc
-  cyl(9, 22, M.print, 0, 19, 0, carG, 48);                                          // hub
+  const idx = cyl(2.1, 4, M.ext, [CC.x - 24.5, 3, CC.z + 9]); idx.rotation.x = Math.PI / 2;   // index stepper under the disc
+  cyl(1.0, 1.2, M.print, [CC.x - 24.5, 5.4, CC.z + 9], scene, 20);                     // its pulley
+  cyl(43, 2, M.ply, [0, 7, 0], carG, 96);                                             // plywood disc — just the floor
+  cyl(21.5, 1.0, M.print, [0, 5.5, 0], carG, 96);                                     // GT2 tooth ring, 8 printed segments, under the disc
+  cyl(9, 22, M.print, [0, 19, 0], carG, 48);                                          // hub
   const rim = shadowed(new THREE.Mesh(new THREE.TorusGeometry(42, 0.9, 12, 96), M.print)); rim.rotation.x = Math.PI / 2; rim.position.y = 13; carG.add(rim);
   for (let k = 0; k < NSLOT; k++) {
     const a = (k + 0.5) * DPHI;
-    const comb = box(30, 3, 1.2, M.print, Math.cos(a) * 24, 9.5, Math.sin(a) * 24, carG); comb.rotation.y = -a;
+    const comb = box(30, 3, 1.2, M.print, [Math.cos(a) * 24, 9.5, Math.sin(a) * 24], carG); comb.rotation.y = -a;
   }
   const slotRecs = [], slotColors = [];
   for (let k = 0; k < NSLOT; k++) {
@@ -277,8 +290,8 @@
 
   // ---------- flip & photo station ----------
   const ST = new THREE.Vector3(20, 30, -12);
-  cyl(1.2, 21, M.alu, ST.x, 19.5, ST.z - 14);
-  box(2.2, 2.2, 7, M.print, ST.x, 30, ST.z - 11);
+  cyl(1.2, 21, M.alu, [ST.x, 19.5, ST.z - 14]);
+  box(2.2, 2.2, 7, M.print, [ST.x, 30, ST.z - 11]);
   const GAP = deg(60);
   const ringG = new THREE.Group(); ringG.position.copy(ST); scene.add(ringG);
   const ring = shadowed(new THREE.Mesh(new THREE.TorusGeometry(7.8, 0.8, 16, 72, Math.PI * 2 - GAP), M.accent));
@@ -287,31 +300,31 @@
 
   // ---------- turntable ----------
   const TTX = 55;
-  box(45, 9, 36, M.tt, TTX + 4.1, 4.5, -0.55); box(45.4, 1.2, 36.4, M.ext, TTX + 4.1, 0.6, -0.55);   // Omnitronic DD 3120, 45 × 36 × 9 cm; spindle 18.4 cm from the left edge, 18.6 from the rear (measured on the photo)
+  box(45, 9, 36, M.tt, [TTX + 4.1, 4.5, -0.55]); box(45.4, 1.2, 36.4, M.ext, [TTX + 4.1, 0.6, -0.55]);   // Omnitronic DD 3120, 45 × 36 × 9 cm; spindle 18.4 cm from the left edge, 18.6 from the rear (measured on the photo)
   const platterG = new THREE.Group(); platterG.position.set(TTX, 0, 0); scene.add(platterG);
-  cyl(16.5, 1.5, M.platter, 0, 9.75, 0, platterG, 96); cyl(15.2, 0.3, M.mat, 0, 10.65, 0, platterG, 96);
-  for (let i = 0; i < 36; i++) { const a = i / 36 * Math.PI * 2; box(0.5, 0.2, 0.5, M.alu, Math.cos(a) * 16.6, 9.75, Math.sin(a) * 16.6, platterG); }
-  cyl(0.36, 2.2, M.alu, 0, 11.6, 0, platterG, 16);
+  cyl(16.5, 1.5, M.platter, [0, 9.75, 0], platterG, 96); cyl(15.2, 0.3, M.mat, [0, 10.65, 0], platterG, 96);
+  for (let i = 0; i < 36; i++) { const a = i / 36 * Math.PI * 2; box(0.5, 0.2, 0.5, M.alu, [Math.cos(a) * 16.6, 9.75, Math.sin(a) * 16.6], platterG); }
+  cyl(0.36, 2.2, M.alu, [0, 11.6, 0], platterG, 16);
   const onPlatter = recordFlat(15, 0xD9642B, 0, 10.95, 0, platterG);
-  box(4.5, 0.8, 3, M.ext, TTX - 14.5, 9.3, 15.3);                                  // start/stop
-  box(1.6, 0.4, 10, M.ext, TTX + 23, 9.2, 6.4);                                   // pitch fader
-  for (const dx of [-11.5, -9, -6.5]) box(1.8, 0.4, 1.2, M.ext, TTX + dx, 9.2, 16.2);   // 33 / 45 / 78
-  cyl(1.5, 1.2, M.ext, TTX - 16.2, 9.6, 11.8);                                      // power knob
-  cyl(0.5, 0.6, new THREE.MeshStandardMaterial({ color: 0xFF3B6B, emissive: 0xFF2255, emissiveIntensity: 1.2 }), TTX - 13.3, 9.4, 10.8);   // the deck's own strobe LED
+  box(4.5, 0.8, 3, M.ext, [TTX - 14.5, 9.3, 15.3]);                                  // start/stop
+  box(1.6, 0.4, 10, M.ext, [TTX + 23, 9.2, 6.4]);                                   // pitch fader
+  for (const dx of [-11.5, -9, -6.5]) box(1.8, 0.4, 1.2, M.ext, [TTX + dx, 9.2, 16.2]);   // 33 / 45 / 78
+  cyl(1.5, 1.2, M.ext, [TTX - 16.2, 9.6, 11.8]);                                      // power knob
+  cyl(0.5, 0.6, new THREE.MeshStandardMaterial({ color: 0xFF3B6B, emissive: 0xFF2255, emissiveIntensity: 1.2 }), [TTX - 13.3, 9.4, 10.8]);   // the deck's own strobe LED
   const PIV = new THREE.Vector3(TTX + 19.4, 13, -8.4), ARM_R = 23;   // pivot 19.4 cm right of and 8.4 cm behind the spindle (photo)
-  cyl(3.2, 5, M.alu, PIV.x, 7.5, PIV.z);                                          // arm base
-  cyl(0.9, 3.5, M.alu, TTX + 18.9, 10.7, 12.5); box(2.4, 0.6, 1.2, M.print, TTX + 18.9, 12.4, 12.5);   // arm rest, front right
+  cyl(3.2, 5, M.alu, [PIV.x, 7.5, PIV.z]);                                          // arm base
+  cyl(0.9, 3.5, M.alu, [TTX + 18.9, 10.7, 12.5]); box(2.4, 0.6, 1.2, M.print, [TTX + 18.9, 12.4, 12.5]);   // arm rest, front right
   // arm built pointing along local +X; armG.rotation.y = -a swings the stylus to azimuth a; armG.position.y lifts it
   const armG = new THREE.Group(); armG.position.copy(PIV); scene.add(armG);
   {
-    const S = new THREE.Vector3(ARM_R, -0.4, 0), d = new THREE.Vector3(1, 0, 0), pp = new THREE.Vector3(0, 0, 1);
+    const S = new THREE.Vector3(ARM_R, -0.4, 0), d = new THREE.Vector3(1, 0, 0);
     const pts = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(8, 0, 2.0), new THREE.Vector3(16, 0, -1.6), S.clone().addScaledVector(d, -1.8).setY(-0.1)];
     armG.add(shadowed(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 40, 0.55, 10, false), M.alu)));
-    box(3.6, 1.6, 1.7, M.ext, ARM_R - 1.6, -0.7, 0, armG);                       // headshell
-    box(0.35, 0.35, 2.8, M.alu, ARM_R - 0.6, -0.4, 1.6, armG);                   // finger lift, sticking outwards (away from the platter centre)
-    box(0.3, 1.2, 0.3, M.alu, ARM_R - 0.6, -1.4, 0.4, armG);                     // cartridge stub
-    cyl(1.8, 3.2, M.ext, -4.5, 0, 0, armG).rotation.z = Math.PI / 2;             // counterweight
-    cyl(1.6, 1.4, M.alu, 0, 0, 0, armG);
+    box(3.6, 1.6, 1.7, M.ext, [ARM_R - 1.6, -0.7, 0], armG);                       // headshell
+    box(0.35, 0.35, 2.8, M.alu, [ARM_R - 0.6, -0.4, 1.6], armG);                   // finger lift, sticking outwards (away from the platter centre)
+    box(0.3, 1.2, 0.3, M.alu, [ARM_R - 0.6, -1.4, 0.4], armG);                     // cartridge stub
+    cyl(1.8, 3.2, M.ext, [-4.5, 0, 0], armG).rotation.z = Math.PI / 2;             // counterweight
+    cyl(1.6, 1.4, M.alu, [0, 0, 0], armG);
   }
   const FL_LOCAL = new THREE.Vector3(ARM_R - 0.6, -0.4, 2.2);
   const ARM_A = { rest: deg(91.3), leadin: deg(118), runout: deg(140), mid: deg(129) };   // recomputed for the measured pivot
@@ -320,53 +333,52 @@
   const fingerLiftAt = (a, l) => { const g = new THREE.Group(); g.position.copy(PIV); g.position.y += LIFT_H * l; g.rotation.y = -a; g.updateMatrixWorld(true); return g.localToWorld(FL_LOCAL.clone()); };
   // cue lever on the deck (front-left of the arm base) and the servo that works it, on a frame outrigger
   const cueLever = new THREE.Group(); cueLever.position.set(TTX + 23.5, 10.2, -4.6); scene.add(cueLever);   // front-right of the arm base
-  box(3.4, 0.5, 0.8, M.ext, 1.2, 0, 0, cueLever); cyl(0.6, 1.0, M.alu, 0, 0, 0, cueLever);
+  box(3.4, 0.5, 0.8, M.ext, [1.2, 0, 0], cueLever); cyl(0.6, 1.0, M.alu, [0, 0, 0], cueLever);
   // cue-lever servo on the right end panel: the pusher comes in along -X at lever height, nowhere near the arm's swing
   const CL = new THREE.Vector3(SX1 - 1.8, 10.2, -4.6);
-  box(2.5, 10, 3, M.print, CL.x, 7, CL.z);                                          // bracket on the end panel's inner face
-  const cueServo = cyl(2, 3.5, M.ext, CL.x - 4, CL.y, CL.z); cueServo.rotation.z = Math.PI / 2;   // linear-push servo
-  box(16, 1.2, 1.2, M.alu, CL.x - 12, CL.y, CL.z);                                  // pusher rod
-  box(2, 1.4, 1.4, M.print, CL.x - 10, CL.y, CL.z);                                 // rod guide
-  box(0.8, 1.6, 1.6, M.accent, TTX + 25.6, CL.y, CL.z);                             // pad that presses the lever
+  box(2.5, 10, 3, M.print, [CL.x, 7, CL.z]);                                          // bracket on the end panel's inner face
+  const cueServo = cyl(2, 3.5, M.ext, [CL.x - 4, CL.y, CL.z]); cueServo.rotation.z = Math.PI / 2;   // linear-push servo
+  box(16, 1.2, 1.2, M.alu, [CL.x - 12, CL.y, CL.z]);                                  // pusher rod
+  box(2, 1.4, 1.4, M.print, [CL.x - 10, CL.y, CL.z]);                                 // rod guide
+  box(0.8, 1.6, 1.6, M.accent, [TTX + 25.6, CL.y, CL.z]);                             // pad that presses the lever
   // inner end stop on a bar from the same bracket, passing in front of the arm base under the arm: a soft-sleeved pin the
   // arm tube meets just past the run-out radius, so the stylus can never reach the label
   const ESA = deg(143.8), ESR = 6;
   const ES = new THREE.Vector3(PIV.x + ESR * Math.cos(ESA), 0, PIV.z + ESR * Math.sin(ESA));
-  box(CL.x - ES.x, 0.8, 1.0, M.alu, (CL.x + ES.x) / 2, 9.8, -2.0);                  // bar along X in front of the arm base
-  box(1.0, 0.8, Math.abs(ES.z + 2.0) + 1, M.alu, ES.x, 9.8, (ES.z - 2.0) / 2);       // stub to the pin
-  cyl(0.5, 5, M.alu, ES.x, 12.3, ES.z); cyl(0.9, 2.2, M.rubber, ES.x, 13.6, ES.z);
+  box(CL.x - ES.x, 0.8, 1.0, M.alu, [(CL.x + ES.x) / 2, 9.8, -2.0]);                  // bar along X in front of the arm base
+  box(1.0, 0.8, Math.abs(ES.z + 2.0) + 1, M.alu, [ES.x, 9.8, (ES.z - 2.0) / 2]);       // stub to the pin
+  cyl(0.5, 5, M.alu, [ES.x, 12.3, ES.z]); cyl(0.9, 2.2, M.rubber, [ES.x, 13.6, ES.z]);
 
   // deck camera: fixed, watches only the tonearm
   // deck camera: low on the right end of the frame, facing the headshell across the platter — sees the stylus in profile,
   // the groove bands edge-on, and the strobe dots on the platter's rim
   const DC = new THREE.Vector3(FX1 - 3, 15.5, 2);
-  box(2.4, 12, 2.4, M.print, DC.x, 9, DC.z);                                        // bracket on the end panel
+  box(2.4, 12, 2.4, M.print, [DC.x, 9, DC.z]);                                        // bracket on the end panel
   const dcam = new THREE.Group(); dcam.position.copy(DC); scene.add(dcam);
-  box(3, 2.4, 3, M.print, 0, -1.4, 0, dcam);
-  box(4, 3, 3, M.cam, 0, 0.6, 1.5, dcam); cyl(0.9, 0.8, M.alu, 0, 0.6, 3.4, dcam).rotation.x = Math.PI / 2;
+  box(3, 2.4, 3, M.print, [0, -1.4, 0], dcam);
+  box(4, 3, 3, M.cam, [0, 0.6, 1.5], dcam); cyl(0.9, 0.8, M.alu, [0, 0.6, 3.4], dcam).rotation.x = Math.PI / 2;
   dcam.lookAt(TTX + 11, 12.6, 9);   // aimed at the headshell's lead-in position
   // LED bar beside the camera: pulsed at a crystal-timed 50 Hz it is the strobe for the rim dots (or a printed strobe ring on any deck);
   // run continuously at a low angle it is the raking light that makes the grooves and the stylus contact visible
   const LEDM = new THREE.MeshStandardMaterial({ color: 0xFFF4D6, emissive: 0xFFE7A8, emissiveIntensity: 0.9, roughness: 0.4 });
   const ledG = new THREE.Group(); ledG.position.set(DC.x - 1, DC.y - 3.8, DC.z + 4.5); scene.add(ledG);
-  box(1.6, 1.6, 7, M.print, 0, 0, 0, ledG); for (const dz of [-2.4, -0.8, 0.8, 2.4]) box(0.6, 0.6, 0.6, LEDM, -0.9, 0, dz, ledG);
-  box(1.6, 3.4, 1.6, M.print, 1.2, 1.7, -3.2, ledG);
+  box(1.6, 1.6, 7, M.print, [0, 0, 0], ledG); for (const dz of [-2.4, -0.8, 0.8, 2.4]) box(0.6, 0.6, 0.6, LEDM, [-0.9, 0, dz], ledG);
+  box(1.6, 3.4, 1.6, M.print, [1.2, 1.7, -3.2], ledG);
   ledG.lookAt(TTX + 8, 10.8, 6); ledG.rotateY(Math.PI / 2);
   // Pi group outside the deck-end panel: plate, the Pi in its finned shell, the powered hub
-  box(0.4, 11, 34, M.accent, SX1 + 0.2, 6, 0);
-  box(3.3, 7, 9.8, M.alu, SX1 + 2.05, 8.5, 0);
-  box(1.8, 4, 10, M.ext, SX1 + 1.3, 9.5, -11);
+  box(0.4, 11, 34, M.accent, [SX1 + 0.2, 6, 0]);
+  box(3.3, 7, 9.8, M.alu, [SX1 + 2.05, 8.5, 0]);
+  box(1.8, 4, 10, M.ext, [SX1 + 1.3, 9.5, -11]);
   // status display on the end panel's front post, glass facing +X, away from the platter so its light misses the strobe dots
   const DSP = new THREE.Vector3(SX1, 20, -37);
-  box(0.6, 5.6, 8.5, M.print, DSP.x + 0.9, DSP.y, DSP.z);                             // standoffs and driver board
-  box(0.4, 6.8, 10.6, M.cam, DSP.x + 1.4, DSP.y, DSP.z);                              // glass
-  box(0.05, 5.4, 9.4, new THREE.MeshStandardMaterial({ color: 0x9FD3FF, emissive: 0x4FA8E8, emissiveIntensity: 0.8, roughness: 0.3 }),
-      DSP.x + 1.63, DSP.y, DSP.z);                                                    // the lit area
+  box(0.6, 5.6, 8.5, M.print, [DSP.x + 0.9, DSP.y, DSP.z]);                             // standoffs and driver board
+  box(0.4, 6.8, 10.6, M.cam, [DSP.x + 1.4, DSP.y, DSP.z]);                              // glass
+  box(0.05, 5.4, 9.4, new THREE.MeshStandardMaterial({ color: 0x9FD3FF, emissive: 0x4FA8E8, emissiveIntensity: 0.8, roughness: 0.3 }), [DSP.x + 1.63, DSP.y, DSP.z]);                                                    // the lit area
   scene.add(shadowed(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([
     new THREE.Vector3(SX1 + 2, 12.4, -4.9), new THREE.Vector3(SX1 + 0.5, 12.6, -7), new THREE.Vector3(SX1 + 0.5, 12.6, -37),
     new THREE.Vector3(SX1 + 0.5, 16.6, -37)]), 24, 0.3, 6, false), new THREE.MeshStandardMaterial({ color: 0xE68C26, roughness: 0.6 }))));   // DSI ribbon, 0.4 m
   // electronics
-  box(26, 9, 18, M.box, ST.x, 4.5, ST.z - 8); box(6, 5, 6, M.ext, ST.x + 16, 2.5, ST.z - 4);   // Pi + Octopus box under the station, pump beside it
+  box(26, 9, 18, M.box, [ST.x, 4.5, ST.z - 8]); box(6, 5, 6, M.ext, [ST.x + 16, 2.5, ST.z - 4]);   // Pi + Octopus box under the station, pump beside it
 
   // ---------- kinematics ----------
   // cup local (0,-L,-2.8) rotated about X by t
@@ -459,12 +471,18 @@
   const vis = { held: false, slot: true, platter: false, ring: false };
   const curSlot = () => slotRecs[slotAt(state.c)];
   function applyVis(v) {
-    if (!v) return; Object.assign(vis, v);
+    if (!v) return;
+    Object.assign(vis, v);
     held.visible = vis.held; onPlatter.visible = vis.platter; ringRec.visible = vis.ring;
     const sr = curSlot(); if (sr) sr.visible = vis.slot;
     if (vis.held) { const col = slotColors[slotAt(state.c)]; for (const g of [held, ringRec, onPlatter]) g.children[1].material.color.setHex(col); }
   }
-  const nearestAngle = (t, ref) => { let d = t - ref; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI; return ref + d; };
+  const nearestAngle = (t, ref) => {
+    let d = t - ref;
+    while (d > Math.PI) d -= 2 * Math.PI;
+    while (d < -Math.PI) d += 2 * Math.PI;
+    return ref + d;
+  };
   function goPose(p) {
     if (pendingEnd) { applyVis(pendingEnd); pendingEnd = null; }
     const f = { ...state }, g = { ...f, ...p.car() };
@@ -558,7 +576,8 @@
   const el = renderer.domElement; let drag = null;
   el.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY, pan: e.shiftKey || e.button === 2 }; el.setPointerCapture(e.pointerId); });
   el.addEventListener('pointermove', e => {
-    if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY;
+    if (!drag) return;
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY;
     if (drag.pan) {
       const right = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 0), up = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 1);
       const k = orbit.r / stage.clientHeight; orbit.tgt.addScaledVector(right, -dx * k).addScaledVector(up, dy * k);
@@ -578,7 +597,7 @@
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) dur = 1;
   function loop(now) { updateKinematics(now); placeCamera(); renderer.render(scene, camera); updateLabels(); requestAnimationFrame(loop); }
   requestAnimationFrame(loop);
-})();
+});
 </script>
 
 </body>

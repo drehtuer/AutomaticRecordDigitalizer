@@ -24,7 +24,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install ruff
-        run: python -m pip install ruff==0.16.6
+        run: python -m pip install --only-binary :all: ruff==0.16.6
 
       - name: Lint
         run: ruff check --output-format=github .
@@ -39,8 +39,11 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Install markdownlint-cli2
+        run: npm install --global --ignore-scripts markdownlint-cli2@0.23.2
+
       - name: Lint
-        run: npx --yes markdownlint-cli2@0.23.2
+        run: markdownlint-cli2
 
   collisions:
     name: collision check
@@ -63,7 +66,7 @@ jobs:
             libgl1 libglu1-mesa libxi6 libxrender1 libxcursor1 libxft2 libxinerama1
 
       - name: Install CadQuery
-        run: python -m pip install -r cad/requirements.txt
+        run: python -m pip install --only-binary :all: --require-hashes -r cad/requirements.txt
 
       - name: Sweep the cycle for collisions
         run: python -m cad.check_collisions

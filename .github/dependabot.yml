@@ -17,7 +17,7 @@ updates:
         patterns:
           - '*'
 
-  # CadQuery, in cad/requirements.txt.
+  # CadQuery, in cad/requirements.in, and the hash lock compiled from it in cad/requirements.txt.
   - package-ecosystem: pip
     directory: /cad
     schedule:

@@ -72,35 +72,55 @@ def main():
     sys.exit(1 if findings else 0)
 
 
+def intersection_volume(a, b):
+    """Volume two solids share; a boolean the kernel cannot compute counts as none."""
+    try:
+        return a.intersect(b).val().Volume()
+    except Exception:
+        return 0.0
+
+
+def collisions_at(m, s, vis, tol):
+    """Every (moving part, environment part, volume) above tol for one sampled state."""
+    env = m.environment(s, vis)
+    env_bb = {n: e.val().BoundingBox() for n, e in env.items()}
+    mov = m.moving(s, vis)
+    found = []
+    for mn in CHECK_MOVING:
+        if mn not in mov:
+            continue
+        mb = mov[mn].val().BoundingBox()
+        for en, e in env.items():
+            if (mn, en) in SKIP_PAIRS or not bbox_overlap(mb, env_bb[en]):
+                continue
+            vol = intersection_volume(mov[mn], e)
+            if vol > tol:
+                found.append((mn, en, vol))
+    return found
+
+
+def sweep_pose(m, pose, keys, args, findings, size):
+    """Sample every segment of one pose's keyframes; returns the number of samples taken."""
+    n_samples = 0
+    # visibility switches at the start (before) and end (after) of a pose
+    vis_before, vis_after = pose["before"], pose.get("after") or pose["before"]
+    for si in range(len(keys) - 1):
+        for t, s in samples(keys[si], keys[si + 1], args.step, args.deg):
+            vis = vis_after if (si == len(keys) - 2 and t >= 1.0) else vis_before
+            n_samples += 1
+            for mn, en, vol in collisions_at(m, s, vis, args.tol):
+                findings.append((size, pose["id"], si, round(t, 2), mn, en, round(vol)))
+                print(f"COLLISION {size:>2s}\" {pose['id']:8s} seg {si} t={t:.2f}  {mn} x {en}: {vol:.0f} mm^3   "
+                      f"at x={s['x']:.0f} y={s['y']:.0f} z={s['z']:.0f} phi={s['phi']:.0f}")
+    return n_samples
+
+
 def sweep(m, cycle, pose_ids, args, findings, t0, size):
     n_samples = 0
     for pose, keys in cycle:
         if pose_ids and pose["id"] not in pose_ids:
             continue
-        # visibility switches at the start (before) and end (after) of a pose
-        vis_before, vis_after = pose["before"], pose.get("after") or pose["before"]
-        for si in range(len(keys) - 1):
-            for t, s in samples(keys[si], keys[si + 1], args.step, args.deg):
-                vis = vis_after if (si == len(keys) - 2 and t >= 1.0) else vis_before
-                env = m.environment(s, vis)
-                env_bb = {n: e.val().BoundingBox() for n, e in env.items()}
-                mov = m.moving(s, vis)
-                n_samples += 1
-                for mn in CHECK_MOVING:
-                    if mn not in mov:
-                        continue
-                    mb = mov[mn].val().BoundingBox()
-                    for en, e in env.items():
-                        if (mn, en) in SKIP_PAIRS or not bbox_overlap(mb, env_bb[en]):
-                            continue
-                        try:
-                            vol = mov[mn].intersect(e).val().Volume()
-                        except Exception:
-                            vol = 0.0
-                        if vol > args.tol:
-                            findings.append((size, pose["id"], si, round(t, 2), mn, en, round(vol)))
-                            print(f"COLLISION {size:>2s}\" {pose['id']:8s} seg {si} t={t:.2f}  {mn} x {en}: {vol:.0f} mm^3   "
-                                  f"at x={s['x']:.0f} y={s['y']:.0f} z={s['z']:.0f} phi={s['phi']:.0f}")
+        n_samples += sweep_pose(m, pose, keys, args, findings, size)
         print(f"checked {pose['id']:8s} ({len(keys) - 1} segments)   elapsed {time.time() - t0:.0f}s")
     return n_samples
 
