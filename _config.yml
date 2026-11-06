@@ -32,6 +32,7 @@ exclude:
   - .editorconfig
   - .markdownlint-cli2.yaml
   - ruff.toml
+  - sonar-project.properties
   - cad/requirements.in
   - cad/requirements.txt
   - cad/assembly.py

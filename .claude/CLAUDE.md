@@ -65,6 +65,11 @@ pip-compile --generate-hashes --allow-unsafe --pip-args "--only-binary :all:" \
   --output-file cad/requirements.txt cad/requirements.in
 ```
 
+CI also runs the SonarCloud scan, configured in `sonar-project.properties`, with the `SONAR_TOKEN`
+Actions secret. It skips pull requests from forks and from Dependabot, which do not get the token.
+SonarCloud refuses a CI scan while its Automatic Analysis is on, so that stays off (Administration >
+Analysis Method on sonarcloud.io).
+
 Formatting is governed by `.editorconfig`: UTF-8, LF, a final newline, spaces not tabs, two-space
 indentation everywhere except Python, which stays at the four spaces PEP 8 and ruff assume.
 
