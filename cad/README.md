@@ -75,8 +75,8 @@ on the platter and on the ring, with 12" records in the other slots, and `kinema
 plans the cycle for it: only the pick and the return move. `Machine(load=carousel.DEMO_LOAD)` fills the
 other slots with the mixed load the pictures and the viewer show (three 10", four 7", one empty slot for
 the loading rule, 12" in the rest); the checker never uses it. The neighbour that matters is slot 1,
-the spoke on the front side of the pick, the one the wrist descends beside; `Machine(record_r,
-neighbour_r)` sets it (None leaves it empty). The checker sweeps the whole cycle with a 12" and then
+the spoke on the front side of the pick, the one the wrist descends beside. The CAD numbers the slots against the manifest's order: each index brings the next lower number to the pick, slot 23 after slot 0, while the manifest counts in pick order, so the CAD's slot k + 1 is the manifest's slot n − 1. `Machine(record_r,
+neighbour_r)` sets that neighbour (None leaves it empty). The checker sweeps the whole cycle with a 12" and then
 the pick, the carry away from the slot and the return with a 10" beside a 12" and a 7" beside a 10",
 the largest neighbours the loading rule allows; `--size 7 --neighbour 12 --poses pick` shows why the
 rule exists.
